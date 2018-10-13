@@ -1,0 +1,13 @@
+server:
+  port: 9002
+######################################################
+#日志配置
+logging:
+  level:
+eureka:
+  client:
+    service-url:
+      zone1: http://localhost:9001/eureka/
+      defaultZone: http://localhost:9001/eureka/
+  instance:
+    hostname: peer2

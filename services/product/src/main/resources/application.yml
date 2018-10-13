@@ -1,0 +1,227 @@
+spring:
+  resources:
+    add-mappings: false
+  mvc:
+      throw-exception-if-no-handler-found: true
+      favicon:
+        enabled: false
+      locale: zh_CN
+      locale-resolver: fixed
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
+  main:
+    banner-mode: "OFF"
+  messages:
+    basename: classpath:org/springframework/security/messages,classpath:org/hibernate/validator/ValidationMessages.properties
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+    virtual-host: jemmyweb
+    publisher-confirms: true
+    publisher-returns: true
+    connection-timeout: 30000
+    ssl:
+      enabled: false
+    template:
+      receive-timeout: 3000
+      mandatory: true
+      reply-timeout: 3000
+    listener:
+      simple:
+        concurrency: 5
+        acknowledge-mode: manual
+        prefetch: 5
+        retry:
+          enabled: true
+          max-attempts: 3
+          max-interval: 10000
+          stateless: true
+          multiplier: 1.0
+        auto-startup: true
+        transaction-size: 1
+        default-requeue-rejected: true
+  datasource:
+    initialize: false
+    platform: mysql
+    xa:
+      properties:
+        capitalizeTypeNames: false
+    driver-class-name: com.mysql.jdbc.Driver
+    continue-on-error: false
+    tomcat:
+      test-on-borrow: true
+      validation-query: select 1
+      max-active: 100
+      min-idle: 100
+      max-idle: 100
+      test-while-idle: true
+      time-between-eviction-runs-millis: 300000
+      min-evictable-idle-time-millis: 1800000
+      max-wait: 60000
+      initial-size: 100
+      remove-abandoned: false
+    name: dataSource
+    username: root
+    password: 123456
+    url: 'jdbc:mysql://localhost:3306/jemmy_product?zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true'
+  cache:
+    type: redis
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    password:
+    ssl: false
+    pool:
+      max-active: 20
+      min-idle: 1
+      max-idle: 10
+      max-wait: 2000
+    timeout: 3000
+  redisson:
+    cacheManager:
+      fallbackToNoOpCache: false
+      codec: JACKSON
+      dynamic: true
+    transaction:
+      enabled: false
+  jta:
+    atomikos:
+      properties:
+        #transactionManagerUniqueName: "${spring.application.name}:${spring.application.index}"
+        log-base-name: "atomikos"
+        console-log-level: info
+        enable-logging: false
+      datasource:
+        max-pool-size: 20
+        min-pool-size: 10
+    log-dir: logs
+    transaction-manager-id: product
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    locale: ${spring.mvc.locale}
+    time-zone: Asia/Shanghai
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+redisson:
+  single:
+    address: "redis://${spring.redis.host}:${spring.redis.port}"
+    database: ${spring.redis.database}
+  type: single
+mybatis:
+  type-aliases-package: com.jemmy.product.model
+  mapper-locations: classpath*:mybatis_mappers/**/*Mapper.xml
+  configuration:
+    default-fetch-size: 10
+    lazy-loading-enabled: true
+    use-generated-keys: true
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+    cache-enabled: false
+    aggressive-lazy-loading: true
+    multiple-result-sets-enabled: true
+    use-column-label: true
+    auto-mapping-behavior: partial
+    auto-mapping-unknown-column-behavior: warning
+    default-executor-type: simple
+    default-statement-timeout: 25000
+    safe-row-bounds-enabled: false
+    local-cache-scope: session
+    lazy-load-trigger-methods: equals,clone,hashCode,toString
+    call-setters-on-nulls: true
+security:
+  oauth2:
+    authorization:
+      check-token-access: permitAll()
+      token-key-access: isAuthenticated()
+      realm: jemmyweb
+    #认证服务器默认支持的client
+    client:
+      client-id: api
+      client-secret: 123456
+      scope: server
+      refresh-token-validity-seconds: 2592000
+      access-token-validity-seconds: 86400
+    resource:
+      filter-order: 3
+      id: ${spring.application.name}
+      jwt:
+        key-value: demo
+  basic:
+    enabled: true
+    realm: jemmyweb
+  headers:
+    frame: false
+    xss: false
+    hsts: none
+  enable-csrf: false
+  sessions: never
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+#超时配置
+ribbon:
+  client:
+    name: client
+  httpclient:
+    enabled: true
+  ReadTimeout: 10000
+  ConnectTimeout: 2000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  MaxHttpConnectionsPerHost: 1000
+  MaxTotalConnections: 5000
+  MaxTotalHttpConnections: 5000
+  MaxConnectionsPerHost: 1000
+  PoolMaxThreads: 5000
+  PoolMinThreads: 5000
+zipkin.collector.http.enabled: false
+hystrix:
+  shareSecurityContext: true
+  metrics:
+    enabled: true
+  #threadpool:
+    #default:
+      #coreSize: 500
+      #maxQueueSize: 4500
+      #queueSizeRejectionThreshold: 450
+  command:
+      default:
+        execution:
+          timeout:
+            enabled: true
+          isolation:
+            strategy: SEMAPHORE
+            #设置所有的hystrix超时时间,其值应大于ribbon的超时时长,并注意考虑ribbon重试所花云的时长. 否则,一旦hystrix超时,整个服务将超时#
+            thread:
+              timeoutInMilliseconds: 50000
+            semaphore:
+              maxConcurrentRequests: 100000
+        circuitBreaker:
+            requestVolumeThreshold: 10000
+            sleepWindowInMilliseconds: 1000
+            errorThresholdPercentage: 60
+        fallback:
+            isolation.semaphore.maxConcurrentRequests: 500
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+com.jemmyweb.product:
+    urls:
+      permitall: /**
+server:
+  tomcat:
+    min-spare-threads: 500
+    max-threads: 500
+    max-connections: 600
+    accept-count: 100
+mapper:
+  mappers: com.jemmy.common.mapper.RootMapper
+  not-empty: false
+  identity: MYSQL

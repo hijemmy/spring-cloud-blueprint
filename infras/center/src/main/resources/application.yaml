@@ -1,0 +1,20 @@
+# 开启调试模式
+#debug: true
+spring:
+  application:
+    name: center
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  mvc:
+    favicon:
+      enabled: false
+    throw-exception-if-no-handler-found: true
+  main:
+    banner-mode: "OFF"
+
+server:
+  tomcat:
+    uri-encoding: UTF-8

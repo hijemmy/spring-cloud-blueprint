@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <springProfile name="pro">
+        <logger name="com.jemmy.eventdriven.mapper" level="WARN"/>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.apache" level="WARN"/>
+        <logger name="com.netflix" level="WARN"/>
+    </springProfile>
+    <springProfile name="devt,dev,test">
+        <logger name="com.jemmy.product" level="DEBUG"/>
+        <logger name="com.jemmy.product.service.ThirdService" level="DEBUG"/>
+        <logger name="com.jemmy.product.service.OrderService" level="DEBUG"/>
+        <logger name="com.jemmy.product.service.UserService" level="DEBUG"/>
+        <logger name="org.springframework.cloud.netflix.feign" level="DEBUG"/>
+        <logger name="org.springframework.jdbc" level="DEBUG"/>
+        <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="INFO"/>
+        <logger name="com.netflix.hystrix" level="DEBUG"/>
+        <logger name="tk.mybatis" level="DEBUG"/>
+    </springProfile>
+</configuration>

@@ -1,0 +1,15 @@
+server:
+  port: 9001
+######################################################
+#日志配置
+logging:
+  level:
+    #com.idoipo: 'DEBUG'
+    #com.netflix: info
+eureka:
+  client:
+    service-url:
+      zone1: http://localhost:9002/eureka/
+      defaultZone: http://localhost:9002/eureka/
+  instance:
+    hostname: peer1

@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: center
+eureka:
+  instance:
+    prefer-ip-address: true
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+    metadata-map:
+      zone: defaultZone
+  server:
+    eviction-interval-timer-in-ms: 1000
+    #enable-self-preservation: false
+  client:
+    region: ShenZhen
+    availability-zones:
+      ShenZhen: defaultZone,zone1
+    service-url:
+      zone1: http://localhost:9002/eureka/
+      defaultZone: http://localhost:9001/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+logging:
+  file: logs/center_${server.port}.log
+  register-shutdown-hook: false
+  exception-conversion-word: '%wEx'
+  level:
+     org.springframework: warn
+     org.apache: warn
+     com.netflix: warn
+management:
+  security:
+    enabled: false
+  add-application-context-header: false
+info:
+  role: '注册中心'
+  instance: ${eureka.instance.hostname}
+  ip: ${spring.cloud.client.ipAddress}
+  port: ${server.port}
+

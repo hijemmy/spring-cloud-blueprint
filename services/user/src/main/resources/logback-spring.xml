@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <springProfile name="pro,test">
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.apache" level="WARN"/>
+        <logger name="com.netflix" level="WARN"/>
+    </springProfile>
+    <springProfile name="test,dev,devt">
+        <logger name="com.jemmy.user" level="DEBUG"/>
+        <logger name="com.jemmy.user.service.third.ThirdService" level="DEBUG"/>
+        <logger name="com.jemmy.user.service.order.OrderService" level="DEBUG"/>
+        <logger name="org.springframework.cloud.netflix.feign" level="DEBUG"/>
+        <logger name="com.netflix.hystrix" level="DEBUG"/>
+    </springProfile>
+    <springProfile name="dev">
+        <logger name="org.springframework.cache" level="WARN"/>
+        <logger name="org.springframework.security" level="DEBUG"/>
+        <logger name="org.redisson" level="WARN"/>
+        <logger name="org.apache.ibatis" level="WARN"/>
+        <logger name="org.mybatis.spring" level="WARN"/>
+    </springProfile>
+</configuration>

@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: user
+  autoconfigure:
+    exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
+  cloud:
+    config:
+      name: user
+      profile: pro
+      discovery:
+        service-id: config
+        enabled: false
+      label: master
+      fail-fast: true
+      retry:
+        max-attempts: 3
+      enabled: false
+    bus:
+      enabled: false
+  zipkin:
+    base-url: http://monitor/
+    sender:
+      type: rabbit
+    enabled: false
+    discovery-client-enabled: true
+    locator:
+      discovery:
+        enabled: true
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: false
+  jmx:
+    enabled: false
+eureka:
+  client:
+    service-url:
+      zone1: http://localhost:9002/eureka/
+      defaultZone: http://localhost:9001/eureka/
+    region: ShenZhen
+    availability-zones:
+      ShenZhen: defaultZone,zone1
+    enabled: false
+  instance:
+    prefer-ip-address: true
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+    metadata-map:
+      zone: defaultZone
+      cluster: jemmyweb
+      version: 1.0
+endpoints:
+  enabled: false
+info:
+  role: '用户中心'
+  instance: ${spring.application.index}
+  ip: ${spring.cloud.client.ipAddress}
+  port: ${server.port}
+  version: ${eureka.instance.metadata-map.version}
+management:
+  add-application-context-header: false
