@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `jemmy_user` /*!40100 DEFAULT CHARACTER SET utf8 
 USE `jemmy_user`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: jemmy_user
+-- Host: 192.168.99.100    Database: jemmy_user
 -- ------------------------------------------------------
--- Server version	5.7.22-log
+-- Server version	5.7.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,11 +26,12 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `email` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '姓名',
+  `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `pass` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
+  `state` tinyint(4) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `delete_time` datetime DEFAULT NULL,
@@ -45,7 +46,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'jemmy','caiqingh2006@126.com',1,'7d966f45fc5c6fff8bf8c22c704f6a74c03b08df91229b2618ce849bbf9f9ecb94a036f0a41077f4a5fe7fd622387faae1bb66246a71f28020da64adbd307269','2cb6af893db821625b2ca18d610b0904','2018-10-13 11:57:50','2018-10-13 03:57:50',NULL);
+INSERT INTO `user` VALUES (1,'jemmy','caiqingh2006@126.com',1,'7d966f45fc5c6fff8bf8c22c704f6a74c03b08df91229b2618ce849bbf9f9ecb94a036f0a41077f4a5fe7fd622387faae1bb66246a71f28020da64adbd307269','2cb6af893db821625b2ca18d610b0904',0,'2018-10-13 11:57:50','2018-10-13 03:57:50',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-13 15:06:25
+-- Dump completed on 2018-10-14 14:04:46

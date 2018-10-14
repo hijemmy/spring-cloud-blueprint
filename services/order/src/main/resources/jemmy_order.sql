@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `jemmy_order` /*!40100 DEFAULT CHARACTER SET utf8
 USE `jemmy_order`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: jemmy_order
+-- Host: 192.168.99.100    Database: jemmy_order
 -- ------------------------------------------------------
--- Server version	5.7.22-log
+-- Server version	5.7.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,6 +28,10 @@ CREATE TABLE `order` (
   `id` bigint(20) unsigned NOT NULL,
   `uid` bigint(20) unsigned NOT NULL COMMENT '买家',
   `total` decimal(5,2) NOT NULL COMMENT '总价款',
+  `state` tinyint(4) NOT NULL DEFAULT '0',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-13 15:12:57
+-- Dump completed on 2018-10-14 14:03:56

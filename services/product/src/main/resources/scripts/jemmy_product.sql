@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `jemmy_product` /*!40100 DEFAULT CHARACTER SET ut
 USE `jemmy_product`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: jemmy_product
+-- Host: 192.168.99.100    Database: jemmy_product
 -- ------------------------------------------------------
--- Server version	5.7.22-log
+-- Server version	5.7.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,6 +29,7 @@ CREATE TABLE `product` (
   `name` varchar(64) NOT NULL DEFAULT '',
   `price` decimal(5,2) NOT NULL COMMENT '价格',
   `num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数量',
+  `state` tinyint(4) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `delete_time` datetime DEFAULT NULL,
@@ -42,7 +43,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'金条',265.32,10,'2018-10-13 12:59:06','2018-10-13 04:59:06',NULL),(2,'项链',56.21,100,'0000-00-00 00:00:00','2018-10-13 05:00:03',NULL);
+INSERT INTO `product` VALUES (1,'金条',265.32,10,0,'2018-10-13 12:59:06','2018-10-13 04:59:06',NULL),(2,'项链',56.21,100,0,'0000-00-00 00:00:00','2018-10-13 05:00:03',NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-13 15:08:14
+-- Dump completed on 2018-10-14 14:04:21
