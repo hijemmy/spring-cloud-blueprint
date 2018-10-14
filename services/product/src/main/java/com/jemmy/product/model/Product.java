@@ -1,9 +1,11 @@
 package com.jemmy.product.model;
 
-import com.jemmy.common.model.BaseModel;
-import java.math.BigDecimal;
+import com.jemmy.common.model.AbstractBaseModel;
+import lombok.EqualsAndHashCode;
 
-public class Product extends BaseModel {
+import java.math.BigDecimal;
+@EqualsAndHashCode(of="id")
+public class Product extends AbstractBaseModel {
     private Long id;
 
     private String name;

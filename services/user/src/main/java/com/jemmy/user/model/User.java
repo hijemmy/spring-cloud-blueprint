@@ -1,8 +1,10 @@
 package com.jemmy.user.model;
 
-import com.jemmy.common.model.BaseModel;
+import com.jemmy.common.model.AbstractBaseModel;
+import lombok.EqualsAndHashCode;
 
-public class User extends BaseModel {
+@EqualsAndHashCode(of="id")
+public class User extends AbstractBaseModel {
     private Long id;
 
     private String name;

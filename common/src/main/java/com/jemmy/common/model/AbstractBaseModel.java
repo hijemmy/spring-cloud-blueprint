@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class BaseModel {
+public abstract class AbstractBaseModel {
     public interface BaseTimeJsonView extends RootJsonView {}
     @JsonView(BaseTimeJsonView.class)
     private Date createTime;

@@ -2,7 +2,6 @@ package com.jemmy.common.vo.order.order;
 
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 /**

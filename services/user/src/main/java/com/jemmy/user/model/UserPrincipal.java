@@ -1,9 +1,6 @@
 package com.jemmy.user.model;
 
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.util.StringUtils;
-
-import java.util.Arrays;
 
 public class UserPrincipal extends org.springframework.security.core.userdetails.User {
     private Long id;

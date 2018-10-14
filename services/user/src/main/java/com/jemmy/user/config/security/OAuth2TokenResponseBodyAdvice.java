@@ -6,7 +6,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -27,7 +26,7 @@ import java.util.Set;
 @Slf4j
 public class OAuth2TokenResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
-    private final String accessTokenUrl="/oauth/token";
+    private final static String accessTokenUrl="/oauth/token";
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {

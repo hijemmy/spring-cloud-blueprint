@@ -1,9 +1,11 @@
 package com.jemmy.order.model;
 
-import com.jemmy.common.model.BaseModel;
-import java.math.BigDecimal;
+import com.jemmy.common.model.AbstractBaseModel;
+import lombok.EqualsAndHashCode;
 
-public class Order extends BaseModel {
+import java.math.BigDecimal;
+@EqualsAndHashCode(of="id")
+public class Order extends AbstractBaseModel {
     private Long id;
 
     private Long uid;

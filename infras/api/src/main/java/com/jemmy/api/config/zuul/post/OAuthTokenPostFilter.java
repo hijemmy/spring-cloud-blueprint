@@ -5,8 +5,6 @@ import com.google.common.io.CharStreams;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
@@ -19,6 +17,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 
 /**
  * 对oauth的处理,放置于auth服务本地处理,以降低服务之间的耦合性
+ * @deprecated
  */
 //@Component
 @Deprecated
@@ -26,8 +25,6 @@ public class OAuthTokenPostFilter extends ZuulFilter {
 
     @Autowired
     private ObjectMapper objectMapper;
-
-    private Logger logger=LoggerFactory.getLogger(OAuthTokenPostFilter.class);
 
     private String tokenUrl="/oauth/token";
 

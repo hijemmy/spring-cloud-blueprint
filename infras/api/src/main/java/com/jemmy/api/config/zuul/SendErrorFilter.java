@@ -1,11 +1,11 @@
 package com.jemmy.api.config.zuul;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jemmy.common.web.MVCResultMsg;
+import com.jemmy.common.web.ResultCode;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import com.jemmy.common.web.MVCResultMsg;
-import com.jemmy.common.web.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.util.ZuulRuntimeException;
 import org.springframework.http.MediaType;

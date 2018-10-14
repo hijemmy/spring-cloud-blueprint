@@ -4,7 +4,6 @@ import com.jemmy.common.vo.product.product.GetAllProductVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
 import com.jemmy.product.bo.anotation.JSONRequestMapping;
-import com.jemmy.product.bo.product.FindAllProductItemBo;
 import com.jemmy.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author Jemmy

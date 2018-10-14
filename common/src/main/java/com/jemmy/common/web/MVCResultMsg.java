@@ -6,17 +6,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 /**
  * Created by Jemmy on 2017-08-07.
  */
-public class MVCResultMsg<MSG> {
+public class MVCResultMsg<D> {
     @JsonView(RootJsonView.class)
     ResultCode code=ResultCode.SUCCESS;
 
     @JsonView(RootJsonView.class)
     String message="执行成功";
     @JsonView(RootJsonView.class)
-    MSG data;
-
-    public MVCResultMsg() {
-    }
+    D data;
 
     public ResultCode getCode() {
         return code;
@@ -34,11 +31,11 @@ public class MVCResultMsg<MSG> {
         this.message = message;
     }
 
-    public MSG getData() {
+    public D getData() {
         return data;
     }
 
-    public void setData(MSG data) {
+    public void setData(D data) {
         this.data = data;
     }
 
