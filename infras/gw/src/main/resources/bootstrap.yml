@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: gw
+  autoconfigure:
+    exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
+  cloud:
+    config:
+      name: gw
+      profile: default
+      discovery:
+        service-id: config
+        enabled: false
+      label: master
+      fail-fast: true
+      retry:
+        max-attempts: 3
+      enabled: false
+    bus:
+      enabled: false
+  zipkin:
+    base-url: http://monitor/
+    sender:
+      type: rabbit
+    enabled: false
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: false
+  jmx:
+    enabled: false
+eureka:
+  client:
+    service-url:
+      zone1: http://localhost:9002/eureka/
+      defaultZone: http://localhost:9001/eureka/
+    region: ShenZhen
+    availability-zones:
+      ShenZhen: defaultZone,zone1
+    enabled: false
+  instance:
+    prefer-ip-address: true
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 30
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 90
+    metadata-map:
+      zone: defaultZone
+      cluster: jemmyweb
+ribbon:
+  eager-load:
+    enabled: true
+    clients: order,user
+endpoints:
+  enabled: false
+info:
+  role: '网关服务'
+  instance: ${spring.application.index}
+  ip: ${spring.cloud.client.ipAddress}
+  port: ${server.port}

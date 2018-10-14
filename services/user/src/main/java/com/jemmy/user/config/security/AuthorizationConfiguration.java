@@ -61,7 +61,7 @@ public class AuthorizationConfiguration extends AuthorizationServerConfigurerAda
         //使用内存存储
         clients.inMemory()
                 //分配客户端账号
-                .withClient("api")
+                .withClient("gw")
                 .secret("123456")
                 //支持的授权类型
                 .authorizedGrantTypes("refresh_token", "client_credentials")

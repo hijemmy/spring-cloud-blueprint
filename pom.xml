@@ -116,6 +116,9 @@
         <module>infras</module>
         <module>services</module>
         <module>eventdriven</module>
+        <module>businesses</module>
+        <module>apis</module>
+        <module>web</module>
     </modules>
 
     <build>
