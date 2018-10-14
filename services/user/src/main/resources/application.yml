@@ -230,7 +230,7 @@ server:
     accept-count: 100
 mapper:
   mappers:
-    - com.jemmy.common.mapper.RootMapper
+    - com.jemmy.common.mybatis.mapper.RootMapper
   not-empty: false
   identity: MYSQL
   style: camelhumpandlowercase

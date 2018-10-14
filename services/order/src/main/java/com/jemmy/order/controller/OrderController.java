@@ -1,9 +1,9 @@
 package com.jemmy.order.controller;
 
+import com.jemmy.common.annotation.JSONRequestMapping;
 import com.jemmy.common.vo.order.order.PagingVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
-import com.jemmy.order.annotation.JSONRequestMapping;
 import com.jemmy.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
 package com.jemmy.user.controller;
 
+import com.jemmy.common.annotation.JSONRequestMapping;
 import com.jemmy.common.io.user.user.RegisterIO;
 import com.jemmy.common.vo.user.user.UserInfoVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
 import com.jemmy.user.UserException;
-import com.jemmy.user.anotation.JSONRequestMapping;
 import com.jemmy.user.service.UserService;
 import com.jemmy.user.vo.user.RegisterVo;
 import lombok.extern.slf4j.Slf4j;

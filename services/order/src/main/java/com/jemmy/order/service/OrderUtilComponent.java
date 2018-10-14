@@ -1,7 +1,7 @@
 package com.jemmy.order.service;
 
 import com.jemmy.common.constants.RedisKeySpaceConstant;
-import com.jemmy.order.redisson.DistributedLocker;
+import com.jemmy.common.redisson.DistributedLocker;
 import org.apache.commons.lang.RandomStringUtils;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;

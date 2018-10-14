@@ -1,7 +1,7 @@
 package com.jemmy.product.mapper;
 
 import com.github.pagehelper.Page;
-import com.jemmy.common.mapper.RootMapper;
+import com.jemmy.common.mybatis.mapper.RootMapper;
 import com.jemmy.product.model.Product;
 import org.apache.ibatis.annotations.Select;
 

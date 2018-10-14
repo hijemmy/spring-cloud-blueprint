@@ -1,7 +1,7 @@
 package com.jemmy.order.mapper;
 
 import com.github.pagehelper.Page;
-import com.jemmy.common.mapper.RootMapper;
+import com.jemmy.common.mybatis.mapper.RootMapper;
 import com.jemmy.order.model.Order;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

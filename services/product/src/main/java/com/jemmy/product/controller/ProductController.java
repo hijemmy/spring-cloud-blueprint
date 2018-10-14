@@ -1,9 +1,9 @@
 package com.jemmy.product.controller;
 
+import com.jemmy.common.annotation.JSONRequestMapping;
 import com.jemmy.common.vo.product.product.GetAllProductVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
-import com.jemmy.product.bo.anotation.JSONRequestMapping;
 import com.jemmy.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,7 +13,7 @@
         <logger name="org.springframework.cloud.netflix.feign" level="DEBUG"/>
         <logger name="com.netflix.hystrix" level="DEBUG"/>
     </springProfile>
-    <springProfile name="dev">
+    <springProfile name="dev,devt">
         <logger name="org.springframework.cache" level="WARN"/>
         <logger name="org.springframework.security" level="DEBUG"/>
         <logger name="org.redisson" level="WARN"/>

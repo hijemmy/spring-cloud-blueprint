@@ -1,8 +1,11 @@
 package com.jemmy.order.model;
 
-import com.jemmy.common.model.AbstractBaseModel;
+import com.jemmy.common.mybatis.model.AbstractBaseModel;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
-import javax.persistence.*;
 
 public class Order extends AbstractBaseModel {
     @Id
