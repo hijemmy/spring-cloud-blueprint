@@ -14,12 +14,13 @@
         <property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
-
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.jemmy.common.mapper.RootMapper"/>
+        </plugin>
         <!--对生成的Model中的注释做配置-->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="false"/>
-            <property name="addRemarkComments" value="true"/>
             <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
         </commentGenerator>
 
@@ -49,20 +50,18 @@
         </sqlMapGenerator>
 
         <!--生成相应的Mapper类-->
-        <javaClientGenerator type="MIXEDMAPPER" targetPackage="com.jemmy.product.mapper" targetProject="src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jemmy.product.mapper" targetProject="src\main\java">
             <!--根据不同的db schema生成相应的package-->
             <property name="enableSubPackages" value="true"/>
             <!--在方法名中不包含Domain的名称-->
             <property name="methodNameCalculator" value="false"/>
-            <!--为所有生成的Mapper指定一个父接口-->
-            <property name="rootInterface" value="com.jemmy.common.mapper.RootMapper"/>
             <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
 
         <!--配置要生成Model的Table,其为全集，在maven plugin中可以指定特定要生成的真正Table-->
         <!--普通Table配置-->
-        <table tableName="product" domainObjectName="Product" enableCountByExample="false"
+        <table tableName="product" enableCountByExample="false"
                escapeWildcards="true" enableDeleteByExample="false" enableSelectByExample="false" enableSelectByPrimaryKey="false"
                enableUpdateByExample="false" enableUpdateByPrimaryKey="false" enableDeleteByPrimaryKey="false"
         >
