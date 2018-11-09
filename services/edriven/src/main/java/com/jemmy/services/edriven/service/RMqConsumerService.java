@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcMqConsumerService.java
+ * 类名称：RMqConsumerService.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -11,19 +11,21 @@
 
 package com.jemmy.services.edriven.service;
 
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.TpcMqConsumer;
-import com.paascloud.provider.model.vo.TpcMqConsumerVo;
-import com.paascloud.provider.model.vo.TpcMqSubscribeVo;
+
+
+import com.jemmy.common.support.IService;
+import com.jemmy.services.edriven.model.domain.EdrivenMqConfirm;
+import com.jemmy.services.edriven.model.vo.TpcMqConsumerVo;
+import com.jemmy.services.edriven.model.vo.TpcMqSubscribeVo;
 
 import java.util.List;
 
 /**
- * The interface Tpc mq consumer service.
+ * 可靠消息消费者服务
  *
  * @author paascloud.net @gmail.com
  */
-public interface TpcMqConsumerService extends IService<TpcMqConsumer> {
+public interface RMqConsumerService extends IService<EdrivenMqConfirm> {
 	/**
 	 * 查询Mq消费者列表.
 	 *
@@ -31,7 +33,7 @@ public interface TpcMqConsumerService extends IService<TpcMqConsumer> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqConsumerVo> listConsumerVoWithPage(TpcMqConsumer tpcMqConsumer);
+	List<TpcMqConsumerVo> listConsumerVoWithPage(EdrivenMqConfirm tpcMqConsumer);
 
 	/**
 	 * 查询订阅者列表.
@@ -40,7 +42,7 @@ public interface TpcMqConsumerService extends IService<TpcMqConsumer> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqSubscribeVo> listSubscribeVoWithPage(TpcMqConsumer tpcMqConsumer);
+	List<TpcMqSubscribeVo> listSubscribeVoWithPage(EdrivenMqConfirm tpcMqConsumer);
 
 	/**
 	 * Delete by tag id.

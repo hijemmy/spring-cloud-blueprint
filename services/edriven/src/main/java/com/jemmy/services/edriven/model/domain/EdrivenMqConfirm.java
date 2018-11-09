@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcMqConfirm.java
+ * 类名称：EdrivenMqConfirm.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -27,7 +27,7 @@ import java.util.Date;
 @Alias("tpcMqConfirm")
 @Table(name = "pc_tpc_mq_confirm")
 @NoArgsConstructor
-public class TpcMqConfirm {
+public class EdrivenMqConfirm {
 	/**
 	 * ID
 	 */
@@ -89,7 +89,7 @@ public class TpcMqConfirm {
 	 * @param messageKey   the message key
 	 * @param consumerCode the consumer code
 	 */
-	public TpcMqConfirm(final Long id, final Long messageId, final String messageKey, final String consumerCode) {
+	public EdrivenMqConfirm(final Long id, final Long messageId, final String messageKey, final String consumerCode) {
 		this.id = id;
 		this.messageId = messageId;
 		this.messageKey = messageKey;

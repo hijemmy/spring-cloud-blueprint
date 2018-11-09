@@ -11,9 +11,9 @@
 
 package com.jemmy.services.edriven.service;
 
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.TpcMqTopic;
-import com.paascloud.provider.model.vo.TpcMqTopicVo;
+import com.jemmy.common.support.IService;
+import com.jemmy.services.edriven.model.domain.EdrivenMqTopic;
+import com.jemmy.services.edriven.model.vo.TpcMqTopicVo;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-public interface TpcMqTopicService extends IService<TpcMqTopic> {
+public interface TpcMqTopicService extends IService<EdrivenMqTopic> {
 	/**
 	 * 查询MQ topic列表.
 	 *
@@ -30,6 +30,6 @@ public interface TpcMqTopicService extends IService<TpcMqTopic> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqTopicVo> listWithPage(TpcMqTopic mdcMqTopic);
+	List<TpcMqTopicVo> listWithPage(EdrivenMqTopic mdcMqTopic);
 
 }

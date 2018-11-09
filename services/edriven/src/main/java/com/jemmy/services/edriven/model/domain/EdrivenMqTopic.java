@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcMqTag.java
+ * 类名称：EdrivenMqTopic.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -20,34 +20,40 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
- * The class Tpc mq tag.
+ * The class Tpc mq topic.
  *
  * @author paascloud.net @gmail.com
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_tpc_mq_tag")
-@Alias(value = "tpcMqTag")
-public class TpcMqTag extends BaseEntity {
-	private static final long serialVersionUID = -1063353649973385058L;
-
-	/**
-	 * 主题ID
-	 */
-	@Column(name = "topic_id")
-	private Long topicId;
+@Table(name = "pc_tpc_mq_topic")
+@Alias(value = "tpcMqTopic")
+public class EdrivenMqTopic extends BaseEntity {
+	private static final long serialVersionUID = 5642946024630652202L;
 
 	/**
 	 * 城市编码
 	 */
-	@Column(name = "tag_code")
-	private String tagCode;
+	@Column(name = "topic_code")
+	private String topicCode;
 
 	/**
 	 * 区域编码
 	 */
-	@Column(name = "tag_name")
-	private String tagName;
+	@Column(name = "topic_name")
+	private String topicName;
+
+	/**
+	 * MQ类型, 10 rocketmq 20 kafka
+	 */
+	@Column(name = "mq_type")
+	private Integer mqType;
+
+	/**
+	 * 消息类型, 10 无序消息, 20 无序消息
+	 */
+	@Column(name = "msg_type")
+	private Integer msgType;
 
 	/**
 	 * 状态, 0生效,10,失效
@@ -57,5 +63,5 @@ public class TpcMqTag extends BaseEntity {
 	/**
 	 * 备注
 	 */
-	private String remark;
+	private String remarks;
 }

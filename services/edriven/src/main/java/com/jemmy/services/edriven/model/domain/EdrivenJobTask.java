@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcJobTask.java
+ * 类名称：EdrivenJobTask.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -26,7 +26,7 @@ import java.util.Date;
 @Data
 @Table(name = "pc_tpc_job_task")
 @Alias(value = "tpcJobTask")
-public class TpcJobTask implements Serializable {
+public class EdrivenJobTask implements Serializable {
 	private static final long serialVersionUID = -7833392442916077253L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

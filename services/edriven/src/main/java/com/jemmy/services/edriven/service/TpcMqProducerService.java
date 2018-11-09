@@ -11,10 +11,10 @@
 
 package com.jemmy.services.edriven.service;
 
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.TpcMqProducer;
-import com.paascloud.provider.model.vo.TpcMqProducerVo;
-import com.paascloud.provider.model.vo.TpcMqPublishVo;
+import com.jemmy.common.support.IService;
+import com.jemmy.services.edriven.model.domain.EdrivenMqProducer;
+import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
+import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-public interface TpcMqProducerService extends IService<TpcMqProducer> {
+public interface TpcMqProducerService extends IService<EdrivenMqProducer> {
 	/**
 	 * List producer vo with page list.
 	 *
@@ -31,7 +31,7 @@ public interface TpcMqProducerService extends IService<TpcMqProducer> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqProducerVo> listProducerVoWithPage(TpcMqProducer mdcMqProducer);
+	List<TpcMqProducerVo> listProducerVoWithPage(EdrivenMqProducer mdcMqProducer);
 
 	/**
 	 * 查询发布者列表.
@@ -40,7 +40,7 @@ public interface TpcMqProducerService extends IService<TpcMqProducer> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqPublishVo> listPublishVoWithPage(TpcMqProducer mdcMqProducer);
+	List<TpcMqPublishVo> listPublishVoWithPage(EdrivenMqProducer mdcMqProducer);
 
 	/**
 	 * 根据生产者ID删除生产者.

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcMessageVo.java
+ * 类名称：EdrivenMessageVo.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class TpcMessageVo extends BaseVo {
+public class EdrivenMessageVo extends BaseVo {
 	private static final long serialVersionUID = 7353473261430862023L;
 
 	private Integer version;

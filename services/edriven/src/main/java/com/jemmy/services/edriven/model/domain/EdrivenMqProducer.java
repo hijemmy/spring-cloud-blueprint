@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcMqConsumer.java
+ * 类名称：EdrivenMqProducer.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -20,17 +20,16 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
- * The class Tpc mq consumer.
+ * The class Tpc mq producer.
  *
  * @author paascloud.net @gmail.com
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_tpc_mq_consumer")
-@Alias(value = "tpcMqConsumer")
-public class TpcMqConsumer extends BaseEntity {
-
-	private static final long serialVersionUID = 9104188440392558541L;
+@Table(name = "pc_tpc_mq_producer")
+@Alias(value = "tpcMqProducer")
+public class EdrivenMqProducer extends BaseEntity {
+	private static final long serialVersionUID = -4064061704648362318L;
 
 	/**
 	 * 微服务名称
@@ -39,16 +38,19 @@ public class TpcMqConsumer extends BaseEntity {
 	private String applicationName;
 
 	/**
-	 * 城市编码
+	 * PID 生产者组编码
 	 */
-	@Column(name = "consumer_code")
-	private String consumerCode;
+	@Column(name = "producer_code")
+	private String producerCode;
 
 	/**
-	 * 区域编码
+	 * PID 生产者组名称
 	 */
-	@Column(name = "consumer_name")
-	private String consumerName;
+	@Column(name = "producer_name")
+	private String producerName;
+
+	@Column(name = "query_message_url")
+	private String queryMessageUrl;
 
 	/**
 	 * 状态, 0生效,10,失效
@@ -59,5 +61,4 @@ public class TpcMqConsumer extends BaseEntity {
 	 * 备注
 	 */
 	private String remark;
-
 }

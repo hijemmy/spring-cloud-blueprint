@@ -21,6 +21,12 @@
             <artifactId>rocketmq-client</artifactId>
             <version>4.1.0-incubating</version>
         </dependency>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>elastic-job-lite</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
 

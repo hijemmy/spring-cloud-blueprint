@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：TpcMqMessage.java
+ * 类名称：EdrivenMqMessage.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -27,7 +27,7 @@ import java.util.List;
 @Data
 @Alias(value = "tpcMqMessage")
 @Table(name = "pc_tpc_mq_message")
-public class TpcMqMessage implements Serializable {
+public class EdrivenMqMessage implements Serializable {
 	private static final long serialVersionUID = -5951754367474682967L;
 	/**
 	 * ID

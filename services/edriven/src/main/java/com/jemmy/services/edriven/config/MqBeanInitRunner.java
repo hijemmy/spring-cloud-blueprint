@@ -13,6 +13,11 @@ package com.jemmy.services.edriven.config;
 
 import com.alibaba.fastjson.JSON;
 
+import com.dangdang.ddframe.job.reg.base.CoordinatorRegistryCenter;
+import com.jemmy.common.config.ApplicationProperties;
+import com.jemmy.common.constants.GlobalConstant;
+import com.jemmy.services.edriven.job.listener.MqConsumerChangeListener;
+import com.jemmy.services.edriven.job.listener.MqProducerChangeListener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCache;
@@ -34,7 +39,7 @@ import java.util.List;
 @Slf4j
 public class MqBeanInitRunner implements CommandLineRunner {
 	@Resource
-	private PaascloudProperties paascloudProperties;
+	private ApplicationProperties paascloudProperties;
 	@Resource
 	private MqProducerChangeListener producerChangeListener;
 	@Resource

@@ -11,12 +11,12 @@
 
 package com.jemmy.services.edriven.service;
 
-import com.paascloud.base.dto.MessageQueryDto;
-import com.paascloud.provider.model.domain.TpcMqMessage;
-import com.paascloud.provider.model.dto.MessageTaskQueryDto;
-import com.paascloud.provider.model.dto.TpcMqMessageDto;
-import com.paascloud.provider.model.vo.TpcMessageVo;
-import com.paascloud.wrapper.Wrapper;
+
+import com.jemmy.apis.edriven.io.RMqMessageIo;
+import com.jemmy.common.dto.MessageQueryDto;
+import com.jemmy.common.web.MVCResultMsg;
+import com.jemmy.services.edriven.model.domain.EdrivenMqMessage;
+import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @param mqMessageDto the mq message dto
 	 */
-	void saveMessageWaitingConfirm(TpcMqMessageDto mqMessageDto);
+	void saveMessageWaitingConfirm(RMqMessageIo mqMessageDto);
 
 
 	/**
@@ -47,7 +47,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @param mqMessageDto the mq message dto
 	 */
-	void saveAndSendMessage(TpcMqMessageDto mqMessageDto);
+	void saveAndSendMessage(RMqMessageIo mqMessageDto);
 
 
 	/**
@@ -109,7 +109,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqMessage> listMessageForWaitingProcess(MessageTaskQueryDto query);
+	List<EdrivenMqMessage> listMessageForWaitingProcess(MessageTaskQueryDto query);
 
 	/**
 	 * 确认收到消息.
@@ -170,7 +170,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the int
 	 */
-	int updateMqMessageTaskStatus(TpcMqMessage message);
+	int updateMqMessageTaskStatus(EdrivenMqMessage message);
 
 	/**
 	 * Update mq message status.
@@ -179,7 +179,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the int
 	 */
-	int updateMqMessageStatus(TpcMqMessage update);
+	int updateMqMessageStatus(EdrivenMqMessage update);
 
 	/**
 	 * Query record list with page page info.
@@ -188,7 +188,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the page info
 	 */
-	Wrapper queryRecordListWithPage(MessageQueryDto tpcMessageQueryDto);
+	MVCResultMsg queryRecordListWithPage(MessageQueryDto tpcMessageQueryDto);
 
 	/**
 	 * List reliable message vo list.
@@ -197,7 +197,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the list
 	 */
-	List<TpcMessageVo> listReliableMessageVo(MessageQueryDto tpcMessageQueryDto);
+	List<EdrivenMqMessage> listReliableMessageVo(MessageQueryDto tpcMessageQueryDto);
 
 	/**
 	 * List reliable message vo list.
@@ -206,5 +206,5 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the list
 	 */
-	List<TpcMessageVo> listReliableMessageVo(List<Long> messageIdList);
+	List<EdrivenMqMessage> listReliableMessageVo(List<Long> messageIdList);
 }
