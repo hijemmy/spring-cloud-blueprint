@@ -119,6 +119,7 @@
         <module>businesses</module>
         <module>apis</module>
         <module>web</module>
+        <module>elastic-job-lite</module>
     </modules>
 
     <build>

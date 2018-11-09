@@ -16,6 +16,7 @@
         <module>user</module>
         <module>order</module>
         <module>product</module>
+        <module>edriven</module>
     </modules>
     <dependencies>
         <dependency>
