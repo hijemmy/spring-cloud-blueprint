@@ -1,10 +1,11 @@
 package com.jemmy.product.service;
 
-import com.jemmy.common.vo.product.product.GetAllProductVo;
+
+import com.jemmy.product.vo.product.GetAllProductVo;
 
 public interface ProductService {
 
 
-    GetAllProductVo findAllProduct(Integer page,Integer size);
+    GetAllProductVo findAllProduct(Integer page, Integer size);
 
 }

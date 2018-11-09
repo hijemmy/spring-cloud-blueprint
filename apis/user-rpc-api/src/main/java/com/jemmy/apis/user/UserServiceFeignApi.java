@@ -1,7 +1,7 @@
-package com.jemmy.order.service;
+package com.jemmy.apis.user;
 
 
-import com.jemmy.common.vo.user.user.UserInfoVo;
+import com.jemmy.apis.user.vo.user.UserInfoVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
 import feign.hystrix.FallbackFactory;
@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Jemmy
  */
 @FeignClient(name = "user",fallbackFactory = AuthServiceFallbackFactory.class,primary = false)
-public interface UserService {
+public interface UserServiceFeignApi {
 
     @RequestMapping(path = "/user/info",method = RequestMethod.GET)
     MVCResultMsg<UserInfoVo> info(@RequestParam(name = "uid") Long uid);
 }
 
 @Component
-class AuthServiceFallbackFactory implements FallbackFactory<UserService>{
+class AuthServiceFallbackFactory implements FallbackFactory<UserServiceFeignApi>{
 
     @Override
-    public UserService create(Throwable cause) {
-        return new UserService() {
+    public UserServiceFeignApi create(Throwable cause) {
+        return new UserServiceFeignApi() {
             @Override
             public MVCResultMsg<UserInfoVo> info(Long uid) {
                 //FeignException exception=new FeignException(cause);

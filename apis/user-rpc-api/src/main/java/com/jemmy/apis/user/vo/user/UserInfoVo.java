@@ -1,4 +1,4 @@
-package com.jemmy.common.vo.user.user;
+package com.jemmy.apis.user.vo.user;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.jemmy.common.vo.order.order;
+package com.jemmy.order.vo.order;
 
 import lombok.Data;
 

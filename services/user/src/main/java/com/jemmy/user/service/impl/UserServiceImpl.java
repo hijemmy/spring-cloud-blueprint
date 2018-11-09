@@ -1,8 +1,8 @@
 package com.jemmy.user.service.impl;
 
+import com.jemmy.apis.user.vo.user.UserInfoVo;
 import com.jemmy.common.security.Pbkdf2PasswordEncoder;
 import com.jemmy.common.support.BaseService;
-import com.jemmy.common.vo.user.user.UserInfoVo;
 import com.jemmy.user.UserException;
 import com.jemmy.user.mapper.UserMapper;
 import com.jemmy.user.model.User;

@@ -1,4 +1,4 @@
-package com.jemmy.common.vo.product.product;
+package com.jemmy.product.vo.product;
 
 
 import lombok.Data;

@@ -13,9 +13,18 @@
     <artifactId>apis</artifactId>
     <modules>
 
+        <module>user-rpc-api</module>
     </modules>
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

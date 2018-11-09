@@ -20,5 +20,10 @@
         <mybatis.generator.includeCompileDependencies>true</mybatis.generator.includeCompileDependencies>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>user-rpc-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

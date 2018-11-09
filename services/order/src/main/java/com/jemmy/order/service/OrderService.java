@@ -1,6 +1,7 @@
 package com.jemmy.order.service;
 
-import com.jemmy.common.vo.order.order.PagingVo;
+
+import com.jemmy.order.vo.order.PagingVo;
 
 public interface OrderService {
 

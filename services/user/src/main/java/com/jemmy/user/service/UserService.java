@@ -1,6 +1,6 @@
 package com.jemmy.user.service;
 
-import com.jemmy.common.vo.user.user.UserInfoVo;
+import com.jemmy.apis.user.vo.user.UserInfoVo;
 import com.jemmy.user.UserException;
 import com.jemmy.user.model.User;
 import com.jemmy.user.vo.user.RegisterVo;

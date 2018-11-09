@@ -1,10 +1,10 @@
 package com.jemmy.product.controller;
 
 import com.jemmy.common.annotation.JSONRequestMapping;
-import com.jemmy.common.vo.product.product.GetAllProductVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
 import com.jemmy.product.service.ProductService;
+import com.jemmy.product.vo.product.GetAllProductVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +30,7 @@ public class ProductController {
      * @return
      */
     @GetMapping("/getAllProduct")
-    public MVCResultMsg<GetAllProductVo> getAllProduct(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue = "10") Integer size){
+    public MVCResultMsg<GetAllProductVo> getAllProduct(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size){
         MVCResultMsg<GetAllProductVo> result=new MVCResultMsg<>();
         result.setCode(ResultCode.SUCCESS);
         result.setData(productService.findAllProduct(page, size));

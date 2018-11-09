@@ -1,6 +1,6 @@
 package com.jemmy.order;
 
-public class OrderException extends Exception{
+public class OrderException extends RuntimeException{
 
     public OrderException(String message) {
         super(message);

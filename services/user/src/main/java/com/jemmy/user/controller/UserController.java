@@ -1,8 +1,9 @@
 package com.jemmy.user.controller;
 
+import com.jemmy.apis.user.UserServiceFeignApi;
+import com.jemmy.apis.user.vo.user.UserInfoVo;
 import com.jemmy.common.annotation.JSONRequestMapping;
 import com.jemmy.common.io.user.user.RegisterIO;
-import com.jemmy.common.vo.user.user.UserInfoVo;
 import com.jemmy.common.web.MVCResultMsg;
 import com.jemmy.common.web.ResultCode;
 import com.jemmy.user.UserException;
@@ -12,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,12 +25,12 @@ import javax.validation.constraints.Min;
 @RestController
 @JSONRequestMapping("/user")
 @Slf4j
-public class UserController {
+public class UserController implements UserServiceFeignApi {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/info")
+    @Override
     public MVCResultMsg<UserInfoVo> info(@Valid @Min(1) @RequestParam Long uid){
         MVCResultMsg<UserInfoVo> result=new MVCResultMsg<>();
         UserInfoVo userInfoVO=userService.selectById(uid);
