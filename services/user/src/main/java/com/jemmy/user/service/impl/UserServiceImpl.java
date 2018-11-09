@@ -1,6 +1,7 @@
 package com.jemmy.user.service.impl;
 
 import com.jemmy.common.security.Pbkdf2PasswordEncoder;
+import com.jemmy.common.support.BaseService;
 import com.jemmy.common.vo.user.user.UserInfoVo;
 import com.jemmy.user.UserException;
 import com.jemmy.user.mapper.UserMapper;
@@ -13,14 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Jemmy
+ */
 @Service
-@Transactional
-public class UserServiceImpl implements UserService {
+@Transactional(rollbackFor = Exception.class)
+public class UserServiceImpl extends BaseService<User,UserMapper> implements UserService {
 
     private Logger logger=LoggerFactory.getLogger(UserServiceImpl.class);
 
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private Pbkdf2PasswordEncoder passwordEncoder;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoVo selectById(Long id) {
-        User user=userMapper.selectByPrimaryKey(id);
+        User user=mapper.selectByPrimaryKey(id);
         UserInfoVo result=null;
         if(user!=null){
             result=new UserInfoVo();
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
     public User findUserByUserame(String userName) {
         User user=new User();
         user.setName(userName);
-        return userMapper.selectOne(user);
+        return mapper.selectOne(user);
     }
 
     @Override
