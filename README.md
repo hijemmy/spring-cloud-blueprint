@@ -1,6 +1,7 @@
 # spring-cloud-blueprint
 基于Spring-cloud的微服务脚手架
 
+本项目基于https://github.com/paascloud/paascloud-master学习改造,仅用于学习交流之用
 
 
 - infras
