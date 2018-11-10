@@ -115,9 +115,8 @@
         <module>common</module>
         <module>infras</module>
         <module>services</module>
-        <module>eventdriven</module>
         <module>businesses</module>
-        <module>apis</module>
+        <module>service-inter-apis</module>
         <module>web</module>
         <module>elastic-job-lite</module>
     </modules>

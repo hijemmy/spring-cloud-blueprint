@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <description>接口整合服务</description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>apis</artifactId>
+    <artifactId>service-inter-apis</artifactId>
     <modules>
 
         <module>user-rpc-api</module>
