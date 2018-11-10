@@ -26,6 +26,26 @@
             <artifactId>elastic-job-lite</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>product-rpc-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>opc-rpc-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>user-rpc-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jemmyweb</groupId>
+            <artifactId>user-rpc-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 

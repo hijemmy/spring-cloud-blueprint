@@ -11,8 +11,8 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.TpcMqConfirm;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.services.edriven.model.domain.TpcMqConfirm;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

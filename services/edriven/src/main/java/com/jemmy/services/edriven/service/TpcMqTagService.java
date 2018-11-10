@@ -11,7 +11,10 @@
 
 package com.jemmy.services.edriven.service;
 
-import com.jemmy.common.support.IService;
+
+
+import com.jemmy.common.core.support.IService;
+import com.jemmy.services.edriven.model.domain.TpcMqTag;
 import com.jemmy.services.edriven.model.vo.TpcMqTagVo;
 
 import java.util.List;
@@ -21,7 +24,7 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-public interface TpcMqTagService extends IService<EdrivenMqTag> {
+public interface TpcMqTagService extends IService<TpcMqTag> {
 	/**
 	 * 查询Tag列表.
 	 *
@@ -29,7 +32,7 @@ public interface TpcMqTagService extends IService<EdrivenMqTag> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqTagVo> listWithPage(EdrivenMqTag mdcMqTag);
+	List<TpcMqTagVo> listWithPage(TpcMqTag mdcMqTag);
 
 	/**
 	 * 根据ID删除TAG.

@@ -12,13 +12,13 @@
 package com.jemmy.services.edriven.service;
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.MessageQueryDto;
-import com.paascloud.base.dto.MqMessageVo;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.provider.exceptions.TpcBizException;
-import com.paascloud.provider.model.service.UacMqMessageFeignApi;
-import com.paascloud.provider.model.service.UacUserTokenFeignApi;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.edriven.exceptions.TpcBizException;
+import com.jemmy.apis.user.service.UacMqMessageFeignApi;
+import com.jemmy.apis.user.service.UacUserTokenFeignApi;
+import com.jemmy.common.base.dto.MessageQueryDto;
+import com.jemmy.common.base.dto.MqMessageVo;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.util.wrapper.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;

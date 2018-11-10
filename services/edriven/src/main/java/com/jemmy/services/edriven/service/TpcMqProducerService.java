@@ -11,7 +11,9 @@
 
 package com.jemmy.services.edriven.service;
 
-import com.jemmy.common.support.IService;
+
+import com.jemmy.common.core.support.IService;
+import com.jemmy.services.edriven.model.domain.TpcMqProducer;
 import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
 import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
 
@@ -22,7 +24,7 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-public interface TpcMqProducerService extends IService<EdrivenMqProducer> {
+public interface TpcMqProducerService extends IService<TpcMqProducer> {
 	/**
 	 * List producer vo with page list.
 	 *
@@ -30,7 +32,7 @@ public interface TpcMqProducerService extends IService<EdrivenMqProducer> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqProducerVo> listProducerVoWithPage(EdrivenMqProducer mdcMqProducer);
+	List<TpcMqProducerVo> listProducerVoWithPage(TpcMqProducer mdcMqProducer);
 
 	/**
 	 * 查询发布者列表.
@@ -39,7 +41,7 @@ public interface TpcMqProducerService extends IService<EdrivenMqProducer> {
 	 *
 	 * @return the list
 	 */
-	List<TpcMqPublishVo> listPublishVoWithPage(EdrivenMqProducer mdcMqProducer);
+	List<TpcMqPublishVo> listPublishVoWithPage(TpcMqProducer mdcMqProducer);
 
 	/**
 	 * 根据生产者ID删除生产者.

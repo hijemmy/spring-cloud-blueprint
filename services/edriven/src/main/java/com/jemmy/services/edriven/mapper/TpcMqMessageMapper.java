@@ -11,11 +11,11 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.paascloud.base.dto.MessageQueryDto;
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.TpcMqMessage;
-import com.paascloud.provider.model.dto.MessageTaskQueryDto;
-import com.paascloud.provider.model.vo.TpcMessageVo;
+import com.jemmy.common.base.dto.MessageQueryDto;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.services.edriven.model.domain.TpcMqMessage;
+import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
+import com.jemmy.services.edriven.model.vo.TpcMessageVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

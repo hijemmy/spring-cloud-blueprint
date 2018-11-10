@@ -15,6 +15,10 @@
 
         <module>user-rpc-api</module>
         <module>edriven-rpc-api</module>
+        <module>rmq-sdk-api</module>
+        <module>product-rpc-api</module>
+        <module>opc-rpc-api</module>
+        <module>omc-rpc-api</module>
     </modules>
     <dependencies>
         <dependency>

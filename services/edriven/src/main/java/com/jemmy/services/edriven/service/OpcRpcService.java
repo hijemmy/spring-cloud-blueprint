@@ -13,12 +13,15 @@ package com.jemmy.services.edriven.service;
 
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.MessageQueryDto;
-import com.paascloud.base.dto.MqMessageVo;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.provider.exceptions.TpcBizException;
-import com.paascloud.provider.model.dto.robot.ChatRobotMsgDto;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.edriven.exceptions.TpcBizException;
+import com.jemmy.apis.opc.model.dto.robot.ChatRobotMsgDto;
+import com.jemmy.apis.opc.service.DingtalkFeignApi;
+import com.jemmy.apis.opc.service.OpcMqMessageFeignApi;
+import com.jemmy.apis.opc.service.OpcOssFeignApi;
+import com.jemmy.common.base.dto.MessageQueryDto;
+import com.jemmy.common.base.dto.MqMessageVo;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.util.wrapper.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
