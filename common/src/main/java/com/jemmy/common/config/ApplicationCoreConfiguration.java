@@ -1,5 +1,6 @@
 package com.jemmy.common.config;
 
+import com.jemmy.common.config.properties.ApplicationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

@@ -12,8 +12,8 @@
 package com.jemmy.services.edriven.service;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.core.registry.base.ReliableMessageRegisterDto;
-import com.paascloud.core.support.SpringContextHolder;
+import com.jemmy.common.support.SpringContextHolder;
+import com.jemmy.common.zk.registory.base.ReliableMessageRegisterDto;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.springframework.beans.factory.config.BeanDefinition;

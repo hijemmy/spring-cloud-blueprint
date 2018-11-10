@@ -2,7 +2,7 @@ package com.jemmy.common.mybatis.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.jemmy.common.dto.LoginAuthDto;
+import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.web.RootJsonView;
 import lombok.Data;
 

@@ -12,12 +12,14 @@
 package com.jemmy.services.edriven.config;
 
 import com.alibaba.fastjson.JSON;
-
-import com.dangdang.ddframe.job.reg.base.CoordinatorRegistryCenter;
-import com.jemmy.common.config.ApplicationProperties;
-import com.jemmy.common.constants.GlobalConstant;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.common.config.properties.ApplicationProperties;
+import com.jemmy.common.zk.registory.base.CoordinatorRegistryCenter;
+import com.jemmy.common.zk.registory.base.ReliableMessageRegisterDto;
 import com.jemmy.services.edriven.job.listener.MqConsumerChangeListener;
 import com.jemmy.services.edriven.job.listener.MqProducerChangeListener;
+import com.jemmy.services.edriven.service.MqProducerBeanFactory;
+import com.jemmy.services.edriven.service.TpcMqProducerService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCache;

@@ -11,13 +11,12 @@
 
 package com.jemmy.common.support;
 
-import com.jemmy.common.exception.BusinessException;
+import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.mybatis.mapper.RootMapper;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 

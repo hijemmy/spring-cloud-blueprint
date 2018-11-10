@@ -2,10 +2,6 @@ package com.jemmy.user.model;
 
 import com.jemmy.common.mybatis.model.AbstractBaseModel;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class User extends AbstractBaseModel {
     /**
      * 姓名

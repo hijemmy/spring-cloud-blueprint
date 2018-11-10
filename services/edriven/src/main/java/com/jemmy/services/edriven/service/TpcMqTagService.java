@@ -12,7 +12,6 @@
 package com.jemmy.services.edriven.service;
 
 import com.jemmy.common.support.IService;
-import com.jemmy.services.edriven.model.domain.EdrivenMqTag;
 import com.jemmy.services.edriven.model.vo.TpcMqTagVo;
 
 import java.util.List;

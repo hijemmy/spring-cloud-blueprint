@@ -12,7 +12,6 @@
 package com.jemmy.services.edriven.service;
 
 import com.jemmy.common.support.IService;
-import com.jemmy.services.edriven.model.domain.EdrivenMqProducer;
 import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
 import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
 
