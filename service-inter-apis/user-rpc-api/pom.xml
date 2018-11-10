@@ -9,6 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>用户服务对其它微服务开放的接口</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
     <artifactId>user-rpc-api</artifactId>
 
 
