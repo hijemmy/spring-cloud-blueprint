@@ -17,7 +17,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 /**
  *  对于获取token的请求,由网关代理请求
  */
-@Component
+//@Component
 public class OAuthTokenPreFilter extends ZuulFilter {
     private Logger logger=LoggerFactory.getLogger(OAuthTokenPreFilter.class);
 

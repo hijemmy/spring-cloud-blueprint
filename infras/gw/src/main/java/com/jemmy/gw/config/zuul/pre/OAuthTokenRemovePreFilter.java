@@ -19,7 +19,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 /**
  *  对于不限的URL请求,删除其认证头
  */
-@Component
+//@Component
 @Slf4j
 public class OAuthTokenRemovePreFilter extends ZuulFilter {
 
