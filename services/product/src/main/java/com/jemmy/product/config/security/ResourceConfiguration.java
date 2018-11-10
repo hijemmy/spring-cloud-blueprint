@@ -44,6 +44,8 @@ public class ResourceConfiguration extends ResourceServerConfigurerAdapter{
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers(urls).permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/druid/**", "/pay/alipayCallback", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs", "/api/applications").permitAll()
                 .anyRequest().authenticated();
     }
 

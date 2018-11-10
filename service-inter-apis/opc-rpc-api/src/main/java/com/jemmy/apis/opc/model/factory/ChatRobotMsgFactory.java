@@ -12,8 +12,8 @@
 package com.jemmy.apis.opc.model.factory;
 
 
-import com.paascloud.provider.model.dto.robot.*;
-import com.paascloud.provider.model.enums.RobotMsgTypeEnum;
+import com.jemmy.apis.opc.model.dto.robot.*;
+import com.jemmy.apis.opc.model.enums.RobotMsgTypeEnum;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -38,7 +38,7 @@ public class ChatRobotMsgFactory {
 	 * @return chat robot msg dto
 	 */
 	public static ChatRobotMsgDto createChatRobotMarkdownMsg(String webhookToken, String text, String title,
-	                                                         boolean isAtAll, String[] atMobiles) {
+															 boolean isAtAll, String[] atMobiles) {
 		ChatRobotMsgDto entity = new ChatRobotMsgDto();
 		entity.setMsgType(RobotMsgTypeEnum.MARKDOWN.getType());
 		entity.setWebhookToken(webhookToken);
