@@ -17,6 +17,7 @@
         <module>order</module>
         <module>product</module>
         <module>edriven</module>
+        <module>opc</module>
     </modules>
     <dependencies>
         <dependency>
