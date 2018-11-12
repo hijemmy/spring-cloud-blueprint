@@ -1,6 +1,6 @@
 package com.jemmy.user.model.dto.omc;
 
-import com.paascloud.provider.model.vo.CartProductVo;
+import com.jemmy.apis.omc.model.vo.CartProductVo;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -12,8 +12,8 @@
 package com.jemmy.user.service.impl;
 
 import com.google.common.collect.Lists;
-import com.paascloud.PublicUtil;
-import com.paascloud.provider.service.RedisHashService;
+import com.jemmy.common.util.PublicUtil;
+import com.jemmy.user.service.RedisHashService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;

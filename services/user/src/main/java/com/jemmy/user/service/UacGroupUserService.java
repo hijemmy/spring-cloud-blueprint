@@ -11,9 +11,10 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacGroup;
-import com.paascloud.provider.model.domain.UacGroupUser;
+
+import com.jemmy.common.core.support.IService;
+import com.jemmy.user.model.domain.UacGroup;
+import com.jemmy.user.model.domain.UacGroupUser;
 
 import java.util.List;
 

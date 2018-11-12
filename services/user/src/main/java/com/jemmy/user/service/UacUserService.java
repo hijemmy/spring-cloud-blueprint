@@ -12,14 +12,21 @@
 package com.jemmy.user.service;
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacLog;
-import com.paascloud.provider.model.domain.UacUser;
-import com.paascloud.provider.model.dto.menu.UserMenuDto;
-import com.paascloud.provider.model.dto.user.*;
-import com.paascloud.provider.model.vo.UserBindRoleVo;
-import com.paascloud.security.core.SecurityUser;
+import com.jemmy.apis.user.user.ForgetResetPasswordDto;
+import com.jemmy.apis.user.user.LoginReqDto;
+import com.jemmy.apis.user.user.Perm;
+import com.jemmy.apis.user.user.UserRegisterDto;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.support.IService;
+import com.jemmy.common.security.core.SecurityUser;
+import com.jemmy.user.model.domain.UacLog;
+import com.jemmy.user.model.domain.UacUser;
+import com.jemmy.user.model.dto.menu.UserMenuDto;
+import com.jemmy.user.model.dto.user.BindUserRolesDto;
+import com.jemmy.user.model.dto.user.ResetLoginPwdDto;
+import com.jemmy.user.model.dto.user.UserModifyPwdDto;
+import com.jemmy.user.model.dto.user.UserResetPwdDto;
+import com.jemmy.user.model.vo.UserBindRoleVo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 

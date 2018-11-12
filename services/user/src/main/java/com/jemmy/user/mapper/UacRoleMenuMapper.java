@@ -11,9 +11,9 @@
 
 package com.jemmy.user.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.UacRoleMenu;
-import com.paascloud.provider.model.vo.role.MenuCountVo;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.user.model.domain.UacRoleMenu;
+import com.jemmy.user.model.vo.role.MenuCountVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

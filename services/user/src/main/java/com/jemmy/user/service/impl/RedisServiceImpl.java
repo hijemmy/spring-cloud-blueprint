@@ -1,8 +1,8 @@
 package com.jemmy.user.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.provider.service.RedisService;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.user.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;

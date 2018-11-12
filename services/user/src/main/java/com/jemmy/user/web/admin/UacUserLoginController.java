@@ -12,15 +12,15 @@
 package com.jemmy.user.web.admin;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.base.dto.UserTokenDto;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.core.utils.RequestUtil;
-import com.paascloud.provider.model.dto.user.LoginRespDto;
-import com.paascloud.provider.model.enums.UacUserTokenStatusEnum;
-import com.paascloud.provider.service.UacLoginService;
-import com.paascloud.provider.service.UacUserTokenService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.base.dto.UserTokenDto;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.core.utils.RequestUtil;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.model.dto.user.LoginRespDto;
+import com.jemmy.user.model.enums.UacUserTokenStatusEnum;
+import com.jemmy.user.service.UacLoginService;
+import com.jemmy.user.service.UacUserTokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;

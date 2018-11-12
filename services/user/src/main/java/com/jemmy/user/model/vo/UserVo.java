@@ -12,8 +12,9 @@
 package com.jemmy.user.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.paascloud.base.dto.BaseVo;
-import com.paascloud.provider.model.domain.UacRole;
+import com.jemmy.apis.user.vo.MenuVo;
+import com.jemmy.common.base.dto.BaseVo;
+import com.jemmy.user.model.domain.UacRole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;

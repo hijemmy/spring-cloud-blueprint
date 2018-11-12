@@ -13,10 +13,10 @@ package com.jemmy.apis.user.service.hystrix;
 
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.MessageQueryDto;
-import com.paascloud.base.dto.MqMessageVo;
-import com.paascloud.provider.model.service.UacMqMessageFeignApi;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.user.service.UacMqMessageFeignApi;
+import com.jemmy.common.base.dto.MessageQueryDto;
+import com.jemmy.common.base.dto.MqMessageVo;
+import com.jemmy.common.util.wrapper.Wrapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

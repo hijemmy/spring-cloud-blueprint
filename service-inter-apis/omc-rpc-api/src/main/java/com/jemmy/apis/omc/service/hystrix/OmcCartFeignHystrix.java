@@ -11,9 +11,10 @@
 
 package com.jemmy.apis.omc.service.hystrix;
 
-import com.paascloud.provider.model.vo.CartProductVo;
-import com.paascloud.provider.service.OmcCartFeignApi;
-import com.paascloud.wrapper.Wrapper;
+
+import com.jemmy.apis.omc.model.vo.CartProductVo;
+import com.jemmy.apis.omc.service.OmcCartFeignApi;
+import com.jemmy.common.util.wrapper.Wrapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

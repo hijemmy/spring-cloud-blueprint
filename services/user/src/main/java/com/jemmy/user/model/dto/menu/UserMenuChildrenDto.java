@@ -1,6 +1,6 @@
 package com.jemmy.user.model.dto.menu;
 
-import com.paascloud.provider.model.vo.MenuVo;
+import com.jemmy.apis.user.vo.MenuVo;
 import lombok.Data;
 
 import java.io.Serializable;

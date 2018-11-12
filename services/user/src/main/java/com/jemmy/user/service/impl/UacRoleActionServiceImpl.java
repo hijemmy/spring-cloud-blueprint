@@ -1,11 +1,12 @@
 package com.jemmy.user.service.impl;
 
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.core.support.BaseService;
-import com.paascloud.provider.mapper.UacRoleActionMapper;
-import com.paascloud.provider.model.domain.UacRoleAction;
-import com.paascloud.provider.model.exceptions.UacBizException;
-import com.paascloud.provider.service.UacRoleActionService;
+
+import com.jemmy.apis.user.exceptions.UacBizException;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.core.support.BaseService;
+import com.jemmy.user.mapper.UacRoleActionMapper;
+import com.jemmy.user.model.domain.UacRoleAction;
+import com.jemmy.user.service.UacRoleActionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

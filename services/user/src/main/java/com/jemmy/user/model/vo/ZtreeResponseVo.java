@@ -12,7 +12,8 @@
 package com.jemmy.user.model.vo;
 
 
-import com.paascloud.provider.model.enums.ZtreeAuthTypeEnum;
+
+import com.jemmy.user.model.enums.ZtreeAuthTypeEnum;
 
 import java.io.Serializable;
 

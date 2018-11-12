@@ -14,7 +14,7 @@ package com.jemmy.opc.utils;
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.paascloud.provider.model.dto.gaode.GaodeLocation;
+import com.jemmy.apis.opc.model.dto.gaode.GaodeLocation;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

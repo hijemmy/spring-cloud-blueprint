@@ -11,7 +11,7 @@
 
 package com.jemmy.services.edriven.model.vo;
 
-import com.paascloud.base.dto.BaseVo;
+import com.jemmy.common.base.dto.BaseVo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package com.jemmy.user.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.paascloud.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.WrapMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;

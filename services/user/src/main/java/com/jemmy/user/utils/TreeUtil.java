@@ -12,8 +12,8 @@
 package com.jemmy.user.utils;
 
 import com.google.common.collect.Lists;
-import com.paascloud.PublicUtil;
-import com.paascloud.provider.model.vo.MenuVo;
+import com.jemmy.apis.user.vo.MenuVo;
+import com.jemmy.common.util.PublicUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

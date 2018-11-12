@@ -11,7 +11,7 @@
 
 package com.jemmy.user.service.impl;
 
-import com.paascloud.provider.service.RedisSetService;
+import com.jemmy.user.service.RedisSetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;

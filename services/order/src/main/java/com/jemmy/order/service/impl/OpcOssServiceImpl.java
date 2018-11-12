@@ -11,14 +11,14 @@
 
 package com.jemmy.order.service.impl;
 
-import com.paascloud.base.enums.ErrorCodeEnum;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.paascloud.provider.exceptions.OmcBizException;
 import com.paascloud.provider.model.dto.oss.OptGetUrlRequest;
 import com.paascloud.provider.model.dto.oss.OptUploadFileReqDto;
 import com.paascloud.provider.model.dto.oss.OptUploadFileRespDto;
 import com.paascloud.provider.service.OpcOssFeignApi;
 import com.paascloud.provider.service.OpcOssService;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

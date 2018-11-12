@@ -11,12 +11,13 @@
 
 package com.jemmy.user.mq.consumer.listener;
 
-import com.paascloud.PublicUtil;
-import com.paascloud.base.constant.AliyunMqTopicConstants;
-import com.paascloud.core.mq.MqMessage;
-import com.paascloud.provider.annotation.MqConsumerStore;
-import com.paascloud.provider.service.MqMessageService;
-import com.paascloud.provider.service.RedisService;
+
+import com.jemmy.apis.rmq.annotation.MqConsumerStore;
+import com.jemmy.apis.rmq.service.MqMessageService;
+import com.jemmy.common.base.constant.AliyunMqTopicConstants;
+import com.jemmy.common.core.mq.MqMessage;
+import com.jemmy.common.util.PublicUtil;
+import com.jemmy.user.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;

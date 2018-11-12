@@ -1,8 +1,8 @@
 package com.jemmy.user.service.impl;
 
 import com.google.common.base.Joiner;
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.provider.security.SecurityUtils;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.user.security.SecurityUtils;
 import com.paascloud.provider.service.UacPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

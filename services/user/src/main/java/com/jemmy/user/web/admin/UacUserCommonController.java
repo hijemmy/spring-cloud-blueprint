@@ -11,20 +11,20 @@
 
 package com.jemmy.user.web.admin;
 
-import com.paascloud.PublicUtil;
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.annotation.LogAnnotation;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.domain.UacRole;
-import com.paascloud.provider.model.domain.UacUser;
-import com.paascloud.provider.model.dto.user.*;
-import com.paascloud.provider.model.vo.MenuVo;
-import com.paascloud.provider.model.vo.UserVo;
-import com.paascloud.provider.service.UacRoleService;
-import com.paascloud.provider.service.UacUserService;
-import com.paascloud.provider.utils.Md5Util;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.user.vo.MenuVo;
+import com.jemmy.common.util.PublicUtil;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.annotation.LogAnnotation;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.user.model.domain.UacRole;
+import com.jemmy.user.model.domain.UacUser;
+import com.jemmy.user.model.dto.user.*;
+import com.jemmy.user.model.vo.UserVo;
+import com.jemmy.user.service.UacRoleService;
+import com.jemmy.user.service.UacUserService;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.utils.Md5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -1,12 +1,12 @@
 package com.jemmy.user.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.provider.exceptions.MdcBizException;
-import com.paascloud.provider.model.dto.AddressDTO;
-import com.paascloud.provider.service.MdcAddressQueryFeignApi;
-import com.paascloud.provider.service.MdcAddressService;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.product.exceptions.MdcBizException;
+import com.jemmy.apis.product.model.dto.AddressDTO;
+import com.jemmy.apis.product.service.MdcAddressQueryFeignApi;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.service.MdcAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

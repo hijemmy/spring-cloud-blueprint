@@ -11,7 +11,7 @@
 
 package com.jemmy.user.model.vo;
 
-import com.paascloud.provider.model.dto.user.BindRoleDto;
+import com.jemmy.user.model.dto.user.BindRoleDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

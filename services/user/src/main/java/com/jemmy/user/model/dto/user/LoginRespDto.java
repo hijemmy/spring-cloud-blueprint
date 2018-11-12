@@ -1,7 +1,7 @@
 package com.jemmy.user.model.dto.user;
 
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.provider.model.vo.MenuVo;
+import com.jemmy.apis.user.vo.MenuVo;
+import com.jemmy.common.base.dto.LoginAuthDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

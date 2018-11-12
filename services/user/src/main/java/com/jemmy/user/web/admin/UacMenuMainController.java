@@ -12,17 +12,17 @@
 package com.jemmy.user.web.admin;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.annotation.LogAnnotation;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.domain.UacMenu;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.annotation.LogAnnotation;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.user.model.domain.UacMenu;
 import com.paascloud.provider.model.dto.menu.UacEditMenuDto;
 import com.paascloud.provider.model.dto.menu.UacMenuStatusDto;
 import com.paascloud.provider.model.vo.MenuVo;
 import com.paascloud.provider.model.vo.ViewMenuVo;
-import com.paascloud.provider.service.UacMenuService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.user.service.UacMenuService;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

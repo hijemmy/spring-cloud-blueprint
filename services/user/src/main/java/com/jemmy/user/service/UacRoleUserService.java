@@ -11,8 +11,9 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacRoleUser;
+
+import com.jemmy.common.core.support.IService;
+import com.jemmy.user.model.domain.UacRoleUser;
 
 import java.util.List;
 

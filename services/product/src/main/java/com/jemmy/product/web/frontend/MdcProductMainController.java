@@ -13,14 +13,14 @@ package com.jemmy.product.web.frontend;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.paascloud.core.annotation.LogAnnotation;
-import com.paascloud.core.support.BaseController;
+import com.jemmy.common.core.annotation.LogAnnotation;
+import com.jemmy.common.core.support.BaseController;
 import com.paascloud.provider.model.domain.MdcProduct;
 import com.paascloud.provider.model.dto.MdcEditProductDto;
 import com.paascloud.provider.model.vo.ProductVo;
 import com.paascloud.provider.service.MdcProductService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

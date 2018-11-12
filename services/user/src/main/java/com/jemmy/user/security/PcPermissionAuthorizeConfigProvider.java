@@ -1,6 +1,6 @@
 package com.jemmy.user.security;
 
-import com.paascloud.security.core.authorize.AuthorizeConfigProvider;
+import com.jemmy.common.security.core.authorize.AuthorizeConfigProvider;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;

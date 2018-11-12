@@ -12,8 +12,8 @@
 package com.jemmy.apis.user.service.hystrix;
 
 
-import com.paascloud.provider.model.service.UacUserTokenFeignApi;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.user.service.UacUserTokenFeignApi;
+import com.jemmy.common.util.wrapper.Wrapper;
 import org.springframework.stereotype.Component;
 
 /**

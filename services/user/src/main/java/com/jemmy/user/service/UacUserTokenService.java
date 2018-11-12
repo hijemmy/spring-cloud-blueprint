@@ -13,11 +13,11 @@ package com.jemmy.user.service;
 
 import com.arronlong.httpclientutil.exception.HttpProcessException;
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.base.dto.UserTokenDto;
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacUserToken;
-import com.paascloud.provider.model.dto.token.TokenMainQueryDto;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.base.dto.UserTokenDto;
+import com.jemmy.common.core.support.IService;
+import com.jemmy.user.model.domain.UacUserToken;
+import com.jemmy.user.model.dto.token.TokenMainQueryDto;
 
 import javax.servlet.http.HttpServletRequest;
 

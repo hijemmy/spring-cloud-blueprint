@@ -12,7 +12,7 @@
 package com.jemmy.opc.consumer;
 
 import com.paascloud.JacksonUtil;
-import com.paascloud.base.constant.AliyunMqTopicConstants;
+import com.jemmy.common.base.constant.AliyunMqTopicConstants;
 import com.paascloud.core.mq.MqMessage;
 import com.paascloud.provider.model.dto.UpdateAttachmentDto;
 import com.paascloud.provider.service.OpcAttachmentService;

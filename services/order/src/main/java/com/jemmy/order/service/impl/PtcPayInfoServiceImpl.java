@@ -11,7 +11,7 @@
 
 package com.jemmy.order.service.impl;
 
-import com.paascloud.core.support.BaseService;
+import com.jemmy.common.core.support.BaseService;
 import com.paascloud.provider.model.domain.PtcPayInfo;
 import com.paascloud.provider.service.PtcPayInfoService;
 import org.springframework.stereotype.Service;

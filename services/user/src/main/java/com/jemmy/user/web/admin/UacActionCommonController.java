@@ -12,13 +12,13 @@
 package com.jemmy.user.web.admin;
 
 
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.domain.UacAction;
-import com.paascloud.provider.model.dto.action.UacActionCheckCodeDto;
-import com.paascloud.provider.model.dto.action.UacActionCheckUrlDto;
-import com.paascloud.provider.service.UacActionService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.model.domain.UacAction;
+import com.jemmy.user.model.dto.action.UacActionCheckCodeDto;
+import com.jemmy.user.model.dto.action.UacActionCheckUrlDto;
+import com.jemmy.user.service.UacActionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

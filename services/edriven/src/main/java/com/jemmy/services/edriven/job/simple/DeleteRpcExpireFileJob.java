@@ -14,7 +14,7 @@ package com.jemmy.services.edriven.job.simple;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import com.paascloud.elastic.lite.annotation.ElasticJobConfig;
-import com.paascloud.provider.service.OpcRpcService;
+import com.jemmy.user.service.OpcRpcService;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;

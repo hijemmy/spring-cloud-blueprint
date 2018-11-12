@@ -13,13 +13,13 @@ package com.jemmy.user.web.rpc;
 
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.MessageQueryDto;
-import com.paascloud.base.dto.MqMessageVo;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.service.UacMqMessageFeignApi;
-import com.paascloud.provider.service.MqMessageService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.rmq.service.MqMessageService;
+import com.jemmy.apis.user.service.UacMqMessageFeignApi;
+import com.jemmy.common.base.dto.MessageQueryDto;
+import com.jemmy.common.base.dto.MqMessageVo;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;

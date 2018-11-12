@@ -12,8 +12,8 @@
 package com.jemmy.order.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.core.support.BaseService;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.core.support.BaseService;
 import com.paascloud.provider.exceptions.OmcBizException;
 import com.paascloud.provider.mapper.OmcOrderDetailMapper;
 import com.paascloud.provider.model.domain.OmcOrderDetail;

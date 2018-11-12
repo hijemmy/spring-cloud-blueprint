@@ -11,11 +11,11 @@
 
 package com.jemmy.opc.config;
 
-import com.paascloud.PublicUtil;
-import com.paascloud.base.constant.AliyunMqTopicConstants;
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.config.properties.PaascloudProperties;
-import com.paascloud.provider.consumer.listener.OptPushMessageListener;
+import com.jemmy.common.base.constant.AliyunMqTopicConstants;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.common.config.properties.ApplicationProperties;
+import com.jemmy.common.util.PublicUtil;
+import com.jemmy.opc.consumer.listener.OptPushMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -36,7 +36,7 @@ import javax.annotation.Resource;
 public class AliyunMqConfiguration {
 
 	@Resource
-	private PaascloudProperties paascloudProperties;
+	private ApplicationProperties paascloudProperties;
 
 	@Resource
 	private OptPushMessageListener optPushConsumer;

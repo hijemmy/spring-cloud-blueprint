@@ -11,16 +11,16 @@
 
 package com.jemmy.user.web.admin;
 
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.support.BaseController;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.support.BaseController;
 import com.paascloud.provider.model.domain.UacGroup;
 import com.paascloud.provider.model.dto.group.CheckGroupCodeDto;
 import com.paascloud.provider.model.dto.group.CheckGroupNameDto;
 import com.paascloud.provider.model.enums.UacGroupTypeEnum;
 import com.paascloud.provider.model.vo.GroupZtreeVo;
 import com.paascloud.provider.service.UacGroupService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

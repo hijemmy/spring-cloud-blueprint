@@ -11,9 +11,10 @@
 
 package com.jemmy.user.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.UacLog;
-import com.paascloud.provider.model.dto.log.UacLogMainDto;
+
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.user.model.domain.UacLog;
+import com.jemmy.user.model.dto.log.UacLogMainDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

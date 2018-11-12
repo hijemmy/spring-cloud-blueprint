@@ -11,16 +11,18 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacRole;
-import com.paascloud.provider.model.dto.role.RoleBindActionDto;
-import com.paascloud.provider.model.dto.role.RoleBindMenuDto;
-import com.paascloud.provider.model.dto.role.RoleBindUserDto;
-import com.paascloud.provider.model.dto.role.RoleBindUserReqDto;
-import com.paascloud.provider.model.vo.BindAuthVo;
-import com.paascloud.provider.model.vo.MenuVo;
-import com.paascloud.provider.model.vo.RoleVo;
+
+
+import com.jemmy.apis.user.vo.MenuVo;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.support.IService;
+import com.jemmy.user.model.domain.UacRole;
+import com.jemmy.user.model.dto.role.RoleBindActionDto;
+import com.jemmy.user.model.dto.role.RoleBindMenuDto;
+import com.jemmy.user.model.dto.role.RoleBindUserDto;
+import com.jemmy.user.model.dto.role.RoleBindUserReqDto;
+import com.jemmy.user.model.vo.BindAuthVo;
+import com.jemmy.user.model.vo.RoleVo;
 
 import java.util.List;
 

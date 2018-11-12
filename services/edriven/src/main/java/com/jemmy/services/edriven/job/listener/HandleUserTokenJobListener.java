@@ -15,7 +15,7 @@ import com.dangdang.ddframe.job.executor.ShardingContexts;
 import com.dangdang.ddframe.job.lite.api.listener.ElasticJobListener;
 import com.paascloud.provider.model.dto.robot.ChatRobotMsgDto;
 import com.paascloud.provider.model.factory.ChatRobotMsgFactory;
-import com.paascloud.provider.service.OpcRpcService;
+import com.jemmy.user.service.OpcRpcService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 

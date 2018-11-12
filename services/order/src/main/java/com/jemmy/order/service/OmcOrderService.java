@@ -13,8 +13,8 @@ package com.jemmy.order.service;
 
 import com.github.pagehelper.PageInfo;
 import com.paascloud.base.dto.BaseQuery;
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.support.IService;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.support.IService;
 import com.paascloud.provider.model.domain.OmcOrder;
 import com.paascloud.provider.model.dto.OrderDto;
 import com.paascloud.provider.model.dto.OrderPageQuery;

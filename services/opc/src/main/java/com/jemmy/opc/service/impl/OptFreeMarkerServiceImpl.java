@@ -12,7 +12,7 @@
 package com.jemmy.opc.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.PublicUtil;
+import com.jemmy.common.util.PublicUtil;
 import com.paascloud.provider.service.OptFreeMarkerService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

@@ -16,7 +16,8 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.paascloud.config.properties.PaascloudProperties;
+import com.jemmy.common.config.properties.ApplicationProperties;
+import com.jemmy.common.config.properties.ApplicationProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,7 @@ import javax.annotation.Resource;
 public class AliyunSmsConfiguration {
 
 	@Resource
-	private PaascloudProperties paascloudProperties;
+	private ApplicationProperties paascloudProperties;
 
 	/**
 	 * Acs client acs client.

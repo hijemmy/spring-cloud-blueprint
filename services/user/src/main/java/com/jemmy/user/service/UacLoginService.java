@@ -12,7 +12,7 @@
 package com.jemmy.user.service;
 
 
-import com.paascloud.provider.model.dto.user.LoginRespDto;
+import com.jemmy.user.model.dto.user.LoginRespDto;
 
 /**
  * The interface Uac login service.

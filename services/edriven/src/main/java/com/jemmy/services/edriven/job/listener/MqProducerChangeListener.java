@@ -13,7 +13,7 @@ package com.jemmy.services.edriven.job.listener;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Charsets;
-import com.paascloud.base.constant.GlobalConstant;
+import com.jemmy.common.base.constant.GlobalConstant;
 import com.paascloud.core.registry.base.ReliableMessageRegisterDto;
 import com.paascloud.core.registry.exception.RegExceptionHandler;
 import com.paascloud.provider.service.MqProducerBeanFactory;

@@ -11,7 +11,7 @@
 
 package com.jemmy.user.model.vo;
 
-import com.paascloud.base.dto.BaseVo;
+import com.jemmy.common.base.dto.BaseVo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

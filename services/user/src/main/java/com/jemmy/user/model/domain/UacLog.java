@@ -1,7 +1,7 @@
 package com.jemmy.user.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.paascloud.core.mybatis.BaseEntity;
+import com.jemmy.common.core.mybatis.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

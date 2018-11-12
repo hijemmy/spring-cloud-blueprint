@@ -13,14 +13,14 @@ package com.jemmy.user.mq.producer;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
-import com.paascloud.RedisKeyUtil;
-import com.paascloud.base.constant.AliyunMqTopicConstants;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.provider.model.domain.MqMessageData;
-import com.paascloud.provider.model.dto.PcSendEmailRequest;
-import com.paascloud.provider.model.enums.UacEmailTemplateEnum;
-import com.paascloud.provider.model.exceptions.UacBizException;
-import com.paascloud.provider.service.UacFreeMarkerService;
+import com.jemmy.apis.opc.model.dto.PcSendEmailRequest;
+import com.jemmy.apis.rmq.model.domain.MqMessageData;
+import com.jemmy.apis.user.exceptions.UacBizException;
+import com.jemmy.common.base.constant.AliyunMqTopicConstants;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.util.RedisKeyUtil;
+import com.jemmy.user.model.enums.UacEmailTemplateEnum;
+import com.jemmy.user.service.UacFreeMarkerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

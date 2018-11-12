@@ -11,7 +11,7 @@
 
 package com.jemmy.services.edriven.service.impl;
 
-import com.paascloud.core.support.BaseService;
+import com.jemmy.common.core.support.BaseService;
 import com.paascloud.provider.mapper.TpcMqTopicMapper;
 import com.paascloud.provider.model.domain.TpcMqTopic;
 import com.paascloud.provider.model.vo.TpcMqTopicVo;

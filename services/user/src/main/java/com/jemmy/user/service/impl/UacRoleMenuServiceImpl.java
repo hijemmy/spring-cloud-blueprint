@@ -1,10 +1,10 @@
 package com.jemmy.user.service.impl;
 
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.core.support.BaseService;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.core.support.BaseService;
 import com.paascloud.provider.mapper.UacRoleMenuMapper;
 import com.paascloud.provider.model.domain.UacRoleMenu;
-import com.paascloud.provider.model.exceptions.UacBizException;
+import com.jemmy.apis.user.exceptions.UacBizException;
 import com.paascloud.provider.service.UacRoleMenuService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -11,8 +11,8 @@
 
 package com.jemmy.user.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.UacUserToken;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.user.model.domain.UacUserToken;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

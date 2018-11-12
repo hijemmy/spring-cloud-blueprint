@@ -12,6 +12,7 @@
 package com.jemmy.common.core.interceptor;
 
 
+import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.common.core.aspect.NotDisplaySqlAspect;
 import com.jemmy.common.util.ThreadLocalMap;
 import lombok.extern.slf4j.Slf4j;

@@ -1,10 +1,10 @@
 package com.jemmy.user.service.impl;
 
-import com.paascloud.core.support.BaseService;
-import com.paascloud.provider.mapper.UacGroupUserMapper;
-import com.paascloud.provider.model.domain.UacGroup;
-import com.paascloud.provider.model.domain.UacGroupUser;
-import com.paascloud.provider.service.UacGroupUserService;
+import com.jemmy.common.core.support.BaseService;
+import com.jemmy.user.mapper.UacGroupUserMapper;
+import com.jemmy.user.model.domain.UacGroup;
+import com.jemmy.user.model.domain.UacGroupUser;
+import com.jemmy.user.service.UacGroupUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

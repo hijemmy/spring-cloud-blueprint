@@ -12,6 +12,7 @@
 package com.jemmy.user.model.vo;
 
 
+import com.jemmy.apis.user.vo.MenuVo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 

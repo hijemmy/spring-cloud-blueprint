@@ -12,9 +12,9 @@
 package com.jemmy.apis.product.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.paascloud.ThreadLocalMap;
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.base.dto.LoginAuthDto;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.util.ThreadLocalMap;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

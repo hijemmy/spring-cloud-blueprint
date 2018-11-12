@@ -11,7 +11,7 @@
 
 package com.jemmy.order.service;
 
-import com.paascloud.core.support.IService;
+import com.jemmy.common.core.support.IService;
 import com.paascloud.provider.model.domain.PtcPayInfo;
 
 /**

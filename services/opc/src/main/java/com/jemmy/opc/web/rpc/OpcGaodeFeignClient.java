@@ -11,12 +11,12 @@
 
 package com.jemmy.opc.web.rpc;
 
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.dto.gaode.GaodeLocation;
-import com.paascloud.provider.service.OpcGaodeFeignApi;
-import com.paascloud.provider.utils.GaoDeUtil;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.opc.model.dto.gaode.GaodeLocation;
+import com.jemmy.apis.opc.service.OpcGaodeFeignApi;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.opc.utils.GaoDeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;

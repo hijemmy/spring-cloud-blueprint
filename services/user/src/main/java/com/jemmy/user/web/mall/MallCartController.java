@@ -11,16 +11,16 @@
 
 package com.jemmy.user.web.mall;
 
-import com.paascloud.PublicUtil;
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.constant.OmcApiConstant;
-import com.paascloud.provider.model.dto.omc.CartListQuery;
-import com.paascloud.provider.model.vo.CartProductVo;
-import com.paascloud.provider.model.vo.CartVo;
-import com.paascloud.provider.service.OmcCartFeignApi;
-import com.paascloud.provider.service.OmcCartQueryFeignApi;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.omc.model.constant.OmcApiConstant;
+import com.jemmy.apis.omc.model.vo.CartProductVo;
+import com.jemmy.apis.omc.model.vo.CartVo;
+import com.jemmy.apis.omc.service.OmcCartFeignApi;
+import com.jemmy.apis.omc.service.OmcCartQueryFeignApi;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.PublicUtil;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.model.dto.omc.CartListQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;

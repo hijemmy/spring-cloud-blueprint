@@ -12,11 +12,11 @@
 package com.jemmy.user.web.admin;
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.dto.token.TokenMainQueryDto;
-import com.paascloud.provider.service.UacUserTokenService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.model.dto.token.TokenMainQueryDto;
+import com.jemmy.user.service.UacUserTokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

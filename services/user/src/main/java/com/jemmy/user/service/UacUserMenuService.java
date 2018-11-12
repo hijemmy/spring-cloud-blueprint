@@ -11,8 +11,8 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacUserMenu;
+import com.jemmy.common.core.support.IService;
+import com.jemmy.user.model.domain.UacUserMenu;
 
 /**
  * The interface Uac user menu service.

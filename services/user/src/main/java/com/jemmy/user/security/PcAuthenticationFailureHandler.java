@@ -1,7 +1,7 @@
 package com.jemmy.user.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.paascloud.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.WrapMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;

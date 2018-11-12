@@ -12,7 +12,7 @@
 package com.jemmy.user.model.dto.token;
 
 
-import com.paascloud.base.dto.BaseQuery;
+import com.jemmy.common.base.dto.BaseQuery;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

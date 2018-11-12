@@ -12,12 +12,12 @@
 package com.jemmy.opc.web;
 
 
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.base.exception.BusinessException;
-import com.paascloud.provider.model.dto.GlobalExceptionLogDto;
-import com.paascloud.provider.service.MdcExceptionLogFeignApi;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
+import com.jemmy.apis.product.service.MdcExceptionLogFeignApi;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.base.exception.BusinessException;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;

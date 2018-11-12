@@ -11,13 +11,13 @@
 
 package com.jemmy.user.service.impl;
 
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.provider.exceptions.MdcBizException;
-import com.paascloud.provider.model.dto.gaode.GaodeLocation;
-import com.paascloud.provider.service.OpcGaodeFeignApi;
-import com.paascloud.provider.service.OpcRpcService;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.apis.opc.model.dto.gaode.GaodeLocation;
+import com.jemmy.apis.opc.service.OpcGaodeFeignApi;
+import com.jemmy.apis.product.exceptions.MdcBizException;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.service.OpcRpcService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

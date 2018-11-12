@@ -2,14 +2,14 @@ package com.jemmy.user.service.impl;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.paascloud.PublicUtil;
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.core.support.BaseService;
-import com.paascloud.provider.mapper.UacRoleUserMapper;
-import com.paascloud.provider.model.domain.UacRoleUser;
-import com.paascloud.provider.model.exceptions.UacBizException;
-import com.paascloud.provider.service.UacRoleUserService;
+import com.jemmy.apis.user.exceptions.UacBizException;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.core.support.BaseService;
+import com.jemmy.common.util.PublicUtil;
+import com.jemmy.user.mapper.UacRoleUserMapper;
+import com.jemmy.user.model.domain.UacRoleUser;
+import com.jemmy.user.service.UacRoleUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

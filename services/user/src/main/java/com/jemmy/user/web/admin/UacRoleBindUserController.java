@@ -11,14 +11,14 @@
 
 package com.jemmy.user.web.admin;
 
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.annotation.LogAnnotation;
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.dto.role.RoleBindUserDto;
-import com.paascloud.provider.model.dto.role.RoleBindUserReqDto;
-import com.paascloud.provider.service.UacRoleService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.annotation.LogAnnotation;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.model.dto.role.RoleBindUserDto;
+import com.jemmy.user.model.dto.role.RoleBindUserReqDto;
+import com.jemmy.user.service.UacRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

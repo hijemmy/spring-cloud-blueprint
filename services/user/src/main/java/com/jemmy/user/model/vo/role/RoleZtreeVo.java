@@ -12,7 +12,8 @@
 package com.jemmy.user.model.vo.role;
 
 
-import com.paascloud.provider.model.vo.ZtreeResponseVo;
+
+import com.jemmy.user.model.vo.ZtreeResponseVo;
 
 import java.io.Serializable;
 

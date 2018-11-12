@@ -11,12 +11,12 @@
 
 package com.jemmy.product.web.rpc;
 
-import com.paascloud.core.support.BaseController;
-import com.paascloud.provider.model.dto.GlobalExceptionLogDto;
-import com.paascloud.provider.service.MdcExceptionLogFeignApi;
+import com.jemmy.common.core.support.BaseController;
+import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
+import com.jemmy.apis.product.service.MdcExceptionLogFeignApi;
 import com.paascloud.provider.service.MdcExceptionLogService;
-import com.paascloud.wrapper.WrapMapper;
-import com.paascloud.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

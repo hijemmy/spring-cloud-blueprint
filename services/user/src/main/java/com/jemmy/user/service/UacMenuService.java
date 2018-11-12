@@ -11,12 +11,14 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.base.dto.LoginAuthDto;
-import com.paascloud.core.support.IService;
-import com.paascloud.provider.model.domain.UacMenu;
-import com.paascloud.provider.model.dto.menu.UacMenuStatusDto;
-import com.paascloud.provider.model.vo.MenuVo;
-import com.paascloud.provider.model.vo.ViewMenuVo;
+
+
+import com.jemmy.apis.user.vo.MenuVo;
+import com.jemmy.common.base.dto.LoginAuthDto;
+import com.jemmy.common.core.support.IService;
+import com.jemmy.user.model.domain.UacMenu;
+import com.jemmy.user.model.dto.menu.UacMenuStatusDto;
+import com.jemmy.user.model.vo.ViewMenuVo;
 
 import java.util.List;
 import java.util.Set;

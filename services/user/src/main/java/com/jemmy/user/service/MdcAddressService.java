@@ -11,7 +11,8 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.provider.model.dto.AddressDTO;
+
+import com.jemmy.apis.product.model.dto.AddressDTO;
 
 /**
  * The interface Omc order service.
