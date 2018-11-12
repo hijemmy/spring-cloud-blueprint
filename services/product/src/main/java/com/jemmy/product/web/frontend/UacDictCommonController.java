@@ -13,12 +13,12 @@ package com.jemmy.product.web.frontend;
 
 
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.MdcDict;
-import com.paascloud.provider.model.dto.MdcDictCheckCodeDto;
-import com.paascloud.provider.model.dto.MdcDictCheckNameDto;
-import com.paascloud.provider.service.MdcDictService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.product.model.domain.MdcDict;
+import com.jemmy.product.model.dto.MdcDictCheckCodeDto;
+import com.jemmy.product.model.dto.MdcDictCheckNameDto;
+import com.jemmy.product.service.MdcDictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

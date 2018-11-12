@@ -12,15 +12,15 @@
 package com.jemmy.product.web.frontend;
 
 import com.jemmy.common.base.dto.LoginAuthDto;
-import com.paascloud.base.dto.UpdateStatusDto;
+import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.MdcProductCategory;
-import com.paascloud.provider.model.dto.MdcEditCategoryDto;
-import com.paascloud.provider.model.vo.MdcCategoryVo;
-import com.paascloud.provider.service.MdcProductCategoryService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.product.model.domain.MdcProductCategory;
+import com.jemmy.product.model.dto.MdcEditCategoryDto;
+import com.jemmy.product.model.vo.MdcCategoryVo;
+import com.jemmy.product.service.MdcProductCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

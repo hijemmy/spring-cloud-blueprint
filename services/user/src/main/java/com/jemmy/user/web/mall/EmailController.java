@@ -13,11 +13,10 @@ package com.jemmy.user.web.mall;
 
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.user.service.EmailService;
-import com.paascloud.provider.model.dto.email.SendEmailMessage;
-import com.jemmy.user.service.EmailService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.user.model.dto.email.SendEmailMessage;
+import com.jemmy.user.service.EmailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

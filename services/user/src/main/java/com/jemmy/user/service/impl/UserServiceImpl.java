@@ -1,8 +1,8 @@
 package com.jemmy.user.service.impl;
 
 import com.jemmy.apis.user.vo.user.UserInfoVo;
+import com.jemmy.common.core.support.BaseService;
 import com.jemmy.common.security.Pbkdf2PasswordEncoder;
-import com.jemmy.common.support.BaseService;
 import com.jemmy.user.UserException;
 import com.jemmy.user.mapper.UserMapper;
 import com.jemmy.user.model.User;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserServiceImpl extends BaseService<User,UserMapper> implements UserService {
+public class UserServiceImpl extends BaseService<User> implements UserService {
 
     private Logger logger=LoggerFactory.getLogger(UserServiceImpl.class);
 

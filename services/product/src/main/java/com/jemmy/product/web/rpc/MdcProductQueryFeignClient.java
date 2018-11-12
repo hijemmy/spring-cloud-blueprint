@@ -11,15 +11,15 @@
 
 package com.jemmy.product.web.rpc;
 
+import com.jemmy.apis.product.model.dto.ProductDto;
+import com.jemmy.apis.product.model.vo.ProductDetailVo;
+import com.jemmy.apis.product.service.MdcProductQueryFeignApi;
 import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.MdcProduct;
-import com.paascloud.provider.model.dto.ProductDto;
-import com.paascloud.provider.model.vo.ProductDetailVo;
-import com.paascloud.provider.service.MdcProductQueryFeignApi;
-import com.paascloud.provider.service.MdcProductService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.product.model.domain.MdcProduct;
+import com.jemmy.product.service.MdcProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;

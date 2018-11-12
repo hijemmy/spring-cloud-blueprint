@@ -12,14 +12,14 @@
 package com.jemmy.product.web.rpc;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.PubUtils;
+import com.jemmy.apis.product.model.dto.ProductDto;
+import com.jemmy.apis.product.service.MdcProductFeignApi;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.dto.ProductDto;
-import com.paascloud.provider.service.MdcProductFeignApi;
-import com.paascloud.provider.service.MdcProductService;
+import com.jemmy.common.util.PubUtils;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.product.service.MdcProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

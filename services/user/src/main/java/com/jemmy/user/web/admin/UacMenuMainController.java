@@ -12,14 +12,14 @@
 package com.jemmy.user.web.admin;
 
 import com.google.common.base.Preconditions;
+import com.jemmy.apis.user.vo.MenuVo;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.user.model.domain.UacMenu;
-import com.paascloud.provider.model.dto.menu.UacEditMenuDto;
-import com.paascloud.provider.model.dto.menu.UacMenuStatusDto;
-import com.paascloud.provider.model.vo.MenuVo;
-import com.paascloud.provider.model.vo.ViewMenuVo;
+import com.jemmy.user.model.dto.menu.UacEditMenuDto;
+import com.jemmy.user.model.dto.menu.UacMenuStatusDto;
+import com.jemmy.user.model.vo.ViewMenuVo;
 import com.jemmy.user.service.UacMenuService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;

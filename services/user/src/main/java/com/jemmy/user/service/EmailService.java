@@ -11,7 +11,8 @@
 
 package com.jemmy.user.service;
 
-import com.paascloud.provider.model.dto.email.SendEmailMessage;
+
+import com.jemmy.user.model.dto.email.SendEmailMessage;
 
 /**
  * The interface Email service.

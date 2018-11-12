@@ -3,7 +3,7 @@ package com.jemmy.user.service.impl;
 import com.google.common.base.Joiner;
 import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.user.security.SecurityUtils;
-import com.paascloud.provider.service.UacPermissionService;
+import com.jemmy.user.service.UacPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;

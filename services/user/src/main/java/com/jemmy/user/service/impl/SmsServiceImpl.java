@@ -1,18 +1,18 @@
 package com.jemmy.user.service.impl;
 
 import com.google.common.base.Preconditions;
-import com.paascloud.PubUtils;
-import com.jemmy.common.util.RedisKeyUtil;
-import com.paascloud.base.constant.AliyunSmsConstants;
-import com.paascloud.core.generator.UniqueIdGenerator;
-import com.paascloud.provider.manager.UserManager;
 import com.jemmy.apis.rmq.model.domain.MqMessageData;
+import com.jemmy.common.base.constant.AliyunSmsConstants;
+import com.jemmy.common.security.core.code.CookieUtil;
+import com.jemmy.common.util.PubUtils;
+import com.jemmy.common.util.RedisKeyUtil;
+import com.jemmy.common.zk.generator.UniqueIdGenerator;
+import com.jemmy.user.manager.UserManager;
 import com.jemmy.user.model.domain.UacUser;
-import com.paascloud.provider.model.dto.sms.SmsMessage;
-import com.paascloud.provider.mq.producer.SmsProducer;
+import com.jemmy.user.model.dto.sms.SmsMessage;
+import com.jemmy.user.mq.producer.SmsProducer;
 import com.jemmy.user.service.SmsService;
 import com.jemmy.user.service.UacUserService;
-import com.paascloud.security.core.validate.code.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;

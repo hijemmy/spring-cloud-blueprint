@@ -11,9 +11,9 @@
 
 package com.jemmy.user.web.rpc;
 
+import com.jemmy.apis.user.service.UacUserTokenFeignApi;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.user.service.UacUserTokenService;
-import com.paascloud.provider.model.service.UacUserTokenFeignApi;
 import com.jemmy.user.service.UacUserTokenService;
 import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
