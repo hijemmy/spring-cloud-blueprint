@@ -1,76 +1,139 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    remote-ip-header: x-forwarded-for
+  use-forward-headers: true
+
+management:
+  security:
+    enabled: false
+
 spring:
-  mvc:
-    date-format: yyyy-MM-dd HH:mm:ss
-  jackson:
-    joda-date-time-format: yyyy-MM-dd HH:mm:ss
-    date-format: yyyy-MM-dd HH:mm:ss
-  cache:
-    cache-names: mdc-cache
+  aop:
+    proxy-target-class: true
+    auto: true
+  rabbitmq:
+    host: paascloud-mq-rabbit
+    port: 5672
+    virtual-host: jemmyweb
+    username: guest
+    password: guest
+  redis:
+    host: paascloud-db-redis
+    port: 6379
+    timeout: 0
   datasource:
-    url: jdbc:mysql://paascloud-db-mysql:3306/paascloud_mdc?characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 5
+      test-on-borrow: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        allow:
+        login-username: admin
+        login-password: admin
+  mail:
+    host: smtp.163.com
+    username: paascloudTest@163.com
+    password: a123456
+    port: 465
+    protocol: smtp
+    test-connection: false
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+          starttls:
+            enable: true
+            required: true
+  boot:
+    admin:
+      username: admin
+      password: admin
+  zipkin:
+    rabbitmq:
+      queue: zipkin
+  sleuth:
+    sampler:
+      percentage: 0.2
 
-liquibase:
-  change-log: classpath:liquibase/index.xml
-  user: ${spring.datasource.username}
-  password: ${spring.datasource.password}
-  url: ${spring.datasource.url}
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
 
-mybatis:
-  type-aliases-package: com.paascloud.provider.model.domain
-  mapper-locations: classpath:mapper/*.xml,classpath*:sdk/mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
+ribbon:
+  eager-load:
+    enabled: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  OkToRetryOnAllOperations: false
+  ConnectTimeout: 60000
+  ReadTimeout: 20000
 
-mapper:
-  mappers: com.paascloud.core.mybatis.MyMapper
-  not-empty: false
-  identity: MYSQL
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
 
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
+info:
+  软件著作权: paascloud快速搭建企业级分布式微服务平台
+  著作登记号: 2018SR320076
+  关于我们: http://paascloud.net
 
-security:
-  oauth2:
-    client:
-      clientId: paascloud-client-mdc
-      clientSecret: paascloudClientSecret
-      access-token-uri: http://paascloud-gateway:7979/uac/oauth/token
-      user-authorization-uri: http://paascloud-gateway:7979/uac/oauth/authorize
-    resource:
-      user-info-uri: http://paascloud-gateway:7979/uac/user
-      prefer-token-info: false
-      jwt:
-        key-uri: http://paascloud-provider-uac:8000/oauth/token_key
-
-jemmycloud:
-  enableSqlLogInterceptor: false
-  dingTalk:
-    webhookToken:
-      sendException: 7b0fcc73f3d2be1415c5d31e5b34100c689961454af15a61635749ba0d8*****
-      jobListener: 7b0fcc73f3d2be1415c5d31e5b34100c689961454af15a61635749ba0d8*****
-  token:
-    interceptor:
-      enable: true
+paascloud:
+  auth:
+    jwt:
+      expiredRemainMinutes: 20
+      expiredMinutes: 120
+  aliyun:
+    key:
+      accessKeyId: 'your aliyun accessKeyId'
+      accessKeySecret: 'your aliyun accessKeySecret'
+    rocketMq:
+      namesrvAddr: paascloud-mq-rocket:9876
+    sms:
+      signName: 快乐学习网
+      regionId: cn-beijing
+      endpoint:
+      endpointName: cn-beijing
+      product: 'your sms product'
+      domain: dysmsapi.aliyuncs.com
+  qiniu:
+    key:
+      accessKey: 'your qiniu accessKey'
+      secretKey: 'your qiniu secretKey'
+    oss:
+      privateHost: 'your qiniu oss private host'
+      publicHost: 'your qiniu oss public host'
+  alipay:
+    callback:
+      url: http://dev-api.paascloud.net/omc/pay/alipayCallback
+    qrCode:
+      pcPath: /data/file/qrCode/alipay
+      qiniuPath: alipay/QRCode/
   zk:
     zkAddressList: paascloud-provider-zk:2181
-  aliyun:
-    rocketMq:
-      enable: false
-      reliableMessageConsumer: false
-      reliableMessageProducer: true
-      namesrvAddr: paascloud-mq-rocket:9876
-      instanceName: paascloud-provider-mdc
-      consumerGroup: CID_MDC
-      producerGroup: PID_MDC
-  oauth2:
-    jwtSigningKey: paascloud
-    client:
-      id: ${security.oauth2.resource.id}
-      accessTokenUrl: ${security.oauth2.client.access-token-uri}
-      clientId: ${security.oauth2.client.clientId}
-      clientSecret: ${security.oauth2.client.clientSecret}
-      clientAuthenticationScheme: header
-      tokenStore: jwt

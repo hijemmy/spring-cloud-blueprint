@@ -1,123 +1,139 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    remote-ip-header: x-forwarded-for
+  use-forward-headers: true
+
+management:
+  security:
+    enabled: false
+
 spring:
-  http:
-    encoding:
-      charset: UTF-8
-      force: true
-      enabled: true
-    multipart:
-      enabled: true
-      max-request-size: 50MB
-      max-file-size: 50MB
+  aop:
+    proxy-target-class: true
+    auto: true
+  rabbitmq:
+    host: paascloud-mq-rabbit
+    port: 5672
+    virtual-host: jemmyweb
+    username: guest
+    password: guest
+  redis:
+    host: paascloud-db-redis
+    port: 6379
+    timeout: 0
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 5
+      test-on-borrow: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        allow:
+        login-username: admin
+        login-password: admin
+  mail:
+    host: smtp.163.com
+    username: paascloudTest@163.com
+    password: a123456
+    port: 465
+    protocol: smtp
+    test-connection: false
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+          starttls:
+            enable: true
+            required: true
+  boot:
+    admin:
+      username: admin
+      password: admin
+  zipkin:
+    rabbitmq:
+      queue: zipkin
+  sleuth:
+    sampler:
+      percentage: 0.2
 
-zuul:
-  host:
-    socket-timeout-millis: 60000
-    connect-timeout-millis: 60000
-  forceOriginalQueryStringEncoding: true
-  routes:
-    uac-route:
-      path: /uac/**
-      sensitiveHeaders:
-#      strip-prefix: false
-      service-id: paascloud-provider-uac
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    mdc-route:
-      path: /mdc/**
-      sensitiveHeaders:
-      service-id: paascloud-provider-mdc
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    omc-route:
-      path: /omc/**
-      sensitiveHeaders:
-      service-id: paascloud-provider-omc
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    opc-route:
-      path: /opc/**
-      sensitiveHeaders:
-      service-id: paascloud-provider-opc
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    mall-route:
-      path: /mall/**
-      sensitiveHeaders:
-      service-id: paascloud-web-mall
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    tpc-route:
-      path: /tpc/**
-      sensitiveHeaders:
-      service-id: paascloud-provider-tpc
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-  add-proxy-headers: true
-  add-host-header: true
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
 
-security:
-  oauth2:
-    client:
-      clientId: paascloud-client-gateway
-      clientSecret: paascloudClientSecret
-      access-token-uri: http://paascloud-gateway:7979/uac/oauth/token
-      user-authorization-uri: http://paascloud-gateway:7979/uac/oauth/authorize
-    resource:
-      user-info-uri: http://paascloud-gateway:7979/uac/user
-      prefer-token-info: false
-      jwt:
-        key-uri: http://paascloud-provider-uac:8000/oauth/token_key
+ribbon:
+  eager-load:
+    enabled: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  OkToRetryOnAllOperations: false
+  ConnectTimeout: 60000
+  ReadTimeout: 20000
 
-proxy:
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+info:
+  软件著作权: paascloud快速搭建企业级分布式微服务平台
+  著作登记号: 2018SR320076
+  关于我们: http://paascloud.net
+
+paascloud:
   auth:
-    routes:
-      uac-route: oauth2
-      mdc-route: oauth2
-
-jemmycloud:
-  enableSqlLogInterceptor: false
-# swagger butler配置
-swagger.butler:
-  api-docs-path: v2/api-docs
-  swagger-version: 1.0
-  auto-generate-from-zuul-routes: true
-# 指定要生成的范围
-  generate-routes: omc-route,mdc-route,opc-route,tpc-route,uac-route
-# 忽略某些路由生成
-#  ignore-routes:
+    jwt:
+      expiredRemainMinutes: 20
+      expiredMinutes: 120
+  aliyun:
+    key:
+      accessKeyId: 'your aliyun accessKeyId'
+      accessKeySecret: 'your aliyun accessKeySecret'
+    rocketMq:
+      namesrvAddr: paascloud-mq-rocket:9876
+    sms:
+      signName: 快乐学习网
+      regionId: cn-beijing
+      endpoint:
+      endpointName: cn-beijing
+      product: 'your sms product'
+      domain: dysmsapi.aliyuncs.com
+  qiniu:
+    key:
+      accessKey: 'your qiniu accessKey'
+      secretKey: 'your qiniu secretKey'
+    oss:
+      privateHost: 'your qiniu oss private host'
+      publicHost: 'your qiniu oss public host'
+  alipay:
+    callback:
+      url: http://dev-api.paascloud.net/omc/pay/alipayCallback
+    qrCode:
+      pcPath: /data/file/qrCode/alipay
+      qiniuPath: alipay/QRCode/
+  zk:
+    zkAddressList: paascloud-provider-zk:2181
