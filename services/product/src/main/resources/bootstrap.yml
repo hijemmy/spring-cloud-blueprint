@@ -1,6 +1,6 @@
 spring:
   application:
-    name: product
+    name: paascloud-provider-mdc
   autoconfigure:
     exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
   cloud:

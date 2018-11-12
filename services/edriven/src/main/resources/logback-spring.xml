@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <springProperty scope="context" name="appport" source="server.port"/>
+    <springProperty scope="context" name="appname" source="spring.application.name"/>
+    <contextName>${appname}:${appport}</contextName>
+
+    <springProfile name="pro">
+        <logger name="com.jemmy.services.edriven.mapper" level="WARN"/>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.apache" level="WARN"/>
+        <logger name="com.netflix" level="WARN"/>
+    </springProfile>
+    <springProfile name="dev,devt,test">
+        <logger name="com.jemmy.services.edriven.mapper" level="WARN"/>
+        <logger name="com.jemmy" level="debug"/>
+    </springProfile>
+</configuration>

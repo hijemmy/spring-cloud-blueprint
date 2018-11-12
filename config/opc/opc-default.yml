@@ -1,13 +1,20 @@
 spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+    multipart:
+      enabled: true
+      max-request-size: 50MB
+      max-file-size: 50MB
   mvc:
     date-format: yyyy-MM-dd HH:mm:ss
   jackson:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
     date-format: yyyy-MM-dd HH:mm:ss
-  cache:
-    cache-names: mdc-cache
   datasource:
-    url: jdbc:mysql://paascloud-db-mysql:3306/paascloud_mdc?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://paascloud-db-mysql:3306/paascloud_opc?useUnicode=true&characterEncoding=UTF-8
 
 liquibase:
   change-log: classpath:liquibase/index.xml
@@ -35,7 +42,7 @@ pagehelper:
 security:
   oauth2:
     client:
-      clientId: paascloud-client-mdc
+      clientId: paascloud-client-opc
       clientSecret: paascloudClientSecret
       access-token-uri: http://paascloud-gateway:7979/uac/oauth/token
       user-authorization-uri: http://paascloud-gateway:7979/uac/oauth/authorize
@@ -47,24 +54,19 @@ security:
 
 jemmycloud:
   enableSqlLogInterceptor: false
-  dingTalk:
-    webhookToken:
-      sendException: 7b0fcc73f3d2be1415c5d31e5b34100c689961454af15a61635749ba0d8*****
-      jobListener: 7b0fcc73f3d2be1415c5d31e5b34100c689961454af15a61635749ba0d8*****
   token:
     interceptor:
       enable: true
   zk:
     zkAddressList: paascloud-provider-zk:2181
-  aliyun:
-    rocketMq:
-      enable: false
-      reliableMessageConsumer: false
-      reliableMessageProducer: true
-      namesrvAddr: paascloud-mq-rocket:9876
-      instanceName: paascloud-provider-mdc
-      consumerGroup: CID_MDC
-      producerGroup: PID_MDC
+  qiniu:
+    key:
+      accessKey: yourQiniuAccessKey
+      secretKey: yourQiniuSecretKey
+    oss:
+      privateHost:
+      publicHost:
+      fileMaxSize: 104857600
   oauth2:
     jwtSigningKey: paascloud
     client:
@@ -74,3 +76,22 @@ jemmycloud:
       clientSecret: ${security.oauth2.client.clientSecret}
       clientAuthenticationScheme: header
       tokenStore: jwt
+  aliyun:
+    key:
+      accessKeyId: yourAliyunAccessKey
+      accessKeySecret: yourAliyunKeySecret
+    rocketMq:
+      enable: true
+      reliableMessageConsumer: true
+      reliableMessageProducer: false
+      namesrvAddr: paascloud-mq-rocket:9876
+      instanceName: paascloud-provider-opc
+      consumerGroup: CID_OPC
+      producerGroup: PID_OPC
+    sms:
+      signName: 快乐学习网
+      regionId: cn-beijing
+      endpoint:
+      endpointName: cn-beijing
+      product: Dysmsapi
+      domain: dysmsapi.aliyuncs.com

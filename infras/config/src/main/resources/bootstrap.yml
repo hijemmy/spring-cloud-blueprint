@@ -3,8 +3,8 @@ spring:
     config:
       server:
         git:
-          search-paths: /**
-          uri: https://github.com/hijemmy/spring-cloud-blueprint-config
+          search-paths: /config/**
+          uri: https://github.com/hijemmy/spring-cloud-blueprint
         bootstrap: true
       name: config
       profile: dev

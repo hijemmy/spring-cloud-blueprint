@@ -40,16 +40,16 @@ public class GlobalConstant {
 	public static final String PRO_PROFILE = "pro";
 	public static final int TWO_INT = 2;
 	public static final int M_SIZE = 1024;
-	public static final String ROOT_PREFIX = "paascloud";
+	public static final String ROOT_PREFIX = "jemmycloud";
 
 	public static final int EXCEPTION_CAUSE_MAX_LENGTH = 2048;
 	public static final int EXCEPTION_MESSAGE_MAX_LENGTH = 2048;
 
-	public static final String ZK_REGISTRY_SERVICE_ROOT_PATH = "/paascloud/registry/service";
-	public static final String ZK_REGISTRY_ID_ROOT_PATH = "/paascloud/registry/id";
-	public static final String ZK_REGISTRY_PRODUCER_ROOT_PATH = "/paascloud/registry/producer";
-	public static final String ZK_REGISTRY_CONSUMER_ROOT_PATH = "/paascloud/registry/consumer";
-	public static final String ZK_REGISTRY_SEQ = "/paascloud/seq";
+	public static final String ZK_REGISTRY_SERVICE_ROOT_PATH = "/jemmycloud/registry/service";
+	public static final String ZK_REGISTRY_ID_ROOT_PATH = "/jemmycloud/registry/id";
+	public static final String ZK_REGISTRY_PRODUCER_ROOT_PATH = "/jemmycloud/registry/producer";
+	public static final String ZK_REGISTRY_CONSUMER_ROOT_PATH = "/jemmycloud/registry/consumer";
+	public static final String ZK_REGISTRY_SEQ = "/jemmycloud/seq";
 
 	public interface Number {
 		int THOUSAND_INT = 1000;
@@ -110,7 +110,7 @@ public class GlobalConstant {
 		/**
 		 * The constant DEFAULT_FILE_PATH.
 		 */
-		public static final String DEFAULT_FILE_PATH = "paascloud/file/";
+		public static final String DEFAULT_FILE_PATH = "jemmycloud/file/";
 
 		/**
 		 * redis key default expire = 1MINUTES

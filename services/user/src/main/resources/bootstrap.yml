@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user
+    name: paascloud-provider-uac
   autoconfigure:
     exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
   cloud:

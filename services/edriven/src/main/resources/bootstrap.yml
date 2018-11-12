@@ -1,11 +1,11 @@
 spring:
   application:
-    name: paascloud-provider-omc
+    name: paascloud-provider-tpc
   autoconfigure:
     exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
   cloud:
     config:
-      name: order
+      name: edriven
       profile: pro
       discovery:
         service-id: config

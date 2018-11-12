@@ -12,11 +12,11 @@
 package com.jemmy.services.edriven.mq;
 
 
-import com.paascloud.base.constant.GlobalConstant;
-import com.paascloud.base.enums.ErrorCodeEnum;
-import com.paascloud.core.mq.MqMessage;
-import com.paascloud.provider.exceptions.TpcBizException;
-import com.paascloud.provider.service.MqProducerBeanFactory;
+import com.jemmy.apis.edriven.exceptions.TpcBizException;
+import com.jemmy.common.base.constant.GlobalConstant;
+import com.jemmy.common.base.enums.ErrorCodeEnum;
+import com.jemmy.common.core.mq.MqMessage;
+import com.jemmy.services.edriven.service.MqProducerBeanFactory;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
