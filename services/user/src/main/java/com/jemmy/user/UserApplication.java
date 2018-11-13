@@ -20,12 +20,11 @@ import tk.mybatis.spring.annotation.MapperScan;
 import javax.sql.DataSource;
 
 @SpringCloudApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.jemmy.apis.edriven"})
 @EnableOAuth2Client
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
 @MapperScan(basePackages = {"com.jemmy.user.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
-@ComponentScan({"com.jemmy.apis.rmq","com.jemmy.common.aop", "com.jemmy.common.security.oauth2","com.jemmy.user"})
-
+@ComponentScan({"com.jemmy.common","com.jemmy.apis", "com.jemmy.common.security.oauth2","com.jemmy.user"})
 public class UserApplication {
     @Bean
     MethodValidationPostProcessor methodValidationPostProcessor(){

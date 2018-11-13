@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.paascloud.provider.mapper.UacMenuMapper">
-    <resultMap id="BaseResultMap" type="com.paascloud.provider.model.domain.UacMenu">
+<mapper namespace="com.jemmy.user.mapper.UacMenuMapper">
+    <resultMap id="BaseResultMap" type="com.jemmy.user.model.domain.UacMenu">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
         <result column="menu_code" jdbcType="VARCHAR" property="menuCode"/>
@@ -180,7 +180,7 @@
         and u.id = #{userId,jdbcType=BIGINT}
         order by m.id asc
     </select>
-    <select id="findMenuVoListByUserId" resultType="com.paascloud.provider.model.vo.MenuVo">
+    <select id="findMenuVoListByUserId" resultType="com.jemmy.apis.user.vo.MenuVo">
         SELECT
         m.menu_code as menuCode,
         m.menu_name as menuName,
@@ -235,14 +235,14 @@
         WHERE
             m.url = #{url, jdbcType=VARCHAR}
     </select>
-    <select id="listMenuListByRoleId" resultType="com.paascloud.provider.model.domain.UacMenu">
+    <select id="listMenuListByRoleId" resultType="com.jemmy.user.model.domain.UacMenu">
         SELECT
           <include refid="Base_Column_List"/>
         FROM pc_uac_menu m LEFT JOIN pc_uac_role_menu rm on m.id = rm.menu_id
         LEFT JOIN pc_uac_role r on r.id = rm.role_id
         where r.id = #{roleId, jdbcType=BIGINT}
     </select>
-  <select id="listMenu" resultType="com.paascloud.provider.model.domain.UacMenu">
+  <select id="listMenu" resultType="com.jemmy.user.model.domain.UacMenu">
     SELECT
     <include refid="Base_Column_List" />
     From

@@ -12,6 +12,7 @@
 package com.jemmy.common.core.support;
 
 import com.jemmy.common.base.exception.BusinessException;
+import com.jemmy.common.core.mybatis.MyMapper;
 import com.jemmy.common.zk.generator.IncrementIdGenerator;
 import com.jemmy.common.zk.generator.UniqueIdGenerator;
 import org.apache.ibatis.session.RowBounds;
@@ -29,7 +30,7 @@ import java.util.List;
  *
  * @author paascloud.net@gmail.com
  */
-public abstract class BaseService<T> implements IService<T> {
+public abstract class BaseService<T,M extends Mapper<T>> implements IService<T> {
 
 	/**
 	 * The Logger.
@@ -40,14 +41,14 @@ public abstract class BaseService<T> implements IService<T> {
 	 * The Mapper.
 	 */
 	@Autowired
-	protected Mapper<T> mapper;
+	protected M mapper;
 
 	/**
 	 * Gets mapper.
 	 *
 	 * @return the mapper
 	 */
-	public Mapper<T> getMapper() {
+	public M getMapper() {
 		return mapper;
 	}
 

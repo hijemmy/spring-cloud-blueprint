@@ -58,7 +58,7 @@ public class LogAspect {
 	/**
 	 * Log annotation.
 	 */
-	@Pointcut("@annotation(com.paascloud.core.annotation.LogAnnotation)")
+	@Pointcut("@annotation(com.jemmy.common.core.annotation.LogAnnotation)")
 	public void logAnnotation() {
 	}
 

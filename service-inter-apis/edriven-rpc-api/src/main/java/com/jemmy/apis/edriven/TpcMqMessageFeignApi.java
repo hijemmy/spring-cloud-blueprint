@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "edriven", primary = false, fallback = ReliableMqMessageFallbackFactory.class)
+@FeignClient(value = "edriven",  fallback = ReliableMqMessageFallbackFactory.class)
 public interface TpcMqMessageFeignApi {
 
 	/**

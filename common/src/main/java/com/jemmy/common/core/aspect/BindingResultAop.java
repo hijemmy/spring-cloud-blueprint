@@ -36,7 +36,7 @@ public class BindingResultAop {
 	/**
 	 * Validate annotation.
 	 */
-	@Pointcut("@annotation(com.paascloud.core.annotation.ValidateAnnotation)")
+	@Pointcut("@annotation(com.jemmy.common.core.annotation.ValidateAnnotation)")
 	public void validateAnnotation() {
 	}
 

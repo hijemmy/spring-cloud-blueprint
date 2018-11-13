@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.paascloud.provider.mapper.UacRoleMenuMapper">
-    <resultMap id="BaseResultMap" type="com.paascloud.provider.model.domain.UacRoleMenu">
+<mapper namespace="com.jemmy.user.mapper.UacRoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.jemmy.user.model.domain.UacRoleMenu">
         <id column="role_id" jdbcType="BIGINT" property="roleId"/>
         <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
     </resultMap>
@@ -24,7 +24,7 @@
       #{item}
     </foreach>
   </delete>
-  <select id="countChildMenuNum" parameterType="java.lang.String" resultType="com.paascloud.provider.model.vo.role.MenuCountVo">
+  <select id="countChildMenuNum" parameterType="java.lang.String" resultType="com.jemmy.user.model.vo.role.MenuCountVo">
         SELECT
             tum.id,
             tum.menu_name AS menuName,
