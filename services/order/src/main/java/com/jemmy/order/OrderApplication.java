@@ -19,12 +19,12 @@ import javax.sql.DataSource;
  * @author Jemmy
  */
 @SpringCloudApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.jemmy.apis")
 @EnableOAuth2Client
 @EnableAspectJAutoProxy(exposeProxy = true)
-@MapperScan(basePackages = {"com.jemmy.order.mapper"})
+@MapperScan(basePackages = {"com.jemmy.order.mapper","com.jemmy.apis.rmq.mapper"})
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
-@ComponentScan(basePackages = {"com.jemmy.order", "com.jemmy.common.web.exception", "com.jemmy.common.security.oauth2", "com.jemmy.common.aop","com.jemmy.common.mybatis"})
+@ComponentScan({"com.jemmy.common.config","com.jemmy.apis", "com.jemmy.common.security.oauth2","com.jemmy.order"})
 public class OrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderApplication.class, args);

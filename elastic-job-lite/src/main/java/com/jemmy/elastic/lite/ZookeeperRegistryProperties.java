@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Jemmy
  */
 @Data
-@ConfigurationProperties(prefix = "jemmy.zk")
+@ConfigurationProperties(prefix = "jemmycloud.zk")
 public class ZookeeperRegistryProperties {
 
     /**

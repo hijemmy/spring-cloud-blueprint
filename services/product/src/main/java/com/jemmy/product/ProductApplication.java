@@ -1,6 +1,6 @@
 package com.jemmy.product;
 
-import com.jemmy.common.mybatis.mapper.RootMapper;
+import com.jemmy.common.core.mybatis.MyMapper;
 import com.jemmy.common.redisson.config.RedissonAutoConfiguration;
 import com.jemmy.common.redisson.config.RedissonSpringAutoConfiguration;
 import liquibase.integration.spring.SpringLiquibase;
@@ -17,12 +17,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import javax.sql.DataSource;
 
 @SpringCloudApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.jemmy.apis")
 @EnableOAuth2Client
 @EnableAspectJAutoProxy(exposeProxy = true)
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
-@MapperScan(basePackages = {"com.jemmy.product.mapper"},markerInterface = RootMapper.class)
-@ComponentScan(basePackages = {"com.jemmy.product", "com.jemmy.common.web.exception", "com.jemmy.common.security.oauth2","com.jemmy.common.aop","com.jemmy.common.mybatis"})
+@MapperScan(basePackages = {"com.jemmy.product.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
+@ComponentScan({"com.jemmy.common.config","com.jemmy.apis", "com.jemmy.common.security.oauth2","com.jemmy.product"})
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class, args);

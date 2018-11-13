@@ -40,7 +40,7 @@
     ${alias}.last_operator_id,
     ${alias}.update_time
   </sql>
-  <select id="listDictVo" resultType="com.jemmy.product.model.vo.MdcDictVo>
+  <select id="listDictVo" resultType="com.jemmy.product.model.vo.MdcDictVo">
     SELECT
     <include refid="Base_Column_List">
       <property name="alias" value="dict"/>

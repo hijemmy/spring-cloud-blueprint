@@ -64,7 +64,7 @@ spring:
       initial-size: 100
       remove-abandoned: false
     name: dataSource
-    username: caiqinghe
+    username: root
     password: 123456
     url: 'jdbc:mysql://localhost:3306/jemmy_order?zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true'
   cache:
