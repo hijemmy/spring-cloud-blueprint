@@ -41,8 +41,8 @@ spring:
 eureka:
   client:
     service-url:
-      zone1: http://localhost:9002/eureka/
-      defaultZone: http://localhost:9001/eureka/
+      zone1: http://localhost:7002/eureka/
+      defaultZone: http://localhost:7001/eureka/
     region: ShenZhen
     availability-zones:
       ShenZhen: defaultZone,zone1
