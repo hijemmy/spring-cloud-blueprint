@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @EnableOAuth2Client
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
 @MapperScan(basePackages = {"com.jemmy.user.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
-@ComponentScan({"com.jemmy.common","com.jemmy.apis", "com.jemmy.common.security.oauth2","com.jemmy.user"})
+@ComponentScan({"com.jemmy.common","com.jemmy.apis","com.jemmy.user"})
 public class UserApplication {
     @Bean
     MethodValidationPostProcessor methodValidationPostProcessor(){

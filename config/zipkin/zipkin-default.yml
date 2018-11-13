@@ -7,7 +7,8 @@ server:
 management:
   security:
     enabled: false
-
+endpoints:
+  enabled: true
 spring:
   aop:
     proxy-target-class: true
@@ -38,6 +39,8 @@ spring:
         allow:
         login-username: admin
         login-password: admin
+  jmx:
+      enabled: true
   mail:
     host: smtp.163.com
     username: paascloudTest@163.com
