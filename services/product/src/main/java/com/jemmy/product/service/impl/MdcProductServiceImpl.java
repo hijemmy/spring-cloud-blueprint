@@ -59,10 +59,8 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MdcProductServiceImpl extends BaseService<MdcProduct> implements MdcProductService {
+public class MdcProductServiceImpl extends BaseService<MdcProduct,MdcProductMapper> implements MdcProductService {
 
-	@Resource
-	private MdcProductMapper mdcProductMapper;
 	@Resource
 	private MdcProductCategoryService mdcProductCategoryService;
 	@Resource
@@ -72,7 +70,7 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 
 	@Override
 	public List<MdcProduct> selectByNameAndCategoryIds(String productName, List<Long> categoryIdList, String orderBy) {
-		return mdcProductMapper.selectByNameAndCategoryIds(productName, categoryIdList, orderBy);
+		return mapper.selectByNameAndCategoryIds(productName, categoryIdList, orderBy);
 	}
 
 	@Override
@@ -80,7 +78,7 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 		logger.info("获取商品明细信息, productId={}", productId);
 		Preconditions.checkArgument(productId != null, ErrorCodeEnum.MDC10021021.msg());
 
-		MdcProduct product = mdcProductMapper.selectByPrimaryKey(productId);
+		MdcProduct product = mapper.selectByPrimaryKey(productId);
 		if (product == null) {
 			throw new MdcBizException(ErrorCodeEnum.MDC10021017, productId);
 		}
@@ -94,12 +92,12 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 	@Override
 	public int updateProductStockById(ProductDto productDto) {
 		Preconditions.checkArgument(!PubUtils.isNull(productDto, productDto.getId()), ErrorCodeEnum.MDC10021021.msg());
-		return mdcProductMapper.updateProductStockById(productDto);
+		return mapper.updateProductStockById(productDto);
 	}
 
 	@Override
 	public List<ProductVo> queryProductListWithPage(final MdcProduct mdcProduct) {
-		return mdcProductMapper.queryProductListWithPage(mdcProduct);
+		return mapper.queryProductListWithPage(mdcProduct);
 	}
 
 	@Override
@@ -136,7 +134,7 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 			mdcProductManager.saveProduct(mqMessageData, product, true);
 		} else if (product.isNew() && PublicUtil.isEmpty(attachmentIdList)) {
 			product.setId(generateId());
-			mdcProductMapper.insertSelective(product);
+			mapper.insertSelective(product);
 		} else {
 			mqMessageData = new MqMessageData(body, topic, tag, key);
 			mdcProductManager.saveProduct(mqMessageData, product, false);
@@ -145,7 +143,7 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 
 	@Override
 	public void deleteProductById(final Long id) {
-		MdcProduct product = mdcProductMapper.selectByPrimaryKey(id);
+		MdcProduct product = mapper.selectByPrimaryKey(id);
 		if (product != null) {
 			String body = product.getProductCode();
 			String topic = AliyunMqTopicConstants.MqTagEnum.DELETE_ATTACHMENT.getTopic();
@@ -158,7 +156,7 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 
 	@Override
 	public ProductVo getProductVo(final Long id) {
-		MdcProduct mdcProduct = mdcProductMapper.selectByPrimaryKey(id);
+		MdcProduct mdcProduct = mapper.selectByPrimaryKey(id);
 		ProductVo productVo = new ModelMapper().map(mdcProduct, ProductVo.class);
 		List<Long> categoryIdList = Lists.newArrayList();
 		buildCategoryIdList(categoryIdList, mdcProduct.getCategoryId());
@@ -175,7 +173,7 @@ public class MdcProductServiceImpl extends BaseService<MdcProduct> implements Md
 
 	@Override
 	public String getMainImage(final Long productId) {
-		MdcProduct product = mdcProductMapper.selectByPrimaryKey(productId);
+		MdcProduct product = mapper.selectByPrimaryKey(productId);
 		String url = null;
 
 		if (product != null) {

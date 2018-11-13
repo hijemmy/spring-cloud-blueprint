@@ -22,6 +22,7 @@ import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.core.support.BaseService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.product.mapper.MdcProductCategoryMapper;
 import com.jemmy.product.model.domain.MdcProduct;
 import com.jemmy.product.model.domain.MdcProductCategory;
 import com.jemmy.product.service.MdcProductCategoryService;
@@ -46,7 +47,7 @@ import java.util.List;
 @RefreshScope
 @RestController
 @Api(value = "API - MdcProductCategoryQueryFeignClient", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCategory> implements MdcProductCategoryQueryFeignApi {
+public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCategory,MdcProductCategoryMapper> implements MdcProductCategoryQueryFeignApi {
 
 	@Resource
 	private MdcProductCategoryService mdcProductCategoryService;

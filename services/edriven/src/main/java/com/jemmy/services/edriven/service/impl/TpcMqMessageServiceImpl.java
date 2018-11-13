@@ -52,9 +52,8 @@ import java.util.List;
 @Service
 @Slf4j
 @Transactional(rollbackFor = Throwable.class)
-public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implements TpcMqMessageService {
-	@Resource
-	private TpcMqMessageMapper tpcMqMessageMapper;
+public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage,TpcMqMessageMapper> implements TpcMqMessageService {
+	
 	@Resource
 	private TpcMqConfirmMapper tpcMqConfirmMapper;
 	@Resource
@@ -78,12 +77,12 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 		message.setMessageStatus(MqSendStatusEnum.WAIT_SEND.sendStatus());
 		message.setUpdateTime(now);
 		message.setCreatedTime(now);
-		tpcMqMessageMapper.insertSelective(message);
+		mapper.insertSelective(message);
 	}
 
 	@Override
 	public void confirmAndSendMessage(String messageKey) {
-		final TpcMqMessage message = tpcMqMessageMapper.getByMessageKey(messageKey);
+		final TpcMqMessage message = mapper.getByMessageKey(messageKey);
 		if (message == null) {
 			throw new TpcBizException(ErrorCodeEnum.TPC10050002);
 		}
@@ -92,7 +91,7 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 		update.setMessageStatus(MqSendStatusEnum.SENDING.sendStatus());
 		update.setId(message.getId());
 		update.setUpdateTime(new Date());
-		tpcMqMessageMapper.updateByPrimaryKeySelective(update);
+		mapper.updateByPrimaryKeySelective(update);
 		// 创建消费待确认列表
 		this.createMqConfirmListByTopic(message.getMessageTopic(), message.getId(), message.getMessageKey());
 		// 直接发送消息
@@ -112,7 +111,7 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 		message.setUpdateTime(now);
 		message.setCreatedTime(now);
 
-		tpcMqMessageMapper.insertSelective(message);
+		mapper.insertSelective(message);
 		// 创建消费待确认列表
 		this.createMqConfirmListByTopic(message.getMessageTopic(), message.getId(), message.getMessageKey());
 		this.directSendMessage(tpcMqMessageDto.getMessageBody(), tpcMqMessageDto.getMessageTopic(), tpcMqMessageDto.getMessageTag(), tpcMqMessageDto.getMessageKey(), tpcMqMessageDto.getProducerGroup(), tpcMqMessageDto.getDelayLevel());
@@ -125,7 +124,7 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 
 	@Override
 	public void resendMessageByMessageId(Long messageId) {
-		final TpcMqMessage message = tpcMqMessageMapper.selectByPrimaryKey(messageId);
+		final TpcMqMessage message = mapper.selectByPrimaryKey(messageId);
 		if (message == null) {
 			throw new TpcBizException(ErrorCodeEnum.TPC10050006);
 		}
@@ -134,24 +133,24 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 
 	@Override
 	public void resendMessageByMessageKey(String messageKey) {
-		final TpcMqMessage task = tpcMqMessageMapper.getByMessageKey(messageKey);
+		final TpcMqMessage task = mapper.getByMessageKey(messageKey);
 		this.resendMessage(task);
 	}
 
 	@Override
 	public void setMessageToAlreadyDead(Long messageId) {
-		final TpcMqMessage task = tpcMqMessageMapper.selectByPrimaryKey(messageId);
+		final TpcMqMessage task = mapper.selectByPrimaryKey(messageId);
 		if (task == null) {
 			throw new TpcBizException(ErrorCodeEnum.TPC10050006);
 		}
 
-		tpcMqMessageMapper.updateAlreadyDeadByMessageId(messageId);
+		mapper.updateAlreadyDeadByMessageId(messageId);
 	}
 
 	@Override
 	public void deleteMessageByMessageKey(String messageKey) {
 
-		int result = tpcMqMessageMapper.deleteMessageByMessageKey(messageKey);
+		int result = mapper.deleteMessageByMessageKey(messageKey);
 		if (result < 1) {
 			throw new TpcBizException(ErrorCodeEnum.TPC10050003, messageKey);
 		}
@@ -165,7 +164,7 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 
 	@Override
 	public List<TpcMqMessage> listMessageForWaitingProcess(MessageTaskQueryDto query) {
-		return tpcMqMessageMapper.listMessageForWaitingProcess(query);
+		return mapper.listMessageForWaitingProcess(query);
 	}
 
 	@Override
@@ -207,12 +206,12 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 
 	@Override
 	public List<String> queryWaitingConfirmMessageKeyList(final MessageTaskQueryDto query) {
-		return tpcMqMessageMapper.queryWaitingConfirmMessageKeyList(query);
+		return mapper.queryWaitingConfirmMessageKeyList(query);
 	}
 
 	@Override
 	public void handleWaitingConfirmMessage(final List<String> deleteKeyList, final List<String> resendKeyList) {
-		tpcMqMessageMapper.batchDeleteMessage(deleteKeyList);
+		mapper.batchDeleteMessage(deleteKeyList);
 		for (final String messageKey : resendKeyList) {
 			this.confirmAndSendMessage(messageKey);
 		}
@@ -220,12 +219,12 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 
 	@Override
 	public int updateMqMessageTaskStatus(final TpcMqMessage message) {
-		return tpcMqMessageMapper.updateMqMessageTaskStatus(message);
+		return mapper.updateMqMessageTaskStatus(message);
 	}
 
 	@Override
 	public int updateMqMessageStatus(final TpcMqMessage update) {
-		return tpcMqMessageMapper.updateByPrimaryKeySelective(update);
+		return mapper.updateByPrimaryKeySelective(update);
 	}
 
 	@Override
@@ -267,19 +266,19 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage> implement
 
 	@Override
 	public List<TpcMessageVo> listReliableMessageVo(final MessageQueryDto messageQueryDto) {
-		return tpcMqMessageMapper.listReliableMessageVoWithPage(messageQueryDto);
+		return mapper.listReliableMessageVoWithPage(messageQueryDto);
 	}
 
 	@Override
 	public List<TpcMessageVo> listReliableMessageVo(final List<Long> messageIdList) {
-		return tpcMqMessageMapper.listReliableMessageVo(messageIdList);
+		return mapper.listReliableMessageVo(messageIdList);
 	}
 
 	private void resendMessage(TpcMqMessage message) {
 		if (message == null) {
 			throw new TpcBizException(ErrorCodeEnum.TPC10050002);
 		}
-		tpcMqMessageMapper.addTaskExeCountById(message.getId());
+		mapper.addTaskExeCountById(message.getId());
 		//TODO 记录重发日志 1.系统自动重发 2.人工重发
 		this.directSendMessage(message.getMessageBody(), message.getMessageTopic(), message.getMessageTag(), message.getMessageKey(), message.getProducerGroup(), message.getDelayLevel());
 	}

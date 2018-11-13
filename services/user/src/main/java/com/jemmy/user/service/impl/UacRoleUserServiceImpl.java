@@ -24,9 +24,7 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements UacRoleUserService {
-	@Resource
-	private UacRoleUserMapper uacRoleUserMapper;
+public class UacRoleUserServiceImpl extends BaseService<UacRoleUser,UacRoleUserMapper> implements UacRoleUserService {
 
 	@Override
 	public int deleteByUserId(Long userId) {
@@ -36,7 +34,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 
 		UacRoleUser param = new UacRoleUser();
 		param.setUserId(userId);
-		return uacRoleUserMapper.delete(param);
+		return mapper.delete(param);
 	}
 
 	@Override
@@ -46,7 +44,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 			throw new UacBizException(ErrorCodeEnum.UAC10011001);
 		}
 
-		return uacRoleUserMapper.listByUserId(userId);
+		return mapper.listByUserId(userId);
 	}
 
 	@Override
@@ -61,7 +59,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 			throw new UacBizException(ErrorCodeEnum.UAC10012001);
 		}
 
-		return uacRoleUserMapper.getByUserIdAndRoleId(userId, roleId);
+		return mapper.getByUserIdAndRoleId(userId, roleId);
 	}
 
 	@Override
@@ -76,7 +74,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		UacRoleUser roleUser = new UacRoleUser();
 		roleUser.setUserId(userId);
 		roleUser.setRoleId(roleId);
-		return uacRoleUserMapper.insertSelective(roleUser);
+		return mapper.insertSelective(roleUser);
 	}
 
 	@Override
@@ -85,7 +83,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		if (roleId == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012001);
 		}
-		return uacRoleUserMapper.listByRoleId(roleId);
+		return mapper.listByRoleId(roleId);
 	}
 
 	@Override
@@ -94,7 +92,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		if (PublicUtil.isEmpty(idList)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012001);
 		}
-		return uacRoleUserMapper.listByRoleIdList(idList);
+		return mapper.listByRoleIdList(idList);
 	}
 
 	@Override
@@ -103,7 +101,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		if (superManagerRoleId == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012001);
 		}
-		return uacRoleUserMapper.listSuperUser(superManagerRoleId);
+		return mapper.listSuperUser(superManagerRoleId);
 	}
 
 	@Override
@@ -114,7 +112,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		if (superManagerRoleId == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012004);
 		}
-		uacRoleUserMapper.deleteExcludeSuperMng(roleId, superManagerRoleId);
+		mapper.deleteExcludeSuperMng(roleId, superManagerRoleId);
 
 	}
 
@@ -124,14 +122,14 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		if (userId == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011001);
 		}
-		return uacRoleUserMapper.listByUserId(userId);
+		return mapper.listByUserId(userId);
 	}
 
 	@Override
 	public void deleteByRoleIdList(List<Long> roleIdList) {
 		Preconditions.checkArgument(PublicUtil.isNotEmpty(roleIdList), ErrorCodeEnum.UAC10012001.msg());
 		Preconditions.checkArgument(!roleIdList.contains(GlobalConstant.Sys.SUPER_MANAGER_ROLE_ID), "超级管理员角色不能删除");
-		int result = uacRoleUserMapper.deleteByRoleIdList(roleIdList);
+		int result = mapper.deleteByRoleIdList(roleIdList);
 		if (result < roleIdList.size()) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012007, Joiner.on(GlobalConstant.Symbol.COMMA).join(roleIdList));
 		}
@@ -142,7 +140,7 @@ public class UacRoleUserServiceImpl extends BaseService<UacRoleUser> implements 
 		Preconditions.checkArgument(roleId != null, ErrorCodeEnum.UAC10012001.msg());
 		Preconditions.checkArgument(!Objects.equals(roleId, GlobalConstant.Sys.SUPER_MANAGER_ROLE_ID), "超级管理员角色不能删除");
 
-		int result = uacRoleUserMapper.deleteByRoleId(roleId);
+		int result = mapper.deleteByRoleId(roleId);
 		if (result < 1) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012006, roleId);
 		}

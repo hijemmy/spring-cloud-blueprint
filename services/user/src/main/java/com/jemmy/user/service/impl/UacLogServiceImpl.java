@@ -27,9 +27,8 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacLogServiceImpl extends BaseService<UacLog> implements UacLogService {
-	@Resource
-	private UacLogMapper uacLogMapper;
+public class UacLogServiceImpl extends BaseService<UacLog,UacLogMapper> implements UacLogService {
+
 	@Resource
 	private OpcRpcService opcRpcService;
 	@Resource
@@ -46,13 +45,13 @@ public class UacLogServiceImpl extends BaseService<UacLog> implements UacLogServ
 		}
 		uacLog.setUpdateInfo(loginAuthDto);
 		uacLog.setId(this.generateId());
-		return uacLogMapper.insertSelective(uacLog);
+		return mapper.insertSelective(uacLog);
 	}
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public List<UacLog> selectUserLogListByUserId(Long userId) {
-		return uacLogMapper.selectUserLogListByUserId(userId);
+		return mapper.selectUserLogListByUserId(userId);
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class UacLogServiceImpl extends BaseService<UacLog> implements UacLogServ
 		// 获取操作位置
 		String locationById = opcRpcService.getLocationById(operationLogDto.getIp());
 		uacLog.setLocation(locationById);
-		return uacLogMapper.insertSelective(uacLog);
+		return mapper.insertSelective(uacLog);
 	}
 
 	@Override
@@ -82,7 +81,7 @@ public class UacLogServiceImpl extends BaseService<UacLog> implements UacLogServ
 		}
 		uacLogQueryDtoPage.setMenuId(actionId);
 		PageHelper.startPage(uacLogQueryDtoPage.getPageNum(), uacLogQueryDtoPage.getPageSize());
-		List<UacLog> actionList = uacLogMapper.queryLogListWithPage(uacLogQueryDtoPage);
+		List<UacLog> actionList = mapper.queryLogListWithPage(uacLogQueryDtoPage);
 		return new PageInfo<>(actionList);
 	}
 }

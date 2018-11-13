@@ -38,21 +38,19 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MdcDictServiceImpl extends BaseService<MdcDict> implements MdcDictService {
-	@Resource
-	private MdcDictMapper mdcDictMapper;
+public class MdcDictServiceImpl extends BaseService<MdcDict,MdcDictMapper> implements MdcDictService {
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public List<MdcDictVo> getDictTreeList() {
-		List<MdcDictVo> list = mdcDictMapper.listDictVo();
+		List<MdcDictVo> list = mapper.listDictVo();
 		return new TreeUtils().getChildTreeObjects(list, 0L);
 	}
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public MdcDictVo getMdcDictVoById(Long dictId) {
-		MdcDict dict = mdcDictMapper.selectByPrimaryKey(dictId);
+		MdcDict dict = mapper.selectByPrimaryKey(dictId);
 
 		if (dict == null) {
 			logger.error("找不到数据字典信息id={}", dictId);
@@ -60,7 +58,7 @@ public class MdcDictServiceImpl extends BaseService<MdcDict> implements MdcDictS
 		}
 
 		// 获取父级菜单信息
-		MdcDict parentDict = mdcDictMapper.selectByPrimaryKey(dict.getPid());
+		MdcDict parentDict = mapper.selectByPrimaryKey(dict.getPid());
 
 		ModelMapper modelMapper = new ModelMapper();
 		MdcDictVo dictVo = modelMapper.map(dict, MdcDictVo.class);

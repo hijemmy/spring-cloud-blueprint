@@ -20,7 +20,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 import javax.sql.DataSource;
 
 @SpringCloudApplication
-@EnableFeignClients(basePackages = {"com.jemmy.apis.edriven"})
+@EnableFeignClients(basePackages = {"com.jemmy.apis"})
 @EnableOAuth2Client
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
 @MapperScan(basePackages = {"com.jemmy.user.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)

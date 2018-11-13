@@ -35,9 +35,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacActionServiceImpl extends BaseService<UacAction> implements UacActionService {
-	@Resource
-	private UacActionMapper uacActionMapper;
+public class UacActionServiceImpl extends BaseService<UacAction,UacActionMapper> implements UacActionService {
+
 	@Resource
 	private UacRoleActionMapper uacRoleActionMapper;
 	private AntPathMatcher antPathMatcher = new AntPathMatcher();
@@ -55,7 +54,7 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 		BeanUtils.copyProperties(actionMainQueryDto, uacAction);
 		uacAction.setOrderBy("update_time desc");
 		PageHelper.startPage(actionMainQueryDto.getPageNum(), actionMainQueryDto.getPageSize());
-		List<ActionVo> actionList = uacActionMapper.queryActionListWithPage(uacAction);
+		List<ActionVo> actionList = mapper.queryActionListWithPage(uacAction);
 		return new PageInfo<>(actionList);
 	}
 
@@ -66,7 +65,7 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 			throw new IllegalArgumentException("权限ID不能为空");
 		}
 
-		UacAction uacAction = uacActionMapper.selectByPrimaryKey(actionId);
+		UacAction uacAction = mapper.selectByPrimaryKey(actionId);
 		if (uacAction == null) {
 			logger.error("找不到权限信息 actionId={}", actionId);
 			throw new UacBizException(ErrorCodeEnum.UAC10014001, actionId);
@@ -75,14 +74,14 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 		// 删除角色权限表数据  不查询了 直接删除了
 		uacRoleActionMapper.deleteByActionId(actionId);
 
-		return uacActionMapper.deleteByPrimaryKey(actionId);
+		return mapper.deleteByPrimaryKey(actionId);
 	}
 
 	@Override
 	public void batchDeleteByIdList(List<Long> deleteIdList) {
 		logger.info("批量删除角色. deleteIdList={}", deleteIdList);
 		Preconditions.checkArgument(PublicUtil.isNotEmpty(deleteIdList), "删除权限ID不能为空");
-		int result = uacActionMapper.batchDeleteByIdList(deleteIdList);
+		int result = mapper.batchDeleteByIdList(deleteIdList);
 		if (result < deleteIdList.size()) {
 			throw new UacBizException(ErrorCodeEnum.UAC10014002, Joiner.on(GlobalConstant.Symbol.COMMA).join(deleteIdList));
 		}
@@ -99,9 +98,9 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 		if (action.isNew()) {
 			Long actionId = super.generateId();
 			action.setId(actionId);
-			uacActionMapper.insertSelective(action);
+			mapper.insertSelective(action);
 		} else {
-			int result = uacActionMapper.updateByPrimaryKeySelective(action);
+			int result = mapper.updateByPrimaryKeySelective(action);
 			if (result < 1) {
 				throw new UacBizException(ErrorCodeEnum.UAC10014003);
 			}
@@ -112,7 +111,7 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 	public int deleteByMenuId(Long id) {
 		Preconditions.checkArgument(id != null, "菜单ID不能为空");
 
-		return uacActionMapper.deleteByMenuId(id);
+		return mapper.deleteByMenuId(id);
 	}
 
 	@Override
@@ -121,13 +120,13 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 		if (roleId == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012001);
 		}
-		return uacActionMapper.getCheckedActionList(roleId);
+		return mapper.getCheckedActionList(roleId);
 	}
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public List<MenuVo> getOwnAuthList(Long userId) {
-		return uacActionMapper.getOwnAuthList(userId);
+		return mapper.getOwnAuthList(userId);
 	}
 
 	@Override
@@ -136,7 +135,7 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 		if (roleId == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012001);
 		}
-		return uacActionMapper.getCheckedMenuList(roleId);
+		return mapper.getCheckedMenuList(roleId);
 	}
 
 	@Override
@@ -147,26 +146,26 @@ public class UacActionServiceImpl extends BaseService<UacAction> implements UacA
 		List<UacAction> uacActionList;
 		if (Objects.equals(userId, GlobalConstant.Sys.SUPER_MANAGER_USER_ID)) {
 			// 获取全部权限信息
-			uacActionList = uacActionMapper.selectAll();
+			uacActionList = mapper.selectAll();
 		} else {
-			uacActionList = uacActionMapper.getOwnUacActionListByUserId(userId);
+			uacActionList = mapper.getOwnUacActionListByUserId(userId);
 		}
 		return uacActionList;
 	}
 
 	@Override
 	public List<UacAction> listActionListByRoleId(Long roleId) {
-		return uacActionMapper.listActionListByRoleId(roleId);
+		return mapper.listActionListByRoleId(roleId);
 	}
 
 	@Override
 	public List<UacAction> listActionList(List<UacMenu> uacMenus) {
-		return uacActionMapper.listActionList(uacMenus);
+		return mapper.listActionList(uacMenus);
 	}
 
 	@Override
 	public UacAction matchesByUrl(String requestUrl) {
-		List<UacAction> uacActionList = uacActionMapper.selectAll();
+		List<UacAction> uacActionList = mapper.selectAll();
 		for (UacAction uacAction : uacActionList) {
 			String url = uacAction.getUrl();
 			if (StringUtils.isEmpty(url)) {

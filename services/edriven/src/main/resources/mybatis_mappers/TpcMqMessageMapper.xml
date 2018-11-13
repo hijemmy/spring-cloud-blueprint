@@ -159,7 +159,7 @@
   </select>
 
   <resultMap id="TpcMqConsumerVoResultMap" extends="ResultMapWithBLOBs" type="com.jemmy.services.edriven.model.vo.TpcMessageVo">
-    <collection property="mqConfirmVoList" ofType="com.paascloud.provider.model.vo.TpcMqConfirmVo">
+    <collection property="mqConfirmVoList" ofType="com.jemmy.services.edriven.model.vo.TpcMqConfirmVo">
       <result property="consumerCode" column="consumerCode"/>
       <result property="consumeCount" column="consumeCount"/>
       <result property="createdTime" column="confirmCreatedTime"/>

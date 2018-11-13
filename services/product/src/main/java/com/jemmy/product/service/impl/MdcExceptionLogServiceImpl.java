@@ -40,9 +40,7 @@ import java.util.List;
  * @author paascloud.net @gmail.com
  */
 @Service
-public class MdcExceptionLogServiceImpl extends BaseService<MdcExceptionLog> implements MdcExceptionLogService {
-	@Resource
-	private MdcExceptionLogMapper mdcExceptionLogMapper;
+public class MdcExceptionLogServiceImpl extends BaseService<MdcExceptionLog,MdcExceptionLogMapper> implements MdcExceptionLogService {
 	@Resource
 	private TaskExecutor taskExecutor;
 	@Resource
@@ -56,7 +54,7 @@ public class MdcExceptionLogServiceImpl extends BaseService<MdcExceptionLog> imp
 
 		exceptionLog.setId(generateId());
 		exceptionLog.setCreateTime(new Date());
-		mdcExceptionLogMapper.insertSelective(exceptionLog);
+		mapper.insertSelective(exceptionLog);
 
 		taskExecutor.execute(() -> {
 			if (judgeIsSend(exceptionLogDto.getProfile())) {
@@ -71,7 +69,7 @@ public class MdcExceptionLogServiceImpl extends BaseService<MdcExceptionLog> imp
 	@Override
 	public PageInfo queryExceptionListWithPage(final MdcExceptionQueryDto mdcExceptionQueryDto) {
 		PageHelper.startPage(mdcExceptionQueryDto.getPageNum(), mdcExceptionQueryDto.getPageSize());
-		List<MdcExceptionLog> actionList = mdcExceptionLogMapper.queryExceptionListWithPage(mdcExceptionQueryDto);
+		List<MdcExceptionLog> actionList = mapper.queryExceptionListWithPage(mdcExceptionQueryDto);
 		return new PageInfo<>(actionList);
 	}
 

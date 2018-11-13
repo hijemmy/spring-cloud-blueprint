@@ -42,10 +42,8 @@ import java.util.*;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGroupService {
+public class UacGroupServiceImpl extends BaseService<UacGroup,UacGroupMapper> implements UacGroupService {
 
-	@Resource
-	private UacGroupMapper uacGroupMapper;
 	@Resource
 	private UacGroupUserMapper uacGroupUserMapper;
 	@Resource
@@ -61,11 +59,11 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		if (StringUtils.isEmpty(group.getStatus())) {
 			group.setStatus(UacGroupStatusEnum.ENABLE.getStatus());
 		}
-		return uacGroupMapper.insertSelective(group);
+		return mapper.insertSelective(group);
 	}
 
 	private int editUacGroup(UacGroup group) {
-		return uacGroupMapper.updateByPrimaryKeySelective(group);
+		return mapper.updateByPrimaryKeySelective(group);
 	}
 
 	@Override
@@ -78,7 +76,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		uacGroup.setId(groupId);
 		uacGroup.setStatus(status);
 
-		UacGroup group = uacGroupMapper.selectByPrimaryKey(groupId);
+		UacGroup group = mapper.selectByPrimaryKey(groupId);
 		if (PublicUtil.isEmpty(group)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10015001, groupId);
 		}
@@ -87,7 +85,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		}
 
 		//查询所有的组织
-		List<UacGroup> totalGroupList = uacGroupMapper.selectAll();
+		List<UacGroup> totalGroupList = mapper.selectAll();
 		List<GroupZtreeVo> totalList = Lists.newArrayList();
 		GroupZtreeVo zTreeVo;
 		for (UacGroup vo : totalGroupList) {
@@ -100,7 +98,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		uacGroupUser.setUserId(loginAuthDto.getUserId());
 		UacGroupUser groupUser = uacGroupUserMapper.selectOne(uacGroupUser);
 		// 查询当前登陆人所在的组织信息
-		UacGroup currentUserUacGroup = uacGroupMapper.selectByPrimaryKey(groupUser.getGroupId());
+		UacGroup currentUserUacGroup = mapper.selectByPrimaryKey(groupUser.getGroupId());
 		// 查询当前登陆人能禁用的所有子节点
 		List<GroupZtreeVo> childGroupList = this.getGroupTree(currentUserUacGroup.getId());
 		// 计算不能禁用的组织= 所有的组织 - 禁用的所有子节点
@@ -117,7 +115,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		uacGroup.setGroupName(group.getGroupName());
 		uacGroup.setGroupCode(group.getGroupCode());
 		uacGroup.setVersion(group.getVersion() + 1);
-		int result = uacGroupMapper.updateByPrimaryKeySelective(uacGroup);
+		int result = mapper.updateByPrimaryKeySelective(uacGroup);
 		// 获取当前所选组织的所有子节点
 		List<GroupZtreeVo> childUacGroupList = this.getGroupTree(uacGroup.getId());
 		// 批量修改组织状态
@@ -125,7 +123,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 			UacGroup childGroup;
 			for (GroupZtreeVo uacGroup1 : childUacGroupList) {
 				if (UacGroupStatusEnum.ENABLE.getStatus() == status) {
-					UacGroup parentGroup = uacGroupMapper.selectByPrimaryKey(uacGroup1.getpId());
+					UacGroup parentGroup = mapper.selectByPrimaryKey(uacGroup1.getpId());
 					if (parentGroup.getStatus() == UacGroupStatusEnum.DISABLE.getStatus()) {
 						throw new UacBizException(ErrorCodeEnum.UAC10015003);
 					}
@@ -133,7 +131,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 				childGroup = new UacGroup();
 				childGroup.setStatus(uacGroup.getStatus());
 				childGroup.setId(uacGroup1.getId());
-				result = uacGroupMapper.updateByPrimaryKeySelective(childGroup);
+				result = mapper.updateByPrimaryKeySelective(childGroup);
 				if (result < 1) {
 					throw new UacBizException(ErrorCodeEnum.UAC10015006, uacGroup1.getId());
 				}
@@ -149,14 +147,14 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		Preconditions.checkArgument(!Objects.equals(id, GlobalConstant.Sys.SUPER_MANAGER_GROUP_ID), "该组织不能删除");
 
 		// 根据前台传入的组织参数校验该组织是否存在
-		UacGroup uacGroup = uacGroupMapper.selectByPrimaryKey(id);
+		UacGroup uacGroup = mapper.selectByPrimaryKey(id);
 		if (PublicUtil.isEmpty(uacGroup)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10015004, id);
 		}
 		//判断该组织下是否存在子节点
 		UacGroup childGroup = new UacGroup();
 		childGroup.setPid(id);
-		List<UacGroup> childGroupList = uacGroupMapper.select(childGroup);
+		List<UacGroup> childGroupList = mapper.select(childGroup);
 		if (PublicUtil.isNotEmpty(childGroupList)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10015007, id);
 		}
@@ -177,7 +175,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		Preconditions.checkArgument(PublicUtil.isNotEmpty(groupId), "组织Id不能为空");
 		UacGroup query = new UacGroup();
 		query.setId(groupId);
-		return uacGroupMapper.selectOne(query);
+		return mapper.selectOne(query);
 	}
 
 	@Override
@@ -186,7 +184,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		// 1. 如果是仓库则 直接把仓库信息封装成ztreeVo返回
 		List<GroupZtreeVo> tree = Lists.newArrayList();
 
-		UacGroup uacGroup = uacGroupMapper.selectByPrimaryKey(groupId);
+		UacGroup uacGroup = mapper.selectByPrimaryKey(groupId);
 
 		GroupZtreeVo zTreeMenuVo = buildGroupZTreeVoByGroup(uacGroup);
 		if (0L == uacGroup.getPid()) {
@@ -200,7 +198,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		// 如果是组织 则查询父id为
 		UacGroup uacGroupQuery = new UacGroup();
 		uacGroupQuery.setPid(groupId);
-		List<UacGroup> groupList = uacGroupMapper.select(uacGroupQuery);
+		List<UacGroup> groupList = mapper.select(uacGroupQuery);
 		if (PublicUtil.isNotEmpty(groupList)) {
 			tree = buildNode(groupList, tree);
 		}
@@ -214,7 +212,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		UacGroupUser groupUser = uacGroupUserMapper.getByUserId(userId);
 		Long groupId = groupUser.getGroupId();
 		//查询当前登陆人所在的组织信息
-		UacGroup currentUserUacGroup = uacGroupMapper.selectByPrimaryKey(groupId);
+		UacGroup currentUserUacGroup = mapper.selectByPrimaryKey(groupId);
 		//获取当前所选组织的所有子节点
 		List<GroupZtreeVo> childUacGroupList = this.getGroupTree(currentUserUacGroup.getId());
 		return this.buildGroupTree(childUacGroupList, groupId);
@@ -244,7 +242,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 	public GroupBindUserDto getGroupBindUserDto(Long groupId, Long currentUserId) {
 		GroupBindUserDto groupBindUserDto = new GroupBindUserDto();
 		Set<Long> alreadyBindUserIdSet = Sets.newHashSet();
-		UacGroup uacGroup = uacGroupMapper.selectByPrimaryKey(groupId);
+		UacGroup uacGroup = mapper.selectByPrimaryKey(groupId);
 		if (PublicUtil.isEmpty(uacGroup)) {
 			logger.error("找不到uacGroup={}, 的组织", uacGroup);
 			throw new UacBizException(ErrorCodeEnum.UAC10015001, groupId);
@@ -288,7 +286,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 			throw new IllegalArgumentException("組織ID不能为空");
 		}
 
-		UacGroup group = uacGroupMapper.selectByPrimaryKey(groupId);
+		UacGroup group = mapper.selectByPrimaryKey(groupId);
 
 		if (group == null) {
 			logger.error("找不到角色信息 groupId={}", groupId);
@@ -341,7 +339,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 		int result;
 		Preconditions.checkArgument(!StringUtils.isEmpty(group.getPid()), "上级节点不能为空");
 
-		UacGroup parenGroup = uacGroupMapper.selectByPrimaryKey(group.getPid());
+		UacGroup parenGroup = mapper.selectByPrimaryKey(group.getPid());
 		if (PublicUtil.isEmpty(parenGroup)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10015009, group.getPid());
 		}
@@ -362,11 +360,11 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public UacGroup getById(Long id) {
-		UacGroup uacGroup = uacGroupMapper.selectByPrimaryKey(id);
+		UacGroup uacGroup = mapper.selectByPrimaryKey(id);
 		if (PublicUtil.isEmpty(uacGroup)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10015001, id);
 		}
-		UacGroup parentGroup = uacGroupMapper.selectByPrimaryKey(uacGroup.getPid());
+		UacGroup parentGroup = mapper.selectByPrimaryKey(uacGroup.getPid());
 		if (parentGroup != null) {
 			uacGroup.setParentGroupCode(parentGroup.getGroupCode());
 			uacGroup.setParentGroupName(parentGroup.getGroupName());
@@ -459,7 +457,7 @@ public class UacGroupServiceImpl extends BaseService<UacGroup> implements UacGro
 			UacGroup query = new UacGroup();
 			query.setPid(group.getId());
 
-			List<UacGroup> groupChildrenList = uacGroupMapper.select(query);
+			List<UacGroup> groupChildrenList = mapper.select(query);
 			// 有子节点 递归查询
 			if (PublicUtil.isNotEmpty(groupChildrenList)) {
 				buildNode(groupChildrenList, tree);

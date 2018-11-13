@@ -51,9 +51,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implements UacUserTokenService {
-	@Resource
-	private UacUserTokenMapper uacUserTokenMapper;
+public class UacUserTokenServiceImpl extends BaseService<UacUserToken,UacUserTokenMapper> implements UacUserTokenService {
+
 	@Resource
 	private UacUserService uacUserService;
 	@Autowired
@@ -101,7 +100,7 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implement
 		uacUserToken.setGroupId(loginAuthDto.getGroupId());
 		uacUserToken.setGroupName(loginAuthDto.getGroupName());
 		uacUserToken.setId(generateId());
-		uacUserTokenMapper.insertSelective(uacUserToken);
+		mapper.insertSelective(uacUserToken);
 		UserTokenDto userTokenDto = new ModelMapper().map(uacUserToken, UserTokenDto.class);
 		// 存入redis数据库
 		updateRedisUserToken(accessToken, accessTokenValidateSeconds, userTokenDto);
@@ -117,7 +116,7 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implement
 		if (userTokenDto == null) {
 			UacUserToken uacUserToken = new UacUserToken();
 			uacUserToken.setAccessToken(accessToken);
-			uacUserToken = uacUserTokenMapper.selectOne(uacUserToken);
+			uacUserToken = mapper.selectOne(uacUserToken);
 			userTokenDto = new ModelMapper().map(uacUserToken, UserTokenDto.class);
 		}
 		return userTokenDto;
@@ -127,7 +126,7 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implement
 	public void updateUacUserToken(UserTokenDto tokenDto, LoginAuthDto loginAuthDto) {
 		UacUserToken uacUserToken = new ModelMapper().map(tokenDto, UacUserToken.class);
 		uacUserToken.setUpdateInfo(loginAuthDto);
-		uacUserTokenMapper.updateByPrimaryKeySelective(uacUserToken);
+		mapper.updateByPrimaryKeySelective(uacUserToken);
 		OAuth2ClientProperties[] clients = securityProperties.getOauth2().getClients();
 		int accessTokenValidateSeconds = clients[0].getAccessTokenValidateSeconds();
 		updateRedisUserToken(uacUserToken.getAccessToken(), accessTokenValidateSeconds, tokenDto);
@@ -148,7 +147,7 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implement
 		if (StringUtils.isNotBlank(token.getUserName())) {
 			userToken.setUserName(token.getUserName());
 		}
-		List<UacUserToken> userTokenList = uacUserTokenMapper.selectTokenList(userToken);
+		List<UacUserToken> userTokenList = mapper.selectTokenList(userToken);
 		return new PageInfo<>(userTokenList);
 	}
 
@@ -181,13 +180,13 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implement
 
 	@Override
 	public int batchUpdateTokenOffLine() {
-		List<Long> idList = uacUserTokenMapper.listOffLineTokenId();
+		List<Long> idList = mapper.listOffLineTokenId();
 		if (PublicUtil.isEmpty(idList)) {
 			return 1;
 		}
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("status", 20);
 		map.put("tokenIdList", idList);
-		return uacUserTokenMapper.batchUpdateTokenOffLine(map);
+		return mapper.batchUpdateTokenOffLine(map);
 	}
 }

@@ -30,27 +30,26 @@ import java.util.List;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class OmcOrderDetailServiceImpl extends BaseService<OmcOrderDetail> implements OmcOrderDetailService {
-	@Resource
-	private OmcOrderDetailMapper omcOrderDetailMapper;
+public class OmcOrderDetailServiceImpl extends BaseService<OmcOrderDetail,OmcOrderDetailMapper> implements OmcOrderDetailService {
+
 
 	@Override
 	public List<OmcOrderDetail> getListByOrderNoUserId(String orderNo, Long userId) {
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
 		Preconditions.checkArgument(StringUtils.isNotEmpty(orderNo), "订单号不能为空");
 
-		return omcOrderDetailMapper.getListByOrderNoUserId(orderNo, userId);
+		return mapper.getListByOrderNoUserId(orderNo, userId);
 	}
 
 	@Override
 	public List<OmcOrderDetail> getListByOrderNo(String orderNo) {
 		Preconditions.checkArgument(StringUtils.isNotEmpty(orderNo), "订单号不能为空");
-		return omcOrderDetailMapper.getListByOrderNo(orderNo);
+		return mapper.getListByOrderNo(orderNo);
 	}
 
 	@Override
 	public void batchInsertOrderDetail(List<OmcOrderDetail> omcOrderDetailList) {
-		int insertResult = omcOrderDetailMapper.batchInsertOrderDetail(omcOrderDetailList);
+		int insertResult = mapper.batchInsertOrderDetail(omcOrderDetailList);
 		if (insertResult < omcOrderDetailList.size()) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031009);
 		}

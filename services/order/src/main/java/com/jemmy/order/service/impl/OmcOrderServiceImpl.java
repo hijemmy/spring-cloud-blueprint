@@ -58,10 +58,8 @@ import java.util.Objects;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrderService {
+public class OmcOrderServiceImpl extends BaseService<OmcOrder,OmcOrderMapper> implements OmcOrderService {
 
-	@Resource
-	private OmcOrderMapper omcOrderMapper;
 	@Resource
 	private OmcCartMapper omcCartMapper;
 	@Resource
@@ -125,7 +123,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 	@Override
 	public int cancelOrderDoc(LoginAuthDto loginAuthDto, String orderNo) {
 		Long userId = loginAuthDto.getUserId();
-		OmcOrder order = omcOrderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+		OmcOrder order = mapper.selectByUserIdAndOrderNo(userId, orderNo);
 		if (order == null) {
 			logger.error("该用户此订单不存在, userId={}, orderNo={}", userId, orderNo);
 			throw new OmcBizException(ErrorCodeEnum.OMC10031003);
@@ -137,20 +135,20 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 		updateOrder.setId(order.getId());
 		updateOrder.setStatus(OmcApiConstant.OrderStatusEnum.CANCELED.getCode());
 
-		return omcOrderMapper.updateByPrimaryKeySelective(updateOrder);
+		return mapper.updateByPrimaryKeySelective(updateOrder);
 	}
 
 	@Override
 	public PageInfo queryUserOrderListWithPage(Long userId, BaseQuery baseQuery) {
 		PageHelper.startPage(baseQuery.getPageNum(), baseQuery.getPageSize());
-		List<OmcOrder> orderList = omcOrderMapper.selectByUserId(userId);
+		List<OmcOrder> orderList = mapper.selectByUserId(userId);
 		List<OrderVo> orderVoList = assembleOrderVoList(orderList, userId);
 		return new PageInfo<>(orderVoList);
 	}
 
 	@Override
 	public boolean queryOrderPayStatus(Long userId, String orderNo) {
-		OmcOrder order = omcOrderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+		OmcOrder order = mapper.selectByUserIdAndOrderNo(userId, orderNo);
 		if (order == null) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031003);
 		}
@@ -161,7 +159,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 	public OmcOrder queryByOrderNo(String orderNo) {
 		Preconditions.checkArgument(StringUtils.isNotEmpty(orderNo), "订单号不能为空");
 
-		return omcOrderMapper.selectByOrderNo(orderNo);
+		return mapper.selectByOrderNo(orderNo);
 	}
 
 	@Override
@@ -169,7 +167,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
 		Preconditions.checkArgument(StringUtils.isNotEmpty(orderNo), "订单号不能为空");
 
-		return omcOrderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+		return mapper.selectByUserIdAndOrderNo(userId, orderNo);
 	}
 
 	@Override
@@ -214,7 +212,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 		order.setId(super.generateId());
 		//发货时间等等
 		//付款时间等等
-		int rowCount = omcOrderMapper.insertSelective(order);
+		int rowCount = mapper.insertSelective(order);
 		if (rowCount > 0) {
 			return order;
 		}
@@ -330,7 +328,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 	@Override
 	public OrderVo getOrderDetail(Long userId, String orderNo) {
 		logger.info("获取订单明细, userId={}, orderNo={}", userId, orderNo);
-		OmcOrder order = omcOrderMapper.selectByUserIdAndOrderNo(userId, orderNo);
+		OmcOrder order = mapper.selectByUserIdAndOrderNo(userId, orderNo);
 		if (null == order) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031005, orderNo);
 		}
@@ -341,7 +339,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 	@Override
 	public OrderVo getOrderDetail(final String orderNo) {
 		logger.info("获取订单明细, orderNo={}", orderNo);
-		OmcOrder order = omcOrderMapper.selectByOrderNo(orderNo);
+		OmcOrder order = mapper.selectByOrderNo(orderNo);
 		if (null == order) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031005, orderNo);
 		}
@@ -352,7 +350,7 @@ public class OmcOrderServiceImpl extends BaseService<OmcOrder> implements OmcOrd
 	@Override
 	public PageInfo queryOrderListWithPage(final OrderPageQuery orderPageQuery) {
 		PageHelper.startPage(orderPageQuery.getPageNum(), orderPageQuery.getPageSize());
-		List<OrderDocVo> orderList = omcOrderMapper.queryOrderListWithPage(orderPageQuery);
+		List<OrderDocVo> orderList = mapper.queryOrderListWithPage(orderPageQuery);
 		return new PageInfo<>(orderList);
 	}
 }

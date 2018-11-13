@@ -39,9 +39,8 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleService {
-	@Resource
-	private UacRoleMapper uacRoleMapper;
+public class UacRoleServiceImpl extends BaseService<UacRole,UacRoleMapper> implements UacRoleService {
+
 	@Resource
 	private UacRoleUserService uacRoleUserService;
 	@Resource
@@ -60,13 +59,13 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public UacRole findByRoleCode(String roleCode) {
-		return uacRoleMapper.findByRoleCode(roleCode);
+		return mapper.findByRoleCode(roleCode);
 	}
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public List<RoleVo> queryRoleListWithPage(UacRole role) {
-		return uacRoleMapper.queryRoleListWithPage(role);
+		return mapper.queryRoleListWithPage(role);
 	}
 
 	@Override
@@ -89,7 +88,7 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 
 		uacRoleActionService.deleteByRoleId(roleId);
 		uacRoleMenuService.deleteByRoleId(roleId);
-		return uacRoleMapper.deleteByPrimaryKey(roleId);
+		return mapper.deleteByPrimaryKey(roleId);
 	}
 
 	@Override
@@ -98,9 +97,9 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 		role.setUpdateInfo(loginAuthDto);
 		if (role.isNew()) {
 			role.setId(super.generateId());
-			uacRoleMapper.insertSelective(role);
+			mapper.insertSelective(role);
 		} else {
-			result = uacRoleMapper.updateByPrimaryKeySelective(role);
+			result = mapper.updateByPrimaryKeySelective(role);
 		}
 		return result;
 	}
@@ -132,7 +131,7 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 			throw new UacBizException(ErrorCodeEnum.UAC10011023);
 		}
 
-		UacRole uacRole = uacRoleMapper.selectByPrimaryKey(roleId);
+		UacRole uacRole = mapper.selectByPrimaryKey(roleId);
 
 		if (uacRole == null) {
 			logger.error("找不到角色信息. roleId={}", roleId);
@@ -157,7 +156,7 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public UacRole getRoleById(Long roleId) {
-		return uacRoleMapper.selectByPrimaryKey(roleId);
+		return mapper.selectByPrimaryKey(roleId);
 	}
 
 	@Override
@@ -165,14 +164,14 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 	public RoleBindUserDto getRoleBindUserDto(Long roleId, Long currentUserId) {
 		RoleBindUserDto roleBindUserDto = new RoleBindUserDto();
 		Set<Long> alreadyBindUserIdSet = Sets.newHashSet();
-		UacRole uacRole = uacRoleMapper.selectByPrimaryKey(roleId);
+		UacRole uacRole = mapper.selectByPrimaryKey(roleId);
 		if (PublicUtil.isEmpty(uacRole)) {
 			logger.error("找不到roleId={}, 的角色", roleId);
 			throw new UacBizException(ErrorCodeEnum.UAC10012005, roleId);
 		}
 
 		// 查询所有用户包括已禁用的用户
-		List<BindUserDto> bindUserDtoList = uacRoleMapper.selectAllNeedBindUser(GlobalConstant.Sys.SUPER_MANAGER_ROLE_ID, currentUserId);
+		List<BindUserDto> bindUserDtoList = mapper.selectAllNeedBindUser(GlobalConstant.Sys.SUPER_MANAGER_ROLE_ID, currentUserId);
 		// 该角色已经绑定的用户
 		List<UacRoleUser> setAlreadyBindUserSet = uacRoleUserService.listByRoleId(roleId);
 		Set<BindUserDto> allUserSet = new HashSet<>(bindUserDtoList);
@@ -251,7 +250,7 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public List<UacRole> findAllRoleInfoByUserId(Long userId) {
-		return uacRoleMapper.selectAllRoleInfoByUserId(userId);
+		return mapper.selectAllRoleInfoByUserId(userId);
 	}
 
 	@Override
@@ -326,7 +325,7 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 		uacRoleMenuService.deleteByRoleIdList(roleIdList);
 		uacRoleActionService.deleteByRoleIdList(roleIdList);
 
-		int result = uacRoleMapper.batchDeleteByIdList(roleIdList);
+		int result = mapper.batchDeleteByIdList(roleIdList);
 		if (result < roleIdList.size()) {
 			throw new UacBizException(ErrorCodeEnum.UAC10012006, Joiner.on(GlobalConstant.Symbol.COMMA).join(roleIdList));
 		}
@@ -357,7 +356,7 @@ public class UacRoleServiceImpl extends BaseService<UacRole> implements UacRoleS
 			throw new UacBizException(ErrorCodeEnum.UAC10011023);
 		}
 
-		UacRole uacRole = uacRoleMapper.selectByPrimaryKey(roleId);
+		UacRole uacRole = mapper.selectByPrimaryKey(roleId);
 
 		if (uacRole == null) {
 			logger.error("找不到角色信息. roleId={}", roleId);

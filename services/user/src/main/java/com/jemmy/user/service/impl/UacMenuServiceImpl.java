@@ -51,9 +51,7 @@ import java.util.*;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuService {
-	@Resource
-	private UacMenuMapper uacMenuMapper;
+public class UacMenuServiceImpl extends BaseService<UacMenu,UacMenuMapper> implements UacMenuService {
 	@Resource
 	private UacRoleMenuService uacRoleMenuService;
 	@Resource
@@ -73,10 +71,10 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 			uacMenuQuery.setStatus(UacMenuStatusEnum.ENABLE.getType());
 			uacMenuQuery.setApplicationId(applicationId);
 			uacMenuQuery.setOrderBy(" level asc,number asc");
-			menuList = uacMenuMapper.selectMenuList(uacMenuQuery);
+			menuList = mapper.selectMenuList(uacMenuQuery);
 		} else {
 			// 1.2查询该用户下所有的菜单列表
-			menuVoList = uacMenuMapper.findMenuVoListByUserId(userId);
+			menuVoList = mapper.findMenuVoListByUserId(userId);
 			if (PublicUtil.isEmpty(menuVoList)) {
 				return null;
 			}
@@ -157,9 +155,9 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 			menu.setLastOperator(loginAuthDto.getUserName());
 			// 新增的菜单是叶子节点
 			menu.setLeaf(MenuConstant.MENU_LEAF_YES);
-			return uacMenuMapper.insertSelective(menu);
+			return mapper.insertSelective(menu);
 		} else {
-			return uacMenuMapper.updateByPrimaryKeySelective(menu);
+			return mapper.updateByPrimaryKeySelective(menu);
 		}
 	}
 
@@ -182,7 +180,7 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 
 
 		// 删除菜单
-		result = uacMenuMapper.deleteByPrimaryKey(id);
+		result = mapper.deleteByPrimaryKey(id);
 		if (result < 1) {
 			logger.error("删除菜单失败 menuId={}", id);
 			throw new UacBizException(ErrorCodeEnum.UAC10013008, id);
@@ -199,9 +197,9 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 		// 是二三级
 		if (Objects.equals(MenuConstant.MENU_LEVEL_TWO, uacMenuQuery.getLevel()) || Objects.equals(MenuConstant.MENU_LEVEL_THREE, uacMenuQuery.getLevel())) {
 			// 查询是否是叶子节点
-			int count = uacMenuMapper.selectMenuChildCountByPid(uacMenuQuery.getPid());
+			int count = mapper.selectMenuChildCountByPid(uacMenuQuery.getPid());
 			if (count == 0) {
-				uacMenuMapper.updateByPrimaryKeySelective(updateParentUacMenu);
+				mapper.updateByPrimaryKeySelective(updateParentUacMenu);
 			}
 		}
 		return result;
@@ -274,7 +272,7 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public List<UacMenu> selectMenuList(UacMenu uacMenu) {
-		return uacMenuMapper.selectMenuList(uacMenu);
+		return mapper.selectMenuList(uacMenu);
 	}
 
 	@Override
@@ -284,13 +282,13 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 		Preconditions.checkArgument(authResDto != null, "无权访问");
 
 		if (!GlobalConstant.Sys.SUPER_MANAGER_LOGIN_NAME.equals(authResDto.getLoginName())) {
-			voList = uacMenuMapper.findMenuVoListByUserId(authResDto.getUserId());
+			voList = mapper.findMenuVoListByUserId(authResDto.getUserId());
 		} else {
 			UacMenu uacMenuQuery = new UacMenu();
 			// 查询启用的菜单
 			uacMenuQuery.setStatus(UacMenuStatusEnum.ENABLE.getType());
 			uacMenuQuery.setOrderBy(" level asc,number asc");
-			List<UacMenu> list = uacMenuMapper.select(uacMenuQuery);
+			List<UacMenu> list = mapper.select(uacMenuQuery);
 			for (UacMenu uacMenu : list) {
 				MenuVo menuVo = new MenuVo();
 				BeanUtils.copyProperties(uacMenu, menuVo);
@@ -304,7 +302,7 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public ViewMenuVo getViewVoById(Long id) {
 		Preconditions.checkArgument(id != null, "菜单ID不能为空");
-		UacMenu menu = uacMenuMapper.selectByPrimaryKey(id);
+		UacMenu menu = mapper.selectByPrimaryKey(id);
 
 		if (menu == null) {
 			logger.error("找不到菜单信息id={}", id);
@@ -312,7 +310,7 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 		}
 
 		// 获取父级菜单信息
-		UacMenu parentMenu = uacMenuMapper.selectByPrimaryKey(menu.getPid());
+		UacMenu parentMenu = mapper.selectByPrimaryKey(menu.getPid());
 
 		ModelMapper modelMapper = new ModelMapper();
 		ViewMenuVo menuVo = modelMapper.map(menu, ViewMenuVo.class);
@@ -381,7 +379,7 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 
 	@Override
 	public List<UacMenu> listMenuListByRoleId(Long roleId) {
-		List<UacMenu> menuList = uacMenuMapper.listMenuListByRoleId(roleId);
+		List<UacMenu> menuList = mapper.listMenuListByRoleId(roleId);
 		List<UacMenu> addMenuList = Lists.newArrayList();
 
 		if (PublicUtil.isNotEmpty(menuList)) {
@@ -395,11 +393,11 @@ public class UacMenuServiceImpl extends BaseService<UacMenu> implements UacMenuS
 
 	@Override
 	public List<UacMenu> getMenuList(final Set<Long> menuIdList) {
-		return uacMenuMapper.listMenu(menuIdList);
+		return mapper.listMenu(menuIdList);
 	}
 
 	private List<UacMenu> getMenuList(List<UacMenu> uacMenuList, Long menuId) {
-		UacMenu uacMenu = uacMenuMapper.selectByPrimaryKey(menuId);
+		UacMenu uacMenu = mapper.selectByPrimaryKey(menuId);
 		if (uacMenu != null) {
 			Long pid = uacMenu.getPid();
 			if (pid != null) {

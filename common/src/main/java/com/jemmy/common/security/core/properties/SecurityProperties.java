@@ -19,7 +19,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author paascloud.net@gmail.com
  */
-@ConfigurationProperties(prefix = "paascloud.security")
+@ConfigurationProperties(prefix = "jemmycloud.security")
 public class SecurityProperties {
 
 	/**

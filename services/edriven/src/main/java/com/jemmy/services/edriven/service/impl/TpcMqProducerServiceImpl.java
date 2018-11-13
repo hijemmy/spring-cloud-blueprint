@@ -30,27 +30,24 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class TpcMqProducerServiceImpl extends BaseService<TpcMqProducer> implements TpcMqProducerService {
-
-	@Resource
-	private TpcMqProducerMapper mdcMqProducerMapper;
+public class TpcMqProducerServiceImpl extends BaseService<TpcMqProducer,TpcMqProducerMapper> implements TpcMqProducerService {
 
 	@Override
 	public List<TpcMqProducerVo> listProducerVoWithPage(TpcMqProducer mdcMqProducer) {
-		return mdcMqProducerMapper.listTpcMqProducerVoWithPage(mdcMqProducer);
+		return mapper.listTpcMqProducerVoWithPage(mdcMqProducer);
 	}
 
 	@Override
 	public List<TpcMqPublishVo> listPublishVoWithPage(TpcMqProducer mdcMqProducer) {
-		return mdcMqProducerMapper.listTpcMqPublishVoWithPage(mdcMqProducer);
+		return mapper.listTpcMqPublishVoWithPage(mdcMqProducer);
 	}
 
 	@Override
 	public int deleteProducerById(Long producerId) {
 		// 删除consumer
-		mdcMqProducerMapper.deleteByPrimaryKey(producerId);
+		mapper.deleteByPrimaryKey(producerId);
 		// 删除发布关系
-		return mdcMqProducerMapper.deletePublishByProducerId(producerId);
+		return mapper.deletePublishByProducerId(producerId);
 	}
 
 	@Override
@@ -67,12 +64,12 @@ public class TpcMqProducerServiceImpl extends BaseService<TpcMqProducer> impleme
 	}
 
 	private void updateStatus(final String producerGroup, final int status) {
-		TpcMqProducer tpcMqProducer = mdcMqProducerMapper.getByPid(producerGroup);
+		TpcMqProducer tpcMqProducer = mapper.getByPid(producerGroup);
 		if (tpcMqProducer.getStatus() != null && tpcMqProducer.getStatus() != status) {
 			TpcMqProducer update = new TpcMqProducer();
 			update.setStatus(status);
 			update.setId(tpcMqProducer.getId());
-			mdcMqProducerMapper.updateByPrimaryKeySelective(update);
+			mapper.updateByPrimaryKeySelective(update);
 		}
 	}
 }

@@ -21,9 +21,7 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacRoleActionServiceImpl extends BaseService<UacRoleAction> implements UacRoleActionService {
-	@Resource
-	private UacRoleActionMapper uacRoleActionMapper;
+public class UacRoleActionServiceImpl extends BaseService<UacRoleAction,UacRoleActionMapper> implements UacRoleActionService {
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -33,7 +31,7 @@ public class UacRoleActionServiceImpl extends BaseService<UacRoleAction> impleme
 		}
 		UacRoleAction roleMenu = new UacRoleAction();
 		roleMenu.setRoleId(roleId);
-		return uacRoleActionMapper.select(roleMenu);
+		return mapper.select(roleMenu);
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class UacRoleActionServiceImpl extends BaseService<UacRoleAction> impleme
 		}
 		UacRoleAction roleMenu = new UacRoleAction();
 		roleMenu.setRoleId(roleId);
-		uacRoleActionMapper.delete(roleMenu);
+		mapper.delete(roleMenu);
 	}
 
 	@Override
@@ -55,12 +53,12 @@ public class UacRoleActionServiceImpl extends BaseService<UacRoleAction> impleme
 		uacRoleAction.setRoleId(roleId);
 		for (Long actionId : actionIdList) {
 			uacRoleAction.setActionId(actionId);
-			uacRoleActionMapper.insert(uacRoleAction);
+			mapper.insert(uacRoleAction);
 		}
 	}
 
 	@Override
 	public int deleteByRoleIdList(final List<Long> roleIdList) {
-		return uacRoleActionMapper.deleteByRoleIdList(roleIdList);
+		return mapper.deleteByRoleIdList(roleIdList);
 	}
 }

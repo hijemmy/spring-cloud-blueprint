@@ -12,6 +12,7 @@
 package com.jemmy.order.service.impl;
 
 import com.jemmy.common.core.support.BaseService;
+import com.jemmy.order.mapper.PtcPayInfoMapper;
 import com.jemmy.order.model.domain.PtcPayInfo;
 import com.jemmy.order.service.PtcPayInfoService;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,5 @@ import org.springframework.stereotype.Service;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class PtcPayInfoServiceImpl extends BaseService<PtcPayInfo> implements PtcPayInfoService {
+public class PtcPayInfoServiceImpl extends BaseService<PtcPayInfo,PtcPayInfoMapper> implements PtcPayInfoService {
 }

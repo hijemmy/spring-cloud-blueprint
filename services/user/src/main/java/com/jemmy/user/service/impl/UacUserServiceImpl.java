@@ -64,9 +64,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserService {
-	@Resource
-	private UacUserMapper uacUserMapper;
+public class UacUserServiceImpl extends BaseService<UacUser,UacUserMapper> implements UacUserService {
+
 	@Resource
 	private UacMenuService uacMenuService;
 	@Resource
@@ -109,12 +108,12 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 	public UacUser findByLoginName(String loginName) {
 		logger.info("findByLoginName - 根据用户名查询用户信息. loginName={}", loginName);
 
-		return uacUserMapper.findByLoginName(loginName);
+		return mapper.findByLoginName(loginName);
 	}
 
 	@Override
 	public UacUser findByMobileNo(String mobileNo) {
-		return uacUserMapper.findByMobileNo(mobileNo);
+		return mapper.findByMobileNo(mobileNo);
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		loginNamePwdMap.put("loginName", loginReqDto.getLoginName());
 		loginNamePwdMap.put("loginPwd", loginReqDto.getLoginPwd());
 
-		UacUser uacUser = uacUserMapper.findByLoginNameAndLoginPwd(loginNamePwdMap);
+		UacUser uacUser = mapper.findByLoginNameAndLoginPwd(loginNamePwdMap);
 		if (PublicUtil.isEmpty(uacUser)) {
 			logger.info("用户【" + loginReqDto.getLoginName() + "】密码认证失败");
 			throw new UacBizException(ErrorCodeEnum.UAC10011002, loginReqDto.getLoginName());
@@ -161,7 +160,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 	@Override
 	public int updateUser(UacUser uacUser) {
 		logger.info("更新用户信息 uacUser={}", uacUser);
-		int updateResult = uacUserMapper.updateByPrimaryKeySelective(uacUser);
+		int updateResult = mapper.updateByPrimaryKeySelective(uacUser);
 		if (updateResult < 1) {
 			logger.info("用户【 {} 】修改用户信息失败", uacUser.getId());
 		} else {
@@ -175,7 +174,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 	public PageInfo queryUserListWithPage(UacUser uacUser) {
 		PageHelper.startPage(uacUser.getPageNum(), uacUser.getPageSize());
 		uacUser.setOrderBy("u.update_time desc");
-		List<UacUser> uacUserList = uacUserMapper.selectUserList(uacUser);
+		List<UacUser> uacUserList = mapper.selectUserList(uacUser);
 		return new PageInfo<>(uacUserList);
 	}
 
@@ -187,7 +186,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 	@Override
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public UacUser findUserInfoByUserId(Long userId) {
-		return uacUserMapper.selectUserInfoByUserId(userId);
+		return mapper.selectUserInfoByUserId(userId);
 	}
 
 	@Override
@@ -207,7 +206,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 			// 验证用户名是否存在
 			UacUser query = new UacUser();
 			query.setLoginName(loginName);
-			int count = uacUserMapper.selectCount(query);
+			int count = mapper.selectCount(query);
 			if (count > 0) {
 				throw new UacBizException(ErrorCodeEnum.UAC10011025, loginName);
 			}
@@ -218,7 +217,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 			user.setType(UacUserTypeEnum.OPERATE.getKey());
 			user.setUserSource(UacUserSourceEnum.INSERT.getKey());
 			// TODO 校验状态是否合法
-			uacUserMapper.insertSelective(user);
+			mapper.insertSelective(user);
 
 			// 2.添加组织关联
 			UacGroupUser groupUser = new UacGroupUser();
@@ -226,10 +225,10 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 			groupUser.setUserId(userId);
 			uacGroupUserService.save(groupUser);
 		} else {
-			UacUser uacUser = uacUserMapper.selectByPrimaryKey(user.getId());
+			UacUser uacUser = mapper.selectByPrimaryKey(user.getId());
 			Preconditions.checkArgument(uacUser != null, "用户不存在");
 			// 1.更新用户信息
-			int updateInt = uacUserMapper.updateUacUser(user);
+			int updateInt = mapper.updateUacUser(user);
 			if (updateInt < 1) {
 				throw new UacBizException(ErrorCodeEnum.UAC10011026, user.getId());
 			}
@@ -268,7 +267,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		if (loginUserId.equals(userId)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011023);
 		}
-		UacUser u = uacUserMapper.selectByPrimaryKey(userId);
+		UacUser u = mapper.selectByPrimaryKey(userId);
 		if (u == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011011, userId);
 		}
@@ -276,7 +275,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		// 更新用户最后修改人与修改时间
 		uacUser.setVersion(u.getVersion() + 1);
 		uacUser.setUpdateInfo(authResDto);
-		return uacUserMapper.updateByPrimaryKeySelective(uacUser);
+		return mapper.updateByPrimaryKeySelective(uacUser);
 	}
 
 	@Override
@@ -323,7 +322,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		final UacUser updateUser = new UacUser();
 		updateUser.setId(operUserId);
 		updateUser.setUpdateInfo(authResDto);
-		uacUserMapper.updateUacUser(updateUser);
+		mapper.updateUacUser(updateUser);
 
 		if (PublicUtil.isEmpty(roleIdList)) {
 			// 取消该角色的所有用户的绑定
@@ -429,7 +428,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public UacUser queryByUserId(Long userId) {
 		logger.info("queryByUserId - 根据用户查询用户信息接口. userId={}", userId);
-		UacUser uacUser = uacUserMapper.selectByPrimaryKey(userId);
+		UacUser uacUser = mapper.selectByPrimaryKey(userId);
 		if (PublicUtil.isNotEmpty(uacUser)) {
 			uacUser.setLoginPwd("");
 		}
@@ -450,7 +449,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		Preconditions.checkArgument(newPassword.equals(confirmPwd), "两次密码不一致, 请重新输入！");
 
 
-		UacUser user = uacUserMapper.findByLoginName(loginName);
+		UacUser user = mapper.findByLoginName(loginName);
 		if (PublicUtil.isEmpty(user)) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011002, loginName);
 		}
@@ -474,7 +473,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		uacUser.setIsChangedPwd(Short.valueOf("1"));
 		uacUser.setUpdateInfo(authResDto);
 
-		return uacUserMapper.updateByPrimaryKeySelective(uacUser);
+		return mapper.updateByPrimaryKeySelective(uacUser);
 
 		// TODO 发送重置密码成功的邮件
 	}
@@ -492,7 +491,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 
 		UacUser query = new UacUser();
 		query.setMobileNo(mobileNo);
-		UacUser user = uacUserMapper.selectOne(query);
+		UacUser user = mapper.selectOne(query);
 		if (user == null) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011027, mobileNo);
 		}
@@ -507,7 +506,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		uacUser.setLastOperatorId(user.getId());
 		uacUser.setUpdateTime(new Date());
 
-		return uacUserMapper.updateByPrimaryKeySelective(uacUser);
+		return mapper.updateByPrimaryKeySelective(uacUser);
 	}
 
 	@Override
@@ -563,7 +562,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		uacUser.setLoginName(loginName);
 		int result = 1;
 		try {
-			result = uacUserMapper.selectCount(uacUser);
+			result = mapper.selectCount(uacUser);
 		} catch (Exception e) {
 			logger.error(" 验证用户名是否存在,出现异常={}", e.getMessage(), e);
 		}
@@ -579,7 +578,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		uacUser.setEmail(email);
 		int result = 1;
 		try {
-			result = uacUserMapper.selectCount(uacUser);
+			result = mapper.selectCount(uacUser);
 		} catch (Exception e) {
 			logger.error(" 验证email是否存在,出现异常={}", e.getMessage(), e);
 		}
@@ -595,7 +594,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		uacUser.setMobileNo(mobileNo);
 		int result = 1;
 		try {
-			result = uacUserMapper.selectCount(uacUser);
+			result = mapper.selectCount(uacUser);
 		} catch (Exception e) {
 			logger.error(" 验证email是否存在,出现异常={}", e.getMessage(), e);
 		}
@@ -612,7 +611,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		uacUser.setLoginName(loginName);
 		uacUser.setEmail(email);
 
-		return uacUserMapper.selectCount(uacUser);
+		return mapper.selectCount(uacUser);
 	}
 
 	@Override
@@ -630,7 +629,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		authUser.setUserName(user.getUserName());
 		uacUser.setUpdateInfo(authUser);
 
-		return uacUserMapper.updateByPrimaryKeySelective(uacUser);
+		return mapper.updateByPrimaryKeySelective(uacUser);
 
 
 	}
@@ -717,7 +716,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		update.setIsChangedPwd((Short.valueOf("1")));
 		update.setUpdateInfo(loginAuthDto);
 
-		int result = uacUserMapper.updateByPrimaryKeySelective(update);
+		int result = mapper.updateByPrimaryKeySelective(update);
 		if (result < 1) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011029);
 		}
@@ -736,7 +735,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		}
 
 		// 查询所有角色包括该用户拥有的角色
-		List<BindRoleDto> bindRoleDtoList = uacUserMapper.selectAllNeedBindRole(GlobalConstant.Sys.SUPER_MANAGER_ROLE_ID);
+		List<BindRoleDto> bindRoleDtoList = mapper.selectAllNeedBindRole(GlobalConstant.Sys.SUPER_MANAGER_ROLE_ID);
 		// 该角色已经绑定的用户
 		List<UacRoleUser> setAlreadyBindRoleSet = uacRoleUserService.listByUserId(userId);
 
@@ -767,7 +766,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		UacUser uacUser = new UacUser();
 		uacUser.setEmail(email);
 
-		uacUser = uacUserMapper.selectOne(uacUser);
+		uacUser = mapper.selectOne(uacUser);
 		if (uacUser == null) {
 			logger.error("找不到用户信息. email={}", email);
 			throw new UacBizException(ErrorCodeEnum.UAC10011004, email);
@@ -852,7 +851,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 
 	@Override
 	public UacUser findUserInfoByLoginName(final String loginName) {
-		return uacUserMapper.findUserInfoByLoginName(loginName);
+		return mapper.findUserInfoByLoginName(loginName);
 	}
 
 	private void validateEmailResetPwd(ForgetResetPasswordDto forgetResetPasswordDto) {
@@ -960,21 +959,21 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 
 		UacUser uacUser = new UacUser();
 		uacUser.setLoginName(registerDto.getLoginName());
-		int count = uacUserMapper.selectCount(uacUser);
+		int count = mapper.selectCount(uacUser);
 		if (count > 0) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011012);
 		}
 
 		uacUser = new UacUser();
 		uacUser.setMobileNo(registerDto.getMobileNo());
-		count = uacUserMapper.selectCount(uacUser);
+		count = mapper.selectCount(uacUser);
 		if (count > 0) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011013);
 		}
 
 		uacUser = new UacUser();
 		uacUser.setEmail(registerDto.getEmail());
-		count = uacUserMapper.selectCount(uacUser);
+		count = mapper.selectCount(uacUser);
 		if (count > 0) {
 			throw new UacBizException(ErrorCodeEnum.UAC10011019);
 		}

@@ -50,9 +50,7 @@ import java.util.List;
  * @author paascloud.net @gmail.com
  */
 @Service
-public class OptAttachmentServiceImpl extends BaseService<OptAttachment> implements OpcAttachmentService {
-	@Resource
-	private OptAttachmentMapper optAttachmentMapper;
+public class OptAttachmentServiceImpl extends BaseService<OptAttachment,OptAttachmentMapper> implements OpcAttachmentService {
 	@Resource
 	private OpcOssService optOssService;
 	@Resource
@@ -102,7 +100,7 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 		Preconditions.checkArgument(id != null, "ID不能为空");
 		OptAttachmentReqDto optAttachmentReqDto = new OptAttachmentReqDto();
 		optAttachmentReqDto.setId(id);
-		List<OptAttachmentRespDto> optAttachmentRespDtos = optAttachmentMapper.queryAttachment(optAttachmentReqDto);
+		List<OptAttachmentRespDto> optAttachmentRespDtos = mapper.queryAttachment(optAttachmentReqDto);
 		return optAttachmentRespDtos == null ? null : optAttachmentRespDtos.get(0);
 	}
 
@@ -111,12 +109,12 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 		Preconditions.checkArgument(StringUtils.isNotEmpty(refNo), "关联单号不能为空");
 		OptAttachmentReqDto optAttachmentReqDto = new OptAttachmentReqDto();
 		optAttachmentReqDto.setRefNo(refNo);
-		return optAttachmentMapper.queryAttachment(optAttachmentReqDto);
+		return mapper.queryAttachment(optAttachmentReqDto);
 	}
 
 	@Override
 	public List<Long> queryAttachmentByRefNo(final String refNo) {
-		return optAttachmentMapper.queryAttachmentByRefNo(refNo);
+		return mapper.queryAttachmentByRefNo(refNo);
 	}
 
 	@Override
@@ -125,15 +123,15 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 		Preconditions.checkArgument(StringUtils.isNotEmpty(bucketName), "存储空间不能为空");
 
 		optOssService.deleteFile(fileName, bucketName);
-		return optAttachmentMapper.deleteByPrimaryKey(attachmentId);
+		return mapper.deleteByPrimaryKey(attachmentId);
 	}
 
 	@Override
 	public int deleteFile(final Long attachmentId) throws QiniuException {
-		OptAttachment optAttachment = optAttachmentMapper.selectByPrimaryKey(attachmentId);
+		OptAttachment optAttachment = mapper.selectByPrimaryKey(attachmentId);
 		if (optAttachment != null) {
 			optOssService.deleteFile(optAttachment.getPath() + optAttachment.getName(), optAttachment.getBucketName());
-			return optAttachmentMapper.deleteByPrimaryKey(attachmentId);
+			return mapper.deleteByPrimaryKey(attachmentId);
 		}
 		return 1;
 	}
@@ -142,9 +140,9 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 	public void saveAttachment(OptAttachment optAttachment, LoginAuthDto loginAuthDto) {
 		optAttachment.setUpdateInfo(loginAuthDto);
 		if (optAttachment.isNew()) {
-			optAttachmentMapper.insertSelective(optAttachment);
+			mapper.insertSelective(optAttachment);
 		} else {
-			int result = optAttachmentMapper.updateByPrimaryKeySelective(optAttachment);
+			int result = mapper.updateByPrimaryKeySelective(optAttachment);
 			if (result < 1) {
 				throw new OpcBizException(ErrorCodeEnum.OPC10040007, optAttachment.getId());
 			}
@@ -224,7 +222,7 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 	@Override
 	public OptAttachment getById(Long attachmentId) {
 		Preconditions.checkArgument(attachmentId != null, "文件流水号不能为空");
-		OptAttachment optAttachment = optAttachmentMapper.selectByPrimaryKey(attachmentId);
+		OptAttachment optAttachment = mapper.selectByPrimaryKey(attachmentId);
 		if (PublicUtil.isEmpty(optAttachment)) {
 			throw new OpcBizException(ErrorCodeEnum.OPC10040008, attachmentId);
 		}
@@ -244,7 +242,7 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 		List<Long> attachmentIdList = attachmentDto.getAttachmentIdList();
 		LoginAuthDto loginAuthDto = attachmentDto.getLoginAuthDto();
 		String refNo = attachmentDto.getRefNo();
-		List<Long> idList = optAttachmentMapper.queryAttachmentByRefNo(refNo);
+		List<Long> idList = mapper.queryAttachmentByRefNo(refNo);
 		if (PublicUtil.isNotEmpty(idList)) {
 			idList.removeAll(attachmentIdList);
 			for (final Long id : idList) {
@@ -256,7 +254,7 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 			optAttachment.setId(id);
 			optAttachment.setRefNo(refNo);
 			optAttachment.setUpdateInfo(loginAuthDto);
-			optAttachmentMapper.updateByPrimaryKeySelective(optAttachment);
+			mapper.updateByPrimaryKeySelective(optAttachment);
 		}
 	}
 
@@ -284,12 +282,12 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 	public List<OptAttachment> listByRefNo(final String refNo) {
 		OptAttachment optAttachment = new OptAttachment();
 		optAttachment.setRefNo(refNo);
-		return optAttachmentMapper.select(optAttachment);
+		return mapper.select(optAttachment);
 	}
 
 	@Override
 	public List<OptAttachment> listExpireFile() {
-		return optAttachmentMapper.listExpireFile();
+		return mapper.listExpireFile();
 	}
 
 	private void insertAttachment(String fileType, String bucketName, LoginAuthDto loginAuthDto, OptUploadFileRespDto fileInfo) {
@@ -306,6 +304,6 @@ public class OptAttachmentServiceImpl extends BaseService<OptAttachment> impleme
 		optAttachment.setCenterName(bucketName);
 		fileInfo.setAttachmentId(id);
 		optAttachment.setUpdateInfo(loginAuthDto);
-		optAttachmentMapper.insertSelective(optAttachment);
+		mapper.insertSelective(optAttachment);
 	}
 }

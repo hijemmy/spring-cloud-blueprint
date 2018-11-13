@@ -54,7 +54,7 @@
   </delete>
 
   <resultMap id="TpcMqProducerVoResultMap" extends="BaseResultMap" type="com.jemmy.services.edriven.model.vo.TpcMqProducerVo">
-    <collection property="mqTopicVoList" ofType="com.paascloud.provider.model.vo.TpcMqTopicVo">
+    <collection property="mqTopicVoList" ofType="com.jemmy.services.edriven.model.vo.TpcMqTopicVo">
       <result property="topicCode" column="topic_code"/>
       <result property="topicName" column="topic_name"/>
       <result property="status" column="topic_status"/>

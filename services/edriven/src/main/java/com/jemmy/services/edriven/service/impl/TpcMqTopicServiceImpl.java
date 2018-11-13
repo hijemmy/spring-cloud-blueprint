@@ -29,12 +29,10 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class TpcMqTopicServiceImpl extends BaseService<TpcMqTopic> implements TpcMqTopicService {
-	@Resource
-	private TpcMqTopicMapper mdcMqTopicMapper;
+public class TpcMqTopicServiceImpl extends BaseService<TpcMqTopic,TpcMqTopicMapper> implements TpcMqTopicService {
 
 	@Override
 	public List<TpcMqTopicVo> listWithPage(TpcMqTopic mdcMqTopic) {
-		return mdcMqTopicMapper.listTpcMqTopicVoWithPage(mdcMqTopic);
+		return mapper.listTpcMqTopicVoWithPage(mdcMqTopic);
 	}
 }

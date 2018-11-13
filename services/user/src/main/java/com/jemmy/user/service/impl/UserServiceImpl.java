@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserServiceImpl extends BaseService<User> implements UserService {
+public class UserServiceImpl extends BaseService<User,UserMapper> implements UserService {
 
     private Logger logger=LoggerFactory.getLogger(UserServiceImpl.class);
 

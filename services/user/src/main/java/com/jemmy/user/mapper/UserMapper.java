@@ -1,7 +1,7 @@
 package com.jemmy.user.mapper;
 
-import com.jemmy.common.mybatis.mapper.RootMapper;
+import com.jemmy.common.core.mybatis.MyMapper;
 import com.jemmy.user.model.User;
 
-public interface UserMapper extends RootMapper<User> {
+public interface UserMapper extends MyMapper<User> {
 }

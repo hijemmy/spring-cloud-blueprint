@@ -20,15 +20,14 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UacRoleMenuServiceImpl extends BaseService<UacRoleMenu> implements UacRoleMenuService {
-	@Resource
-	private UacRoleMenuMapper uacRoleMenuMapper;
+public class UacRoleMenuServiceImpl extends BaseService<UacRoleMenu,UacRoleMenuMapper> implements UacRoleMenuService {
+
 
 	@Override
 	public int delRoleMenuList(Set<UacRoleMenu> uacRoleMenus) {
 		int result = 0;
 		for (UacRoleMenu uacRoleMenu : uacRoleMenus) {
-			result += uacRoleMenuMapper.delete(uacRoleMenu);
+			result += mapper.delete(uacRoleMenu);
 		}
 		return result;
 	}
@@ -40,7 +39,7 @@ public class UacRoleMenuServiceImpl extends BaseService<UacRoleMenu> implements 
 		}
 		UacRoleMenu roleMenu = new UacRoleMenu();
 		roleMenu.setRoleId(roleId);
-		uacRoleMenuMapper.delete(roleMenu);
+		mapper.delete(roleMenu);
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class UacRoleMenuServiceImpl extends BaseService<UacRoleMenu> implements 
 		}
 		UacRoleMenu roleMenu = new UacRoleMenu();
 		roleMenu.setRoleId(roleId);
-		return uacRoleMenuMapper.select(roleMenu);
+		return mapper.select(roleMenu);
 	}
 
 	@Override
@@ -63,12 +62,12 @@ public class UacRoleMenuServiceImpl extends BaseService<UacRoleMenu> implements 
 		uacRoleMenu.setRoleId(roleId);
 		for (Long menuId : menuIdList) {
 			uacRoleMenu.setMenuId(menuId);
-			uacRoleMenuMapper.insertSelective(uacRoleMenu);
+			mapper.insertSelective(uacRoleMenu);
 		}
 	}
 
 	@Override
 	public void deleteByRoleIdList(final List<Long> roleIdList) {
-		uacRoleMenuMapper.deleteByRoleIdList(roleIdList);
+		mapper.deleteByRoleIdList(roleIdList);
 	}
 }

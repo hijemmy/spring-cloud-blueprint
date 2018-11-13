@@ -30,9 +30,7 @@ import java.util.List;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class MdcAddressServiceImpl extends BaseService<MdcAddress> implements MdcAddressService {
-	@Resource
-	private MdcAddressMapper mdcAddressMapper;
+public class MdcAddressServiceImpl extends BaseService<MdcAddress,MdcAddressMapper> implements MdcAddressService {
 
 	/**
 	 * Find by pid list.
@@ -43,19 +41,19 @@ public class MdcAddressServiceImpl extends BaseService<MdcAddress> implements Md
 	 */
 	@Override
 	public List<MdcAddress> listByPid(Long pid) {
-		return mdcAddressMapper.selectAddressByPid(pid);
+		return mapper.selectAddressByPid(pid);
 	}
 
 	@Override
 	@Cacheable(cacheNames = "mdc-cache", key = "#id")
 	public MdcAddress getById(Long id) {
-		return mdcAddressMapper.selectByPrimaryKey(id);
+		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	@Cacheable(cacheNames = "mdc-cache", keyGenerator = "keyGenerator")
 	public List<TreeNode> get4City() {
-		List<MdcAddress> mdcAddresses = mdcAddressMapper.selectAll();
+		List<MdcAddress> mdcAddresses = mapper.selectAll();
 		List<TreeNode> treeNodeList = buildGroupTree(mdcAddresses);
 		logger.info("treeNodeList={}", treeNodeList);
 		return treeNodeList;

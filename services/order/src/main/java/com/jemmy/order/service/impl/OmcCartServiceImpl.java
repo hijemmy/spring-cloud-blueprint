@@ -50,9 +50,8 @@ import java.util.List;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartService {
-	@Resource
-	private OmcCartMapper omcCartMapper;
+public class OmcCartServiceImpl extends BaseService<OmcCart,OmcCartMapper> implements OmcCartService {
+
 	@Resource
 	private MdcProductService mdcProductService;
 	@Resource
@@ -100,7 +99,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 					OmcCart cartForQuantity = new OmcCart();
 					cartForQuantity.setId(cartItem.getId());
 					cartForQuantity.setQuantity(buyLimitCount);
-					omcCartMapper.updateByPrimaryKeySelective(cartForQuantity);
+					mapper.updateByPrimaryKeySelective(cartForQuantity);
 				}
 				cartProductVo.setQuantity(buyLimitCount);
 				//计算总价
@@ -128,7 +127,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 
 		OmcCart omcCart = new OmcCart();
 		omcCart.setUserId(userId);
-		return omcCartMapper.select(omcCart);
+		return mapper.select(omcCart);
 	}
 
 	@Override
@@ -171,10 +170,10 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
 
 		omcCart.setUpdateInfo(authDto);
-		OmcCart omcCartExist = omcCartMapper.selectByProductIdAndUserId(productId, userId);
+		OmcCart omcCartExist = mapper.selectByProductIdAndUserId(productId, userId);
 		if (PublicUtil.isEmpty(omcCartExist)) {
 			try {
-				omcCartMapper.insertSelective(omcCart);
+				mapper.insertSelective(omcCart);
 			} catch (Exception e) {
 				logger.error("新增购物车, 出现异常={}", e.getMessage(), e);
 			}
@@ -182,7 +181,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 		}
 		omcCart.setId(omcCartExist.getId());
 		omcCart.setQuantity(omcCart.getQuantity() + omcCartExist.getQuantity());
-		int updateResult = omcCartMapper.updateByPrimaryKeySelective(omcCart);
+		int updateResult = mapper.updateByPrimaryKeySelective(omcCart);
 		if (updateResult < 1) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031014, omcCartExist.getId());
 		}
@@ -205,11 +204,11 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 			cart.setChecked(OmcApiConstant.Cart.CHECKED);
 			cart.setProductId(productId);
 			cart.setUserId(userId);
-			resultInt = omcCartMapper.insertSelective(cart);
+			resultInt = mapper.insertSelective(cart);
 		} else {
 			count = cart.getQuantity() == null ? 0 : cart.getQuantity() + count;
 			cart.setQuantity(count);
-			omcCartMapper.updateByPrimaryKeySelective(cart);
+			mapper.updateByPrimaryKeySelective(cart);
 		}
 		return resultInt;
 	}
@@ -221,7 +220,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
 		Preconditions.checkArgument(productId != null, ErrorCodeEnum.MDC10021021.msg());
 
-		return omcCartMapper.selectByProductIdAndUserId(productId, userId);
+		return mapper.selectByProductIdAndUserId(productId, userId);
 	}
 
 	@Override
@@ -232,7 +231,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
 
-		return omcCartMapper.deleteByUserIdProductIds(userId, productList);
+		return mapper.deleteByUserIdProductIds(userId, productList);
 	}
 
 	@Override
@@ -241,7 +240,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
 
-		return omcCartMapper.checkedOrUncheckedProduct(userId, productId, checked);
+		return mapper.checkedOrUncheckedProduct(userId, productId, checked);
 	}
 
 	@Override
@@ -260,10 +259,10 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 		if (count == 0) {
 			List<String> productList = Lists.newArrayList();
 			productList.add(productId.toString());
-			resultInt = omcCartMapper.deleteByUserIdProductIds(userId, productList);
+			resultInt = mapper.deleteByUserIdProductIds(userId, productList);
 		} else {
 			cart.setQuantity(count);
-			resultInt = omcCartMapper.updateByPrimaryKeySelective(cart);
+			resultInt = mapper.updateByPrimaryKeySelective(cart);
 		}
 
 		return resultInt;
@@ -275,7 +274,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 
 		OrderProductVo orderProductVo = new OrderProductVo();
 
-		List<OmcCart> omcCartList = omcCartMapper.selectCheckedCartByUserId(userId);
+		List<OmcCart> omcCartList = mapper.selectCheckedCartByUserId(userId);
 		List<OmcOrderDetail> orderItemList = this.getCartOrderItem(userId, omcCartList);
 
 		List<OrderItemVo> orderItemVoList = Lists.newArrayList();
@@ -299,7 +298,7 @@ public class OmcCartServiceImpl extends BaseService<OmcCart> implements OmcCartS
 
 	private boolean getAllCheckedStatus(Long userId) {
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
-		return omcCartMapper.selectUnCheckedCartProductCountByUserId(userId) == 0;
+		return mapper.selectUnCheckedCartProductCountByUserId(userId) == 0;
 
 	}
 

@@ -42,13 +42,11 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MdcProductCategoryServiceImpl extends BaseService<MdcProductCategory> implements MdcProductCategoryService {
-	@Resource
-	private MdcProductCategoryMapper mdcProductCategoryMapper;
+public class MdcProductCategoryServiceImpl extends BaseService<MdcProductCategory,MdcProductCategoryMapper> implements MdcProductCategoryService {
 
 	@Override
 	public List<ProductCategoryDto> getCategoryDtoList(Long categoryId) {
-		return mdcProductCategoryMapper.selectCategoryDtoList(categoryId);
+		return mapper.selectCategoryDtoList(categoryId);
 	}
 
 	@Override
@@ -72,18 +70,18 @@ public class MdcProductCategoryServiceImpl extends BaseService<MdcProductCategor
 
 		MdcProductCategory query = new MdcProductCategory();
 		query.setId(categoryId);
-		return mdcProductCategoryMapper.selectOne(query);
+		return mapper.selectOne(query);
 	}
 
 	@Override
 	public List<MdcCategoryVo> getCategoryTreeList() {
-		List<MdcCategoryVo> list = mdcProductCategoryMapper.listCategoryVo();
+		List<MdcCategoryVo> list = mapper.listCategoryVo();
 		return new TreeUtils().getChildTreeObjects(list, 0L);
 	}
 
 	@Override
 	public MdcCategoryVo getMdcCategoryVoById(final Long categoryId) {
-		MdcProductCategory category = mdcProductCategoryMapper.selectByPrimaryKey(categoryId);
+		MdcProductCategory category = mapper.selectByPrimaryKey(categoryId);
 
 		if (category == null) {
 			logger.error("找不到数据字典信息id={}", categoryId);
@@ -91,7 +89,7 @@ public class MdcProductCategoryServiceImpl extends BaseService<MdcProductCategor
 		}
 
 		// 获取父级菜单信息
-		MdcProductCategory parentCategory = mdcProductCategoryMapper.selectByPrimaryKey(category.getPid());
+		MdcProductCategory parentCategory = mapper.selectByPrimaryKey(category.getPid());
 
 		ModelMapper modelMapper = new ModelMapper();
 		MdcCategoryVo categoryVo = modelMapper.map(category, MdcCategoryVo.class);
@@ -168,7 +166,7 @@ public class MdcProductCategoryServiceImpl extends BaseService<MdcProductCategor
 	 * 递归算法,算出子节点
 	 */
 	private Set<MdcProductCategory> findChildCategory(Set<MdcProductCategory> categorySet, Long categoryId) {
-		MdcProductCategory category = mdcProductCategoryMapper.selectByPrimaryKey(categoryId);
+		MdcProductCategory category = mapper.selectByPrimaryKey(categoryId);
 		if (category != null) {
 			categorySet.add(category);
 		}
@@ -186,7 +184,7 @@ public class MdcProductCategoryServiceImpl extends BaseService<MdcProductCategor
 		MdcProductCategory query = new MdcProductCategory();
 		query.setPid(pid);
 
-		return mdcProductCategoryMapper.select(query);
+		return mapper.select(query);
 	}
 
 	private void updateCategoryStatus(List<MdcProductCategory> mdcCategoryList, LoginAuthDto loginAuthDto, int status) {

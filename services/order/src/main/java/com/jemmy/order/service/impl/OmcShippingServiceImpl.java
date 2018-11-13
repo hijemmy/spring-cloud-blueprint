@@ -36,19 +36,17 @@ import java.util.List;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class OmcShippingServiceImpl extends BaseService<OmcShipping> implements OmcShippingService {
+public class OmcShippingServiceImpl extends BaseService<OmcShipping,OmcShippingMapper> implements OmcShippingService {
 
-	@Resource
-	private OmcShippingMapper omcShippingMapper;
 
 	@Override
 	public int saveShipping(LoginAuthDto loginAuthDto, OmcShipping shipping) {
 		int resultInt;
 		shipping.setUpdateInfo(loginAuthDto);
 		if (shipping.isNew()) {
-			resultInt = omcShippingMapper.insertSelective(shipping);
+			resultInt = mapper.insertSelective(shipping);
 		} else {
-			resultInt = omcShippingMapper.updateByPrimaryKeySelective(shipping);
+			resultInt = mapper.updateByPrimaryKeySelective(shipping);
 		}
 		return resultInt;
 	}
@@ -56,17 +54,17 @@ public class OmcShippingServiceImpl extends BaseService<OmcShipping> implements 
 	@Override
 	public int deleteShipping(Long userId, Integer shippingId) {
 
-		return omcShippingMapper.deleteByShippingIdUserId(userId, shippingId);
+		return mapper.deleteByShippingIdUserId(userId, shippingId);
 	}
 
 	@Override
 	public OmcShipping selectByShippingIdUserId(Long userId, Long shippingId) {
-		return omcShippingMapper.selectByShippingIdUserId(userId, shippingId);
+		return mapper.selectByShippingIdUserId(userId, shippingId);
 	}
 
 	@Override
 	public List<OmcShipping> queryShippingList(OmcShipping shipping) {
-		return omcShippingMapper.select(shipping);
+		return mapper.select(shipping);
 	}
 
 	@Override
@@ -96,7 +94,7 @@ public class OmcShippingServiceImpl extends BaseService<OmcShipping> implements 
 	@Override
 	public List<OmcShipping> selectByUserId(Long userId) {
 		Preconditions.checkArgument(userId != null, ErrorCodeEnum.UAC10011001.msg());
-		return omcShippingMapper.selectByUserId(userId);
+		return mapper.selectByUserId(userId);
 	}
 
 	@Transactional(rollbackFor = Exception.class)
@@ -106,7 +104,7 @@ public class OmcShippingServiceImpl extends BaseService<OmcShipping> implements 
 		Preconditions.checkArgument(addressId != null, "地址ID不能为空");
 
 		// 1. 查找当前默认地址
-		OmcShipping omcShipping = omcShippingMapper.selectDefaultAddressByUserId(userId);
+		OmcShipping omcShipping = mapper.selectDefaultAddressByUserId(userId);
 		if (PublicUtil.isEmpty(omcShipping)) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031007);
 		}
@@ -128,7 +126,7 @@ public class OmcShippingServiceImpl extends BaseService<OmcShipping> implements 
 		updateNotDefault.setDefaultAddress(isDefault);
 		updateNotDefault.setUpdateInfo(loginAuthDto);
 		updateNotDefault.setId(addressId);
-		result = omcShippingMapper.updateByPrimaryKeySelective(updateNotDefault);
+		result = mapper.updateByPrimaryKeySelective(updateNotDefault);
 		if (result < 1) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031008, addressId);
 		}

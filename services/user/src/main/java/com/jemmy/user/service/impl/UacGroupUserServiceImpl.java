@@ -16,23 +16,21 @@ import java.util.List;
  * @author paascloud.net@gmail.com
  */
 @Service
-public class UacGroupUserServiceImpl extends BaseService<UacGroupUser> implements UacGroupUserService {
-	@Resource
-	private UacGroupUserMapper uacGroupUserMapper;
+public class UacGroupUserServiceImpl extends BaseService<UacGroupUser,UacGroupUserMapper> implements UacGroupUserService {
 
 	@Override
 	public UacGroupUser queryByUserId(Long userId) {
-		return uacGroupUserMapper.getByUserId(userId);
+		return mapper.getByUserId(userId);
 	}
 
 	@Override
 	public int updateByUserId(UacGroupUser uacGroupUser) {
-		return uacGroupUserMapper.updateByUserId(uacGroupUser);
+		return mapper.updateByUserId(uacGroupUser);
 	}
 
 	@Override
 	public List<UacGroup> getGroupListByUserId(Long userId) {
-		return uacGroupUserMapper.selectGroupListByUserId(userId);
+		return mapper.selectGroupListByUserId(userId);
 	}
 
 	@Override
@@ -40,6 +38,6 @@ public class UacGroupUserServiceImpl extends BaseService<UacGroupUser> implement
 		UacGroupUser groupUser = new UacGroupUser();
 		groupUser.setUserId(userId);
 		groupUser.setGroupId(groupId);
-		uacGroupUserMapper.insertSelective(groupUser);
+		mapper.insertSelective(groupUser);
 	}
 }
