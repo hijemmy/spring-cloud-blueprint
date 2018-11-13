@@ -3,8 +3,8 @@ spring:
     config:
       enabled: true
       discovery:
-        enabled: true
-      profile: default,devt
+        enabled: false
+      profile: default,pro
     service-registry:
       auto-registration:
         enabled: true
@@ -19,5 +19,3 @@ eureka:
   instance:
     metadata-map:
       zone: defaultZone
-logging:
-  path: logs

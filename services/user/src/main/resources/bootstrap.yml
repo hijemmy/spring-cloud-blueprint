@@ -61,3 +61,5 @@ info:
   version: ${eureka.instance.metadata-map.version}
 management:
   add-application-context-header: false
+logging:
+  path: logs

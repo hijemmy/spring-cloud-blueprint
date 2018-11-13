@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: monitor
+  autoconfigure:
+    exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
+  cloud:
+    config:
+      name: monitor
+      profile: default
+      discovery:
+        service-id: config
+        enabled: false
+      label: master
+      fail-fast: true
+      retry:
+        max-attempts: 3
+      enabled: false
+    bus:
+      enabled: false
+logging:
+  path: logs

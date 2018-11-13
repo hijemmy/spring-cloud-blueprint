@@ -23,13 +23,13 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
 logging:
-  file: logs/center_${server.port}.log
   register-shutdown-hook: false
   exception-conversion-word: '%wEx'
   level:
      org.springframework: warn
      org.apache: warn
      com.netflix: warn
+  path: logs
 management:
   security:
     enabled: false

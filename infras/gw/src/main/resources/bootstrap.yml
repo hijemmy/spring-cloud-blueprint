@@ -57,3 +57,5 @@ info:
   instance: ${spring.application.index}
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
+logging:
+  path: logs

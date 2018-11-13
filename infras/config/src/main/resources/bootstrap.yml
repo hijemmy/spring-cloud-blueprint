@@ -36,6 +36,7 @@ logging:
      org.springframework: warn
      org.apache: warn
      com.netflix: warn
+  path: logs
 management:
   security:
     enabled: false

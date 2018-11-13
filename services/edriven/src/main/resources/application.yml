@@ -106,7 +106,7 @@ spring:
     time-zone: Asia/Shanghai
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
 mybatis:
-  type-aliases-package: com.jemmy.order.model
+  type-aliases-package: com.jemmy.services.edriven.model.domain
   mapper-locations: classpath*:mybatis_mappers/**/*Mapper.xml
   configuration:
     default-fetch-size: 10
