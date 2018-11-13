@@ -1,21 +1,37 @@
 spring:
   cloud:
-    cloud:
-      config:
-        name: monitor
-        profile: default
-        discovery:
-          service-id: config
-          enabled: false
-        label: master
-        fail-fast: true
-        retry:
-          max-attempts: 3
+    config:
+      name: user
+      profile: pro
+      discovery:
+        service-id: config
         enabled: false
-      bus:
-        enabled: false
+      label: master
+      fail-fast: true
+      retry:
+        max-attempts: 3
+      enabled: false
   application:
     name: zipkin
 
 logging:
   path: logs
+eureka:
+  client:
+    service-url:
+      zone1: http://localhost:9002/eureka/
+      defaultZone: http://localhost:9001/eureka/
+    region: ShenZhen
+    availability-zones:
+      ShenZhen: defaultZone,zone1
+    enabled: false
+  instance:
+    prefer-ip-address: true
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+    metadata-map:
+      zone: defaultZone
+      cluster: jemmyweb
+      version: 1.0

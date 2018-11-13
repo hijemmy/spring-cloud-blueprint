@@ -24,3 +24,12 @@ spring:
       name: dataSource
       username: root
       password: 123456
+  zipkin:
+    locator:
+      discovery:
+        enabled: true
+    service:
+      name: ${spring.application.name}
+    enabled: true
+  sleuth:
+    enabled: true
