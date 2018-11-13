@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+      initialize: false
+      platform: mysql
+      xa:
+        properties:
+          capitalizeTypeNames: false
+      driver-class-name: com.mysql.jdbc.Driver
+      continue-on-error: false
+      tomcat:
+        test-on-borrow: true
+        validation-query: select 1
+        max-active: 100
+        min-idle: 10
+        max-idle: 10
+        test-while-idle: true
+        time-between-eviction-runs-millis: 300000
+        min-evictable-idle-time-millis: 1800000
+        max-wait: 60000
+        initial-size: 10
+        remove-abandoned: false
+      name: dataSource
+      username: root
+      password: 123456

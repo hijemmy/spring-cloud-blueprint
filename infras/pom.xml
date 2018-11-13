@@ -16,6 +16,7 @@
         <module>config</module>
         <module>gw</module>
         <module>monitor</module>
+        <module>zipkin</module>
     </modules>
     <dependencies>
         <dependency>
