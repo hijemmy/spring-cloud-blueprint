@@ -11,10 +11,13 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.TpcMqProducer;
-import com.paascloud.provider.model.vo.TpcMqProducerVo;
-import com.paascloud.provider.model.vo.TpcMqPublishVo;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.services.edriven.model.domain.TpcMqProducer;
+import com.jemmy.services.edriven.model.domain.TpcMqProducer;
+import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
+import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
+import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
+import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

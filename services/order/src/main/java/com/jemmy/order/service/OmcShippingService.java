@@ -14,7 +14,7 @@ package com.jemmy.order.service;
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.IService;
-import com.paascloud.provider.model.domain.OmcShipping;
+import com.jemmy.order.model.domain.OmcShipping;
 
 import java.util.List;
 

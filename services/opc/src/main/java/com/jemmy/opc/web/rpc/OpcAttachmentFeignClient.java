@@ -11,16 +11,16 @@
 
 package com.jemmy.opc.web.rpc;
 
+import com.jemmy.apis.opc.exceptions.OpcBizException;
+import com.jemmy.apis.opc.model.dto.oss.*;
+import com.jemmy.apis.opc.service.OpcOssFeignApi;
 import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.exceptions.OpcBizException;
-import com.paascloud.provider.model.domain.OptAttachment;
-import com.paascloud.provider.model.dto.oss.*;
-import com.paascloud.provider.service.OpcAttachmentService;
-import com.paascloud.provider.service.OpcOssFeignApi;
-import com.paascloud.provider.service.OpcOssService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.opc.model.domain.OptAttachment;
+import com.jemmy.opc.service.OpcAttachmentService;
+import com.jemmy.opc.service.OpcOssService;
 import com.qiniu.common.QiniuException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

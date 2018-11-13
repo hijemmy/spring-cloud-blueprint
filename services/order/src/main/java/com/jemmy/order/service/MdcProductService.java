@@ -11,8 +11,8 @@
 
 package com.jemmy.order.service;
 
-import com.paascloud.provider.model.dto.ProductDto;
-import com.paascloud.provider.model.vo.ProductDetailVo;
+import com.jemmy.apis.product.model.dto.ProductDto;
+import com.jemmy.apis.product.model.vo.ProductDetailVo;
 
 /**
  * The interface Mdc product service.

@@ -18,10 +18,8 @@ import com.jemmy.apis.opc.model.dto.attachment.OptAttachmentRespDto;
 import com.jemmy.apis.opc.model.dto.oss.OptUploadFileReqDto;
 import com.jemmy.apis.opc.model.dto.oss.OptUploadFileRespDto;
 import com.jemmy.common.base.constant.GlobalConstant;
-import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.core.support.BaseController;
-
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
 import com.jemmy.opc.service.OpcAttachmentService;

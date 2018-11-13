@@ -11,9 +11,9 @@
 
 package com.jemmy.opc.config;
 
-import com.paascloud.core.config.PcObjectMapper;
-import com.paascloud.core.config.SwaggerConfiguration;
-import com.paascloud.core.interceptor.TokenInterceptor;
+import com.jemmy.common.core.config.PcObjectMapper;
+import com.jemmy.common.core.config.SwaggerConfiguration;
+import com.jemmy.common.core.interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;

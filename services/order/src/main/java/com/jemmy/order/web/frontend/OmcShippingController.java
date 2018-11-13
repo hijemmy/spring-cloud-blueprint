@@ -13,8 +13,10 @@ package com.jemmy.order.web.frontend;
 
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.OmcShipping;
-import com.paascloud.provider.service.OmcShippingService;
+import com.jemmy.order.model.domain.OmcShipping;
+import com.jemmy.order.model.domain.OmcShipping;
+import com.jemmy.order.service.OmcShippingService;
+import com.jemmy.order.service.OmcShippingService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;

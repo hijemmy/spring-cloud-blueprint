@@ -12,12 +12,12 @@
 package com.jemmy.services.edriven.controller.frontend;
 
 import com.jemmy.common.base.dto.LoginAuthDto;
-import com.paascloud.base.dto.UpdateStatusDto;
+import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.TpcMqTopic;
-import com.paascloud.provider.model.vo.TpcMqTopicVo;
-import com.paascloud.provider.service.TpcMqTopicService;
+import com.jemmy.services.edriven.model.domain.TpcMqTopic;
+import com.jemmy.services.edriven.model.vo.TpcMqTopicVo;
+import com.jemmy.services.edriven.service.TpcMqTopicService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;

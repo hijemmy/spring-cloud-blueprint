@@ -12,16 +12,16 @@
 package com.jemmy.services.edriven.job.dataflow;
 
 import com.google.common.collect.Lists;
-import com.paascloud.DateUtil;
-import com.paascloud.elastic.lite.JobParameter;
-import com.paascloud.elastic.lite.annotation.ElasticJobConfig;
-import com.paascloud.elastic.lite.job.AbstractBaseDataflowJob;
-import com.paascloud.provider.mapper.TpcMqConfirmMapper;
-import com.paascloud.provider.model.domain.TpcMqMessage;
-import com.paascloud.provider.model.dto.MessageTaskQueryDto;
-import com.paascloud.provider.model.enums.JobTaskStatusEnum;
-import com.paascloud.provider.model.enums.MqSendStatusEnum;
-import com.paascloud.provider.service.TpcMqMessageService;
+import com.jemmy.common.util.DateUtil;
+import com.jemmy.elastic.lite.JobParameter;
+import com.jemmy.elastic.lite.annotation.ElasticJobConfig;
+import com.jemmy.elastic.lite.job.AbstractBaseDataflowJob;
+import com.jemmy.services.edriven.mapper.TpcMqConfirmMapper;
+import com.jemmy.services.edriven.model.domain.TpcMqMessage;
+import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
+import com.jemmy.apis.edriven.model.enums.JobTaskStatusEnum;
+import com.jemmy.services.edriven.model.enums.MqSendStatusEnum;
+import com.jemmy.services.edriven.service.TpcMqMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

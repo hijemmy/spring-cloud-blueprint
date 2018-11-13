@@ -11,12 +11,12 @@
 
 package com.jemmy.order.web.rpc;
 
+import com.jemmy.apis.omc.model.dto.OrderDto;
+import com.jemmy.apis.omc.service.OmcOrderQueryFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.dto.OrderDto;
-import com.paascloud.provider.service.OmcOrderQueryFeignApi;
-import com.paascloud.provider.service.OmcOrderService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.order.service.OmcOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

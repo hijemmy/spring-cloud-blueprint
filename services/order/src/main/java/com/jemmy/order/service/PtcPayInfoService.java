@@ -12,7 +12,7 @@
 package com.jemmy.order.service;
 
 import com.jemmy.common.core.support.IService;
-import com.paascloud.provider.model.domain.PtcPayInfo;
+import com.jemmy.order.model.domain.PtcPayInfo;
 
 /**
  * The interface Ptc pay info service.

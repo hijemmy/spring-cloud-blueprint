@@ -12,13 +12,13 @@
 package com.jemmy.order.web.rpc;
 
 import com.google.common.collect.Lists;
+import com.jemmy.apis.omc.model.dto.OrderDetailDto;
+import com.jemmy.apis.omc.service.OmcOrderDetailQueryFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.OmcOrderDetail;
-import com.paascloud.provider.model.dto.OrderDetailDto;
-import com.paascloud.provider.service.OmcOrderDetailQueryFeignApi;
-import com.paascloud.provider.service.OmcOrderDetailService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.order.model.domain.OmcOrderDetail;
+import com.jemmy.order.service.OmcOrderDetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;

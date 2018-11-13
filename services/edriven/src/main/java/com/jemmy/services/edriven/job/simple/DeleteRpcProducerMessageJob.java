@@ -14,12 +14,13 @@ package com.jemmy.services.edriven.job.simple;
 import com.alibaba.fastjson.JSON;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
+import com.jemmy.apis.edriven.model.dto.TpcMqMessageDto;
 import com.jemmy.common.base.constant.AliyunMqTopicConstants;
 import com.jemmy.common.config.properties.ApplicationProperties;
-import com.paascloud.core.generator.UniqueIdGenerator;
-import com.paascloud.elastic.lite.annotation.ElasticJobConfig;
-import com.paascloud.provider.model.dto.TpcMqMessageDto;
-import com.paascloud.provider.service.TpcMqMessageService;
+import com.jemmy.common.zk.generator.UniqueIdGenerator;
+import com.jemmy.elastic.lite.annotation.ElasticJobConfig;
+import com.jemmy.services.edriven.service.TpcMqMessageService;
+import com.jemmy.services.edriven.service.TpcMqMessageService;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
@@ -34,7 +35,7 @@ import javax.annotation.Resource;
 public class DeleteRpcProducerMessageJob implements SimpleJob {
 
 	@Resource
-	private PaascloudProperties paascloudProperties;
+	private ApplicationProperties paascloudProperties;
 	@Resource
 	private TpcMqMessageService tpcMqMessageService;
 

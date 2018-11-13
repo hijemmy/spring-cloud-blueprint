@@ -13,13 +13,14 @@ package com.jemmy.order.service.impl;
 
 
 import com.google.common.base.Preconditions;
+import com.jemmy.apis.product.service.MdcProductFeignApi;
+import com.jemmy.apis.product.service.MdcProductQueryFeignApi;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.apis.product.exceptions.MdcBizException;
-import com.paascloud.provider.model.dto.ProductDto;
-import com.paascloud.provider.model.vo.ProductDetailVo;
-import com.paascloud.provider.service.MdcProductFeignApi;
-import com.paascloud.provider.service.MdcProductQueryFeignApi;
-import com.paascloud.provider.service.MdcProductService;
+import com.jemmy.apis.product.model.dto.ProductDto;
+import com.jemmy.order.service.MdcProductService;
+import com.jemmy.apis.product.model.vo.ProductDetailVo;
+import com.jemmy.order.service.MdcProductService;
 import com.jemmy.common.util.wrapper.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

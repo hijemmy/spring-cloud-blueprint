@@ -1,5 +1,7 @@
 package com.jemmy.common.util;
 
+import com.xiaoleilu.hutool.date.DateField;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -286,7 +288,17 @@ public enum  DateUtil {
             return c.getTime();
         }
     }
-
+    /**
+     * 获取系统前时间.
+     *
+     * @param minute the minute
+     *
+     * @return the before time[yyyy-MM-dd HH:mm:ss]
+     */
+    public static String getBeforeTime(int minute) {
+        Date newDate = com.xiaoleilu.hutool.date.DateUtil.offset(new Date(), DateField.MINUTE, -minute);
+        return com.xiaoleilu.hutool.date.DateUtil.formatDateTime(newDate);
+    }
     /*
      * 1则代表的是对年份操作， 2是对月份操作， 3是对星期操作， 5是对日期操作， 11是对小时操作， 12是对分钟操作， 13是对秒操作，
      * 14是对毫秒操作

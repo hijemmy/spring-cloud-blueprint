@@ -12,13 +12,13 @@
 package com.jemmy.order.service;
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.BaseQuery;
+import com.jemmy.common.base.dto.BaseQuery;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.IService;
-import com.paascloud.provider.model.domain.OmcOrder;
-import com.paascloud.provider.model.dto.OrderDto;
-import com.paascloud.provider.model.dto.OrderPageQuery;
-import com.paascloud.provider.model.vo.OrderVo;
+import com.jemmy.order.model.domain.OmcOrder;
+import com.jemmy.apis.omc.model.dto.OrderDto;
+import com.jemmy.apis.omc.model.dto.OrderPageQuery;
+import com.jemmy.apis.omc.model.vo.OrderVo;
 
 /**
  * The interface Omc order service.

@@ -14,10 +14,10 @@ package com.jemmy.order.service.impl;
 import com.google.common.base.Preconditions;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.core.support.BaseService;
-import com.paascloud.provider.exceptions.OmcBizException;
-import com.paascloud.provider.mapper.OmcOrderDetailMapper;
-import com.paascloud.provider.model.domain.OmcOrderDetail;
-import com.paascloud.provider.service.OmcOrderDetailService;
+import com.jemmy.apis.omc.exceptions.OmcBizException;
+import com.jemmy.order.mapper.OmcOrderDetailMapper;
+import com.jemmy.order.model.domain.OmcOrderDetail;
+import com.jemmy.order.service.OmcOrderDetailService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

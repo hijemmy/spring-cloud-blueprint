@@ -12,16 +12,16 @@
 package com.jemmy.order.web.frontend;
 
 import com.github.pagehelper.PageInfo;
-import com.paascloud.base.dto.BaseQuery;
+import com.jemmy.apis.omc.model.dto.OrderPageQuery;
+import com.jemmy.apis.omc.model.vo.OrderProductVo;
+import com.jemmy.apis.omc.model.vo.OrderVo;
+import com.jemmy.common.base.dto.BaseQuery;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.dto.OrderPageQuery;
-import com.paascloud.provider.model.vo.OrderProductVo;
-import com.paascloud.provider.model.vo.OrderVo;
-import com.paascloud.provider.service.OmcCartService;
-import com.paascloud.provider.service.OmcOrderService;
 import com.jemmy.common.util.wrapper.WrapMapper;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.order.service.OmcCartService;
+import com.jemmy.order.service.OmcOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;

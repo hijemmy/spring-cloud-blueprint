@@ -12,10 +12,10 @@
 package com.jemmy.services.edriven.service.impl;
 
 import com.jemmy.common.core.support.BaseService;
-import com.paascloud.provider.mapper.TpcMqTopicMapper;
-import com.paascloud.provider.model.domain.TpcMqTopic;
-import com.paascloud.provider.model.vo.TpcMqTopicVo;
-import com.paascloud.provider.service.TpcMqTopicService;
+import com.jemmy.services.edriven.mapper.TpcMqTopicMapper;
+import com.jemmy.services.edriven.model.domain.TpcMqTopic;
+import com.jemmy.services.edriven.model.vo.TpcMqTopicVo;
+import com.jemmy.services.edriven.service.TpcMqTopicService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

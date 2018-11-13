@@ -12,7 +12,7 @@
 package com.jemmy.order.service;
 
 import com.jemmy.common.core.support.IService;
-import com.paascloud.provider.model.domain.OmcOrderDetail;
+import com.jemmy.order.model.domain.OmcOrderDetail;
 
 import java.util.List;
 

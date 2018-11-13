@@ -11,12 +11,12 @@
 
 package com.jemmy.order.web.rpc;
 
+import com.jemmy.apis.omc.model.dto.OrderDto;
+import com.jemmy.apis.omc.service.OmcOrderFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.domain.OmcOrder;
-import com.paascloud.provider.model.dto.OrderDto;
-import com.paascloud.provider.service.OmcOrderFeignApi;
-import com.paascloud.provider.service.OmcOrderService;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.order.model.domain.OmcOrder;
+import com.jemmy.order.service.OmcOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;

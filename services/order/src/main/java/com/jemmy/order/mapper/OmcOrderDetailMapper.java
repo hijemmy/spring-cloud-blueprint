@@ -11,8 +11,8 @@
 
 package com.jemmy.order.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.OmcOrderDetail;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.order.model.domain.OmcOrderDetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

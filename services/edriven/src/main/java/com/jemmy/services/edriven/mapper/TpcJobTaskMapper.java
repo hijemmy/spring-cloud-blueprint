@@ -11,8 +11,8 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.TpcJobTask;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.services.edriven.model.domain.TpcJobTask;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

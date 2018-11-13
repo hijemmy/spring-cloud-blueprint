@@ -11,8 +11,9 @@
 
 package com.jemmy.order.mapper;
 
-import com.paascloud.core.mybatis.MyMapper;
-import com.paascloud.provider.model.domain.PtcPayInfo;
+import com.jemmy.order.model.domain.PtcPayInfo;
+import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.order.model.domain.PtcPayInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

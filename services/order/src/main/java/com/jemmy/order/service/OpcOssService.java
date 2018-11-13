@@ -11,9 +11,10 @@
 
 package com.jemmy.order.service;
 
-import com.paascloud.provider.model.dto.oss.OptGetUrlRequest;
-import com.paascloud.provider.model.dto.oss.OptUploadFileReqDto;
-import com.paascloud.provider.model.dto.oss.OptUploadFileRespDto;
+import com.jemmy.apis.opc.model.dto.oss.*;
+import com.jemmy.apis.opc.model.dto.oss.OptGetUrlRequest;
+import com.jemmy.apis.opc.model.dto.oss.OptUploadFileReqDto;
+import com.jemmy.apis.opc.model.dto.oss.OptUploadFileReqDto;
 
 /**
  * The interface Opc oss service.

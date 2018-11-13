@@ -13,7 +13,7 @@ package com.jemmy.opc.model.dto.mail;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
-import com.paascloud.PubUtils;
+import com.jemmy.common.util.PubUtils;
 import com.jemmy.common.util.PublicUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

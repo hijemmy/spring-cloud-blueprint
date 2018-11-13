@@ -12,9 +12,9 @@
 package com.jemmy.opc.consumer;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.paascloud.JacksonUtil;
-import com.paascloud.core.mq.MqMessage;
-import com.paascloud.provider.service.OptSmsService;
+import com.jemmy.common.core.mq.MqMessage;
+import com.jemmy.common.util.JacksonUtil;
+import com.jemmy.opc.service.OptSmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

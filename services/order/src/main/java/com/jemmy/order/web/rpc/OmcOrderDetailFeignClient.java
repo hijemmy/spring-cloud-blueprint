@@ -11,8 +11,8 @@
 
 package com.jemmy.order.web.rpc;
 
+import com.jemmy.apis.omc.service.OmcOrderDetailFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.service.OmcOrderDetailFeignApi;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;

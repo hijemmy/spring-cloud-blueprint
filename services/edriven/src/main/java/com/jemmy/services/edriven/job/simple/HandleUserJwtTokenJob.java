@@ -13,8 +13,10 @@ package com.jemmy.services.edriven.job.simple;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import com.paascloud.elastic.lite.annotation.ElasticJobConfig;
-import com.paascloud.provider.service.UacRpcService;
+import com.jemmy.elastic.lite.annotation.ElasticJobConfig;
+import com.jemmy.elastic.lite.annotation.ElasticJobConfig;
+import com.jemmy.services.edriven.service.UacRpcService;
+import com.jemmy.services.edriven.service.UacRpcService;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;

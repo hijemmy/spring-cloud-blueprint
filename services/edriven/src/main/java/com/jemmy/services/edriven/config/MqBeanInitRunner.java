@@ -14,6 +14,7 @@ package com.jemmy.services.edriven.config;
 import com.alibaba.fastjson.JSON;
 import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.common.config.properties.ApplicationProperties;
+import com.jemmy.common.zk.registory.RegistryCenterFactory;
 import com.jemmy.common.zk.registory.base.CoordinatorRegistryCenter;
 import com.jemmy.common.zk.registory.base.ReliableMessageRegisterDto;
 import com.jemmy.services.edriven.job.listener.MqConsumerChangeListener;

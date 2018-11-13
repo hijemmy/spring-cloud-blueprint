@@ -11,7 +11,7 @@
 
 package com.jemmy.services.edriven.model.domain;
 
-import com.paascloud.core.mybatis.BaseEntity;
+import com.jemmy.common.core.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.Alias;

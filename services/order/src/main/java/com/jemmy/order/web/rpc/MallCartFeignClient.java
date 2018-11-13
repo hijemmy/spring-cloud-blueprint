@@ -11,11 +11,11 @@
 
 package com.jemmy.order.web.rpc;
 
+import com.jemmy.apis.omc.model.vo.CartProductVo;
+import com.jemmy.apis.omc.service.OmcCartFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.paascloud.provider.model.vo.CartProductVo;
-import com.paascloud.provider.service.OmcCartFeignApi;
-import com.paascloud.provider.service.OmcCartService;
 import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.order.service.OmcCartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
