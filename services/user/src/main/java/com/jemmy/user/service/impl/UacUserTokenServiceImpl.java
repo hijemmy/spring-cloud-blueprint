@@ -62,7 +62,7 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken> implement
 	private RedisTemplate<String, Object> redisTemplate;
 	@Resource
 	private OpcRpcService opcRpcService;
-	@Value("${paascloud.auth.refresh-token-url}")
+	@Value("${jemmycloud.auth.refresh-token-url}")
 	private String refreshTokenUrl;
 
 	@Override

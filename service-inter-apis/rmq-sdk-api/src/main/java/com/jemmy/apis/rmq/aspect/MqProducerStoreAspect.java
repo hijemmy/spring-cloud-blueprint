@@ -43,7 +43,7 @@ public class MqProducerStoreAspect {
 	@Resource
 	private MqMessageService mqMessageService;
 
-	@Value("${paascloud.aliyun.rocketMq.producerGroup}")
+	@Value("${jemmycloud.aliyun.rocketMq.producerGroup}")
 	private String producerGroup;
 
 	@Resource
@@ -52,7 +52,7 @@ public class MqProducerStoreAspect {
 	/**
 	 * Add exe time annotation pointcut.
 	 */
-	@Pointcut("@annotation(com.paascloud.provider.annotation.MqProducerStore)")
+	@Pointcut("@annotation(com.jemmy.apis.rmq.annotation.MqProducerStore)")
 	public void mqProducerStoreAnnotationPointcut() {
 
 	}

@@ -23,13 +23,13 @@ liquibase:
   url: ${spring.datasource.url}
 
 mybatis:
-  type-aliases-package: com.paascloud.provider.model.domain
-  mapper-locations: classpath:mapper/*.xml,classpath*:sdk/mapper/*.xml
+  type-aliases-package: com.jemmy.opc.model.domain
+  mapper-locations: classpath:mybatis_mappers/*.xml,classpath*:sdk/mybatis_mappers/*.xml
   configuration:
     map-underscore-to-camel-case: true
 
 mapper:
-  mappers: com.paascloud.core.mybatis.MyMapper
+  mappers: com.jemmy.common.core.mybatis.MyMapper
   not-empty: false
   identity: MYSQL
 

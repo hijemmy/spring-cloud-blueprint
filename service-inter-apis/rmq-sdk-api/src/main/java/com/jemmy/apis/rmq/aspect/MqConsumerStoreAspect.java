@@ -43,7 +43,7 @@ public class MqConsumerStoreAspect {
 
 	@Resource
 	private MqMessageService mqMessageService;
-	@Value("${paascloud.aliyun.rocketMq.consumerGroup}")
+	@Value("${jemmycloud.aliyun.rocketMq.consumerGroup}")
 	private String consumerGroup;
 
 	private static final String CONSUME_SUCCESS = "CONSUME_SUCCESS";
@@ -51,7 +51,7 @@ public class MqConsumerStoreAspect {
 	/**
 	 * Add exe time annotation pointcut.
 	 */
-	@Pointcut("@annotation(com.paascloud.provider.annotation.MqConsumerStore)")
+	@Pointcut("@annotation(com.jemmy.apis.rmq.annotation.MqConsumerStore)")
 	public void mqConsumerStoreAnnotationPointcut() {
 
 	}

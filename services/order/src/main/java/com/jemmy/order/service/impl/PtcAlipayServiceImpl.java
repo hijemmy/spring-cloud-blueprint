@@ -85,11 +85,11 @@ public class PtcAlipayServiceImpl implements PtcAlipayService {
 	@Resource
 	private OpcOssService opcOssService;
 
-	@Value("${paascloud.alipay.callback.url}")
+	@Value("${jemmycloud.alipay.callback.url}")
 	private String alipayCallbackUrl;
-	@Value("${paascloud.alipay.qrCode.pcPath}")
+	@Value("${jemmycloud.alipay.qrCode.pcPath}")
 	private String qrCodePcPath;
-	@Value("${paascloud.alipay.qrCode.qiniuPath}")
+	@Value("${jemmycloud.alipay.qrCode.qiniuPath}")
 	private String qrCodeQiniuPath;
 
 	/**

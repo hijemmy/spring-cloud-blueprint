@@ -46,7 +46,7 @@ public class EmailServiceImpl implements EmailService {
 	private EmailProducer emailProducer;
 	@Resource
 	private UacUserService uacUserService;
-	@Value("${paascloud.auth.rest-pwd-url}")
+	@Value("${jemmycloud.auth.rest-pwd-url}")
 	private String resetPwdUrl;
 	@Resource
 	private RedisTemplate<String, Object> redisTemplate;

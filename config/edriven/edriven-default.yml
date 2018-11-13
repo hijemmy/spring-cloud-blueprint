@@ -104,7 +104,7 @@ info:
   著作登记号: 2018SR320076
   关于我们: http://paascloud.net
 
-paascloud:
+jemmycloud:
   auth:
     jwt:
       expiredRemainMinutes: 20

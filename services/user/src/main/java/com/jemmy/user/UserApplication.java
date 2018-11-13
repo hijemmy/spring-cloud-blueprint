@@ -1,6 +1,6 @@
 package com.jemmy.user;
 
-import com.jemmy.common.mybatis.mapper.RootMapper;
+import com.jemmy.common.core.mybatis.MyMapper;
 import com.jemmy.common.redisson.config.RedissonAutoConfiguration;
 import com.jemmy.common.redisson.config.RedissonSpringAutoConfiguration;
 import com.jemmy.common.security.core.code.sms.SmsCodeSender;
@@ -23,8 +23,8 @@ import javax.sql.DataSource;
 @EnableFeignClients
 @EnableOAuth2Client
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
-@MapperScan(basePackages = "com.jemmy.user.mapper",markerInterface = RootMapper.class)
-@ComponentScan({"com.jemmy.user","com.jemmy.common.aop","com.jemmy.common.web.exception", "com.jemmy.common.security.oauth2"})
+@MapperScan(basePackages = {"com.jemmy.user.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
+@ComponentScan({"com.jemmy.apis.rmq","com.jemmy.common.aop", "com.jemmy.common.security.oauth2","com.jemmy.user"})
 
 public class UserApplication {
     @Bean

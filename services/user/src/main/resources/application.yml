@@ -231,6 +231,7 @@ server:
 mapper:
   mappers:
     - com.jemmy.common.mybatis.mapper.RootMapper
+    - com.jemmy.common.core.mybatis.MyMapper
   not-empty: false
   identity: MYSQL
   style: camelhumpandlowercase

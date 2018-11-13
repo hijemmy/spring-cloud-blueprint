@@ -46,7 +46,7 @@ import java.util.*;
 @Slf4j
 @Order(1)
 public class SqlLogInterceptor implements Interceptor {
-	@Value("${paascloud.enableSqlLogInterceptor}")
+	@Value("${jemmycloud.enableSqlLogInterceptor}")
 	private boolean enableSqlLogInterceptor;
 
 	/**

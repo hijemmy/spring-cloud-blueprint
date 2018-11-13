@@ -89,7 +89,7 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 	private RedisService redisService;
 	@Resource
 	private EmailProducer emailProducer;
-	@Value("${paascloud.auth.active-user-url}")
+	@Value("${jemmycloud.auth.active-user-url}")
 	private String activeUserUrl;
 	@Resource
 	private UacActionService uacActionService;

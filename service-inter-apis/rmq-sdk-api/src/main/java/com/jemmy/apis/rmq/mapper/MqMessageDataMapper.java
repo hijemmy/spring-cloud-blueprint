@@ -14,6 +14,7 @@ package com.jemmy.apis.rmq.mapper;
 import com.jemmy.apis.rmq.model.domain.MqMessageData;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
+import com.jemmy.common.core.mybatis.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,7 @@ import java.util.List;
  */
 @Component
 @Mapper
-public interface MqMessageDataMapper extends tk.mybatis.mapper.common.Mapper<MqMessageData> {
+public interface MqMessageDataMapper extends MyMapper<MqMessageData> {
 	/**
 	 * 获取7天前消息总数.
 	 *

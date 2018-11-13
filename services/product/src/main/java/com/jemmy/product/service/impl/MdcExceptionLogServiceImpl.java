@@ -47,7 +47,7 @@ public class MdcExceptionLogServiceImpl extends BaseService<MdcExceptionLog> imp
 	private TaskExecutor taskExecutor;
 	@Resource
 	private OpcRpcService opcRpcService;
-	@Value("${paascloud.dingTalk.webhookToken.sendException}")
+	@Value("${jemmycloud.dingTalk.webhookToken.sendException}")
 	private String webhookToken;
 
 	@Override
