@@ -98,31 +98,7 @@ endpoints:
     enabled: false
   actuator:
     sensitive: true
-security:
-  oauth2:
-    client:
-      client-id: gw
-      client-secret: 123456
-      access-token-uri: http://localhost:9040/oauth/token
-      user-authorization-uri: http://localhost:9040/oauth/authorize
-      authentication-scheme: header
-      client-authentication-scheme: header
-    resource:
-      token-info-uri: http://localhost:9040/oauth/check_token
-      prefer-token-info: false
-      #若使用jwt令牌,则token-info-uri无效,使用以下配置
-      jwt:
-        key-value: demo
-      user-info-uri: http://localhost:9040/order/info
-      id: ${spring.application.name}
-      filter-order: 3
-    sso:
-      login-path: http://localhost:7020/uac/sso/login
-  sessions: stateless
-  basic:
-    enabled: false
-    realm: zk24j
-  enable-csrf: false
+
 proxy:
   auth:
     load-balanced: true

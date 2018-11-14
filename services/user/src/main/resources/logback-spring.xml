@@ -15,7 +15,7 @@
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <!-- Minimum logging level to be presented in the console logs -->
-            <level>INFO</level>
+            <level>DEBUG</level>
         </filter>
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
@@ -88,4 +88,5 @@
         <appender-ref ref="flatfile"/>
     </root>
     <logger name="org.springframework.security" level="debug"/>
+    <logger name="RocketmqClient" level="warn"/>
 </configuration>

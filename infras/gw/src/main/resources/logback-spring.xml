@@ -72,4 +72,5 @@
         <appender-ref ref="logstash"/>
         <appender-ref ref="flatfile"/>
     </root>
+    <logger name="org.springframework.security" level="debug"/>
 </configuration>

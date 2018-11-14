@@ -31,7 +31,7 @@ public class SwaggerProperties {
 
 	private String licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0";
 
-	private String contactName = "无痕";
+	private String contactName = "Jemmy";
 
 	private String contactUrl = "https://github.com/hijemmy";
 

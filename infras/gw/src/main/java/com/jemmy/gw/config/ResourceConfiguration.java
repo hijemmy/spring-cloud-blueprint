@@ -24,9 +24,9 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
-@Configuration
-@EnableResourceServer
-@RefreshScope
+//@Configuration
+//@EnableResourceServer
+//@RefreshScope
 public class ResourceConfiguration extends ResourceServerConfigurerAdapter {
 
     @Autowired
