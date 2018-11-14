@@ -36,7 +36,6 @@ management:
   add-application-context-header: false
 info:
   role: '注册中心'
-  instance: ${eureka.instance.hostname}
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
 

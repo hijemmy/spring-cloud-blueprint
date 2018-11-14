@@ -51,7 +51,6 @@ endpoints:
   enabled: false
 info:
   role: '订单服务'
-  instance: ${eureka.instance.hostname}
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
   version: ${eureka.instance.metadata-map.version}
