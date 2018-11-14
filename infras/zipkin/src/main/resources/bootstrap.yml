@@ -35,3 +35,5 @@ eureka:
       zone: defaultZone
       cluster: jemmyweb
       version: 1.0
+info:
+  role: 链路跟踪

@@ -50,7 +50,7 @@ eureka:
 endpoints:
   enabled: false
 info:
-  role: '订单服务'
+  role: '可靠消息服务'
   instance: ${spring.application.index}
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
