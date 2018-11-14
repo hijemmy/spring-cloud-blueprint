@@ -98,14 +98,25 @@ endpoints:
     enabled: false
   actuator:
     sensitive: true
-
+security:
+  oauth2:
+    client:
+      authentication-scheme: header
+      client-authentication-scheme: header
+    resource:
+      filter-order: 3
+    sso:
+      login-path: http://dev-login.paascloud.net
+  sessions: stateless
+  basic:
+    enabled: false
+    realm: zk24j
+  enable-csrf: false
+  ignored: /uac/oauth/token,/uac/oauth/authorize,/uac/auth/code/*,/uac/auth/form,/webjars/**
 proxy:
   auth:
     load-balanced: true
 #程序访问控制
 com.jemmy:
-  gw:
-    urls:
-      permitall: /user/oauth/token,/user/sso/login
   headers:
     cors: '*'

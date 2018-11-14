@@ -87,6 +87,7 @@
         <appender-ref ref="logstash"/>
         <appender-ref ref="flatfile"/>
     </root>
+    <logger name="org.springframework.web" level="debug"/>
     <logger name="org.springframework.security" level="debug"/>
     <logger name="RocketmqClient" level="warn"/>
 </configuration>
