@@ -3,7 +3,7 @@ spring:
     config:
       enabled: true
       discovery:
-        enabled: false
+        enabled: true
       profile: default,devt
     service-registry:
       auto-registration:

@@ -46,6 +46,8 @@ eureka:
     metadata-map:
       zone: defaultZone
       cluster: jemmyweb
+      version: 1.0
+
 ribbon:
   eager-load:
     enabled: true

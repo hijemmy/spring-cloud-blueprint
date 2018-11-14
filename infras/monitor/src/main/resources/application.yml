@@ -1,0 +1,74 @@
+eureka:
+    client:
+        availability-zones:
+            ShenZhen: defaultZone,zone1
+        region: ShenZhen
+        service-url:
+            defaultZone: http://localhost:7001/eureka/
+            zone1: http://localhost:7002/eureka/
+    instance:
+        lease-expiration-duration-in-seconds: 10
+        lease-renewal-interval-in-seconds: 5
+        metadata-map:
+            zone: defaultZone
+        prefer-ip-address: true
+info:
+    ip: ${spring.cloud.client.ipAddress}
+    port: ${server.port}
+    role: 监控中心
+logging:
+    level:
+        com:
+            jemmy:
+                monitor: warn
+            netflix: warn
+        io:
+            reactivex:
+                netty: fatal
+        org:
+            apache: warn
+            springframework: warn
+            springframework.cloud.netflix.zuul.filters.post: fatal
+            xnio: warn
+    path: logs
+management:
+    add-application-context-header: false
+    security:
+        enabled: false
+security:
+    basic:
+        enabled: false
+    user:
+        name: jemmyweb
+        password: 657036476
+server:
+    port: 9090
+spring:
+    application:
+        name: monitor
+    boot:
+        admin:
+            auth:
+                password: ${security.user.password}
+                username: ${security.user.name}
+            context-path: /admin
+            routes:
+                endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
+            turbine:
+                clusters: api,user,order,product,third,news,activity
+                location: http://${spring.cloud.client.ipAddress}:${turbine.stream.port}
+    main:
+        banner-mode: 'off'
+    mvc:
+        favicon:
+            enabled: false
+        throw-exception-if-no-handler-found: true
+    rabbitmq:
+        host: localhost
+        password: guest
+        port: 5672
+        username: guest
+        virtual-host: jemmyweb
+turbine:
+    stream:
+        port: 9091
