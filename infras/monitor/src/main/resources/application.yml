@@ -55,7 +55,7 @@ spring:
             routes:
                 endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
             turbine:
-                clusters: api,user,order,product,third,news,activity
+                clusters: gw,paascloud-provider-uac,paascloud-provider-omc,paascloud-provider-mdc,paascloud-provider-opc,paascloud-provider-tpc
                 location: http://${spring.cloud.client.ipAddress}:${turbine.stream.port}
     main:
         banner-mode: 'off'
