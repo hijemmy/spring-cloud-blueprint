@@ -50,8 +50,7 @@ eureka:
 endpoints:
   enabled: false
 info:
-  role: '订单服务'
-  instance: ${spring.application.index}
+  role: '开放平台'
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
   version: ${eureka.instance.metadata-map.version}

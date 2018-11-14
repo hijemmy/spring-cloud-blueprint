@@ -55,7 +55,6 @@ endpoints:
   enabled: false
 info:
   role: '用户中心'
-  instance: ${spring.application.index}
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
   version: ${eureka.instance.metadata-map.version}
