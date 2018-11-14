@@ -1,13 +1,13 @@
 spring:
   mvc:
     favicon:
-      enabled: false
+      enabled: true
     #当找不到可处理的handler时,应该抛出异常,否则将会直接将结果写入response,导致不可以被异常处理机制拦截
     throw-exception-if-no-handler-found: true
     locale-resolver: fixed
     locale: zh_CN
   resources:
-    add-mappings: false
+    add-mappings: true
   messages:
       basename: classpath:org/springframework/security/messages
   rabbitmq:
@@ -117,7 +117,7 @@ security:
       id: ${spring.application.name}
       filter-order: 3
     sso:
-      login-path: http://localhost:9030/user/sso/login
+      login-path: http://localhost:7020/uac/sso/login
   sessions: stateless
   basic:
     enabled: false
