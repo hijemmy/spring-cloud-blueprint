@@ -103,8 +103,10 @@ hystrix:
             timeoutInMilliseconds: 20000
 
 info:
-  软件著作权: paascloud快速搭建企业级分布式微服务平台
-  著作登记号: 2018SR320076
+  instance: ${eureka.instance.hostname}
+  ip: ${spring.cloud.client.ipAddress}
+  port: ${server.port}
+  version: ${eureka.instance.metadata-map.version}
   关于我们: https://github.com/hijemmy
 
 jemmycloud:
