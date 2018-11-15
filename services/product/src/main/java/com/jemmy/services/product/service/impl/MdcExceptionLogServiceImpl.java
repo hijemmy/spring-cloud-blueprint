@@ -34,6 +34,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Mdc exception log service.
  *
@@ -45,7 +47,7 @@ public class MdcExceptionLogServiceImpl extends BaseService<MdcExceptionLog,MdcE
 	private TaskExecutor taskExecutor;
 	@Resource
 	private OpcRpcService opcRpcService;
-	@Value("${jemmycloud.dingTalk.webhookToken.sendException}")
+	@Value("${"+ROOT_PREFIX+".dingTalk.webhookToken.sendException}")
 	private String webhookToken;
 
 	@Override

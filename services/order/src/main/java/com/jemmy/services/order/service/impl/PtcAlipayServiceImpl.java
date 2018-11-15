@@ -58,6 +58,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Ptc alipay service.
  *
@@ -85,11 +87,11 @@ public class PtcAlipayServiceImpl implements PtcAlipayService {
 	@Resource
 	private OpcOssService opcOssService;
 
-	@Value("${jemmycloud.alipay.callback.url}")
+	@Value("${"+ROOT_PREFIX+".alipay.callback.url}")
 	private String alipayCallbackUrl;
-	@Value("${jemmycloud.alipay.qrCode.pcPath}")
+	@Value("${"+ROOT_PREFIX+".alipay.qrCode.pcPath}")
 	private String qrCodePcPath;
-	@Value("${jemmycloud.alipay.qrCode.qiniuPath}")
+	@Value("${"+ROOT_PREFIX+".alipay.qrCode.qiniuPath}")
 	private String qrCodeQiniuPath;
 
 	/**

@@ -25,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_USER;
+
 /**
  * The interface Uac user token feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-uac", configuration = OAuth2FeignAutoConfiguration.class, fallback = UacMqMessageApiHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_USER, configuration = OAuth2FeignAutoConfiguration.class, fallback = UacMqMessageApiHystrix.class)
 public interface UacMqMessageFeignApi {
 
 

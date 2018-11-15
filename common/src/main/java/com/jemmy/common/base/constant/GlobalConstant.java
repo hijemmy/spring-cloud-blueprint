@@ -51,6 +51,15 @@ public class GlobalConstant {
 	public static final String ZK_REGISTRY_CONSUMER_ROOT_PATH = "/jemmycloud/registry/consumer";
 	public static final String ZK_REGISTRY_SEQ = "/jemmycloud/seq";
 
+	/**
+	 * 微服务名称
+	 */
+	public static final String MICRO_SERVICE_NAME_ORDER="paascloud-provider-omc";
+	public static final String MICRO_SERVICE_NAME_PRODUCT="paascloud-provider-mdc";
+	public static final String MICRO_SERVICE_NAME_OPC="paascloud-provider-opc";
+	public static final String MICRO_SERVICE_NAME_USER="paascloud-provider-uac";
+	public static final String MICRO_SERVICE_NAME_EDRIVEN="paascloud-provider-tpc";
+
 	public interface Number {
 		int THOUSAND_INT = 1000;
 		int HUNDRED_INT = 100;

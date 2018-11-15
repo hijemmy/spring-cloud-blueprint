@@ -1,6 +1,7 @@
 package com.jemmy.apis.edriven;
 
 import com.jemmy.apis.edriven.model.dto.TpcMqMessageDto;
+import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
 import com.jemmy.common.util.wrapper.Wrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -9,13 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_EDRIVEN;
+
 
 /**
  * The interface Tpc mq message feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "edriven",  fallback = ReliableMqMessageFallbackFactory.class)
+@FeignClient(value = MICRO_SERVICE_NAME_EDRIVEN, configuration = OAuth2FeignAutoConfiguration.class,  fallback = ReliableMqMessageFallbackFactory.class)
 public interface TpcMqMessageFeignApi {
 
 	/**

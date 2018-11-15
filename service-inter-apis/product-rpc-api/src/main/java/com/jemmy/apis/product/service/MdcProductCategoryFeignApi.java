@@ -15,12 +15,14 @@ import com.jemmy.apis.product.service.hystrix.MdcProductCategoryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
 import org.springframework.cloud.netflix.feign.FeignClient;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_PRODUCT;
+
 /**
  * The interface Mdc product category feign api.
  *
  * @author paascloud.net@gmail.com
  */
-@FeignClient(value = "paascloud-provider-mdc", configuration = OAuth2FeignAutoConfiguration.class, fallback = MdcProductCategoryFeignHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_PRODUCT, configuration = OAuth2FeignAutoConfiguration.class, fallback = MdcProductCategoryFeignHystrix.class)
 public interface MdcProductCategoryFeignApi {
 
 }

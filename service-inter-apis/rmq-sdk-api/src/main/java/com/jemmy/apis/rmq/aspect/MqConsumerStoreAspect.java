@@ -31,6 +31,8 @@ import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 
 /**
  * The class Mq consumer store aspect.
@@ -43,7 +45,7 @@ public class MqConsumerStoreAspect {
 
 	@Resource
 	private MqMessageService mqMessageService;
-	@Value("${jemmycloud.aliyun.rocketMq.consumerGroup}")
+	@Value("${"+ROOT_PREFIX+".aliyun.rocketMq.consumerGroup}")
 	private String consumerGroup;
 
 	private static final String CONSUME_SUCCESS = "CONSUME_SUCCESS";

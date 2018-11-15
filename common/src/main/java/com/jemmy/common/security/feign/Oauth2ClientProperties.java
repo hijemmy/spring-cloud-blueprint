@@ -14,13 +14,15 @@ package com.jemmy.common.security.feign;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Oauth 2 client properties.
  *
  * @author paascloud.net @gmail.com
  */
 @Data
-@ConfigurationProperties(prefix = "jemmycloud.oauth2.client")
+@ConfigurationProperties(prefix = ROOT_PREFIX+".oauth2.client")
 public class Oauth2ClientProperties {
 	private String id;
 	private String accessTokenUrl;

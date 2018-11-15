@@ -3,12 +3,14 @@ package com.jemmy.elastic.lite;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import static com.jemmy.elastic.lite.GlobalConstant.ROOT_PREFIX;
+
 /**
  * zookeeper属性配置
  * @author Jemmy
  */
 @Data
-@ConfigurationProperties(prefix = "jemmycloud.zk")
+@ConfigurationProperties(prefix = ROOT_PREFIX+".zk")
 public class ZookeeperRegistryProperties {
 
     /**

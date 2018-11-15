@@ -33,6 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Token interceptor.
  *
@@ -41,7 +43,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class TokenInterceptor implements HandlerInterceptor {
 
-	@Value("${jemmycloud.oauth2.jwtSigningKey}")
+	@Value("${"+ROOT_PREFIX+".oauth2.jwtSigningKey}")
 	private String jwtSigningKey;
 
 	@Resource

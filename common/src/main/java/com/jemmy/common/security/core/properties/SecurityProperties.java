@@ -13,13 +13,15 @@ package com.jemmy.common.security.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 
 /**
  * The class Security properties.
  *
  * @author paascloud.net@gmail.com
  */
-@ConfigurationProperties(prefix = "jemmycloud.security")
+@ConfigurationProperties(prefix = ROOT_PREFIX+".security")
 public class SecurityProperties {
 
 	/**

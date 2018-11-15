@@ -21,6 +21,8 @@ import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter
 import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 
 /**
  * The class Qq auto config.
@@ -28,7 +30,7 @@ import org.springframework.social.connect.ConnectionFactory;
  * @author paascloud.net@gmail.com
  */
 @Configuration
-@ConditionalOnProperty(prefix = "paascloud.security.social.qq", name = "app-id")
+@ConditionalOnProperty(prefix = ROOT_PREFIX+"security.social.qq", name = "app-id")
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 
 	private final SecurityProperties securityProperties;

@@ -15,11 +15,13 @@ import com.jemmy.apis.omc.service.hystrix.OmcOrderDetailFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
 import org.springframework.cloud.netflix.feign.FeignClient;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_ORDER;
+
 /**
  * The interface Omc order detail feign api.
  *
  * @author paascloud.net@gmail.com
  */
-@FeignClient(value = "paascloud-provider-omc", configuration = OAuth2FeignAutoConfiguration.class, fallback = OmcOrderDetailFeignHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_ORDER, configuration = OAuth2FeignAutoConfiguration.class, fallback = OmcOrderDetailFeignHystrix.class)
 public interface OmcOrderDetailFeignApi {
 }

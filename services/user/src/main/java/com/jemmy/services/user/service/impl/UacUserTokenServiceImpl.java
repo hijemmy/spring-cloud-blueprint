@@ -43,6 +43,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 
 /**
  * The class Uac user token service.
@@ -61,7 +63,7 @@ public class UacUserTokenServiceImpl extends BaseService<UacUserToken,UacUserTok
 	private RedisTemplate<String, Object> redisTemplate;
 	@Resource
 	private OpcRpcService opcRpcService;
-	@Value("${jemmycloud.auth.refresh-token-url}")
+	@Value("${"+ROOT_PREFIX+".auth.refresh-token-url}")
 	private String refreshTokenUrl;
 
 	@Override

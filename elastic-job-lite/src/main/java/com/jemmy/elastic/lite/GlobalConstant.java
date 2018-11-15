@@ -5,6 +5,7 @@ package com.jemmy.elastic.lite;
  * @author paascloud.net@gmail.com
  */
 public class GlobalConstant {
+	public static final String ROOT_PREFIX = "jemmycloud";
 
 	/**
 	 * The class Symbol.

@@ -27,12 +27,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_OPC;
+
 /**
  * The interface Opc oss feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-opc", configuration = OAuth2FeignAutoConfiguration.class, fallback = OpcOssFeignApiHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_OPC, configuration = OAuth2FeignAutoConfiguration.class, fallback = OpcOssFeignApiHystrix.class)
 public interface OpcOssFeignApi {
 
 	/**

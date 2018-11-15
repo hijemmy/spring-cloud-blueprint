@@ -10,6 +10,7 @@
     <description>用户中心微服务</description>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>user</artifactId>
+    <version>${parent.version}</version>
     <properties>
         <!--mybatis generator配置-->
         <mybatis.generator.contexts>jemmyweb</mybatis.generator.contexts>

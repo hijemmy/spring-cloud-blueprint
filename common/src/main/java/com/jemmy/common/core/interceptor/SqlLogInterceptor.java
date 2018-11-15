@@ -32,6 +32,8 @@ import org.springframework.core.annotation.Order;
 import java.text.DateFormat;
 import java.util.*;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * mybatis sql 拦截器
  * 1.配合注解NotDisplaySql ，可以禁止指定的方法的SQL 不打印控制台。
@@ -46,7 +48,7 @@ import java.util.*;
 @Slf4j
 @Order(1)
 public class SqlLogInterceptor implements Interceptor {
-	@Value("${jemmycloud.enableSqlLogInterceptor}")
+	@Value("${"+ROOT_PREFIX+".enableSqlLogInterceptor}")
 	private boolean enableSqlLogInterceptor;
 
 	/**

@@ -18,12 +18,14 @@ import com.jemmy.common.util.wrapper.Wrapper;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_USER;
+
 /**
  * The interface Uac user token feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-uac", configuration = OAuth2FeignAutoConfiguration.class, fallback = UacUserTokenFeignApiHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_USER, configuration = OAuth2FeignAutoConfiguration.class, fallback = UacUserTokenFeignApiHystrix.class)
 public interface UacUserTokenFeignApi {
 
 	/**

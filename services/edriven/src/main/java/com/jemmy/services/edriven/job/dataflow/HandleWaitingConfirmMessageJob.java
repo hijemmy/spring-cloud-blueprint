@@ -15,14 +15,9 @@ import com.google.common.collect.Lists;
 import com.jemmy.apis.edriven.model.enums.JobTaskStatusEnum;
 import com.jemmy.common.util.DateUtil;
 import com.jemmy.elastic.lite.JobParameter;
-import com.jemmy.elastic.lite.JobParameter;
 import com.jemmy.elastic.lite.annotation.ElasticJobConfig;
 import com.jemmy.elastic.lite.job.AbstractBaseDataflowJob;
-import com.jemmy.elastic.lite.job.AbstractBaseDataflowJob;
 import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
-import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
-import com.jemmy.apis.edriven.model.enums.JobTaskStatusEnum;
-import com.jemmy.services.edriven.model.enums.MqSendStatusEnum;
 import com.jemmy.services.edriven.model.enums.MqSendStatusEnum;
 import com.jemmy.services.edriven.service.TpcMqMessageService;
 import com.jemmy.services.edriven.service.UacRpcService;
@@ -32,6 +27,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
 
 /**
  * 处理可靠消息表中待生产者确认的消息数据,目的在于确保可靠消息服务与上游(生产者)之间的一致性
@@ -47,7 +44,7 @@ public class HandleWaitingConfirmMessageJob extends AbstractBaseDataflowJob<Stri
 	private TpcMqMessageService tpcMqMessageService;
 	@Resource
 	private UacRpcService uacRpcService;
-	@Value("${jemmycloud.message.handleTimeout}")
+	@Value("${"+ROOT_PREFIX+".message.handleTimeout}")
 	private int timeOutMinute;
 	private static final String PID_UAC = "PID_UAC";
 

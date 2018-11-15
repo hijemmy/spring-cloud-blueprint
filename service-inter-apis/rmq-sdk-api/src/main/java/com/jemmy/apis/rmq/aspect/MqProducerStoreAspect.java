@@ -31,6 +31,8 @@ import org.springframework.core.task.TaskExecutor;
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 
 /**
  * The class Mq producer store aspect.
@@ -43,7 +45,7 @@ public class MqProducerStoreAspect {
 	@Resource
 	private MqMessageService mqMessageService;
 
-	@Value("${jemmycloud.aliyun.rocketMq.producerGroup}")
+	@Value("${"+ROOT_PREFIX+".aliyun.rocketMq.producerGroup}")
 	private String producerGroup;
 
 	@Resource

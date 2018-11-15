@@ -87,4 +87,6 @@
         <appender-ref ref="logstash"/>
         <appender-ref ref="flatfile"/>
     </root>
+    <logger name="RocketmqClient" level="warn"/>
+
 </configuration>

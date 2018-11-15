@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Email service.
  *
@@ -46,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
 	private EmailProducer emailProducer;
 	@Resource
 	private UacUserService uacUserService;
-	@Value("${jemmycloud.auth.rest-pwd-url}")
+	@Value("${"+ROOT_PREFIX+".auth.rest-pwd-url}")
 	private String resetPwdUrl;
 	@Resource
 	private RedisTemplate<String, Object> redisTemplate;

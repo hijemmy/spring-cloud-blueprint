@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_ORDER;
+
 /**
  * The interface Omc cart feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-omc", configuration = OAuth2FeignAutoConfiguration.class, fallback = OmcCartFeignHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_ORDER, configuration = OAuth2FeignAutoConfiguration.class, fallback = OmcCartFeignHystrix.class)
 public interface OmcCartFeignApi {
 	/**
 	 * 更新购物车.

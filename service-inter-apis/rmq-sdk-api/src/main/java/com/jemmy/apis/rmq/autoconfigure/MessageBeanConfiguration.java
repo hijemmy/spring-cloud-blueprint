@@ -17,6 +17,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Elastic job auto configuration.
  *
@@ -25,13 +27,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MessageBeanConfiguration {
 	@Bean
-	@ConditionalOnExpression("${jemmycloud.aliyun.rocketMq.reliableMessageConsumer:true}")
+	@ConditionalOnExpression("${"+ROOT_PREFIX+".aliyun.rocketMq.reliableMessageConsumer:true}")
 	public MqConsumerStoreAspect mqConsumerStoreAspect() {
 		return new MqConsumerStoreAspect();
 	}
 
 	@Bean
-	@ConditionalOnExpression("${jemmycloud.aliyun.rocketMq.reliableMessageProducer:true}")
+	@ConditionalOnExpression("${"+ROOT_PREFIX+".aliyun.rocketMq.reliableMessageProducer:true}")
 	public MqProducerStoreAspect mqProducerStoreAspect() {
 		return new MqProducerStoreAspect();
 	}

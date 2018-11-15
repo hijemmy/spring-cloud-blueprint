@@ -13,6 +13,8 @@ package com.jemmy.common.security.core.properties;
 
 import lombok.Data;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class O auth 2 properties.
  *
@@ -24,7 +26,7 @@ public class OAuth2Properties {
 	/**
 	 * 使用jwt时为token签名的秘钥
 	 */
-	private String jwtSigningKey = "paascloud";
+	private String jwtSigningKey = ROOT_PREFIX;
 	/**
 	 * 客户端配置
 	 */

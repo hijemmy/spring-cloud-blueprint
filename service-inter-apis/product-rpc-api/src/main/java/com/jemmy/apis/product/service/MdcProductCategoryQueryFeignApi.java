@@ -25,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_PRODUCT;
+
 /**
  * The interface Mdc product category query feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-mdc", configuration = OAuth2FeignAutoConfiguration.class, fallback = MdcProductCategoryQueryFeignHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_PRODUCT, configuration = OAuth2FeignAutoConfiguration.class, fallback = MdcProductCategoryQueryFeignHystrix.class)
 public interface MdcProductCategoryQueryFeignApi {
 
 	/**

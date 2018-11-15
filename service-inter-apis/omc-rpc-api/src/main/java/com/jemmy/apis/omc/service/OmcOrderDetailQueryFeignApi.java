@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_ORDER;
+
 /**
  * The interface Omc order detail query feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-omc", configuration = OAuth2FeignAutoConfiguration.class, fallback = OmcOrderDetailQueryFeignHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_ORDER, configuration = OAuth2FeignAutoConfiguration.class, fallback = OmcOrderDetailQueryFeignHystrix.class)
 public interface OmcOrderDetailQueryFeignApi {
 	/**
 	 * Gets list by order no user id.

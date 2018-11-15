@@ -22,6 +22,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * 加载LWR规则.
  *
@@ -43,7 +45,7 @@ public class CoreConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(HandlerInterceptor.class)
-	@ConditionalOnProperty(prefix = "jemmycloud.token.interceptor", name = "enable", havingValue = "true")
+	@ConditionalOnProperty(prefix = ROOT_PREFIX+".token.interceptor", name = "enable", havingValue = "true")
 	public TokenInterceptor tokenInterceptor() {
 		return new TokenInterceptor();
 	}

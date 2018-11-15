@@ -21,12 +21,14 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_OPC;
+
 /**
  * The interface Dingtalk feign api.
  *
  * @author paascloud.net @gmail.com
  */
-@FeignClient(value = "paascloud-provider-opc", configuration = OAuth2FeignAutoConfiguration.class, fallback = DingtalkFeignApiHystrix.class)
+@FeignClient(value = MICRO_SERVICE_NAME_OPC, configuration = OAuth2FeignAutoConfiguration.class, fallback = DingtalkFeignApiHystrix.class)
 public interface DingtalkFeignApi {
 
 	/**

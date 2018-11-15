@@ -56,6 +56,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 
 /**
  * The class Uac user service.
@@ -88,7 +90,7 @@ public class UacUserServiceImpl extends BaseService<UacUser,UacUserMapper> imple
 	private RedisService redisService;
 	@Resource
 	private EmailProducer emailProducer;
-	@Value("${jemmycloud.auth.active-user-url}")
+	@Value("${"+ROOT_PREFIX+".auth.active-user-url}")
 	private String activeUserUrl;
 	@Resource
 	private UacActionService uacActionService;

@@ -32,6 +32,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * 处理可靠消息表中发送中的消息数据,目的在于确保可靠消息服务与下游(消费者)之间的一致性
  * 如果所有消费者都已经消费了消息,则将消息状态置为FINISH
@@ -44,12 +46,12 @@ import java.util.List;
 public class HandleSendingMessageJob extends AbstractBaseDataflowJob<TpcMqMessage> {
 	@Resource
 	private TpcMqMessageService tpcMqMessageService;
-	@Value("${jemmycloud.message.handleTimeout}")
+	@Value("${"+ROOT_PREFIX+".message.handleTimeout}")
 	private int timeOutMinute;
-	@Value("${jemmycloud.message.maxSendTimes}")
+	@Value("${"+ROOT_PREFIX+".message.maxSendTimes}")
 	private int messageMaxSendTimes;
 
-	@Value("${jemmycloud.message.resendMultiplier}")
+	@Value("${"+ROOT_PREFIX+".message.resendMultiplier}")
 	private int messageResendMultiplier;
 	@Resource
 	private TpcMqConfirmMapper tpcMqConfirmMapper;
