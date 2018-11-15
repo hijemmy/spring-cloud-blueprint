@@ -12,7 +12,7 @@
 package com.jemmy.services.user.mapper;
 
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacLog;
 import com.jemmy.services.user.model.dto.log.UacLogMainDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface UacLogMapper extends MyMapper<UacLog> {
+public interface UacLogMapper extends RootMapper<UacLog> {
 	/**
 	 * Select user log list with user id list.
 	 *

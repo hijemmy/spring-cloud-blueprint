@@ -11,9 +11,7 @@
 
 package com.jemmy.services.order.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
-import com.jemmy.services.order.model.domain.OmcCart;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.order.model.domain.OmcCart;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface OmcCartMapper extends MyMapper<OmcCart> {
+public interface OmcCartMapper extends RootMapper<OmcCart> {
 	/**
 	 * Select un checked cart product count by user id int.
 	 *

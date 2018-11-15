@@ -11,7 +11,7 @@
 
 package com.jemmy.services.opc.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.opc.model.domain.OpcSmsSetting;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -23,5 +23,5 @@ import org.springframework.stereotype.Component;
  */
 @Mapper
 @Component
-public interface OpcSmsSettingMapper extends MyMapper<OpcSmsSetting> {
+public interface OpcSmsSettingMapper extends RootMapper<OpcSmsSetting> {
 }

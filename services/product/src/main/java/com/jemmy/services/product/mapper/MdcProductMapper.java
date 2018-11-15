@@ -12,7 +12,7 @@
 package com.jemmy.services.product.mapper;
 
 import com.jemmy.apis.product.model.dto.ProductDto;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.product.model.domain.MdcProduct;
 import com.jemmy.services.product.model.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface MdcProductMapper extends MyMapper<MdcProduct> {
+public interface MdcProductMapper extends RootMapper<MdcProduct> {
 	/**
 	 * Select by name and category ids list.
 	 *

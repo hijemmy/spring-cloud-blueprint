@@ -13,7 +13,7 @@ package com.jemmy.services.user.mapper;
 
 import com.jemmy.apis.user.user.Perm;
 import com.jemmy.apis.user.vo.MenuVo;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacAction;
 import com.jemmy.services.user.model.domain.UacMenu;
 import com.jemmy.services.user.model.vo.ActionVo;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface UacActionMapper extends MyMapper<UacAction> {
+public interface UacActionMapper extends RootMapper<UacAction> {
 	/**
 	 * Find all perms list.
 	 *

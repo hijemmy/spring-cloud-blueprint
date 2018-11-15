@@ -12,7 +12,7 @@
 package com.jemmy.services.edriven.mapper;
 
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.edriven.model.domain.TpcMqConsumer;
 import com.jemmy.services.edriven.model.vo.TpcMqConsumerVo;
 import com.jemmy.services.edriven.model.vo.TpcMqSubscribeVo;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface TpcMqConsumerMapper extends MyMapper<TpcMqConsumer> {
+public interface TpcMqConsumerMapper extends RootMapper<TpcMqConsumer> {
 	/**
 	 * 查询消费者列表.
 	 *

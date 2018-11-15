@@ -11,7 +11,7 @@
 
 package com.jemmy.services.user.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacRoleMenu;
 import com.jemmy.services.user.model.vo.role.MenuCountVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface UacRoleMenuMapper extends MyMapper<UacRoleMenu> {
+public interface UacRoleMenuMapper extends RootMapper<UacRoleMenu> {
 	/**
 	 * Count child menu num list.
 	 *

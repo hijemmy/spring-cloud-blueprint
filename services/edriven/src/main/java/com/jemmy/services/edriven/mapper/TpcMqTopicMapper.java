@@ -11,10 +11,8 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.edriven.model.domain.TpcMqTopic;
-import com.jemmy.services.edriven.model.domain.TpcMqTopic;
-import com.jemmy.services.edriven.model.vo.TpcMqTopicVo;
 import com.jemmy.services.edriven.model.vo.TpcMqTopicVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -28,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface TpcMqTopicMapper extends MyMapper<TpcMqTopic> {
+public interface TpcMqTopicMapper extends RootMapper<TpcMqTopic> {
 	/**
 	 * List tpc mq topic vo with page list.
 	 *

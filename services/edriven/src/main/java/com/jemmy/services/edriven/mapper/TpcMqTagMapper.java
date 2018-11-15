@@ -11,10 +11,8 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.edriven.model.domain.TpcMqTag;
-import com.jemmy.services.edriven.model.domain.TpcMqTag;
-import com.jemmy.services.edriven.model.vo.TpcMqTagVo;
 import com.jemmy.services.edriven.model.vo.TpcMqTagVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -28,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface TpcMqTagMapper extends MyMapper<TpcMqTag> {
+public interface TpcMqTagMapper extends RootMapper<TpcMqTag> {
 	/**
 	 * List tpc mq tag vo with page list.
 	 *

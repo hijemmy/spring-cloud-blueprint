@@ -11,12 +11,9 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
-import com.jemmy.services.edriven.model.domain.TpcMqProducer;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.edriven.model.domain.TpcMqProducer;
 import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
-import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
-import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
 import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -31,7 +28,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface TpcMqProducerMapper extends MyMapper<TpcMqProducer> {
+public interface TpcMqProducerMapper extends RootMapper<TpcMqProducer> {
 
 	/**
 	 * 查询生产者集合.

@@ -11,7 +11,7 @@
 
 package com.jemmy.services.user.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacRoleAction;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface UacRoleActionMapper extends MyMapper<UacRoleAction> {
+public interface UacRoleActionMapper extends RootMapper<UacRoleAction> {
 	/**
 	 * Delete by action id int.
 	 *

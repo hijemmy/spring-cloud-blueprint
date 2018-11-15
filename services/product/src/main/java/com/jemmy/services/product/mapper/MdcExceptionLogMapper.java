@@ -11,7 +11,7 @@
 
 package com.jemmy.services.product.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.product.model.domain.MdcExceptionLog;
 import com.jemmy.services.product.model.dto.MdcExceptionQueryDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface MdcExceptionLogMapper extends MyMapper<MdcExceptionLog> {
+public interface MdcExceptionLogMapper extends RootMapper<MdcExceptionLog> {
 	/**
 	 * Query exception list with page list.
 	 *

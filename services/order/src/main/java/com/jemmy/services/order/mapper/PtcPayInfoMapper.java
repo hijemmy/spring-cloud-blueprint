@@ -12,8 +12,7 @@
 package com.jemmy.services.order.mapper;
 
 import com.jemmy.services.order.model.domain.PtcPayInfo;
-import com.jemmy.common.core.mybatis.MyMapper;
-import com.jemmy.services.order.model.domain.PtcPayInfo;
+import com.jemmy.common.core.mybatis.RootMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +23,5 @@ import org.springframework.stereotype.Component;
  */
 @Mapper
 @Component
-public interface PtcPayInfoMapper extends MyMapper<PtcPayInfo> {
+public interface PtcPayInfoMapper extends RootMapper<PtcPayInfo> {
 }

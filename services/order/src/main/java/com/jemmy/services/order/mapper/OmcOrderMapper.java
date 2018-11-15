@@ -13,7 +13,7 @@ package com.jemmy.services.order.mapper;
 
 import com.jemmy.apis.omc.model.dto.OrderPageQuery;
 import com.jemmy.apis.omc.model.vo.OrderDocVo;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.order.model.domain.OmcOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface OmcOrderMapper extends MyMapper<OmcOrder> {
+public interface OmcOrderMapper extends RootMapper<OmcOrder> {
 	/**
 	 * Select by user id and order no omc order.
 	 *

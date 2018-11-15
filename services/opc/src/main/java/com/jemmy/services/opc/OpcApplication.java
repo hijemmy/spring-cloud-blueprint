@@ -2,7 +2,7 @@ package com.jemmy.services.opc;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
@@ -23,8 +23,8 @@ import java.util.Properties;
 @EnableFeignClients(basePackages = {"com.jemmy.apis"})
 @EnableOAuth2Client
 @EnableSwagger2
-@MapperScan(basePackages = {"com.jemmy.services.opc.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
-@ComponentScan({"com.jemmy.common.config","com.jemmy.common.zk","com.jemmy.common.core.config","com.jemmy.common.core.support","com.jemmy.apis","com.jemmy.services.opc"})
+@MapperScan(basePackages = {"com.jemmy.services.opc.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = RootMapper.class)
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.opc"})
 public class OpcApplication {
 
     public static void main(String... args){

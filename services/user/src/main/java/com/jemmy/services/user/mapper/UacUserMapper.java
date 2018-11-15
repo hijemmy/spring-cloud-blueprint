@@ -12,7 +12,7 @@
 package com.jemmy.services.user.mapper;
 
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.model.dto.user.BindRoleDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Mapper
 @Component
-public interface UacUserMapper extends MyMapper<UacUser> {
+public interface UacUserMapper extends RootMapper<UacUser> {
 
 	/**
 	 * Find by login name uac user.

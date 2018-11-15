@@ -11,7 +11,7 @@
 
 package com.jemmy.services.product.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.product.model.domain.MdcAddress;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface MdcAddressMapper extends MyMapper<MdcAddress> {
+public interface MdcAddressMapper extends RootMapper<MdcAddress> {
 	/**
 	 * Select mdc address list.
 	 *

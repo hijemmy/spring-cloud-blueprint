@@ -11,7 +11,7 @@
 
 package com.jemmy.services.user.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacRole;
 import com.jemmy.services.user.model.dto.role.BindUserDto;
 import com.jemmy.services.user.model.vo.RoleVo;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface UacRoleMapper extends MyMapper<UacRole> {
+public interface UacRoleMapper extends RootMapper<UacRole> {
 	/**
 	 * Find by role code uac role.
 	 *

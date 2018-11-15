@@ -11,7 +11,7 @@
 
 package com.jemmy.services.order.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.order.model.domain.OmcShipping;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface OmcShippingMapper extends MyMapper<OmcShipping> {
+public interface OmcShippingMapper extends RootMapper<OmcShipping> {
 	/**
 	 * Delete by shipping id user id int.
 	 *

@@ -12,7 +12,7 @@
 package com.jemmy.services.user.mapper;
 
 import com.jemmy.apis.user.vo.MenuVo;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +28,7 @@ import java.util.Set;
  */
 @Mapper
 @Component
-public interface UacMenuMapper extends MyMapper<UacMenu> {
+public interface UacMenuMapper extends RootMapper<UacMenu> {
 
 	/**
 	 * Find menu vo list by user id list.

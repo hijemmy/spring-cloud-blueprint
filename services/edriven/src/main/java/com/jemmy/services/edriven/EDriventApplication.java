@@ -1,6 +1,6 @@
 package com.jemmy.services.edriven;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
@@ -18,8 +18,8 @@ import javax.sql.DataSource;
 @SpringCloudApplication
 @EnableFeignClients(basePackages = {"com.jemmy.apis"})
 @EnableOAuth2Client
-@MapperScan(basePackages = {"com.jemmy.services.edriven.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
-@ComponentScan({"com.jemmy.common.config","com.jemmy.common.zk","com.jemmy.common.core.config","com.jemmy.common.core.support","com.jemmy.apis","com.jemmy.services.edriven"})
+@MapperScan(basePackages = {"com.jemmy.services.edriven.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = RootMapper.class)
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.edriven"})
 public class EDriventApplication {
     public static void main(String[] args) {
         SpringApplication.run(EDriventApplication.class, args);

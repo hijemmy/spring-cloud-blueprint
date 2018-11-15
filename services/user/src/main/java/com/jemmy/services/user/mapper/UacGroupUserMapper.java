@@ -11,7 +11,7 @@
 
 package com.jemmy.services.user.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacGroup;
 import com.jemmy.services.user.model.domain.UacGroupUser;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface UacGroupUserMapper extends MyMapper<UacGroupUser> {
+public interface UacGroupUserMapper extends RootMapper<UacGroupUser> {
 
 	/**
 	 * Query by user id uac group user.

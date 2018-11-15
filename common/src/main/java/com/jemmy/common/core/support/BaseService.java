@@ -12,7 +12,6 @@
 package com.jemmy.common.core.support;
 
 import com.jemmy.common.base.exception.BusinessException;
-import com.jemmy.common.core.mybatis.MyMapper;
 import com.jemmy.common.zk.generator.IncrementIdGenerator;
 import com.jemmy.common.zk.generator.UniqueIdGenerator;
 import org.apache.ibatis.session.RowBounds;

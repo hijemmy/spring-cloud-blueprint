@@ -12,7 +12,7 @@
 package com.jemmy.services.edriven.mapper;
 
 import com.jemmy.common.base.dto.MessageQueryDto;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.edriven.model.domain.TpcMqMessage;
 import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
 import com.jemmy.services.edriven.model.vo.TpcMessageVo;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Component
 @Mapper
-public interface TpcMqMessageMapper extends MyMapper<TpcMqMessage> {
+public interface TpcMqMessageMapper extends RootMapper<TpcMqMessage> {
 	/**
 	 * Gets message by message key.
 	 *

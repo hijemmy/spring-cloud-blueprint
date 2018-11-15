@@ -1,6 +1,6 @@
 package com.jemmy.services.product;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.common.redisson.config.RedissonAutoConfiguration;
 import com.jemmy.common.redisson.config.RedissonSpringAutoConfiguration;
 import liquibase.integration.spring.SpringLiquibase;
@@ -21,8 +21,8 @@ import javax.sql.DataSource;
 @EnableOAuth2Client
 @EnableAspectJAutoProxy(exposeProxy = true)
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
-@MapperScan(basePackages = {"com.jemmy.services.product.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
-@ComponentScan({"com.jemmy.common.config","com.jemmy.common.zk","com.jemmy.common.core.config","com.jemmy.common.core.support","com.jemmy.apis","com.jemmy.services.product"})
+@MapperScan(basePackages = {"com.jemmy.services.product.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = RootMapper.class)
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.product"})
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class, args);

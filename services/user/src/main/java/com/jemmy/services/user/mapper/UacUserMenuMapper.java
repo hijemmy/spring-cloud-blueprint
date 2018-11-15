@@ -12,7 +12,7 @@
 package com.jemmy.services.user.mapper;
 
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacUserMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -24,5 +24,5 @@ import org.springframework.stereotype.Component;
  */
 @Mapper
 @Component
-public interface UacUserMenuMapper extends MyMapper<UacUserMenu> {
+public interface UacUserMenuMapper extends RootMapper<UacUserMenu> {
 }

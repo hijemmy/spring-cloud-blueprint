@@ -20,7 +20,7 @@ mybatis:
     map-underscore-to-camel-case: true
 
 mapper:
-  mappers: com.jemmy.common.core.mybatis.MyMapper
+  mappers: com.jemmy.common.core.mybatis.RootMapper
   not-empty: false
   identity: MYSQL
 

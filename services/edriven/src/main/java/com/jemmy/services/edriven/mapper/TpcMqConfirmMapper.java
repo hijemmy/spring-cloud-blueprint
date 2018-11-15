@@ -11,7 +11,7 @@
 
 package com.jemmy.services.edriven.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.edriven.model.domain.TpcMqConfirm;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Component
 @Mapper
-public interface TpcMqConfirmMapper extends MyMapper<TpcMqConfirm> {
+public interface TpcMqConfirmMapper extends RootMapper<TpcMqConfirm> {
 	/**
 	 * Confirm receive message.
 	 *

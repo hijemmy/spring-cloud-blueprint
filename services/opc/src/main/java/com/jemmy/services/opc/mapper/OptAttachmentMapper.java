@@ -13,7 +13,7 @@ package com.jemmy.services.opc.mapper;
 
 
 import com.jemmy.apis.opc.model.dto.attachment.OptAttachmentRespDto;
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.opc.model.domain.OptAttachment;
 import com.jemmy.services.opc.model.dto.attachment.OptAttachmentReqDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface OptAttachmentMapper extends MyMapper<OptAttachment> {
+public interface OptAttachmentMapper extends RootMapper<OptAttachment> {
 	/**
 	 * Query attachment list.
 	 *

@@ -11,7 +11,7 @@
 
 package com.jemmy.services.product.mapper;
 
-import com.jemmy.common.core.mybatis.MyMapper;
+import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.product.model.domain.MdcDict;
 import com.jemmy.services.product.model.vo.MdcDictVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface MdcDictMapper extends MyMapper<MdcDict> {
+public interface MdcDictMapper extends RootMapper<MdcDict> {
 	/**
 	 * List dict vo list.
 	 *
