@@ -9,7 +9,7 @@
  * 项目官网: http://paascloud.net
  */
 
-package com.jemmy.gw.config.zuul.pre;
+package com.jemmy.gw.config.zuul.post;
 
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.base.exception.BusinessException;

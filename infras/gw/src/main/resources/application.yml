@@ -112,7 +112,7 @@ security:
     enabled: false
     realm: zk24j
   enable-csrf: false
-  ignored: /uac/oauth/token,/uac/oauth/authorize,/uac/auth/code/*,/uac/auth/form,/webjars/**
+  ignored: /uac/oauth/*,/uac/auth/**,/webjars/**,/druid/**, /swagger-ui.html, /swagger-resources/**, /*/v2/api-docs, /api/applications,/pay/alipayCallback
 proxy:
   auth:
     load-balanced: true

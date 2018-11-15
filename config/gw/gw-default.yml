@@ -141,3 +141,5 @@ jemmycloud:
       qiniuPath: alipay/QRCode/
   zk:
     zkAddressList: paascloud-provider-zk:2181
+  security:
+    ignored: /uac/oauth/*,/uac/auth/**,/webjars/**,/druid/**, /swagger-ui.html, /swagger-resources/**, /*/v2/api-docs, /api/applications,/pay/alipayCallback
