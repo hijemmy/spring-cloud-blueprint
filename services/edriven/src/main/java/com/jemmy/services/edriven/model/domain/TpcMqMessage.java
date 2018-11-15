@@ -13,6 +13,8 @@ package com.jemmy.services.edriven.model.domain;
 
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,6 +36,7 @@ public class TpcMqMessage implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ColumnType(jdbcType = JdbcType.BIGINT)
 	private Long id;
 
 	/**

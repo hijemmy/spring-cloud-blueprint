@@ -53,8 +53,8 @@ jemmycloud:
       producerGroup: PID_UAC
   auth:
     rest-pwd-url: http://dev-login.paascloud.net/resetPwd?resetPwdKey=
-    active-user-url: http://dev-api.paascloud.net:7010/uac/auth/activeUser/
-    refresh-token-url: http://dev-api.paascloud.net:7010/uac/oauth/token
+    active-user-url: http://dev-api.paascloud.net:7030/uac/auth/activeUser/
+    refresh-token-url: http://dev-api.paascloud.net:7030/uac/oauth/token
   token:
     interceptor:
       enable: true

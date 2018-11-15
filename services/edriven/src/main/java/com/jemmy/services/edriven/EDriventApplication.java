@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @EnableFeignClients(basePackages = {"com.jemmy.apis"})
 @EnableOAuth2Client
 @MapperScan(basePackages = {"com.jemmy.services.edriven.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = MyMapper.class)
-@ComponentScan({"com.jemmy.common.config","com.jemmy.common.zk","com.jemmy.common.core.support","com.jemmy.apis","com.jemmy.services.edriven"})
+@ComponentScan({"com.jemmy.common.config","com.jemmy.common.zk","com.jemmy.common.core.config","com.jemmy.common.core.support","com.jemmy.apis","com.jemmy.services.edriven"})
 public class EDriventApplication {
     public static void main(String[] args) {
         SpringApplication.run(EDriventApplication.class, args);
