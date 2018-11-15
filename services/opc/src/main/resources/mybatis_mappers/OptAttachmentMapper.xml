@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jemmy.opc.mapper.OptAttachmentMapper">
-  <resultMap id="BaseResultMap" type="com.jemmy.opc.model.domain.OptAttachment">
+<mapper namespace="com.jemmy.services.opc.mapper.OptAttachmentMapper">
+  <resultMap id="BaseResultMap" type="com.jemmy.services.opc.model.domain.OptAttachment">
     <id column="id" property="id" jdbcType="BIGINT"/>
     <result column="version" property="version" jdbcType="INTEGER"/>
     <result column="center_name" property="centerName" jdbcType="VARCHAR"/>
@@ -26,7 +26,7 @@
       #{item}
     </foreach>
   </delete>
-  <select id="queryAttachment" resultType="com.jemmy.opc.model.dto.attachment.OptAttachmentReqDto">
+  <select id="queryAttachment" resultType="com.jemmy.services.opc.model.dto.attachment.OptAttachmentReqDto">
     SELECT
     id,
     bucket_name,
@@ -54,7 +54,7 @@
     WHERE
       ref_no = #{refNo}
   </select>
-  <select id="listExpireFile" resultType="com.jemmy.opc.model.domain.OptAttachment">
+  <select id="listExpireFile" resultType="com.jemmy.services.opc.model.domain.OptAttachment">
     SELECT
       id,
       bucket_name,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jemmy.order.mapper.OmcShippingMapper">
-    <resultMap id="BaseResultMap" type="com.jemmy.order.model.domain.OmcShipping">
+<mapper namespace="com.jemmy.services.order.mapper.OmcShippingMapper">
+    <resultMap id="BaseResultMap" type="com.jemmy.services.order.model.domain.OmcShipping">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
@@ -52,7 +52,7 @@
         where user_id = #{userId}
     </select>
     <select id="selectDefaultAddressByUserId"
-            resultType="com.jemmy.order.model.domain.OmcShipping">
+            resultType="com.jemmy.services.order.model.domain.OmcShipping">
         SELECT
             <include refid="Base_Column_List"/>
         from pc_omc_shipping

@@ -23,7 +23,7 @@ liquibase:
   url: ${spring.datasource.url}
 
 mybatis:
-  type-aliases-package: com.jemmy.opc.model.domain
+  type-aliases-package: com.jemmy.services.opc.model.domain
   mapper-locations: classpath:mybatis_mappers/*.xml,classpath*:sdk/mybatis_mappers/*.xml
   configuration:
     map-underscore-to-camel-case: true

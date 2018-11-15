@@ -37,7 +37,7 @@
         </javaTypeResolver>
 
         <!--对Model生成的配置-->
-        <javaModelGenerator targetPackage="com.jemmy.product.model" targetProject="src\main\java">
+        <javaModelGenerator targetPackage="com.jemmy.services.product.model" targetProject="src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="rootClass" value="com.jemmy.common.mybatis.model.AbstractBaseModel"/>
@@ -50,7 +50,7 @@
         </sqlMapGenerator>
 
         <!--生成相应的Mapper类-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jemmy.product.mapper" targetProject="src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jemmy.services.product.mapper" targetProject="src\main\java">
             <!--根据不同的db schema生成相应的package-->
             <property name="enableSubPackages" value="true"/>
             <!--在方法名中不包含Domain的名称-->

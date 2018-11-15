@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jemmy.user.mapper.UacRoleMapper">
-    <resultMap id="BaseResultMap" type="com.jemmy.user.model.domain.UacRole">
+<mapper namespace="com.jemmy.services.user.mapper.UacRoleMapper">
+    <resultMap id="BaseResultMap" type="com.jemmy.services.user.model.domain.UacRole">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
         <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
@@ -109,10 +109,10 @@
             </if>
         </set>
     </sql>
-    <select id="findByRoleCode" resultType="com.jemmy.user.model.domain.UacRole">
+    <select id="findByRoleCode" resultType="com.jemmy.services.user.model.domain.UacRole">
         SELECT * from pc_uac_role WHERE role_code=#{roleCode,jdbcType=VARCHAR}
     </select>
-    <select id="queryRoleListWithPage" resultType="com.jemmy.user.model.vo.RoleVo">
+    <select id="queryRoleListWithPage" resultType="com.jemmy.services.user.model.vo.RoleVo">
         SELECT
         tur.id AS id,
         tur.version AS version,
@@ -162,7 +162,7 @@
             ORDER BY ${orderBy}
         </if>
     </select>
-    <select id="selectAllNeedBindUser" parameterType="map" resultType="com.jemmy.user.model.dto.role.BindUserDto">
+    <select id="selectAllNeedBindUser" parameterType="map" resultType="com.jemmy.services.user.model.dto.role.BindUserDto">
         SELECT
             a.id as userId,
             a.mobile_no as mobileNo,

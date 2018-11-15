@@ -110,7 +110,7 @@ redisson:
     database: ${spring.redis.database}
   type: single
 mybatis:
-  type-aliases-package: com.jemmy.product.model
+  type-aliases-package: com.jemmy.services.product.model
   mapper-locations: classpath*:mybatis_mappers/**/*Mapper.xml
   configuration:
     default-fetch-size: 10

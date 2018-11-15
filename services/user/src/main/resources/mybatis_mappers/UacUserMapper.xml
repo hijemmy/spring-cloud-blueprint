@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jemmy.user.mapper.UacUserMapper">
+<mapper namespace="com.jemmy.services.user.mapper.UacUserMapper">
     <resultMap id="BaseResultMap" type="uacUser">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
@@ -271,7 +271,7 @@
             LEFT JOIN pc_uac_group g on gu.group_id = g.id
         WHERE u.id = #{userId}
     </select>
-    <select id="selectAllNeedBindRole" parameterType="long" resultType="com.jemmy.user.model.dto.user.BindRoleDto">
+    <select id="selectAllNeedBindRole" parameterType="long" resultType="com.jemmy.services.user.model.dto.user.BindRoleDto">
         SELECT
             r.id as roleId,
             r.role_code as roleCode,
@@ -279,7 +279,7 @@
             (r.id = #{superManagerRoleId}) AS disabled
         FROM pc_uac_role r
     </select>
-  <select id="findUserInfoByLoginName" resultType="com.jemmy.user.model.domain.UacUser">
+  <select id="findUserInfoByLoginName" resultType="com.jemmy.services.user.model.domain.UacUser">
     SELECT
     <include refid="Base_Column_List"/>,
     g.id as groupId,

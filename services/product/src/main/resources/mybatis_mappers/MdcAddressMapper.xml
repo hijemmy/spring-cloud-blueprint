@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jemmy.product.mapper.MdcAddressMapper">
-    <resultMap id="BaseResultMap" type="com.jemmy.product.model.domain.MdcAddress" >
+<mapper namespace="com.jemmy.services.product.mapper.MdcAddressMapper">
+    <resultMap id="BaseResultMap" type="com.jemmy.services.product.model.domain.MdcAddress" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="pid" property="pid" jdbcType="BIGINT" />
@@ -42,13 +42,13 @@
             </if>
         </where>
     </sql>
-    <select id="selectMdcAddress" resultMap="BaseResultMap" parameterType="com.jemmy.product.model.domain.MdcAddress">
+    <select id="selectMdcAddress" resultMap="BaseResultMap" parameterType="com.jemmy.services.product.model.domain.MdcAddress">
         SELECT
         <include refid="Base_Column_List"/>
         FROM pc_mdc_address
         <include refid="Base_Where_Condition"/>
     </select>
-    <select id="selectAddressByPid" resultType="com.jemmy.product.model.domain.MdcAddress">
+    <select id="selectAddressByPid" resultType="com.jemmy.services.product.model.domain.MdcAddress">
         SELECT
           <include refid="Base_Column_List"/>
         FROM

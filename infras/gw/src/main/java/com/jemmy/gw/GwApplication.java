@@ -16,7 +16,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableZuulProxy
 @EnableOAuth2Sso
 @ServletComponentScan
-@ComponentScan(basePackages = {"com.jemmy.common.config","com.jemmy.gw"})
+@ComponentScan(basePackages = {"com.jemmy.common.config","com.jemmy.common.zk","com.jemmy.gw"})
 @EnableSwaggerButler
 public class GwApplication {
 

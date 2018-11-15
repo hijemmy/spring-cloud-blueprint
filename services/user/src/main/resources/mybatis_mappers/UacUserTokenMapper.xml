@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jemmy.user.mapper.UacUserTokenMapper">
-    <resultMap id="BaseResultMap" type="com.jemmy.user.model.domain.UacUserToken">
+<mapper namespace="com.jemmy.services.user.mapper.UacUserTokenMapper">
+    <resultMap id="BaseResultMap" type="com.jemmy.services.user.model.domain.UacUserToken">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
         <result column="pid" jdbcType="BIGINT" property="pid"/>
@@ -32,7 +32,7 @@
         refresh_token, access_token_validity, refresh_token_validity, status, creator, creator_id,
         created_time, last_operator, last_operator_id, update_time, os, browser, login_time, group_id, group_name
     </sql>
-    <select id="selectTokenList" resultType="com.jemmy.user.model.domain.UacUserToken">
+    <select id="selectTokenList" resultType="com.jemmy.services.user.model.domain.UacUserToken">
 
         SELECT
         <include refid="Base_Column_List"/>,
