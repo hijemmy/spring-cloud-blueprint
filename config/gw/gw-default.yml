@@ -42,9 +42,9 @@ spring:
   jmx:
       enabled: true
   mail:
-    host: smtp.163.com
-    username: paascloudTest@163.com
-    password: a123456
+    host: smtp.126.com
+    username: jemmyCloudPrint@126.com
+    password: 123456abc
     port: 465
     protocol: smtp
     test-connection: false
