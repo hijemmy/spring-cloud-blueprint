@@ -70,9 +70,11 @@ spring:
   zipkin:
     rabbitmq:
       queue: zipkin
+    enabled: true
   sleuth:
     sampler:
       percentage: 0.2
+    enabled: true
 
 feign:
   hystrix:
