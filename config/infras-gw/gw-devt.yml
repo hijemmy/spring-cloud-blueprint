@@ -19,7 +19,7 @@ zuul:
       path: /uac/**
       sensitiveHeaders:
 #      strip-prefix: false
-      service-id: paascloud-provider-uac
+      service-id: service-user
       ribbon:
         eager-load:
           enabled: true
@@ -31,7 +31,7 @@ zuul:
     mdc-route:
       path: /mdc/**
       sensitiveHeaders:
-      service-id: paascloud-provider-mdc
+      service-id: service-product
       ribbon:
         eager-load:
           enabled: true
@@ -43,7 +43,7 @@ zuul:
     omc-route:
       path: /omc/**
       sensitiveHeaders:
-      service-id: paascloud-provider-omc
+      service-id: service-order
       ribbon:
         eager-load:
           enabled: true
@@ -55,7 +55,7 @@ zuul:
     opc-route:
       path: /opc/**
       sensitiveHeaders:
-      service-id: paascloud-provider-opc
+      service-id: service-opc
       ribbon:
         eager-load:
           enabled: true
@@ -79,7 +79,7 @@ zuul:
     tpc-route:
       path: /tpc/**
       sensitiveHeaders:
-      service-id: paascloud-provider-tpc
+      service-id: service-edriven
       ribbon:
         eager-load:
           enabled: true
