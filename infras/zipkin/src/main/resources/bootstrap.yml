@@ -4,7 +4,7 @@ spring:
       name: zipkin
       profile: pro
       discovery:
-        service-id: config
+        service-id: infras-config
         enabled: false
       label: master
       fail-fast: true
@@ -12,7 +12,7 @@ spring:
         max-attempts: 3
       enabled: false
   application:
-    name: zipkin
+    name: infras-zipkin
 
 logging:
   path: logs

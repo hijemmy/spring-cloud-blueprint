@@ -1,6 +1,6 @@
 spring:
   application:
-    name: paascloud-provider-tpc
+    name: service-edriven
   autoconfigure:
     exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
   cloud:
@@ -8,7 +8,7 @@ spring:
       name: edriven
       profile: pro
       discovery:
-        service-id: config
+        service-id: infras-config
         enabled: false
       label: master
       fail-fast: true
@@ -18,7 +18,7 @@ spring:
     bus:
       enabled: false
   zipkin:
-    base-url: http://monitor/
+    base-url: http://infras-zipin/
     sender:
       type: rabbit
     enabled: false

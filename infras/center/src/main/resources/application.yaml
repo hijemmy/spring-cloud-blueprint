@@ -1,8 +1,6 @@
 # 开启调试模式
 #debug: true
 spring:
-  application:
-    name: center
   http:
     encoding:
       force: true

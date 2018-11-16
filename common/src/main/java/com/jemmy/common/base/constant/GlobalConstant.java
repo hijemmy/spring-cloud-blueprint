@@ -54,11 +54,16 @@ public class GlobalConstant {
 	/**
 	 * 微服务名称
 	 */
-	public static final String MICRO_SERVICE_NAME_ORDER="paascloud-provider-omc";
-	public static final String MICRO_SERVICE_NAME_PRODUCT="paascloud-provider-mdc";
-	public static final String MICRO_SERVICE_NAME_OPC="paascloud-provider-opc";
-	public static final String MICRO_SERVICE_NAME_USER="paascloud-provider-uac";
-	public static final String MICRO_SERVICE_NAME_EDRIVEN="paascloud-provider-tpc";
+	public static final String MICRO_SERVICE_NAME_ORDER="service-order";
+	public static final String MICRO_SERVICE_NAME_PRODUCT="service-product";
+	public static final String MICRO_SERVICE_NAME_OPC="service-opc";
+	public static final String MICRO_SERVICE_NAME_USER="service-user";
+	public static final String MICRO_SERVICE_NAME_EDRIVEN="service-edriven";
+	public static final String INFRAS_SERVICE_NAME_MONITOR="infras-monitor";
+	public static final String INFRAS_SERVICE_NAME_ZIPKIN="infras-zipkin";
+	public static final String INFRAS_SERVICE_NAME_GW="infras-gw";
+	public static final String INFRAS_SERVICE_NAME_CONFIG="infras-config";
+	public static final String INFRAS_SERVICE_NAME_CENTER="infras-center";
 
 	public interface Number {
 		int THOUSAND_INT = 1000;

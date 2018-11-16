@@ -1,6 +1,6 @@
 spring:
   application:
-    name: center
+    name: infras-center
 eureka:
   instance:
     prefer-ip-address: true

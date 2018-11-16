@@ -74,8 +74,8 @@
           },
           url: '/uac/auth/form',
           auth: {
-            username: 'paascloud-client-uac',
-            password: 'paascloudClientSecret'
+            username: 'client-service-uac',
+            password: 'oauth2ClientSecret'
           },
           params: {
             username: loginName,

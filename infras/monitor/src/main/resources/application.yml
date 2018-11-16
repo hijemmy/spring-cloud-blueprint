@@ -44,8 +44,6 @@ security:
 server:
     port: 9090
 spring:
-    application:
-        name: monitor
     boot:
         admin:
             auth:
@@ -55,7 +53,7 @@ spring:
             routes:
                 endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
             turbine:
-                clusters: gw,paascloud-provider-uac,paascloud-provider-omc,paascloud-provider-mdc,paascloud-provider-opc,paascloud-provider-tpc
+                clusters: infras-gw,service-user,service-opc,service-product,service-order,service-edriven
                 location: http://${spring.cloud.client.ipAddress}:${turbine.stream.port}
     main:
         banner-mode: 'off'

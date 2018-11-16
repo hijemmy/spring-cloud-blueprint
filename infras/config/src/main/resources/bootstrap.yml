@@ -6,11 +6,10 @@ spring:
           search-paths: /config/**
           uri: https://github.com/hijemmy/spring-cloud-blueprint
         bootstrap: true
-      name: config
       profile: dev
       enabled: false
   application:
-    name: config
+    name: infras-config
 server:
   port: 9010
 eureka:
