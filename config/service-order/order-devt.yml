@@ -50,7 +50,7 @@ jemmycloud:
       enable: false
       reliableMessageConsumer: false
       reliableMessageProducer: false
-      instanceName: paascloud-provider-omc
+      instanceName: service-order
       consumerGroup: CID_OMC
       producerGroup: PID_OMC
   token:
@@ -59,7 +59,7 @@ jemmycloud:
   zk:
     zkAddressList: paascloud-provider-zk:2181
   oauth2:
-    jwtSigningKey: paascloud
+    jwtSigningKey: jemmycloud
     client:
       id: ${security.oauth2.resource.id}
       accessTokenUrl: ${security.oauth2.client.access-token-uri}

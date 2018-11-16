@@ -48,7 +48,7 @@ jemmycloud:
       enable: true
       reliableMessageConsumer: false
       reliableMessageProducer: true
-      instanceName: paascloud-provider-uac
+      instanceName: service-user
       consumerGroup: CID_UAC
       producerGroup: PID_UAC
   auth:
@@ -59,7 +59,7 @@ jemmycloud:
     interceptor:
       enable: true
   oauth2:
-    jwtSigningKey: paascloud
+    jwtSigningKey: jemmycloud
     client:
       id: ${security.oauth2.resource.id}
       accessTokenUrl: ${security.oauth2.client.access-token-uri}

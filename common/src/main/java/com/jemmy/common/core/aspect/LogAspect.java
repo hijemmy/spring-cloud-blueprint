@@ -35,6 +35,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
 
+import static com.jemmy.common.base.constant.GlobalConstant.MICRO_SERVICE_NAME_USER;
+
 /**
  * The class Log aspect.
  *
@@ -132,7 +134,7 @@ public class LogAspect {
 
 			getControllerMethodDescription(relog, operationLogDto, result, joinPoint);
 			threadLocal.remove();
-			taskExecutor.execute(() -> this.restTemplate.postForObject("http://paascloud-provider-uac/auth/saveLog", operationLogDto, Integer.class));
+			taskExecutor.execute(() -> this.restTemplate.postForObject("http://"+MICRO_SERVICE_NAME_USER+"/auth/saveLog", operationLogDto, Integer.class));
 		} catch (Exception ex) {
 			log.error("获取注解类出现异常={}", ex.getMessage(), ex);
 		}

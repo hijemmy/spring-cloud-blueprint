@@ -68,7 +68,7 @@ jemmycloud:
       publicHost:
       fileMaxSize: 104857600
   oauth2:
-    jwtSigningKey: paascloud
+    jwtSigningKey: jemmycloud
     client:
       id: ${security.oauth2.resource.id}
       accessTokenUrl: ${security.oauth2.client.access-token-uri}
@@ -85,7 +85,7 @@ jemmycloud:
       reliableMessageConsumer: true
       reliableMessageProducer: false
       namesrvAddr: paascloud-mq-rocket:9876
-      instanceName: paascloud-provider-opc
+      instanceName: service-opc
       consumerGroup: CID_OPC
       producerGroup: PID_OPC
     sms:

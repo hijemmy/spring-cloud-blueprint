@@ -58,10 +58,10 @@ jemmycloud:
       reliableMessageConsumer: false
       reliableMessageProducer: true
       namesrvAddr: paascloud-mq-rocket:9876
-      instanceName: paascloud-provider-tpc
+      instanceName: service-edriven
       producerGroup: PID_TPC
   oauth2:
-    jwtSigningKey: paascloud
+    jwtSigningKey: jemmycloud
     client:
       id: ${security.oauth2.resource.id}
       accessTokenUrl: ${security.oauth2.client.access-token-uri}
