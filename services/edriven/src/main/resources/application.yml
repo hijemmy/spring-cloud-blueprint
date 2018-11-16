@@ -223,6 +223,6 @@ server:
     max-connections: 600
     accept-count: 100
 mapper:
-  mappers: com.jemmy.common.mybatis.mapper.RootMapper
+  mappers: com.jemmy.common.core.mybatis.RootMapper
   not-empty: false
   identity: MYSQL
