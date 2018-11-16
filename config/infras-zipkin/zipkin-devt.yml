@@ -15,6 +15,7 @@ zipkin:
       addresses: paascloud-mq-rabbit:5672
       username: guest
       password: guest
+      virtual-host: jemmyweb
       queue: zipkin
   storage:
     type: mysql
