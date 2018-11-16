@@ -15,11 +15,11 @@ import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.edriven.model.domain.TpcMqTopic;
 import com.jemmy.services.edriven.model.vo.TpcMqTopicVo;
 import com.jemmy.services.edriven.service.TpcMqTopicService;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -56,11 +56,11 @@ public class TpcMqTopicController extends BaseController {
 	 */
 	@PostMapping(value = "/queryTopicListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询MQ topic列表")
-	public Wrapper<List<TpcMqTopicVo>> queryTopicListWithPage(@ApiParam(name = "topic", value = "MQ-Topic") @RequestBody TpcMqTopic tpcMqTopic) {
+	public MvcResult<List<TpcMqTopicVo>> queryTopicListWithPage(@ApiParam(name = "topic", value = "MQ-Topic") @RequestBody TpcMqTopic tpcMqTopic) {
 
 		logger.info("查询角色列表tpcMqTopicQuery={}", tpcMqTopic);
 		List<TpcMqTopicVo> list = tpcMqTopicService.listWithPage(tpcMqTopic);
-		return WrapMapper.ok(list);
+		return MvcResultBuilder.ok(list);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class TpcMqTopicController extends BaseController {
 	@PostMapping(value = "/modifyStatusById")
 	@ApiOperation(httpMethod = "POST", value = "修改topic状态")
 	@LogAnnotation
-	public Wrapper modifyTopicStatusById(@ApiParam(value = "修改topic状态") @RequestBody UpdateStatusDto updateStatusDto) {
+	public MvcResult modifyTopicStatusById(@ApiParam(value = "修改topic状态") @RequestBody UpdateStatusDto updateStatusDto) {
 		logger.info("修改topic状态 updateStatusDto={}", updateStatusDto);
 		Long roleId = updateStatusDto.getId();
 

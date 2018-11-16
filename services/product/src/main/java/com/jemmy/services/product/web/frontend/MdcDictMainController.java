@@ -14,8 +14,8 @@ package com.jemmy.services.product.web.frontend;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.model.domain.MdcDict;
 import com.jemmy.services.product.model.dto.MdcEditDictDto;
 import com.jemmy.services.product.model.vo.MdcDictVo;
@@ -50,9 +50,9 @@ public class MdcDictMainController extends BaseController {
 	 */
 	@PostMapping(value = "/getTree")
 	@ApiOperation(httpMethod = "POST", value = "获取字典树")
-	public Wrapper<List<MdcDictVo>> queryDictTreeList() {
+	public MvcResult<List<MdcDictVo>> queryDictTreeList() {
 		List<MdcDictVo> dictVoList = mdcDictService.getDictTreeList();
-		return WrapMapper.ok(dictVoList);
+		return MvcResultBuilder.ok(dictVoList);
 	}
 
 	/**
@@ -64,10 +64,10 @@ public class MdcDictMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据ID获取字典信息")
-	public Wrapper<MdcDictVo> queryDictVoById(@ApiParam(name = "id", value = "字典id") @PathVariable Long id) {
+	public MvcResult<MdcDictVo> queryDictVoById(@ApiParam(name = "id", value = "字典id") @PathVariable Long id) {
 		logger.info("根据Id查询字典信息, dictId={}", id);
 		MdcDictVo mdcDictVo = mdcDictService.getMdcDictVoById(id);
-		return WrapMapper.ok(mdcDictVo);
+		return MvcResultBuilder.ok(mdcDictVo);
 	}
 
 
@@ -78,21 +78,21 @@ public class MdcDictMainController extends BaseController {
 	 */
 	@PostMapping(value = "/modifyStatus")
 	@ApiOperation(httpMethod = "POST", value = "根据id修改字典的禁用状态")
-	public Wrapper updateMdcDictStatusById(@ApiParam(name = "mdcDictStatusDto", value = "修改字典状态Dto") @RequestBody UpdateStatusDto updateStatusDto) {
+	public MvcResult updateMdcDictStatusById(@ApiParam(name = "mdcDictStatusDto", value = "修改字典状态Dto") @RequestBody UpdateStatusDto updateStatusDto) {
 		logger.info("根据id修改字典的禁用状态 updateStatusDto={}", updateStatusDto);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		mdcDictService.updateMdcDictStatusById(updateStatusDto, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@PostMapping(value = "/save")
 	@ApiOperation(httpMethod = "POST", value = "编辑字典")
-	public Wrapper saveDict(@ApiParam(name = "saveDict", value = "编辑字典") @RequestBody MdcEditDictDto mdcDictAddDto) {
+	public MvcResult saveDict(@ApiParam(name = "saveDict", value = "编辑字典") @RequestBody MdcEditDictDto mdcDictAddDto) {
 		MdcDict mdcDict = new MdcDict();
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		BeanUtils.copyProperties(mdcDictAddDto, mdcDict);
 		mdcDictService.saveMdcDict(mdcDict, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -104,12 +104,12 @@ public class MdcDictMainController extends BaseController {
 	 */
 	@PostMapping(value = "/deleteById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据id删除字典")
-	public Wrapper<Integer> deleteMdcDictById(@ApiParam(name = "id", value = "字典id") @PathVariable Long id) {
+	public MvcResult<Integer> deleteMdcDictById(@ApiParam(name = "id", value = "字典id") @PathVariable Long id) {
 		logger.info(" 根据id删除字典 id={}", id);
 		// 判断此字典是否有子节点
 		boolean hasChild = mdcDictService.checkDictHasChildDict(id);
 		if (hasChild) {
-			return WrapMapper.wrap(Wrapper.ERROR_CODE, "此字典含有子字典, 请先删除子字典");
+			return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, "此字典含有子字典, 请先删除子字典");
 		}
 
 		int result = mdcDictService.deleteByKey(id);

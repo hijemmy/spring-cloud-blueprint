@@ -17,8 +17,8 @@ import com.jemmy.apis.product.service.MdcProductFeignApi;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.util.PubUtils;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.service.MdcProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,16 +44,16 @@ public class MdcProductFeignClient extends BaseController implements MdcProductF
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "更新商品库存")
-	public Wrapper<Integer> updateProductStockById(@RequestBody ProductDto productDto) {
+	public MvcResult<Integer> updateProductStockById(@RequestBody ProductDto productDto) {
 		logger.info("更新商品库存. productDto={}", productDto);
 		Preconditions.checkArgument(!PubUtils.isNull(productDto, productDto.getId()), ErrorCodeEnum.MDC10021021.msg());
 		int result = mdcProductService.updateProductStockById(productDto);
-		return WrapMapper.ok(result);
+		return MvcResultBuilder.ok(result);
 	}
 
 	@Override
-	public Wrapper<String> getMainImage(@RequestParam("productId") Long productId) {
+	public MvcResult<String> getMainImage(@RequestParam("productId") Long productId) {
 		String mainImage = mdcProductService.getMainImage(productId);
-		return WrapMapper.ok(mainImage);
+		return MvcResultBuilder.ok(mainImage);
 	}
 }

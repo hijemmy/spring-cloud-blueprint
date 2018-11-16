@@ -13,8 +13,8 @@ package com.jemmy.services.user.web.admin;
 
 
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.domain.UacAction;
 import com.jemmy.services.user.model.dto.action.UacActionCheckCodeDto;
 import com.jemmy.services.user.model.dto.action.UacActionCheckUrlDto;
@@ -54,7 +54,7 @@ public class UacActionCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkActionCode")
 	@ApiOperation(httpMethod = "POST", value = "检测权限编码是否已存在")
-	public Wrapper<Boolean> checkActionCode(@ApiParam(name = "uacActionCheckCodeDto", value = "id与url") @RequestBody UacActionCheckCodeDto uacActionCheckCodeDto) {
+	public MvcResult<Boolean> checkActionCode(@ApiParam(name = "uacActionCheckCodeDto", value = "id与url") @RequestBody UacActionCheckCodeDto uacActionCheckCodeDto) {
 		logger.info("校验权限编码唯一性 uacActionCheckCodeDto={}", uacActionCheckCodeDto);
 
 		Long id = uacActionCheckCodeDto.getActionId();
@@ -69,7 +69,7 @@ public class UacActionCommonController extends BaseController {
 		criteria.andEqualTo("actionCode", actionCode);
 
 		int result = uacActionService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class UacActionCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkUrl")
 	@ApiOperation(httpMethod = "POST", value = "检测权限URL唯一性")
-	public Wrapper<Boolean> checkActionUrl(@ApiParam(name = "uacActionCheckUrlDto", value = "id与url") @RequestBody UacActionCheckUrlDto uacActionCheckUrlDto) {
+	public MvcResult<Boolean> checkActionUrl(@ApiParam(name = "uacActionCheckUrlDto", value = "id与url") @RequestBody UacActionCheckUrlDto uacActionCheckUrlDto) {
 		logger.info("检测权限URL唯一性 uacActionCheckUrlDto={}", uacActionCheckUrlDto);
 
 		Long id = uacActionCheckUrlDto.getActionId();
@@ -96,6 +96,6 @@ public class UacActionCommonController extends BaseController {
 		criteria.andEqualTo("url", url);
 
 		int result = uacActionService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 }

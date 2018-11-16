@@ -14,8 +14,8 @@ package com.jemmy.services.user.web.admin;
 import com.jemmy.apis.user.enums.UacGroupTypeEnum;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacGroup;
 import com.jemmy.services.user.model.dto.group.CheckGroupCodeDto;
 import com.jemmy.services.user.model.dto.group.CheckGroupNameDto;
@@ -52,14 +52,14 @@ public class UacGroupCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/getGroupTree")
 	@ApiOperation(httpMethod = "POST", value = "根据当前登录人查询组织列表")
-	public Wrapper<List<GroupZtreeVo>> getGroupTreeById() {
+	public MvcResult<List<GroupZtreeVo>> getGroupTreeById() {
 
 		logger.info("根据当前登录人查询组织列表");
 		LoginAuthDto loginAuthDto = super.getLoginAuthDto();
 		Long groupId = loginAuthDto.getGroupId();
 		UacGroup uacGroup = uacGroupService.queryById(groupId);
 		List<GroupZtreeVo> tree = uacGroupService.getGroupTree(uacGroup.getId());
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "操作成功", tree);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, "操作成功", tree);
 	}
 
 	/**
@@ -71,12 +71,12 @@ public class UacGroupCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/getGroupTree/{groupId}")
 	@ApiOperation(httpMethod = "POST", value = "通过组织ID查询组织列表")
-	public Wrapper<List<GroupZtreeVo>> getGroupTreeById(@ApiParam(name = "groupId", value = "通过组织ID查询组织列表") @PathVariable Long groupId) {
+	public MvcResult<List<GroupZtreeVo>> getGroupTreeById(@ApiParam(name = "groupId", value = "通过组织ID查询组织列表") @PathVariable Long groupId) {
 
 		logger.info("通过组织ID查询组织列表 groupId={}", groupId);
 
 		List<GroupZtreeVo> tree = uacGroupService.getGroupTree(groupId);
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "操作成功", tree);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, "操作成功", tree);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class UacGroupCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkGroupName")
 	@ApiOperation(httpMethod = "POST", value = "编辑校验组织名唯一性")
-	public Wrapper<Boolean> checkGroupName(@ApiParam(name = "checkGroupName", value = "组织名称") @RequestBody CheckGroupNameDto checkGroupNameDto) {
+	public MvcResult<Boolean> checkGroupName(@ApiParam(name = "checkGroupName", value = "组织名称") @RequestBody CheckGroupNameDto checkGroupNameDto) {
 		logger.info("校验组织名称唯一性 checkGroupNameDto={}", checkGroupNameDto);
 
 		Long id = checkGroupNameDto.getGroupId();
@@ -103,7 +103,7 @@ public class UacGroupCommonController extends BaseController {
 		criteria.andEqualTo("groupName", groupName);
 
 		int result = uacGroupService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class UacGroupCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkGroupCode")
 	@ApiOperation(httpMethod = "POST", value = "修改校验组织编码唯一性")
-	public Wrapper<Boolean> checkGroupCode(@ApiParam(name = "checkGroupCode", value = "组织相关信息") @RequestBody CheckGroupCodeDto checkGroupCodeDto) {
+	public MvcResult<Boolean> checkGroupCode(@ApiParam(name = "checkGroupCode", value = "组织相关信息") @RequestBody CheckGroupCodeDto checkGroupCodeDto) {
 		logger.info("校验组织编码唯一性 checkGroupCodeDto={}", checkGroupCodeDto);
 
 		Long id = checkGroupCodeDto.getGroupId();
@@ -130,7 +130,7 @@ public class UacGroupCommonController extends BaseController {
 		criteria.andEqualTo("groupCode", groupCode);
 
 		int result = uacGroupService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -140,9 +140,9 @@ public class UacGroupCommonController extends BaseController {
 	 */
 	@PostMapping(value = "queryGroupType")
 	@ApiOperation(httpMethod = "POST", value = "查询组织类型")
-	public Wrapper<List<Map<String, String>>> queryGroupType() {
+	public MvcResult<List<Map<String, String>>> queryGroupType() {
 		List<Map<String, String>> groupTypeList = UacGroupTypeEnum.getMap2List();
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, groupTypeList);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, MvcResult.SUCCESS_MESSAGE, groupTypeList);
 	}
 
 }

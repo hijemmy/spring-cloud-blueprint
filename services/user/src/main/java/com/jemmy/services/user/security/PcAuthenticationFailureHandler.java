@@ -1,7 +1,7 @@
 package com.jemmy.services.user.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jemmy.common.util.wrapper.WrapMapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
@@ -44,7 +44,7 @@ public class PcAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 
 		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().write(objectMapper.writeValueAsString(WrapMapper.error(exception.getMessage())));
+		response.getWriter().write(objectMapper.writeValueAsString(MvcResultBuilder.error(exception.getMessage())));
 
 	}
 

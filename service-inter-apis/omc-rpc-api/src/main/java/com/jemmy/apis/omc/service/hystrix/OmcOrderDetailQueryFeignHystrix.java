@@ -13,7 +13,7 @@ package com.jemmy.apis.omc.service.hystrix;
 
 import com.jemmy.apis.omc.model.dto.OrderDetailDto;
 import com.jemmy.apis.omc.service.OmcOrderDetailQueryFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 public class OmcOrderDetailQueryFeignHystrix implements OmcOrderDetailQueryFeignApi {
 
 	@Override
-	public Wrapper<List<OrderDetailDto>> getListByOrderNoUserId(final String orderNo, final Long userId) {
+	public MvcResult<List<OrderDetailDto>> getListByOrderNoUserId(final String orderNo, final Long userId) {
 		return null;
 	}
 }

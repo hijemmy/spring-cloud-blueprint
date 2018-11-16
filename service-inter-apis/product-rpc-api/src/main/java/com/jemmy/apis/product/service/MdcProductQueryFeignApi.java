@@ -16,7 +16,7 @@ import com.jemmy.apis.product.model.vo.ProductDetailVo;
 import com.jemmy.apis.product.service.hystrix.MdcProductQueryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
 import com.jemmy.common.util.annotation.NoNeedAccessAuthentication;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +40,7 @@ public interface MdcProductQueryFeignApi {
 	 */
 	@PostMapping(value = "/api/product/getProductDetail/{productId}")
 	@NoNeedAccessAuthentication
-	Wrapper<ProductDetailVo> getProductDetail(@PathVariable("productId") Long productId);
+    MvcResult<ProductDetailVo> getProductDetail(@PathVariable("productId") Long productId);
 
 	/**
 	 * Select by id wrapper.
@@ -51,5 +51,5 @@ public interface MdcProductQueryFeignApi {
 	 */
 	@PostMapping(value = "/api/product/selectById/{productId}")
 	@NoNeedAccessAuthentication
-	Wrapper<ProductDto> selectById(@PathVariable("productId") Long productId);
+    MvcResult<ProductDto> selectById(@PathVariable("productId") Long productId);
 }

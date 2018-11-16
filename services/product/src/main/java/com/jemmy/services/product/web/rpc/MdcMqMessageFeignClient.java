@@ -18,8 +18,8 @@ import com.jemmy.apis.rmq.service.MqMessageService;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
@@ -43,13 +43,13 @@ public class MdcMqMessageFeignClient extends BaseController implements MdcMqMess
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "查询含有的messageKey")
-	public Wrapper<List<String>> queryMessageKeyList(@RequestParam("messageKeyList") List<String> messageKeyList) {
+	public MvcResult<List<String>> queryMessageKeyList(@RequestParam("messageKeyList") List<String> messageKeyList) {
 		logger.info("查询消息KEY. messageKeyList={}", messageKeyList);
-		return WrapMapper.ok(mqMessageService.queryMessageKeyList(messageKeyList));
+		return MvcResultBuilder.ok(mqMessageService.queryMessageKeyList(messageKeyList));
 	}
 
 	@Override
-	public Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(@RequestBody MessageQueryDto messageQueryDto) {
+	public MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(@RequestBody MessageQueryDto messageQueryDto) {
 		return mqMessageService.queryMessageListWithPage(messageQueryDto);
 	}
 }

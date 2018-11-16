@@ -14,8 +14,8 @@ package com.jemmy.services.product.web.rpc;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
 import com.jemmy.apis.product.service.MdcExceptionLogFeignApi;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.service.MdcExceptionLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,12 +42,12 @@ public class MdcExceptionLogFeignClient extends BaseController implements MdcExc
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "保存日志并发送钉钉消息")
-	public Wrapper saveAndSendExceptionLog(@RequestBody GlobalExceptionLogDto exceptionLogDto) {
+	public MvcResult saveAndSendExceptionLog(@RequestBody GlobalExceptionLogDto exceptionLogDto) {
 		try {
 			mdcExceptionLogService.saveAndSendExceptionLog(exceptionLogDto);
 		} catch (Exception e) {
 			log.error("saveAndSendExceptionLog={}", e.getMessage(), e);
 		}
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

@@ -42,7 +42,7 @@ const getters = {
   },
   getRedirectUri: (state) => {
     if (!state.redirectUri) {
-      state.redirectUri = PcCookie.get(enums.USER.REDIRECT_URI) ? PcCookie.get(enums.USER.REDIRECT_URI) : 'http://mall.paascloud.net';
+      state.redirectUri = PcCookie.get(enums.USER.REDIRECT_URI) ? PcCookie.get(enums.USER.REDIRECT_URI) : 'http://dev-mall.passcloud.net';
     }
     return state.redirectUri;
   }

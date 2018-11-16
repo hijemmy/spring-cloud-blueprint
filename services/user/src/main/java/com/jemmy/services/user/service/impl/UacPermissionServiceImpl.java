@@ -25,7 +25,7 @@ import java.util.Set;
 @Component("permissionService")
 public class UacPermissionServiceImpl implements UacPermissionService {
 	private AntPathMatcher antPathMatcher = new AntPathMatcher();
-	private static final String OAUTH2_CLIENT_PREFIX = "paascloud-client-";
+	private static final String OAUTH2_CLIENT_PREFIX = "client-";
 
 	@Resource
 	private ClientDetailsService clientDetailsService;

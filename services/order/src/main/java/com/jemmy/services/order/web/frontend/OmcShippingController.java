@@ -13,12 +13,10 @@ package com.jemmy.services.order.web.frontend;
 
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.services.order.model.domain.OmcShipping;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.order.model.domain.OmcShipping;
 import com.jemmy.services.order.service.OmcShippingService;
-import com.jemmy.services.order.service.OmcShippingService;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
@@ -48,7 +46,7 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("/addShipping")
 	@ApiOperation(httpMethod = "POST", value = "增加收货人地址")
-	public Wrapper addShipping(OmcShipping shipping) {
+	public MvcResult addShipping(OmcShipping shipping) {
 
 		logger.info("addShipping - 增加收货人地址. shipping={}", shipping);
 		int result = omcShippingService.saveShipping(getLoginAuthDto(), shipping);
@@ -65,7 +63,7 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("/deleteShipping/{shippingId}")
 	@ApiOperation(httpMethod = "POST", value = "删除收货人地址")
-	public Wrapper deleteShipping(@PathVariable Integer shippingId) {
+	public MvcResult deleteShipping(@PathVariable Integer shippingId) {
 		Long userId = getLoginAuthDto().getUserId();
 		logger.info("deleteShipping - 删除收货人地址. userId={}, shippingId={}", userId, shippingId);
 		int result = omcShippingService.deleteShipping(userId, shippingId);
@@ -81,7 +79,7 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("/updateShipping")
 	@ApiOperation(httpMethod = "POST", value = "编辑收货人地址")
-	public Wrapper updateShipping(OmcShipping shipping) {
+	public MvcResult updateShipping(OmcShipping shipping) {
 		logger.info("updateShipping - 编辑收货人地址. shipping={}", shipping);
 		int result = omcShippingService.saveShipping(getLoginAuthDto(), shipping);
 		return handleResult(result);
@@ -96,7 +94,7 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("/setDefaultAddress/{addressId}")
 	@ApiOperation(httpMethod = "POST", value = "设置默认收货地址")
-	public Wrapper setDefaultAddress(@PathVariable Long addressId) {
+	public MvcResult setDefaultAddress(@PathVariable Long addressId) {
 		logger.info("updateShipping - 设置默认地址. addressId={}", addressId);
 		int result = omcShippingService.setDefaultAddress(getLoginAuthDto(), addressId);
 		return handleResult(result);
@@ -111,11 +109,11 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("/selectShippingById/{shippingId}")
 	@ApiOperation(httpMethod = "POST", value = "根据Id查询收货人地址")
-	public Wrapper<OmcShipping> selectShippingById(@PathVariable Long shippingId) {
+	public MvcResult<OmcShipping> selectShippingById(@PathVariable Long shippingId) {
 		Long userId = getLoginAuthDto().getUserId();
 		logger.info("selectShippingById - 根据Id查询收货人地址. userId={}, shippingId={}", userId, shippingId);
 		OmcShipping omcShipping = omcShippingService.selectByShippingIdUserId(userId, shippingId);
-		return WrapMapper.ok(omcShipping);
+		return MvcResultBuilder.ok(omcShipping);
 	}
 
 	/**
@@ -127,11 +125,11 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("queryUserShippingListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "分页查询当前用户收货人地址列表")
-	public Wrapper<PageInfo> queryUserShippingListWithPage(@RequestBody OmcShipping shipping) {
+	public MvcResult<PageInfo> queryUserShippingListWithPage(@RequestBody OmcShipping shipping) {
 		Long userId = getLoginAuthDto().getUserId();
 		logger.info("queryUserShippingListWithPage - 分页查询当前用户收货人地址列表.userId={} shipping={}", userId, shipping);
 		PageInfo pageInfo = omcShippingService.queryListWithPageByUserId(userId, shipping.getPageNum(), shipping.getPageSize());
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	/**
@@ -143,10 +141,10 @@ public class OmcShippingController extends BaseController {
 	 */
 	@PostMapping("queryShippingListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "分页查询收货人地址列表")
-	public Wrapper<PageInfo> queryShippingListWithPage(@RequestBody OmcShipping shipping) {
+	public MvcResult<PageInfo> queryShippingListWithPage(@RequestBody OmcShipping shipping) {
 		logger.info("queryShippingListWithPage - 分页查询收货人地址列表. shipping={}", shipping);
 		PageInfo pageInfo = omcShippingService.queryShippingListWithPage(shipping);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 }

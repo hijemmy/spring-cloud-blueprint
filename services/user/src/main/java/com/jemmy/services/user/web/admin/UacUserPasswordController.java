@@ -16,8 +16,8 @@ import com.jemmy.apis.user.user.UserRegisterDto;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.dto.user.UserModifyPwdDto;
 import com.jemmy.services.user.service.UacUserService;
 import io.swagger.annotations.Api;
@@ -54,7 +54,7 @@ public class UacUserPasswordController extends BaseController {
 	@PostMapping(value = "/modifyUserPwd")
 	@LogAnnotation
 	@ApiOperation(httpMethod = "POST", value = "用户修改密码")
-	public Wrapper<Integer> modifyUserPwd(@ApiParam(name = "userModifyPwdDto", value = "用户修改密码Dto") @RequestBody UserModifyPwdDto userModifyPwdDto) {
+	public MvcResult<Integer> modifyUserPwd(@ApiParam(name = "userModifyPwdDto", value = "用户修改密码Dto") @RequestBody UserModifyPwdDto userModifyPwdDto) {
 		logger.info("==》vue用户修改密码, userModifyPwdDto={}", userModifyPwdDto);
 
 		logger.info("旧密码 oldPassword = {}", userModifyPwdDto.getOldPassword());
@@ -77,9 +77,9 @@ public class UacUserPasswordController extends BaseController {
 	 */
 	@PostMapping(value = "/registerUser")
 	@ApiOperation(httpMethod = "POST", value = "注册新用户")
-	public Wrapper registerUser(@ApiParam(name = "registerDto", value = "用户注册Dto") @RequestBody UserRegisterDto registerDto) {
+	public MvcResult registerUser(@ApiParam(name = "registerDto", value = "用户注册Dto") @RequestBody UserRegisterDto registerDto) {
 		logger.info("vue注册开始。注册参数：{}", registerDto);
 		uacUserService.register(registerDto);
-		return WrapMapper.ok("注册成功");
+		return MvcResultBuilder.ok("注册成功");
 	}
 }

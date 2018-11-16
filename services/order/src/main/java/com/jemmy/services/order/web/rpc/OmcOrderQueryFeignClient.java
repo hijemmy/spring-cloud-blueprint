@@ -14,8 +14,8 @@ package com.jemmy.services.order.web.rpc;
 import com.jemmy.apis.omc.model.dto.OrderDto;
 import com.jemmy.apis.omc.service.OmcOrderQueryFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.order.service.OmcOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,17 +40,17 @@ public class OmcOrderQueryFeignClient extends BaseController implements OmcOrder
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据订单号查询订单信息")
-	public Wrapper<OrderDto> queryByOrderNo(@PathVariable("orderNo") String orderNo) {
+	public MvcResult<OrderDto> queryByOrderNo(@PathVariable("orderNo") String orderNo) {
 		logger.info("selectByOrderNo - 根据订单号查询订单信息. orderNo={}", orderNo);
 		OrderDto orderDto = omcOrderService.queryOrderDtoByOrderNo(orderNo);
-		return WrapMapper.ok(orderDto);
+		return MvcResultBuilder.ok(orderDto);
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据订单号查询用户订单信息")
-	public Wrapper<OrderDto> queryByUserIdAndOrderNo(@PathVariable("userId") Long userId, @PathVariable("orderNo") String orderNo) {
+	public MvcResult<OrderDto> queryByUserIdAndOrderNo(@PathVariable("userId") Long userId, @PathVariable("orderNo") String orderNo) {
 		logger.info("selectByUserIdAndOrderNo - 根据订单号查询用户订单信息. userId={}, orderNo={}", userId, orderNo);
 		OrderDto orderDto = omcOrderService.queryOrderDtoByUserIdAndOrderNo(userId, orderNo);
-		return WrapMapper.ok(orderDto);
+		return MvcResultBuilder.ok(orderDto);
 	}
 }

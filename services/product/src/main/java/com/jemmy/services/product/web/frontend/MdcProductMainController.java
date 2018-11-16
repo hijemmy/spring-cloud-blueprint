@@ -15,8 +15,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.model.domain.MdcProduct;
 import com.jemmy.services.product.model.dto.MdcEditProductDto;
 import com.jemmy.services.product.model.vo.ProductVo;
@@ -52,13 +52,13 @@ public class MdcProductMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryProductListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "分页查询商品列表")
-	public Wrapper<PageInfo<ProductVo>> queryProductListWithPage(@ApiParam(name = "mdcProduct", value = "商品信息") @RequestBody MdcProduct mdcProduct) {
+	public MvcResult<PageInfo<ProductVo>> queryProductListWithPage(@ApiParam(name = "mdcProduct", value = "商品信息") @RequestBody MdcProduct mdcProduct) {
 
 		logger.info("分页查询商品列表, mdcProduct={}", mdcProduct);
 		PageHelper.startPage(mdcProduct.getPageNum(), mdcProduct.getPageSize());
 		mdcProduct.setOrderBy("update_time desc");
 		List<ProductVo> roleVoList = mdcProductService.queryProductListWithPage(mdcProduct);
-		return WrapMapper.ok(new PageInfo<>(roleVoList));
+		return MvcResultBuilder.ok(new PageInfo<>(roleVoList));
 	}
 
 	/**
@@ -66,27 +66,27 @@ public class MdcProductMainController extends BaseController {
 	 */
 	@PostMapping(value = "/getById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "分页查询商品列表")
-	public Wrapper<ProductVo> getById(@PathVariable Long id) {
+	public MvcResult<ProductVo> getById(@PathVariable Long id) {
 		logger.info("查询商品详情, id={}", id);
 		ProductVo productVo = mdcProductService.getProductVo(id);
-		return WrapMapper.ok(productVo);
+		return MvcResultBuilder.ok(productVo);
 	}
 
 	@PostMapping(value = "/save")
 	@ApiOperation(httpMethod = "POST", value = "编辑商品")
 	@LogAnnotation
-	public Wrapper saveCategory(@RequestBody MdcEditProductDto mdcCategoryAddDto) {
+	public MvcResult saveCategory(@RequestBody MdcEditProductDto mdcCategoryAddDto) {
 		logger.info("编辑商品. mdcCategoryAddDto={}", mdcCategoryAddDto);
 		mdcProductService.saveProduct(mdcCategoryAddDto, getLoginAuthDto());
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@PostMapping(value = "/deleteProductById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "删除商品信息")
 	@LogAnnotation
-	public Wrapper<ProductVo> deleteProductById(@PathVariable Long id) {
+	public MvcResult<ProductVo> deleteProductById(@PathVariable Long id) {
 		logger.info("删除商品信息, id={}", id);
 		mdcProductService.deleteProductById(id);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

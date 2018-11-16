@@ -14,7 +14,7 @@ package com.jemmy.apis.product.service.hystrix;
 
 import com.jemmy.apis.product.model.dto.ProductDto;
 import com.jemmy.apis.product.service.MdcProductFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,12 +26,12 @@ import org.springframework.stereotype.Component;
 public class MdcProductFeignHystrix implements MdcProductFeignApi {
 
 	@Override
-	public Wrapper<Integer> updateProductStockById(final ProductDto productDto) {
+	public MvcResult<Integer> updateProductStockById(final ProductDto productDto) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<String> getMainImage(final Long productId) {
+	public MvcResult<String> getMainImage(final Long productId) {
 		return null;
 	}
 }

@@ -18,8 +18,8 @@ import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.annotation.ValidateAnnotation;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.core.utils.RequestUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.domain.UacAction;
 import com.jemmy.services.user.model.dto.action.ActionMainQueryDto;
 import com.jemmy.services.user.model.dto.base.ModifyStatusDto;
@@ -56,11 +56,11 @@ public class UacActionMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询角色列表")
-	public Wrapper queryUacActionListWithPage(@ApiParam(name = "action", value = "角色信息") @RequestBody ActionMainQueryDto action) {
+	public MvcResult queryUacActionListWithPage(@ApiParam(name = "action", value = "角色信息") @RequestBody ActionMainQueryDto action) {
 
 		logger.info("查询角色列表actionQuery={}", action);
 		PageInfo pageInfo = uacActionService.queryActionListWithPage(action);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class UacActionMainController extends BaseController {
 	@PostMapping(value = "/deleteActionById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "删除角色")
 	@LogAnnotation
-	public Wrapper deleteUacActionById(@ApiParam(name = "id", value = "角色id") @PathVariable Long id) {
+	public MvcResult deleteUacActionById(@ApiParam(name = "id", value = "角色id") @PathVariable Long id) {
 		int result = uacActionService.deleteActionById(id);
 		return super.handleResult(result);
 	}
@@ -88,10 +88,10 @@ public class UacActionMainController extends BaseController {
 	@PostMapping(value = "/batchDeleteByIdList")
 	@ApiOperation(httpMethod = "POST", value = "批量删除角色")
 	@LogAnnotation
-	public Wrapper batchDeleteByIdList(@ApiParam(name = "deleteIdList", value = "角色Id") @RequestBody List<Long> deleteIdList) {
+	public MvcResult batchDeleteByIdList(@ApiParam(name = "deleteIdList", value = "角色Id") @RequestBody List<Long> deleteIdList) {
 		logger.info("批量删除角色 idList={}", deleteIdList);
 		uacActionService.batchDeleteByIdList(deleteIdList);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 
@@ -106,10 +106,10 @@ public class UacActionMainController extends BaseController {
 	@ApiOperation(httpMethod = "POST", value = "新增角色")
 	@ValidateAnnotation
 	@LogAnnotation
-	public Wrapper save(@ApiParam(name = "action", value = "角色信息") @RequestBody UacAction action) {
+	public MvcResult save(@ApiParam(name = "action", value = "角色信息") @RequestBody UacAction action) {
 		LoginAuthDto loginAuthDto = RequestUtil.getLoginUser();
 		uacActionService.saveAction(action, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class UacActionMainController extends BaseController {
 	@PostMapping(value = "/modifyStatus")
 	@ApiOperation(httpMethod = "POST", value = "根据权限Id修改角色状态")
 	@LogAnnotation
-	public Wrapper modifyActionStatus(@ApiParam(name = "modifyActionStatus", value = "修改权限状态") @RequestBody ModifyStatusDto modifyStatusDto) {
+	public MvcResult modifyActionStatus(@ApiParam(name = "modifyActionStatus", value = "修改权限状态") @RequestBody ModifyStatusDto modifyStatusDto) {
 		logger.info("根据角色Id修改权限状态 modifyStatusDto={}", modifyStatusDto);
 		Long actionId = modifyStatusDto.getId();
 		Preconditions.checkArgument(actionId != null, "权限ID不能为空");

@@ -20,8 +20,7 @@ import com.jemmy.apis.product.exceptions.MdcBizException;
 import com.jemmy.apis.product.model.dto.ProductDto;
 import com.jemmy.services.order.service.MdcProductService;
 import com.jemmy.apis.product.model.vo.ProductDetailVo;
-import com.jemmy.services.order.service.MdcProductService;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -44,15 +43,15 @@ public class MdcProductServiceImpl implements MdcProductService {
 	public ProductDto selectById(Long productId) {
 		log.info("查询商品信息. productId={}", productId);
 		Preconditions.checkArgument(productId != null, ErrorCodeEnum.MDC10021021.msg());
-		Wrapper<ProductDto> productDtoWrapper = mdcProductQueryFeignApi.selectById(productId);
+		MvcResult<ProductDto> productDtoMvcResult = mdcProductQueryFeignApi.selectById(productId);
 
-		if (productDtoWrapper == null) {
+		if (productDtoMvcResult == null) {
 			throw new MdcBizException(ErrorCodeEnum.MDC10021003);
 		}
-		if (productDtoWrapper.error()) {
+		if (productDtoMvcResult.error()) {
 			throw new MdcBizException(ErrorCodeEnum.MDC10021004, productId);
 		}
-		return productDtoWrapper.getResult();
+		return productDtoMvcResult.getResult();
 
 	}
 
@@ -61,36 +60,36 @@ public class MdcProductServiceImpl implements MdcProductService {
 		log.info("获取商品详情. productId={}", productId);
 		Preconditions.checkArgument(productId != null, ErrorCodeEnum.MDC10021021.msg());
 
-		Wrapper<ProductDetailVo> wrapper = mdcProductQueryFeignApi.getProductDetail(productId);
+		MvcResult<ProductDetailVo> mvcResult = mdcProductQueryFeignApi.getProductDetail(productId);
 
-		if (wrapper == null) {
+		if (mvcResult == null) {
 			throw new MdcBizException(ErrorCodeEnum.GL99990002);
 		}
-		if (wrapper.error()) {
+		if (mvcResult.error()) {
 			throw new MdcBizException(ErrorCodeEnum.MDC10021004, productId);
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 
 	@Override
 	public int updateProductStockById(ProductDto productDto) {
 		Preconditions.checkArgument(productDto.getId() != null, ErrorCodeEnum.MDC10021021.msg());
-		Wrapper<Integer> wrapper = mdcProductFeignApi.updateProductStockById(productDto);
-		if (wrapper == null) {
+		MvcResult<Integer> mvcResult = mdcProductFeignApi.updateProductStockById(productDto);
+		if (mvcResult == null) {
 			throw new MdcBizException(ErrorCodeEnum.GL99990002);
 		}
-		if (wrapper.error()) {
+		if (mvcResult.error()) {
 			throw new MdcBizException(ErrorCodeEnum.MDC10021022, productDto.getId());
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 
 	@Override
 	public String getMainImage(final Long productId) {
-		Wrapper<String> wrapper = mdcProductFeignApi.getMainImage(productId);
-		if (wrapper == null) {
+		MvcResult<String> mvcResult = mdcProductFeignApi.getMainImage(productId);
+		if (mvcResult == null) {
 			throw new MdcBizException(ErrorCodeEnum.GL99990002);
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 }

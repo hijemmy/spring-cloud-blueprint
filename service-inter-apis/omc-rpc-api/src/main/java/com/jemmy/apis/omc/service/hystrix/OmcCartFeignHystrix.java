@@ -14,7 +14,7 @@ package com.jemmy.apis.omc.service.hystrix;
 
 import com.jemmy.apis.omc.model.vo.CartProductVo;
 import com.jemmy.apis.omc.service.OmcCartFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,27 +27,27 @@ import java.util.List;
 @Component
 public class OmcCartFeignHystrix implements OmcCartFeignApi {
 	@Override
-	public Wrapper updateCartList(final List<CartProductVo> cartProductVoList) {
+	public MvcResult updateCartList(final List<CartProductVo> cartProductVoList) {
 		return null;
 	}
 
 	@Override
-	public Wrapper addProduct(final Long userId, final Long productId, final Integer count) {
+	public MvcResult addProduct(final Long userId, final Long productId, final Integer count) {
 		return null;
 	}
 
 	@Override
-	public Wrapper updateProduct(final Long userId, final Long productId, final Integer count) {
+	public MvcResult updateProduct(final Long userId, final Long productId, final Integer count) {
 		return null;
 	}
 
 	@Override
-	public Wrapper deleteProduct(final Long userId, final String productIds) {
+	public MvcResult deleteProduct(final Long userId, final String productIds) {
 		return null;
 	}
 
 	@Override
-	public Wrapper selectOrUnSelect(final Long userId, final Long productId, final Integer checked) {
+	public MvcResult selectOrUnSelect(final Long userId, final Long productId, final Integer checked) {
 		return null;
 	}
 }

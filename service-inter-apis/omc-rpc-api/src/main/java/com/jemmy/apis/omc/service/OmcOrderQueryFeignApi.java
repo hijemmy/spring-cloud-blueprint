@@ -14,7 +14,7 @@ package com.jemmy.apis.omc.service;
 import com.jemmy.apis.omc.model.dto.OrderDto;
 import com.jemmy.apis.omc.service.hystrix.OmcOrderQueryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +36,7 @@ public interface OmcOrderQueryFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/order/queryByOrderNo/{orderNo}")
-	Wrapper<OrderDto> queryByOrderNo(@PathVariable("orderNo") String orderNo);
+    MvcResult<OrderDto> queryByOrderNo(@PathVariable("orderNo") String orderNo);
 
 	/**
 	 * Query by user id and order no wrapper.
@@ -47,5 +47,5 @@ public interface OmcOrderQueryFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/order/queryByUserIdAndOrderNo/{userId}/{orderNo}")
-	Wrapper<OrderDto> queryByUserIdAndOrderNo(@PathVariable("userId") Long userId, @PathVariable("orderNo") String orderNo);
+    MvcResult<OrderDto> queryByUserIdAndOrderNo(@PathVariable("userId") Long userId, @PathVariable("orderNo") String orderNo);
 }

@@ -14,7 +14,7 @@ package com.jemmy.apis.product.service;
 import com.jemmy.apis.product.model.dto.ProductDto;
 import com.jemmy.apis.product.service.hystrix.MdcProductFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +38,7 @@ public interface MdcProductFeignApi {
 	 * @return the int
 	 */
 	@PostMapping(value = "/api/product/updateProductStockById")
-	Wrapper<Integer> updateProductStockById(@RequestBody ProductDto productDto);
+    MvcResult<Integer> updateProductStockById(@RequestBody ProductDto productDto);
 
 	/**
 	 * Gets main image.
@@ -49,5 +49,5 @@ public interface MdcProductFeignApi {
 	 * @return the main image
 	 */
 	@PostMapping(value = "/api/product/getMainImage")
-	Wrapper<String> getMainImage(@RequestParam("productId") Long productId);
+    MvcResult<String> getMainImage(@RequestParam("productId") Long productId);
 }

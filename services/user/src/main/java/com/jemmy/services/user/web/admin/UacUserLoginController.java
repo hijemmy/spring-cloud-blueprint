@@ -15,8 +15,8 @@ import com.google.common.base.Preconditions;
 import com.jemmy.common.base.dto.UserTokenDto;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.core.utils.RequestUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.dto.user.LoginRespDto;
 import com.jemmy.services.user.model.enums.UacUserTokenStatusEnum;
 import com.jemmy.services.user.service.UacLoginService;
@@ -63,10 +63,10 @@ public class UacUserLoginController extends BaseController {
 	 */
 	@PostMapping(value = "/user/loginAfter/{applicationId}")
 	@ApiOperation(httpMethod = "POST", value = "登录成功获取用户菜单")
-	public Wrapper<LoginRespDto> loginAfter(@PathVariable Long applicationId) {
+	public MvcResult<LoginRespDto> loginAfter(@PathVariable Long applicationId) {
 		logger.info("登录成功获取用户菜单. applicationId={}", applicationId);
 		LoginRespDto result = uacLoginService.loginAfter(applicationId);
-		return WrapMapper.ok(result);
+		return MvcResultBuilder.ok(result);
 	}
 
 	/**
@@ -78,14 +78,14 @@ public class UacUserLoginController extends BaseController {
 	 */
 	@PostMapping(value = "/user/logout")
 	@ApiOperation(httpMethod = "POST", value = "登出")
-	public Wrapper loginAfter(String accessToken) {
+	public MvcResult loginAfter(String accessToken) {
 		if (!StringUtils.isEmpty(accessToken)) {
 			// 修改用户在线状态
 			UserTokenDto userTokenDto = uacUserTokenService.getByAccessToken(accessToken);
 			userTokenDto.setStatus(UacUserTokenStatusEnum.OFF_LINE.getStatus());
 			uacUserTokenService.updateUacUserToken(userTokenDto, getLoginAuthDto());
 		}
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class UacUserLoginController extends BaseController {
 	 */
 	@GetMapping(value = "/auth/user/refreshToken")
 	@ApiOperation(httpMethod = "POST", value = "刷新token")
-	public Wrapper<String> refreshToken(HttpServletRequest request, @RequestParam(value = "refreshToken") String refreshToken, @RequestParam(value = "accessToken") String accessToken) {
+	public MvcResult<String> refreshToken(HttpServletRequest request, @RequestParam(value = "refreshToken") String refreshToken, @RequestParam(value = "accessToken") String accessToken) {
 		String token;
 		try {
 			Preconditions.checkArgument(org.apache.commons.lang3.StringUtils.isNotEmpty(accessToken), "accessToken is null");
@@ -125,9 +125,9 @@ public class UacUserLoginController extends BaseController {
 			token = uacUserTokenService.refreshToken(accessToken, refreshToken, request);
 		} catch (Exception e) {
 			logger.error("refreshToken={}", e.getMessage(), e);
-			return WrapMapper.error();
+			return MvcResultBuilder.error();
 		}
-		return WrapMapper.ok(token);
+		return MvcResultBuilder.ok(token);
 	}
 
 }

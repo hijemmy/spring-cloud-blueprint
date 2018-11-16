@@ -17,7 +17,7 @@ import com.jemmy.apis.opc.model.dto.oss.OptUploadFileReqDto;
 import com.jemmy.apis.opc.model.dto.oss.OptUploadFileRespDto;
 import com.jemmy.apis.opc.service.OpcOssFeignApi;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.order.service.OpcOssService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,20 +38,20 @@ public class OpcOssServiceImpl implements OpcOssService {
 	@Override
 	public OptUploadFileRespDto uploadFile(OptUploadFileReqDto optUploadFileReqDto) {
 		log.info("uploadFile - 上传附件. optUploadFileReqDto={}", optUploadFileReqDto);
-		Wrapper<OptUploadFileRespDto> wrapper = opcOssFeignApi.uploadFile(optUploadFileReqDto);
-		if (null == wrapper || wrapper.error()) {
+		MvcResult<OptUploadFileRespDto> mvcResult = opcOssFeignApi.uploadFile(optUploadFileReqDto);
+		if (null == mvcResult || mvcResult.error()) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031012);
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 
 	@Override
 	public String getFileUrl(OptGetUrlRequest optGetUrlRequest) {
 		log.info("getFileUrl - 获取附件地址. optUploadFileReqDto={}", optGetUrlRequest);
-		Wrapper<String> wrapper = opcOssFeignApi.getFileUrl(optGetUrlRequest);
-		if (null == wrapper || wrapper.error()) {
+		MvcResult<String> mvcResult = opcOssFeignApi.getFileUrl(optGetUrlRequest);
+		if (null == mvcResult || mvcResult.error()) {
 			throw new OmcBizException(ErrorCodeEnum.OMC10031013);
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 }

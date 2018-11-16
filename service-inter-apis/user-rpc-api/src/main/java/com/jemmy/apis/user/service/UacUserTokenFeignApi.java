@@ -14,7 +14,7 @@ package com.jemmy.apis.user.service;
 
 import com.jemmy.apis.user.service.hystrix.UacUserTokenFeignApiHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -34,5 +34,5 @@ public interface UacUserTokenFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/uac/token/updateTokenOffLine")
-	Wrapper<Integer> updateTokenOffLine();
+    MvcResult<Integer> updateTokenOffLine();
 }

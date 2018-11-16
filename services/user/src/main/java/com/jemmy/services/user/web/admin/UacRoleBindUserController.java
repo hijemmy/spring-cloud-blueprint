@@ -14,8 +14,8 @@ package com.jemmy.services.user.web.admin;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.dto.role.RoleBindUserDto;
 import com.jemmy.services.user.model.dto.role.RoleBindUserReqDto;
 import com.jemmy.services.user.service.UacRoleService;
@@ -50,11 +50,11 @@ public class UacRoleBindUserController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/bindUser")
 	@ApiOperation(httpMethod = "POST", value = "角色绑定用户")
-	public Wrapper bindUser(@ApiParam(name = "uacRoleBindUserReqDto", value = "角色绑定用户") @RequestBody RoleBindUserReqDto roleBindUserReqDto) {
+	public MvcResult bindUser(@ApiParam(name = "uacRoleBindUserReqDto", value = "角色绑定用户") @RequestBody RoleBindUserReqDto roleBindUserReqDto) {
 		logger.info("roleBindUser={}", roleBindUserReqDto);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		uacRoleService.bindUser4Role(roleBindUserReqDto, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -66,11 +66,11 @@ public class UacRoleBindUserController extends BaseController {
 	 */
 	@PostMapping(value = "/getBindUser/{roleId}")
 	@ApiOperation(httpMethod = "POST", value = "获取角色绑定用户页面数据")
-	public Wrapper<RoleBindUserDto> getBindUser(@ApiParam(name = "roleId", value = "角色id") @PathVariable Long roleId) {
+	public MvcResult<RoleBindUserDto> getBindUser(@ApiParam(name = "roleId", value = "角色id") @PathVariable Long roleId) {
 		logger.info("获取角色绑定用户页面数据. roleId={}", roleId);
 		LoginAuthDto loginAuthDto = super.getLoginAuthDto();
 		Long currentUserId = loginAuthDto.getUserId();
 		RoleBindUserDto bindUserDto = uacRoleService.getRoleBindUserDto(roleId, currentUserId);
-		return WrapMapper.ok(bindUserDto);
+		return MvcResultBuilder.ok(bindUserDto);
 	}
 }

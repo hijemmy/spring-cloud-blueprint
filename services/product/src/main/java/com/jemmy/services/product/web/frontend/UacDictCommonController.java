@@ -13,8 +13,8 @@ package com.jemmy.services.product.web.frontend;
 
 
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.product.model.domain.MdcDict;
 import com.jemmy.services.product.model.dto.MdcDictCheckCodeDto;
 import com.jemmy.services.product.model.dto.MdcDictCheckNameDto;
@@ -54,7 +54,7 @@ public class UacDictCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkDictCode")
 	@ApiOperation(httpMethod = "POST", value = "检测数据字典编码是否已存在")
-	public Wrapper<Boolean> checkDictCode(@ApiParam(name = "uacMenuCheckCodeDto", value = "id与url") @RequestBody MdcDictCheckCodeDto mdcDictCheckCodeDto) {
+	public MvcResult<Boolean> checkDictCode(@ApiParam(name = "uacMenuCheckCodeDto", value = "id与url") @RequestBody MdcDictCheckCodeDto mdcDictCheckCodeDto) {
 		logger.info("检测数据字典编码是否已存在 mdcDictCheckCodeDto={}", mdcDictCheckCodeDto);
 
 		Long id = mdcDictCheckCodeDto.getDictId();
@@ -69,7 +69,7 @@ public class UacDictCommonController extends BaseController {
 		criteria.andEqualTo("dictCode", dictCode);
 
 		int result = mdcDictService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class UacDictCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkDictName")
 	@ApiOperation(httpMethod = "POST", value = "检测数据字典名称是否已存在")
-	public Wrapper<Boolean> checkDictName(@ApiParam(name = "uacMenuCheckCodeDto", value = "id与url") @RequestBody MdcDictCheckNameDto mdcDictCheckNameDto) {
+	public MvcResult<Boolean> checkDictName(@ApiParam(name = "uacMenuCheckCodeDto", value = "id与url") @RequestBody MdcDictCheckNameDto mdcDictCheckNameDto) {
 		logger.info("检测数据字典名称是否已存在 mdcDictCheckNameDto={}", mdcDictCheckNameDto);
 
 		Long id = mdcDictCheckNameDto.getDictId();
@@ -96,6 +96,6 @@ public class UacDictCommonController extends BaseController {
 		criteria.andEqualTo("dictName", dictName);
 
 		int result = mdcDictService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 }

@@ -15,7 +15,7 @@ package com.jemmy.apis.opc.service;
 import com.jemmy.apis.opc.model.dto.oss.*;
 import com.jemmy.apis.opc.service.hystrix.OpcOssFeignApiHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -45,7 +45,7 @@ public interface OpcOssFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/opc/oss/uploadFile")
-	Wrapper<OptUploadFileRespDto> uploadFile(@RequestBody OptUploadFileReqDto optUploadFileReqDto);
+    MvcResult<OptUploadFileRespDto> uploadFile(@RequestBody OptUploadFileReqDto optUploadFileReqDto);
 
 	/**
 	 * 获取附件完整路径.
@@ -55,7 +55,7 @@ public interface OpcOssFeignApi {
 	 * @return the file url
 	 */
 	@PostMapping(value = "/api/opc/oss/getFileUrl")
-	Wrapper<String> getFileUrl(@RequestBody OptGetUrlRequest optGetUrlRequest);
+    MvcResult<String> getFileUrl(@RequestBody OptGetUrlRequest optGetUrlRequest);
 
 	/**
 	 * List file url wrapper.
@@ -65,7 +65,7 @@ public interface OpcOssFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/opc/oss/listFileUrl")
-	Wrapper<List<ElementImgUrlDto>> listFileUrl(@RequestBody OptBatchGetUrlRequest urlRequest);
+    MvcResult<List<ElementImgUrlDto>> listFileUrl(@RequestBody OptBatchGetUrlRequest urlRequest);
 
 	/**
 	 * Upload file with feign wrapper.
@@ -75,7 +75,7 @@ public interface OpcOssFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/opc/oss/handleFileUpload")
-	Wrapper<OptUploadFileRespDto> handleFileUpload(@RequestPart(value = "file") MultipartFile file);
+    MvcResult<OptUploadFileRespDto> handleFileUpload(@RequestPart(value = "file") MultipartFile file);
 
 	/**
 	 * 删除过期的文件.

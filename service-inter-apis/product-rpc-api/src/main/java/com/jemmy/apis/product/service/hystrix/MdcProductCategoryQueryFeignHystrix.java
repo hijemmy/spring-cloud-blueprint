@@ -15,7 +15,7 @@ import com.github.pagehelper.PageInfo;
 import com.jemmy.apis.product.model.dto.ProductCategoryDto;
 import com.jemmy.apis.product.model.dto.ProductReqDto;
 import com.jemmy.apis.product.service.MdcProductCategoryQueryFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,12 +28,12 @@ import java.util.List;
 @Component
 public class MdcProductCategoryQueryFeignHystrix implements MdcProductCategoryQueryFeignApi {
 	@Override
-	public Wrapper<List<ProductCategoryDto>> getProductCategoryData(final Long pid) {
+	public MvcResult<List<ProductCategoryDto>> getProductCategoryData(final Long pid) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<PageInfo> getProductList(final ProductReqDto productReqDto) {
+	public MvcResult<PageInfo> getProductList(final ProductReqDto productReqDto) {
 		return null;
 	}
 }

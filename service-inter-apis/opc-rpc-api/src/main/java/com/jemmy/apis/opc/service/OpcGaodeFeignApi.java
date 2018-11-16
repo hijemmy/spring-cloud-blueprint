@@ -14,7 +14,7 @@ package com.jemmy.apis.opc.service;
 import com.jemmy.apis.opc.model.dto.gaode.GaodeLocation;
 import com.jemmy.apis.opc.service.hystrix.OpcGaodeFeignApiHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,5 +37,5 @@ public interface OpcGaodeFeignApi {
 	 * @return the location by ip addr
 	 */
 	@PostMapping(value = "/api/auth/getLocationByIpAddr")
-	Wrapper<GaodeLocation> getLocationByIpAddr(@RequestParam("ipAddr") String ipAddr);
+    MvcResult<GaodeLocation> getLocationByIpAddr(@RequestParam("ipAddr") String ipAddr);
 }

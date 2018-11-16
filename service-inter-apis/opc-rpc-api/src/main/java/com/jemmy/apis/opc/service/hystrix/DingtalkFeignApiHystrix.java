@@ -14,7 +14,7 @@ package com.jemmy.apis.opc.service.hystrix;
 
 import com.jemmy.apis.opc.model.dto.robot.ChatRobotMsgDto;
 import com.jemmy.apis.opc.service.DingtalkFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class DingtalkFeignApiHystrix implements DingtalkFeignApi {
 
 	@Override
-	public Wrapper<Boolean> sendChatRobotMsg(final ChatRobotMsgDto uacUserReqDto) {
+	public MvcResult<Boolean> sendChatRobotMsg(final ChatRobotMsgDto uacUserReqDto) {
 		return null;
 	}
 }

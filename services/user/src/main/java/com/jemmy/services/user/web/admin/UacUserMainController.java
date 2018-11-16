@@ -19,8 +19,8 @@ import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.security.core.SecurityUser;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacLog;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.model.dto.menu.UserMenuDto;
@@ -61,11 +61,11 @@ public class UacUserMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询角色列表")
-	public Wrapper<PageInfo> queryUserListWithPage(@ApiParam(name = "role", value = "角色信息") @RequestBody UacUser uacUser) {
+	public MvcResult<PageInfo> queryUserListWithPage(@ApiParam(name = "role", value = "角色信息") @RequestBody UacUser uacUser) {
 
 		logger.info("查询用户列表uacUser={}", uacUser);
 		PageInfo pageInfo = uacUserService.queryUserListWithPage(uacUser);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	/**
@@ -78,11 +78,11 @@ public class UacUserMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/save")
 	@ApiOperation(httpMethod = "POST", value = "新增用户")
-	public Wrapper<Integer> addUacUser(@ApiParam(name = "user", value = "新增用户Dto") @RequestBody UacUser user) {
+	public MvcResult<Integer> addUacUser(@ApiParam(name = "user", value = "新增用户Dto") @RequestBody UacUser user) {
 		logger.info(" 新增用户 user={}", user);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		uacUserService.saveUacUser(user, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -94,13 +94,13 @@ public class UacUserMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryUserLogListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "分页查询用户操作日志列表")
-	public Wrapper<PageInfo<UacLog>> queryUserLogListWithPage(@ApiParam(name = "user", value = "用户信息") @RequestBody UacLog log) {
+	public MvcResult<PageInfo<UacLog>> queryUserLogListWithPage(@ApiParam(name = "user", value = "用户信息") @RequestBody UacLog log) {
 
 		logger.info("分页查询用户操作日志列表");
 		PageHelper.startPage(log.getPageNum(), log.getPageSize());
 		List<UacLog> list = uacUserService.queryUserLogListWithUserId(getLoginAuthDto().getUserId());
 		PageInfo<UacLog> pageInfo = new PageInfo<>(list);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class UacUserMainController extends BaseController {
 	@PostMapping(value = "/modifyUserStatusById")
 	@LogAnnotation
 	@ApiOperation(httpMethod = "POST", value = "根据Id修改用户状态")
-	public Wrapper<Integer> modifyUserStatusById(@ApiParam(name = "modifyUserStatusDto", value = "用户禁用/启用Dto") @RequestBody ModifyUserStatusDto modifyUserStatusDto) {
+	public MvcResult<Integer> modifyUserStatusById(@ApiParam(name = "modifyUserStatusDto", value = "用户禁用/启用Dto") @RequestBody ModifyUserStatusDto modifyUserStatusDto) {
 		logger.info(" 根据Id修改用户状态 modifyUserStatusDto={}", modifyUserStatusDto);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		UacUser uacUser = new UacUser();
@@ -134,7 +134,7 @@ public class UacUserMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/deleteUserById/{userId}")
 	@ApiOperation(httpMethod = "POST", value = "通过Id删除用户")
-	public Wrapper<Integer> deleteUserById(@ApiParam(name = "userId", value = "用户ID") @PathVariable Long userId) {
+	public MvcResult<Integer> deleteUserById(@ApiParam(name = "userId", value = "用户ID") @PathVariable Long userId) {
 		logger.info(" 通过Id删除用户 userId={}", userId);
 		int result = uacUserService.deleteUserById(userId);
 		return handleResult(result);
@@ -149,7 +149,7 @@ public class UacUserMainController extends BaseController {
 	 */
 	@PostMapping(value = "/getBindRole/{userId}")
 	@ApiOperation(httpMethod = "POST", value = "获取用户绑定角色页面数据")
-	public Wrapper<UserBindRoleVo> getBindRole(@ApiParam(name = "userId", value = "角色id") @PathVariable Long userId) {
+	public MvcResult<UserBindRoleVo> getBindRole(@ApiParam(name = "userId", value = "角色id") @PathVariable Long userId) {
 		logger.info("获取用户绑定角色页面数据. userId={}", userId);
 		LoginAuthDto loginAuthDto = super.getLoginAuthDto();
 		Long currentUserId = loginAuthDto.getUserId();
@@ -158,7 +158,7 @@ public class UacUserMainController extends BaseController {
 		}
 
 		UserBindRoleVo bindUserDto = uacUserService.getUserBindRoleDto(userId);
-		return WrapMapper.ok(bindUserDto);
+		return MvcResultBuilder.ok(bindUserDto);
 	}
 
 	/**
@@ -171,11 +171,11 @@ public class UacUserMainController extends BaseController {
 	@PostMapping(value = "/bindRole")
 	@LogAnnotation
 	@ApiOperation(httpMethod = "POST", value = "用户绑定角色")
-	public Wrapper<Integer> bindUserRoles(@ApiParam(name = "bindUserRolesDto", value = "用户绑定角色Dto") @RequestBody BindUserRolesDto bindUserRolesDto) {
+	public MvcResult<Integer> bindUserRoles(@ApiParam(name = "bindUserRolesDto", value = "用户绑定角色Dto") @RequestBody BindUserRolesDto bindUserRolesDto) {
 		logger.info("用户绑定角色 bindUserRolesDto={}", bindUserRolesDto);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		uacUserService.bindUserRoles(bindUserRolesDto, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -185,12 +185,12 @@ public class UacUserMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryUserMenuDtoData")
 	@ApiOperation(httpMethod = "POST", value = "查询用户常用功能数据")
-	public Wrapper<List<UserMenuDto>> queryUserMenuDtoData() {
+	public MvcResult<List<UserMenuDto>> queryUserMenuDtoData() {
 		logger.info("查询用户常用功能数据");
 
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		List<UserMenuDto> userMenuDtoList = uacUserService.queryUserMenuDtoData(loginAuthDto);
-		return WrapMapper.ok(userMenuDtoList);
+		return MvcResultBuilder.ok(userMenuDtoList);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class UacUserMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/bindUserMenus")
 	@ApiOperation(httpMethod = "POST", value = "绑定用户常用菜单")
-	public Wrapper<Integer> bindUserMenus(@ApiParam(name = "bindUserMenusDto", value = "绑定用户常用菜单Dto") @RequestBody BindUserMenusDto bindUserMenusDto) {
+	public MvcResult<Integer> bindUserMenus(@ApiParam(name = "bindUserMenusDto", value = "绑定用户常用菜单Dto") @RequestBody BindUserMenusDto bindUserMenusDto) {
 		logger.info("绑定用户常用菜单");
 		List<Long> menuIdList = bindUserMenusDto.getMenuIdList();
 		logger.info("menuIdList = {}", menuIdList);
@@ -223,11 +223,11 @@ public class UacUserMainController extends BaseController {
 	 */
 	@PostMapping(value = "/getUacUserById/{userId}")
 	@ApiOperation(httpMethod = "POST", value = "根据用户Id查询用户信息")
-	public Wrapper<UacUser> getUacUserById(@ApiParam(name = "userId", value = "用户ID") @PathVariable Long userId) {
+	public MvcResult<UacUser> getUacUserById(@ApiParam(name = "userId", value = "用户ID") @PathVariable Long userId) {
 		logger.info("getUacUserById - 根据用户Id查询用户信息. userId={}", userId);
 		UacUser uacUser = uacUserService.queryByUserId(userId);
 		logger.info("getUacUserById - 根据用户Id查询用户信息. [OK] uacUser={}", uacUser);
-		return WrapMapper.ok(uacUser);
+		return MvcResultBuilder.ok(uacUser);
 	}
 
 	/**
@@ -240,10 +240,10 @@ public class UacUserMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/resetLoginPwd/{userId}")
 	@ApiOperation(httpMethod = "POST", value = "根据用户Id重置密码")
-	public Wrapper<UacUser> resetLoginPwd(@ApiParam(name = "userId", value = "用户ID") @PathVariable Long userId) {
+	public MvcResult<UacUser> resetLoginPwd(@ApiParam(name = "userId", value = "用户ID") @PathVariable Long userId) {
 		logger.info("resetLoginPwd - 根据用户Id重置密码. userId={}", userId);
 		uacUserService.resetLoginPwd(userId, getLoginAuthDto());
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**

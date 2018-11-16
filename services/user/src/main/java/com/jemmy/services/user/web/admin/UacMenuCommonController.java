@@ -13,8 +13,8 @@ package com.jemmy.services.user.web.admin;
 
 
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacMenu;
 import com.jemmy.services.user.model.dto.menu.UacMenuCheckCodeDto;
 import com.jemmy.services.user.model.dto.menu.UacMenuCheckNameDto;
@@ -55,7 +55,7 @@ public class UacMenuCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkMenuCode")
 	@ApiOperation(httpMethod = "POST", value = "检测菜单编码是否已存在")
-	public Wrapper<Boolean> checkUacMenuActionCode(@ApiParam(name = "uacMenuCheckCodeDto", value = "id与url") @RequestBody UacMenuCheckCodeDto uacMenuCheckCodeDto) {
+	public MvcResult<Boolean> checkUacMenuActionCode(@ApiParam(name = "uacMenuCheckCodeDto", value = "id与url") @RequestBody UacMenuCheckCodeDto uacMenuCheckCodeDto) {
 		logger.info("校验菜单编码唯一性 uacMenuCheckCodeDto={}", uacMenuCheckCodeDto);
 
 		Long id = uacMenuCheckCodeDto.getMenuId();
@@ -70,7 +70,7 @@ public class UacMenuCommonController extends BaseController {
 		criteria.andEqualTo("menuCode", menuCode);
 
 		int result = uacMenuService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class UacMenuCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkMenuName")
 	@ApiOperation(httpMethod = "POST", value = "检测菜单名称唯一性")
-	public Wrapper<Boolean> checkUacMenuName(@ApiParam(name = "uacMenuCheckNameDto", value = "id与name") @RequestBody UacMenuCheckNameDto uacMenuCheckNameDto) {
+	public MvcResult<Boolean> checkUacMenuName(@ApiParam(name = "uacMenuCheckNameDto", value = "id与name") @RequestBody UacMenuCheckNameDto uacMenuCheckNameDto) {
 		logger.info("校验菜单名称唯一性 uacMenuCheckNameDto={}", uacMenuCheckNameDto);
 		Long id = uacMenuCheckNameDto.getMenuId();
 		Long pid = uacMenuCheckNameDto.getPid();
@@ -98,7 +98,7 @@ public class UacMenuCommonController extends BaseController {
 		criteria.andEqualTo("pid", pid);
 
 		int result = uacMenuService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 
@@ -111,7 +111,7 @@ public class UacMenuCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkMenuUrl")
 	@ApiOperation(httpMethod = "POST", value = "检测菜单URL唯一性")
-	public Wrapper<Boolean> checkUacMenuUrl(@ApiParam(name = "uacMenuCheckUrlDto", value = "id与url") @RequestBody UacMenuCheckUrlDto uacMenuCheckUrlDto) {
+	public MvcResult<Boolean> checkUacMenuUrl(@ApiParam(name = "uacMenuCheckUrlDto", value = "id与url") @RequestBody UacMenuCheckUrlDto uacMenuCheckUrlDto) {
 		logger.info("检测菜单URL唯一性 uacMenuCheckUrlDto={}", uacMenuCheckUrlDto);
 
 		Long id = uacMenuCheckUrlDto.getMenuId();
@@ -126,6 +126,6 @@ public class UacMenuCommonController extends BaseController {
 		criteria.andEqualTo("url", url);
 
 		int result = uacMenuService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 }

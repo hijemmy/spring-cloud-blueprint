@@ -18,7 +18,7 @@ import com.jemmy.common.core.annotation.OperationLogDto;
 import com.jemmy.common.core.utils.RequestUtil;
 import com.jemmy.common.util.JacksonUtil;
 import com.jemmy.common.util.PubUtils;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -80,10 +80,10 @@ public class LogAspect {
 	 */
 	@AfterReturning(pointcut = "logAnnotation()", returning = "returnValue")
 	public void doAfter(final JoinPoint joinPoint, final Object returnValue) {
-		if (returnValue instanceof Wrapper) {
-			Wrapper result = (Wrapper) returnValue;
+		if (returnValue instanceof MvcResult) {
+			MvcResult result = (MvcResult) returnValue;
 
-			if (!PubUtils.isNull(result) && result.getCode() == Wrapper.SUCCESS_CODE) {
+			if (!PubUtils.isNull(result) && result.getCode() == MvcResult.SUCCESS_CODE) {
 				this.handleLog(joinPoint, result);
 			}
 

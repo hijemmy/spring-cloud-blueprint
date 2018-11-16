@@ -12,8 +12,8 @@
 package com.jemmy.services.user.web.admin;
 
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacRole;
 import com.jemmy.services.user.model.dto.role.CheckRoleCodeDto;
 import com.jemmy.services.user.model.vo.BindAuthVo;
@@ -49,9 +49,9 @@ public class UacRoleCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/queryRoleInfoById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "查看角色信息")
-	public Wrapper<UacRole> queryRoleInfo(@PathVariable Long id) {
+	public MvcResult<UacRole> queryRoleInfo(@PathVariable Long id) {
 		UacRole role = uacRoleService.selectByKey(id);
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, role);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, MvcResult.SUCCESS_MESSAGE, role);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class UacRoleCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkRoleCode")
 	@ApiOperation(httpMethod = "POST", value = "验证角色编码是否存在")
-	public Wrapper<Boolean> checkUacRoleCode(@ApiParam(name = "roleCode", value = "角色编码") @RequestBody CheckRoleCodeDto checkRoleCodeDto) {
+	public MvcResult<Boolean> checkUacRoleCode(@ApiParam(name = "roleCode", value = "角色编码") @RequestBody CheckRoleCodeDto checkRoleCodeDto) {
 
 		logger.info("校验角色编码唯一性 checkRoleCodeDto={}", checkRoleCodeDto);
 
@@ -79,7 +79,7 @@ public class UacRoleCommonController extends BaseController {
 		criteria.andEqualTo("roleCode", roleCode);
 
 		int result = uacRoleService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -91,10 +91,10 @@ public class UacRoleCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/getActionTreeByRoleId/{roleId}")
 	@ApiOperation(httpMethod = "POST", value = "获取权限树")
-	public Wrapper<BindAuthVo> getActionTreeByRoleId(@ApiParam(name = "roleId", value = "角色id") @PathVariable Long roleId) {
+	public MvcResult<BindAuthVo> getActionTreeByRoleId(@ApiParam(name = "roleId", value = "角色id") @PathVariable Long roleId) {
 		logger.info("roleId={}", roleId);
 		BindAuthVo bindAuthVo = uacRoleService.getActionTreeByRoleId(roleId);
-		return WrapMapper.ok(bindAuthVo);
+		return MvcResultBuilder.ok(bindAuthVo);
 	}
 
 	/**
@@ -106,10 +106,10 @@ public class UacRoleCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/getMenuTreeByRoleId/{roleId}")
 	@ApiOperation(httpMethod = "POST", value = "获取菜单树")
-	public Wrapper<BindAuthVo> getMenuTreeByRoleId(@ApiParam(name = "roleId", value = "角色id") @PathVariable Long roleId) {
+	public MvcResult<BindAuthVo> getMenuTreeByRoleId(@ApiParam(name = "roleId", value = "角色id") @PathVariable Long roleId) {
 		logger.info("roleId={}", roleId);
 		BindAuthVo bindAuthVo = uacRoleService.getMenuTreeByRoleId(roleId);
-		return WrapMapper.ok(bindAuthVo);
+		return MvcResultBuilder.ok(bindAuthVo);
 	}
 
 }

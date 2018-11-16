@@ -16,7 +16,7 @@ import com.jemmy.apis.opc.service.OpcGaodeFeignApi;
 import com.jemmy.apis.product.exceptions.MdcBizException;
 import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.service.OpcRpcService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,15 +38,15 @@ public class OpcRpcServiceImpl implements OpcRpcService {
 	@Override
 	public String getLocationById(String addressId) {
 		try {
-			Wrapper<GaodeLocation> wrapper = opcGaodeFeignApi.getLocationByIpAddr(addressId);
-			if (wrapper == null) {
+			MvcResult<GaodeLocation> mvcResult = opcGaodeFeignApi.getLocationByIpAddr(addressId);
+			if (mvcResult == null) {
 				throw new MdcBizException(ErrorCodeEnum.GL99990002);
 			}
-			if (wrapper.error()) {
+			if (mvcResult.error()) {
 				throw new MdcBizException(ErrorCodeEnum.MDC10021002);
 			}
 
-			GaodeLocation result = wrapper.getResult();
+			GaodeLocation result = mvcResult.getResult();
 
 			assert result != null;
 			return result.getProvince().contains("市") ? result.getCity() : result.getProvince() + GlobalConstant.Symbol.SHORT_LINE + result.getCity();

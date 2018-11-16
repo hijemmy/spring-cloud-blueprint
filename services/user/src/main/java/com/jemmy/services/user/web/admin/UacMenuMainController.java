@@ -16,13 +16,13 @@ import com.jemmy.apis.user.vo.MenuVo;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacMenu;
 import com.jemmy.services.user.model.dto.menu.UacEditMenuDto;
 import com.jemmy.services.user.model.dto.menu.UacMenuStatusDto;
 import com.jemmy.services.user.model.vo.ViewMenuVo;
 import com.jemmy.services.user.service.UacMenuService;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -53,9 +53,9 @@ public class UacMenuMainController extends BaseController {
 	 */
 	@PostMapping(value = "/getTree")
 	@ApiOperation(httpMethod = "POST", value = "获取菜单树")
-	public Wrapper<List<MenuVo>> queryMenuTreeList() {
+	public MvcResult<List<MenuVo>> queryMenuTreeList() {
 		List<MenuVo> menuVoList = uacMenuService.getMenuVoList(getLoginAuthDto().getUserId(), null);
-		return WrapMapper.ok(menuVoList);
+		return MvcResultBuilder.ok(menuVoList);
 	}
 
 	/**
@@ -67,9 +67,9 @@ public class UacMenuMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "编辑菜单")
-	public Wrapper<ViewMenuVo> queryMenuVoById(@ApiParam(name = "id", value = "菜单id") @PathVariable Long id) {
+	public MvcResult<ViewMenuVo> queryMenuVoById(@ApiParam(name = "id", value = "菜单id") @PathVariable Long id) {
 		ViewMenuVo menuVo = uacMenuService.getViewVoById(id);
-		return WrapMapper.ok(menuVo);
+		return MvcResultBuilder.ok(menuVo);
 	}
 
 
@@ -83,11 +83,11 @@ public class UacMenuMainController extends BaseController {
 	@PostMapping(value = "/modifyStatus")
 	@ApiOperation(httpMethod = "POST", value = "修改菜单状态")
 	@LogAnnotation
-	public Wrapper updateUacMenuStatusById(@ApiParam(name = "uacMenuStatusDto", value = "修改菜单状态Dto") @RequestBody UacMenuStatusDto uacMenuStatusDto) {
+	public MvcResult updateUacMenuStatusById(@ApiParam(name = "uacMenuStatusDto", value = "修改菜单状态Dto") @RequestBody UacMenuStatusDto uacMenuStatusDto) {
 		logger.info("根据id修改菜单的禁用状态 uacMenuStatusDto={}", uacMenuStatusDto);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		uacMenuService.updateUacMenuStatusById(uacMenuStatusDto, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -100,12 +100,12 @@ public class UacMenuMainController extends BaseController {
 	@PostMapping(value = "/save")
 	@ApiOperation(httpMethod = "POST", value = "新增菜单")
 	@LogAnnotation
-	public Wrapper saveMenu(@ApiParam(name = "saveMenu", value = "保存菜单") @RequestBody UacEditMenuDto uacMenuAddDto) {
+	public MvcResult saveMenu(@ApiParam(name = "saveMenu", value = "保存菜单") @RequestBody UacEditMenuDto uacMenuAddDto) {
 		UacMenu uacMenu = new UacMenu();
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		BeanUtils.copyProperties(uacMenuAddDto, uacMenu);
 		uacMenuService.saveUacMenu(uacMenu, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class UacMenuMainController extends BaseController {
 	@PostMapping(value = "/deleteById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "删除菜单")
 	@LogAnnotation
-	public Wrapper<Integer> deleteUacMenuById(@ApiParam(name = "id", value = "菜单id") @PathVariable Long id) {
+	public MvcResult<Integer> deleteUacMenuById(@ApiParam(name = "id", value = "菜单id") @PathVariable Long id) {
 		logger.info(" 根据id删除菜单 id={}", id);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 
@@ -127,7 +127,7 @@ public class UacMenuMainController extends BaseController {
 		// 判断此菜单是否有子节点
 		boolean hasChild = uacMenuService.checkMenuHasChildMenu(id);
 		if (hasChild) {
-			return WrapMapper.wrap(Wrapper.ERROR_CODE, "此菜单含有子菜单, 请先删除子菜单");
+			return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, "此菜单含有子菜单, 请先删除子菜单");
 		}
 
 		int result = uacMenuService.deleteUacMenuById(id, loginAuthDto);

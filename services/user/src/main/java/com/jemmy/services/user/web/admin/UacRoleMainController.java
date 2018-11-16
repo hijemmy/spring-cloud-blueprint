@@ -20,8 +20,8 @@ import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.annotation.ValidateAnnotation;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.core.utils.RequestUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacRole;
 import com.jemmy.services.user.model.domain.UacRoleUser;
 import com.jemmy.services.user.model.dto.base.ModifyStatusDto;
@@ -63,13 +63,13 @@ public class UacRoleMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryRoleListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询角色列表")
-	public Wrapper<PageInfo<RoleVo>> queryUacRoleListWithPage(@ApiParam(name = "role", value = "角色信息") @RequestBody UacRole role) {
+	public MvcResult<PageInfo<RoleVo>> queryUacRoleListWithPage(@ApiParam(name = "role", value = "角色信息") @RequestBody UacRole role) {
 
 		logger.info("查询角色列表roleQuery={}", role);
 		PageHelper.startPage(role.getPageNum(), role.getPageSize());
 		role.setOrderBy("update_time desc");
 		List<RoleVo> roleVoList = uacRoleService.queryRoleListWithPage(role);
-		return WrapMapper.ok(new PageInfo<>(roleVoList));
+		return MvcResultBuilder.ok(new PageInfo<>(roleVoList));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class UacRoleMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/deleteRoleById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "删除角色")
-	public Wrapper deleteUacRoleById(@ApiParam(name = "id", value = "角色id") @PathVariable Long id) {
+	public MvcResult deleteUacRoleById(@ApiParam(name = "id", value = "角色id") @PathVariable Long id) {
 		int result = uacRoleService.deleteRoleById(id);
 		return super.handleResult(result);
 	}
@@ -97,10 +97,10 @@ public class UacRoleMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/batchDeleteByIdList")
 	@ApiOperation(httpMethod = "POST", value = "批量删除角色")
-	public Wrapper batchDeleteByIdList(@ApiParam(name = "deleteIdList", value = "角色Id") @RequestBody List<Long> deleteIdList) {
+	public MvcResult batchDeleteByIdList(@ApiParam(name = "deleteIdList", value = "角色Id") @RequestBody List<Long> deleteIdList) {
 		logger.info("批量删除角色 idList={}", deleteIdList);
 		uacRoleService.batchDeleteByIdList(deleteIdList);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class UacRoleMainController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/modifyRoleStatusById")
 	@ApiOperation(httpMethod = "POST", value = "根据角色Id修改角色状态")
-	public Wrapper modifyUacRoleStatusById(@ApiParam(name = "modifyRoleStatusDto", value = "修改角色状态数据") @RequestBody ModifyStatusDto modifyStatusDto) {
+	public MvcResult modifyUacRoleStatusById(@ApiParam(name = "modifyRoleStatusDto", value = "修改角色状态数据") @RequestBody ModifyStatusDto modifyStatusDto) {
 		logger.info("根据角色Id修改角色状态 modifyStatusDto={}", modifyStatusDto);
 		Long roleId = modifyStatusDto.getId();
 		if (roleId == null) {
@@ -150,9 +150,9 @@ public class UacRoleMainController extends BaseController {
 	@ApiOperation(httpMethod = "POST", value = "新增角色")
 	@ValidateAnnotation
 	@LogAnnotation
-	public Wrapper save(@ApiParam(name = "role", value = "角色信息") @RequestBody UacRole role) {
+	public MvcResult save(@ApiParam(name = "role", value = "角色信息") @RequestBody UacRole role) {
 		LoginAuthDto loginAuthDto = RequestUtil.getLoginUser();
 		uacRoleService.saveRole(role, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

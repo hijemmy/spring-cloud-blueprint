@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：PageWrapper.java
+ * 类名称：PageMvcResult.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -23,7 +23,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PageWrapper<T> extends Wrapper<T> {
+public class PageMvcResult<T> extends MvcResult<T> {
 
 	private static final long serialVersionUID = 666985064788933395L;
 
@@ -33,7 +33,7 @@ public class PageWrapper<T> extends Wrapper<T> {
 	/**
 	 * Instantiates a new Page wrapper.
 	 */
-	PageWrapper() {
+	PageMvcResult() {
 		super();
 	}
 
@@ -44,7 +44,7 @@ public class PageWrapper<T> extends Wrapper<T> {
 	 * @param code    the code
 	 * @param message the message
 	 */
-	public PageWrapper(int code, String message) {
+	public PageMvcResult(int code, String message) {
 		super(code, message);
 	}
 
@@ -54,7 +54,7 @@ public class PageWrapper<T> extends Wrapper<T> {
 	 * @param result   the result
 	 * @param pageUtil the page util
 	 */
-	public PageWrapper(T result, PageUtil pageUtil) {
+	public PageMvcResult(T result, PageUtil pageUtil) {
 		super();
 		this.setResult(result);
 		this.setPageUtil(pageUtil);
@@ -68,7 +68,7 @@ public class PageWrapper<T> extends Wrapper<T> {
 	 * @param result   the result
 	 * @param pageUtil the page util
 	 */
-	PageWrapper(int code, String message, T result, PageUtil pageUtil) {
+	PageMvcResult(int code, String message, T result, PageUtil pageUtil) {
 		super(code, message, result);
 		this.pageUtil = pageUtil;
 	}
@@ -80,7 +80,7 @@ public class PageWrapper<T> extends Wrapper<T> {
 	 *
 	 * @return the page wrapper
 	 */
-	public PageWrapper<T> pageUtil(PageUtil pageUtil) {
+	public PageMvcResult<T> pageUtil(PageUtil pageUtil) {
 		this.setPageUtil(pageUtil);
 		return this;
 	}
@@ -93,7 +93,7 @@ public class PageWrapper<T> extends Wrapper<T> {
 	 * @return the page wrapper
 	 */
 	@Override
-	public PageWrapper<T> result(T result) {
+	public PageMvcResult<T> result(T result) {
 		super.setResult(result);
 		return this;
 	}

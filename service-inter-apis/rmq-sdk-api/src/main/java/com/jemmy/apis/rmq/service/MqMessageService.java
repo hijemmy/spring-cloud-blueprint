@@ -16,7 +16,7 @@ import com.jemmy.apis.rmq.model.domain.MqMessageData;
 import com.jemmy.apis.rmq.model.enums.MqSendTypeEnum;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 
 
 import java.util.List;
@@ -128,5 +128,5 @@ public interface MqMessageService {
 	 *
 	 * @return the wrapper
 	 */
-	Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(MessageQueryDto messageQueryDto);
+	MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(MessageQueryDto messageQueryDto);
 }

@@ -15,8 +15,8 @@ package com.jemmy.services.user.web.admin;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.dto.group.GroupBindUserDto;
 import com.jemmy.services.user.model.dto.group.GroupBindUserReqDto;
 import com.jemmy.services.user.service.UacGroupService;
@@ -51,11 +51,11 @@ public class UacGroupBindUserController extends BaseController {
 	@PostMapping(value = "/bindUser")
 	@LogAnnotation
 	@ApiOperation(httpMethod = "POST", value = "组织绑定用户")
-	public Wrapper bindUser4Role(@ApiParam(name = "uacGroupBindUserReqDto", value = "组织绑定用户") @RequestBody GroupBindUserReqDto groupBindUserReqDto) {
+	public MvcResult bindUser4Role(@ApiParam(name = "uacGroupBindUserReqDto", value = "组织绑定用户") @RequestBody GroupBindUserReqDto groupBindUserReqDto) {
 		logger.info("组织绑定用户...  groupBindUserReqDto={}", groupBindUserReqDto);
 		LoginAuthDto loginAuthDto = super.getLoginAuthDto();
 		uacGroupService.bindUacUser4Group(groupBindUserReqDto, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -67,11 +67,11 @@ public class UacGroupBindUserController extends BaseController {
 	 */
 	@PostMapping(value = "/getBindUser/{groupId}")
 	@ApiOperation(httpMethod = "POST", value = "获取组织绑定用户页面数据")
-	public Wrapper<GroupBindUserDto> getGroupBindUserPageInfo(@ApiParam(name = "groupId", value = "组织id") @PathVariable Long groupId) {
+	public MvcResult<GroupBindUserDto> getGroupBindUserPageInfo(@ApiParam(name = "groupId", value = "组织id") @PathVariable Long groupId) {
 		logger.info("查询组织绑定用户页面数据 groupId={}", groupId);
 		LoginAuthDto loginAuthDto = super.getLoginAuthDto();
 		Long currentUserId = loginAuthDto.getUserId();
 		GroupBindUserDto bindUserDto = uacGroupService.getGroupBindUserDto(groupId, currentUserId);
-		return WrapMapper.ok(bindUserDto);
+		return MvcResultBuilder.ok(bindUserDto);
 	}
 }

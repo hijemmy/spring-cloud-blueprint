@@ -5,7 +5,7 @@ import com.jemmy.apis.product.exceptions.MdcBizException;
 import com.jemmy.apis.product.model.dto.AddressDTO;
 import com.jemmy.apis.product.service.MdcAddressQueryFeignApi;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.service.MdcAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,14 +27,14 @@ public class MdcAddressServiceImpl implements MdcAddressService {
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	public AddressDTO getAddressById(Long addressId) {
 		Preconditions.checkArgument(addressId != null, "地址ID不能为空");
-		Wrapper<AddressDTO> wrapper = mdcAddressQueryFeignApi.getById(addressId);
+		MvcResult<AddressDTO> mvcResult = mdcAddressQueryFeignApi.getById(addressId);
 
-		if (wrapper == null) {
+		if (mvcResult == null) {
 			throw new MdcBizException(ErrorCodeEnum.GL99990002);
 		}
-		if (wrapper.error()) {
+		if (mvcResult.error()) {
 			throw new MdcBizException(ErrorCodeEnum.MDC10021002);
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 }

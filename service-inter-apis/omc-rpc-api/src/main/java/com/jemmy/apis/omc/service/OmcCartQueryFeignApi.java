@@ -12,10 +12,9 @@
 package com.jemmy.apis.omc.service;
 
 import com.jemmy.apis.omc.model.vo.CartVo;
-import com.jemmy.apis.omc.service.hystrix.OmcCartFeignHystrix;
 import com.jemmy.apis.omc.service.hystrix.OmcCartQueryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,5 +37,5 @@ public interface OmcCartQueryFeignApi {
 	 * @return the cart vo
 	 */
 	@PostMapping(value = "/api/cart/getCarVo")
-	Wrapper<CartVo> getCartVo(@RequestParam("userId") Long userId);
+    MvcResult<CartVo> getCartVo(@RequestParam("userId") Long userId);
 }

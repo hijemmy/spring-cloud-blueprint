@@ -13,7 +13,7 @@ package com.jemmy.services.order.service;
 
 
 import com.jemmy.common.base.dto.LoginAuthDto;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public interface PtcAlipayService {
 	 *
 	 * @return the wrapper
 	 */
-	Wrapper pay(String orderNo, LoginAuthDto loginAuthDto);
+	MvcResult pay(String orderNo, LoginAuthDto loginAuthDto);
 
 	/**
 	 * Ali pay callback wrapper.
@@ -41,5 +41,5 @@ public interface PtcAlipayService {
 	 *
 	 * @return the wrapper
 	 */
-	Wrapper aliPayCallback(Map<String, String> params);
+	MvcResult aliPayCallback(Map<String, String> params);
 }

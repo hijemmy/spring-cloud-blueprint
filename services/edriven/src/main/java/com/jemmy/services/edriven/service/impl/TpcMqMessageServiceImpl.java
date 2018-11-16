@@ -21,8 +21,8 @@ import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.core.support.BaseService;
 import com.jemmy.common.util.PublicUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.common.zk.generator.UniqueIdGenerator;
 import com.jemmy.services.edriven.mapper.TpcMqConfirmMapper;
 import com.jemmy.services.edriven.mapper.TpcMqMessageMapper;
@@ -228,29 +228,29 @@ public class TpcMqMessageServiceImpl extends BaseService<TpcMqMessage,TpcMqMessa
 	}
 
 	@Override
-	public Wrapper queryRecordListWithPage(final MessageQueryDto messageQueryDto) {
+	public MvcResult queryRecordListWithPage(final MessageQueryDto messageQueryDto) {
 		String producerGroup = messageQueryDto.getProducerGroup();
 		String messageKey = messageQueryDto.getMessageKey();
 		Preconditions.checkArgument(StringUtils.isNotEmpty(producerGroup) || StringUtils.isNotEmpty(messageKey), "messageKey 和 pid 必须选择一个");
 		if (StringUtils.isEmpty(producerGroup)) {
 			List<MqMessageVo> result = Lists.newArrayList();
-			Wrapper<PageInfo<MqMessageVo>> uacWrapper = uacRpcService.queryMessageListWithPage(messageQueryDto);
-			Wrapper<PageInfo<MqMessageVo>> mdcWrapper = mdcRpcService.queryMessageListWithPage(messageQueryDto);
-			Wrapper<PageInfo<MqMessageVo>> opcWrapper = opcRpcService.queryMessageListWithPage(messageQueryDto);
+			MvcResult<PageInfo<MqMessageVo>> uacMvcResult = uacRpcService.queryMessageListWithPage(messageQueryDto);
+			MvcResult<PageInfo<MqMessageVo>> mdcMvcResult = mdcRpcService.queryMessageListWithPage(messageQueryDto);
+			MvcResult<PageInfo<MqMessageVo>> opcMvcResult = opcRpcService.queryMessageListWithPage(messageQueryDto);
 
-			if (uacWrapper != null && uacWrapper.getResult() != null) {
-				List<MqMessageVo> list = uacWrapper.getResult().getList();
+			if (uacMvcResult != null && uacMvcResult.getResult() != null) {
+				List<MqMessageVo> list = uacMvcResult.getResult().getList();
 				result.addAll(list);
 			}
-			if (mdcWrapper != null && mdcWrapper.getResult() != null) {
-				List<MqMessageVo> list = mdcWrapper.getResult().getList();
+			if (mdcMvcResult != null && mdcMvcResult.getResult() != null) {
+				List<MqMessageVo> list = mdcMvcResult.getResult().getList();
 				result.addAll(list);
 			}
-			if (opcWrapper != null && opcWrapper.getResult() != null) {
-				List<MqMessageVo> list = opcWrapper.getResult().getList();
+			if (opcMvcResult != null && opcMvcResult.getResult() != null) {
+				List<MqMessageVo> list = opcMvcResult.getResult().getList();
 				result.addAll(list);
 			}
-			return WrapMapper.ok(new PageInfo<>(result));
+			return MvcResultBuilder.ok(new PageInfo<>(result));
 		}
 		if (StringUtils.equals(PIDEnum.PID_UAC.name(), producerGroup)) {
 			return uacRpcService.queryMessageListWithPage(messageQueryDto);

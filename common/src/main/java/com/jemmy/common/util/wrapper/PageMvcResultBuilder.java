@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：PageWrapMapper.java
+ * 类名称：PageMvcResultBuilder.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -19,16 +19,16 @@ import com.jemmy.common.util.page.PageUtil;
  *
  * @author paascloud.net@gmail.com
  */
-public class PageWrapMapper {
+public class PageMvcResultBuilder {
 
 	/**
 	 * Instantiates a new page wrap mapper.
 	 */
-	private PageWrapMapper() {
+	private PageMvcResultBuilder() {
 	}
 
-	private static <E> PageWrapper<E> wrap(int code, String message, E o, PageUtil pageUtil) {
-		return new PageWrapper<E>(code, message, o, pageUtil);
+	private static <E> PageMvcResult<E> wrap(int code, String message, E o, PageUtil pageUtil) {
+		return new PageMvcResult<E>(code, message, o, pageUtil);
 	}
 
 	/**
@@ -40,8 +40,8 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> wrap(E o, PageUtil pageUtil) {
-		return wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, o, pageUtil);
+	public static <E> PageMvcResult<E> wrap(E o, PageUtil pageUtil) {
+		return wrap(MvcResult.SUCCESS_CODE, MvcResult.SUCCESS_MESSAGE, o, pageUtil);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> wrap(int code, String message) {
+	public static <E> PageMvcResult<E> wrap(int code, String message) {
 		return wrap(code, message, null, null);
 	}
 
@@ -65,7 +65,7 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> wrap(int code) {
+	public static <E> PageMvcResult<E> wrap(int code) {
 		return wrap(code, null, null, null);
 	}
 
@@ -77,8 +77,8 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> wrap(Exception e) {
-		return new PageWrapper<E>(Wrapper.ERROR_CODE, e.getMessage(), null, null);
+	public static <E> PageMvcResult<E> wrap(Exception e) {
+		return new PageMvcResult<E>(MvcResult.ERROR_CODE, e.getMessage(), null, null);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class PageWrapMapper {
 	 *
 	 * @return the e
 	 */
-	public static <E> E unWrap(PageWrapper<E> wrapper) {
+	public static <E> E unWrap(PageMvcResult<E> wrapper) {
 		return wrapper.getResult();
 	}
 
@@ -100,8 +100,8 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> illegalArgument() {
-		return wrap(Wrapper.ILLEGAL_ARGUMENT_CODE_, Wrapper.ILLEGAL_ARGUMENT_MESSAGE, null, null);
+	public static <E> PageMvcResult<E> illegalArgument() {
+		return wrap(MvcResult.ILLEGAL_ARGUMENT_CODE_, MvcResult.ILLEGAL_ARGUMENT_MESSAGE, null, null);
 	}
 
 	/**
@@ -111,8 +111,8 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> error() {
-		return wrap(Wrapper.ERROR_CODE, Wrapper.ERROR_MESSAGE, null, null);
+	public static <E> PageMvcResult<E> error() {
+		return wrap(MvcResult.ERROR_CODE, MvcResult.ERROR_MESSAGE, null, null);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class PageWrapMapper {
 	 *
 	 * @return the page wrapper
 	 */
-	public static <E> PageWrapper<E> ok() {
-		return new PageWrapper<E>();
+	public static <E> PageMvcResult<E> ok() {
+		return new PageMvcResult<E>();
 	}
 }

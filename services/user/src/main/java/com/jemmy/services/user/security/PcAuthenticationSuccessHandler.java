@@ -2,9 +2,9 @@ package com.jemmy.services.user.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jemmy.common.core.utils.RequestUtil;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.service.UacUserService;
 import com.jemmy.common.security.core.SecurityUser;
-import com.jemmy.common.util.wrapper.WrapMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
@@ -83,7 +83,7 @@ public class PcAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 		log.info("用户【 {} 】记录登录日志", principal.getUsername());
 
 		response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().write((objectMapper.writeValueAsString(WrapMapper.ok(token))));
+		response.getWriter().write((objectMapper.writeValueAsString(MvcResultBuilder.ok(token))));
 
 	}
 

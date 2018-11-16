@@ -14,7 +14,7 @@ package com.jemmy.apis.product.service;
 import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
 import com.jemmy.apis.product.service.hystrix.MdcExceptionLogFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,5 +37,5 @@ public interface MdcExceptionLogFeignApi {
 	 * @return the int
 	 */
 	@PostMapping(value = "/api/exception/saveAndSendExceptionLog")
-	Wrapper saveAndSendExceptionLog(@RequestBody GlobalExceptionLogDto exceptionLogDto);
+    MvcResult saveAndSendExceptionLog(@RequestBody GlobalExceptionLogDto exceptionLogDto);
 }

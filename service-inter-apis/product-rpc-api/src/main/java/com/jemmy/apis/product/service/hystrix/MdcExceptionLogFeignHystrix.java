@@ -13,7 +13,7 @@ package com.jemmy.apis.product.service.hystrix;
 
 import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
 import com.jemmy.apis.product.service.MdcExceptionLogFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 public class MdcExceptionLogFeignHystrix implements MdcExceptionLogFeignApi {
 
 	@Override
-	public Wrapper saveAndSendExceptionLog(final GlobalExceptionLogDto exceptionLogDto) {
+	public MvcResult saveAndSendExceptionLog(final GlobalExceptionLogDto exceptionLogDto) {
 		return null;
 	}
 }

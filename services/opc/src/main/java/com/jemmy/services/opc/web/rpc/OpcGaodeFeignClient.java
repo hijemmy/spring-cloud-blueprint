@@ -14,8 +14,8 @@ package com.jemmy.services.opc.web.rpc;
 import com.jemmy.apis.opc.model.dto.gaode.GaodeLocation;
 import com.jemmy.apis.opc.service.OpcGaodeFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.opc.utils.GaoDeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,12 +34,12 @@ public class OpcGaodeFeignClient extends BaseController implements OpcGaodeFeign
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据IP获取位置信息")
-	public Wrapper<GaodeLocation> getLocationByIpAddr(@RequestParam("ipAddr") String ipAddr) {
+	public MvcResult<GaodeLocation> getLocationByIpAddr(@RequestParam("ipAddr") String ipAddr) {
 		String temp = "127.0.";
 		String temp2 = "192.168.";
 		if (ipAddr.startsWith(temp) || ipAddr.startsWith(temp2)) {
 			ipAddr = "111.199.188.14";
 		}
-		return WrapMapper.ok(GaoDeUtil.getCityByIpAddr(ipAddr));
+		return MvcResultBuilder.ok(GaoDeUtil.getCityByIpAddr(ipAddr));
 	}
 }

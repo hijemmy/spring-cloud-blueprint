@@ -14,8 +14,8 @@ package com.jemmy.services.user.web.mall;
 import com.jemmy.apis.user.user.UserInfoDto;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.service.UacUserService;
 import io.swagger.annotations.Api;
@@ -51,11 +51,11 @@ public class MallUserController extends BaseController {
 	 */
 	@PostMapping(value = "/updateInformation")
 	@ApiOperation(httpMethod = "POST", value = "更新用户信息")
-	public Wrapper<UserInfoDto> updateInformation(@RequestBody UserInfoDto userInfoDto) {
+	public MvcResult<UserInfoDto> updateInformation(@RequestBody UserInfoDto userInfoDto) {
 		logger.info("updateInformation - 更新用户基本信息 userInfoDto={}", userInfoDto);
 		UacUser uacUser = new ModelMapper().map(userInfoDto, UacUser.class);
 		uacUserService.updateUser(uacUser);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -65,17 +65,17 @@ public class MallUserController extends BaseController {
 	 */
 	@PostMapping(value = "/getInformation")
 	@ApiOperation(httpMethod = "POST", value = "获取用户信息")
-	public Wrapper<UserInfoDto> getInformation() {
+	public MvcResult<UserInfoDto> getInformation() {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		logger.info("queryUserInfo - 查询用户基本信息 userId={}", userId);
 		UacUser uacUser = uacUserService.queryByUserId(userId);
 		if (uacUser == null) {
-			return WrapMapper.error("找不到当前用户");
+			return MvcResultBuilder.error("找不到当前用户");
 		}
 		UserInfoDto userInfoDto = new UserInfoDto();
 		BeanUtils.copyProperties(uacUser, userInfoDto);
 
-		return WrapMapper.ok(userInfoDto);
+		return MvcResultBuilder.ok(userInfoDto);
 	}
 }

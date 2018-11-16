@@ -17,8 +17,8 @@ import com.jemmy.apis.user.user.UserRegisterDto;
 import com.jemmy.common.base.dto.CheckValidDto;
 import com.jemmy.common.core.annotation.OperationLogDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.model.dto.user.ResetLoginPwdDto;
 import com.jemmy.services.user.model.enums.UacUserStatusEnum;
@@ -63,12 +63,12 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/checkPhoneActive/{mobileNo}")
 	@ApiOperation(httpMethod = "POST", value = "校验手机号码")
-	public Wrapper<Boolean> checkPhoneActive(@PathVariable String mobileNo) {
+	public MvcResult<Boolean> checkPhoneActive(@PathVariable String mobileNo) {
 		UacUser uacUser = new UacUser();
 		uacUser.setStatus(UacUserStatusEnum.ENABLE.getKey());
 		uacUser.setMobileNo(mobileNo);
 		int count = uacUserService.selectCount(uacUser);
-		return WrapMapper.ok(count > 0);
+		return MvcResultBuilder.ok(count > 0);
 	}
 
 	/**
@@ -80,12 +80,12 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/checkEmailActive/{email:.+}")
 	@ApiOperation(httpMethod = "POST", value = "校验邮箱")
-	public Wrapper<Boolean> checkEmailActive(@PathVariable("email") String email) {
+	public MvcResult<Boolean> checkEmailActive(@PathVariable("email") String email) {
 		UacUser uacUser = new UacUser();
 		uacUser.setStatus(UacUserStatusEnum.ENABLE.getKey());
 		uacUser.setEmail(email);
 		int count = uacUserService.selectCount(uacUser);
-		return WrapMapper.ok(count > 0);
+		return MvcResultBuilder.ok(count > 0);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/checkValid")
 	@ApiOperation(httpMethod = "POST", value = "校验数据")
-	public Wrapper checkValid(@RequestBody CheckValidDto checkValidDto) {
+	public MvcResult checkValid(@RequestBody CheckValidDto checkValidDto) {
 		String type = checkValidDto.getType();
 		String validValue = checkValidDto.getValidValue();
 
@@ -125,7 +125,7 @@ public class AuthRestController extends BaseController {
 			}
 		}
 
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, message, result);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, message, result);
 	}
 
 
@@ -138,10 +138,10 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/submitResetPwdEmail")
 	@ApiOperation(httpMethod = "POST", value = "重置密码-邮箱-提交")
-	public Wrapper<String> submitResetPwdEmail(@RequestParam("email") String email) {
+	public MvcResult<String> submitResetPwdEmail(@RequestParam("email") String email) {
 		logger.info("重置密码-邮箱-提交, email={}", email);
 		emailService.submitResetPwdEmail(email);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 
@@ -155,10 +155,10 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/submitResetPwdPhone")
 	@ApiOperation(httpMethod = "POST", value = "重置密码-手机-提交")
-	public Wrapper<String> submitResetPwdPhone(@RequestParam("mobile") String mobile, HttpServletResponse response) {
+	public MvcResult<String> submitResetPwdPhone(@RequestParam("mobile") String mobile, HttpServletResponse response) {
 		logger.info("重置密码-手机-提交, mobile={}", mobile);
 		String token = smsService.submitResetPwdPhone(mobile, response);
-		return WrapMapper.ok(token);
+		return MvcResultBuilder.ok(token);
 	}
 
 	/**
@@ -170,9 +170,9 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/resetLoginPwd")
 	@ApiOperation(httpMethod = "POST", value = "重置密码-最终提交")
-	public Wrapper<Boolean> checkResetSmsCode(ResetLoginPwdDto resetLoginPwdDto) {
+	public MvcResult<Boolean> checkResetSmsCode(ResetLoginPwdDto resetLoginPwdDto) {
 		uacUserService.resetLoginPwd(resetLoginPwdDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -184,9 +184,9 @@ public class AuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/register")
 	@ApiOperation(httpMethod = "POST", value = "注册用户")
-	public Wrapper registerUser(UserRegisterDto user) {
+	public MvcResult registerUser(UserRegisterDto user) {
 		uacUserService.register(user);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -198,9 +198,9 @@ public class AuthRestController extends BaseController {
 	 */
 	@GetMapping(value = "/activeUser/{activeUserToken}")
 	@ApiOperation(httpMethod = "POST", value = "激活用户")
-	public Wrapper activeUser(@PathVariable String activeUserToken) {
+	public MvcResult activeUser(@PathVariable String activeUserToken) {
 		uacUserService.activeUser(activeUserToken);
-		return WrapMapper.ok("激活成功");
+		return MvcResultBuilder.ok("激活成功");
 	}
 
 	/**

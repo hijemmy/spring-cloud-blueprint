@@ -14,7 +14,7 @@ package com.jemmy.apis.omc.service;
 import com.jemmy.apis.omc.model.dto.OrderDto;
 import com.jemmy.apis.omc.service.hystrix.OmcOrderFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,5 +36,5 @@ public interface OmcOrderFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/order/updateOrderById")
-	Wrapper updateOrderById(@RequestBody OrderDto order);
+    MvcResult updateOrderById(@RequestBody OrderDto order);
 }

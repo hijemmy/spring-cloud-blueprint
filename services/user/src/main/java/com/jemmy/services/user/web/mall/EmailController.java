@@ -13,8 +13,8 @@ package com.jemmy.services.user.web.mall;
 
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.dto.email.SendEmailMessage;
 import com.jemmy.services.user.service.EmailService;
 import io.swagger.annotations.Api;
@@ -51,10 +51,10 @@ public class EmailController extends BaseController {
 	 */
 	@PostMapping(value = "/sendRestEmailCode")
 	@ApiOperation(httpMethod = "POST", value = "发送注册短信验证码")
-	public Wrapper<String> sendRestEmailCode(@RequestBody SendEmailMessage sendEmailMessage) {
+	public MvcResult<String> sendRestEmailCode(@RequestBody SendEmailMessage sendEmailMessage) {
 		LoginAuthDto loginAuthDto = this.getLoginAuthDto();
 		emailService.sendEmailCode(sendEmailMessage, loginAuthDto.getLoginName());
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -66,10 +66,10 @@ public class EmailController extends BaseController {
 	 */
 	@PostMapping(value = "/checkRestEmailCode")
 	@ApiOperation(httpMethod = "POST", value = "校验充值密码邮件验证码")
-	public Wrapper checkRestEmailCode(@ApiParam(value = "验证信息") @RequestBody SendEmailMessage sendEmailMessage) {
+	public MvcResult checkRestEmailCode(@ApiParam(value = "验证信息") @RequestBody SendEmailMessage sendEmailMessage) {
 		logger.info("校验短信验证码, checkRestEmailCode={}", sendEmailMessage);
 		LoginAuthDto loginAuthDto = this.getLoginAuthDto();
 		emailService.checkEmailCode(sendEmailMessage, loginAuthDto.getLoginName());
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

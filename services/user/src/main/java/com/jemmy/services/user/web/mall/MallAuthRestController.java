@@ -18,7 +18,7 @@ import com.jemmy.apis.product.model.vo.ProductDetailVo;
 import com.jemmy.apis.product.service.MdcProductCategoryQueryFeignApi;
 import com.jemmy.apis.product.service.MdcProductQueryFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
@@ -53,7 +53,7 @@ public class MallAuthRestController extends BaseController {
 	 */
 	@PostMapping(value = "/product/queryProductList")
 	@ApiOperation(httpMethod = "POST", value = "查询商品列表")
-	public Wrapper<PageInfo> queryProductList(@RequestBody ProductReqDto productReqDto) {
+	public MvcResult<PageInfo> queryProductList(@RequestBody ProductReqDto productReqDto) {
 		logger.info("getProductCategoryDtoByPid - 查询分类信息 productReqDto={}", productReqDto);
 		return mdcProductCategoryQueryFeignApi.getProductList(productReqDto);
 	}
@@ -67,7 +67,7 @@ public class MallAuthRestController extends BaseController {
 	 */
 	@GetMapping(value = "/product/queryProductDetail/{productId}")
 	@ApiOperation(httpMethod = "POST", value = "查询商品详情信息")
-	public Wrapper<ProductDetailVo> queryProductDetail(@PathVariable Long productId) {
+	public MvcResult<ProductDetailVo> queryProductDetail(@PathVariable Long productId) {
 		logger.info("getProductCategoryDtoByPid - 查询商品详情信息 productId={}", productId);
 		return mdcProductQueryFeignApi.getProductDetail(productId);
 	}
@@ -80,9 +80,9 @@ public class MallAuthRestController extends BaseController {
 	 * @return the product category dto by pid
 	 */
 	@GetMapping(value = "/category/getProductCategoryDtoByPid/{pid}")
-	public Wrapper<List<ProductCategoryDto>> getProductCategoryDtoByPid(@PathVariable Long pid) {
+	public MvcResult<List<ProductCategoryDto>> getProductCategoryDtoByPid(@PathVariable Long pid) {
 		logger.info("getProductCategoryDtoByPid - 查询分类信息 pid={}", pid);
-		Wrapper<List<ProductCategoryDto>> productCategoryData = mdcProductCategoryQueryFeignApi.getProductCategoryData(pid);
+		MvcResult<List<ProductCategoryDto>> productCategoryData = mdcProductCategoryQueryFeignApi.getProductCategoryData(pid);
 		logger.info("productCategoryData={}", productCategoryData);
 		return productCategoryData;
 	}

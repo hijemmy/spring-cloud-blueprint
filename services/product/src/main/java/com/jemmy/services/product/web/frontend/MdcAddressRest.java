@@ -14,8 +14,8 @@ package com.jemmy.services.product.web.frontend;
 
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.util.TreeNode;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.service.MdcAddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,10 +48,10 @@ public class MdcAddressRest extends BaseController {
 	 */
 	@PostMapping(value = "/get4City")
 	@ApiOperation(httpMethod = "POST", value = "查看四级地址")
-	public Wrapper<List<TreeNode>> get4City() {
+	public MvcResult<List<TreeNode>> get4City() {
 		logger.info("get4City - 获取四级地址");
 		List<TreeNode> treeNodeList = mdcAddressService.get4City();
-		return WrapMapper.ok(treeNodeList);
+		return MvcResultBuilder.ok(treeNodeList);
 	}
 
 }

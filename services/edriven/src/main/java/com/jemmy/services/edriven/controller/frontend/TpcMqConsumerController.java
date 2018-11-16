@@ -18,8 +18,8 @@ import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.util.PublicUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.edriven.model.domain.TpcMqConsumer;
 import com.jemmy.services.edriven.model.vo.TpcMqConsumerVo;
 import com.jemmy.services.edriven.model.vo.TpcMqSubscribeVo;
@@ -59,11 +59,11 @@ public class TpcMqConsumerController extends BaseController {
 	 */
 	@PostMapping(value = "/queryConsumerVoListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询Mq消费者列表")
-	public Wrapper<List<TpcMqConsumerVo>> queryConsumerVoList(@ApiParam(name = "consumer", value = "Mq消费者") @RequestBody TpcMqConsumer tpcMqConsumer) {
+	public MvcResult<List<TpcMqConsumerVo>> queryConsumerVoList(@ApiParam(name = "consumer", value = "Mq消费者") @RequestBody TpcMqConsumer tpcMqConsumer) {
 
 		logger.info("查询消费者列表tpcMqProducerQuery={}", tpcMqConsumer);
 		List<TpcMqConsumerVo> list = tpcMqConsumerService.listConsumerVoWithPage(tpcMqConsumer);
-		return WrapMapper.ok(list);
+		return MvcResultBuilder.ok(list);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class TpcMqConsumerController extends BaseController {
 	 */
 	@PostMapping(value = "/querySubscribeListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询订阅者列表")
-	public Wrapper<PageInfo<TpcMqSubscribeVo>> querySubscribeListWithPage(@ApiParam(name = "consumer", value = "Mq消费者") @RequestBody TpcMqConsumer tpcMqConsumer) {
+	public MvcResult<PageInfo<TpcMqSubscribeVo>> querySubscribeListWithPage(@ApiParam(name = "consumer", value = "Mq消费者") @RequestBody TpcMqConsumer tpcMqConsumer) {
 		logger.info("查询Mq订阅列表tpcMqConsumerQuery={}", tpcMqConsumer);
 		PageHelper.startPage(tpcMqConsumer.getPageNum(), tpcMqConsumer.getPageSize());
 		tpcMqConsumer.setOrderBy("update_time desc");
@@ -95,7 +95,7 @@ public class TpcMqConsumerController extends BaseController {
 			}
 			pageInfo.setList(new ArrayList<>(tpcMqSubscribeVoMap.values()));
 		}
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	private Map<Long, TpcMqSubscribeVo> trans2Map(List<TpcMqSubscribeVo> resultDTOS) {
@@ -120,7 +120,7 @@ public class TpcMqConsumerController extends BaseController {
 	@PostMapping(value = "/modifyStatusById")
 	@ApiOperation(httpMethod = "POST", value = "更改消费者状态")
 	@LogAnnotation
-	public Wrapper modifyConsumerStatusById(@ApiParam(value = "更改消费者状态") @RequestBody UpdateStatusDto updateStatusDto) {
+	public MvcResult modifyConsumerStatusById(@ApiParam(value = "更改消费者状态") @RequestBody UpdateStatusDto updateStatusDto) {
 		logger.info("修改consumer状态 updateStatusDto={}", updateStatusDto);
 		Long consumerId = updateStatusDto.getId();
 
@@ -145,7 +145,7 @@ public class TpcMqConsumerController extends BaseController {
 	@PostMapping(value = "/deleteById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据消费者ID删除消费者")
 	@LogAnnotation
-	public Wrapper deleteConsumerById(@PathVariable Long id) {
+	public MvcResult deleteConsumerById(@PathVariable Long id) {
 		logger.info("删除consumer id={}", id);
 		int result = tpcMqConsumerService.deleteConsumerById(id);
 		return super.handleResult(result);

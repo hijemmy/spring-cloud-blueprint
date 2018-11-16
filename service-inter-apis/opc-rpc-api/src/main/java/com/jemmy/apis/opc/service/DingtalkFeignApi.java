@@ -16,7 +16,7 @@ import com.jemmy.apis.opc.model.dto.robot.ChatRobotMsgDto;
 import com.jemmy.apis.opc.service.hystrix.DingtalkFeignApiHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
 import com.jemmy.common.util.annotation.NoNeedAccessAuthentication;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,5 +40,5 @@ public interface DingtalkFeignApi {
 	 */
 	@PostMapping(value = "/api/opc/dingtalk/sendChatRobotMsg")
 	@NoNeedAccessAuthentication
-	Wrapper<Boolean> sendChatRobotMsg(@RequestBody ChatRobotMsgDto uacUserReqDto);
+    MvcResult<Boolean> sendChatRobotMsg(@RequestBody ChatRobotMsgDto uacUserReqDto);
 }

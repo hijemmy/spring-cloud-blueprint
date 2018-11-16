@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
 import com.jemmy.apis.user.service.UacMqMessageFeignApi;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,12 +31,12 @@ import java.util.List;
 public class UacMqMessageApiHystrix implements UacMqMessageFeignApi {
 
 	@Override
-	public Wrapper<List<String>> queryMessageKeyList(final List<String> messageKeyList) {
+	public MvcResult<List<String>> queryMessageKeyList(final List<String> messageKeyList) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
+	public MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
 		return null;
 	}
 

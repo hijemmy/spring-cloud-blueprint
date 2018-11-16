@@ -29,8 +29,8 @@ import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.base.dto.ShardingContextDto;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.util.PublicUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.common.zk.generator.UniqueIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -99,12 +99,12 @@ public class MqMessageServiceImpl implements MqMessageService {
 	public void confirmAndSendMessage(String messageKey) {
 		// 发送确认消息给消息中心
 		try {
-			Wrapper wrapper = tpcMqMessageFeignApi.confirmAndSendMessage(messageKey);
-			if (wrapper == null) {
+			MvcResult mvcResult = tpcMqMessageFeignApi.confirmAndSendMessage(messageKey);
+			if (mvcResult == null) {
 				throw new TpcBizException(ErrorCodeEnum.GL99990002);
 			}
-			if (wrapper.error()) {
-				throw new TpcBizException(ErrorCodeEnum.TPC10050004, wrapper.getMessage(), messageKey);
+			if (mvcResult.error()) {
+				throw new TpcBizException(ErrorCodeEnum.TPC10050004, mvcResult.getMessage(), messageKey);
 			}
 			log.info("<== saveMqProducerMessage - 存储并发送消息给消息中心成功. messageKey={}", messageKey);
 		} catch (Exception e) {
@@ -136,25 +136,25 @@ public class MqMessageServiceImpl implements MqMessageService {
 		messageData.setId(UniqueIdGenerator.generateId());
 		mqMessageDataMapper.insertSelective(messageData);
 
-		Wrapper wrapper = tpcMqMessageFeignApi.confirmReceiveMessage(cid, messageKey);
-		log.info("tpcMqMessageFeignApi.confirmReceiveMessage result={}", wrapper);
-		if (wrapper == null) {
+		MvcResult mvcResult = tpcMqMessageFeignApi.confirmReceiveMessage(cid, messageKey);
+		log.info("tpcMqMessageFeignApi.confirmReceiveMessage result={}", mvcResult);
+		if (mvcResult == null) {
 			throw new TpcBizException(ErrorCodeEnum.GL99990002);
 		}
-		if (wrapper.error()) {
-			throw new TpcBizException(ErrorCodeEnum.TPC10050004, wrapper.getMessage(), messageKey);
+		if (mvcResult.error()) {
+			throw new TpcBizException(ErrorCodeEnum.TPC10050004, mvcResult.getMessage(), messageKey);
 		}
 	}
 
 	@Override
 	public void saveAndConfirmFinishMessage(String cid, String messageKey) {
-		Wrapper wrapper = tpcMqMessageFeignApi.confirmConsumedMessage(cid, messageKey);
-		log.info("tpcMqMessageFeignApi.confirmReceiveMessage result={}", wrapper);
-		if (wrapper == null) {
+		MvcResult mvcResult = tpcMqMessageFeignApi.confirmConsumedMessage(cid, messageKey);
+		log.info("tpcMqMessageFeignApi.confirmReceiveMessage result={}", mvcResult);
+		if (mvcResult == null) {
 			throw new TpcBizException(ErrorCodeEnum.GL99990002);
 		}
-		if (wrapper.error()) {
-			throw new TpcBizException(ErrorCodeEnum.TPC10050004, wrapper.getMessage(), messageKey);
+		if (mvcResult.error()) {
+			throw new TpcBizException(ErrorCodeEnum.TPC10050004, mvcResult.getMessage(), messageKey);
 		}
 	}
 
@@ -225,13 +225,13 @@ public class MqMessageServiceImpl implements MqMessageService {
 	}
 
 	@Override
-	public Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
+	public MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
 		PageHelper.startPage(messageQueryDto.getPageNum(), messageQueryDto.getPageSize());
 		List<MqMessageVo> list = mqMessageDataMapper.queryMessageListWithPage(messageQueryDto);
 
 		if (PublicUtil.isEmpty(list)) {
 			list = Lists.newArrayList();
 		}
-		return WrapMapper.ok(new PageInfo<>(list));
+		return MvcResultBuilder.ok(new PageInfo<>(list));
 	}
 }

@@ -18,8 +18,8 @@ import com.jemmy.apis.omc.model.vo.OrderVo;
 import com.jemmy.common.base.dto.BaseQuery;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.order.service.OmcCartService;
 import com.jemmy.services.order.service.OmcOrderService;
 import io.swagger.annotations.Api;
@@ -50,8 +50,8 @@ public class OmcOrderController extends BaseController {
 	 * @return the cart count
 	 */
 	@PostMapping(value = "getCartCount")
-	public Wrapper<Integer> getCartCount() {
-		return WrapMapper.ok(0);
+	public MvcResult<Integer> getCartCount() {
+		return MvcResultBuilder.ok(0);
 	}
 
 	/**
@@ -61,10 +61,10 @@ public class OmcOrderController extends BaseController {
 	 */
 	@PostMapping("/getOrderCartProduct")
 	@ApiOperation(httpMethod = "POST", value = "获取购物车商品数量")
-	public Wrapper getOrderCartProduct() {
+	public MvcResult getOrderCartProduct() {
 		logger.info("getOrderCartProduct - 获取购物车商品数量");
 		OrderProductVo orderCartProduct = omcCartService.getOrderCartProduct(getLoginAuthDto().getUserId());
-		return WrapMapper.ok(orderCartProduct);
+		return MvcResultBuilder.ok(orderCartProduct);
 	}
 
 	/**
@@ -76,13 +76,13 @@ public class OmcOrderController extends BaseController {
 	 */
 	@PostMapping("createOrderDoc/{shippingId}")
 	@ApiOperation(httpMethod = "POST", value = "创建订单")
-	public Wrapper createOrderDoc(@PathVariable Long shippingId) {
+	public MvcResult createOrderDoc(@PathVariable Long shippingId) {
 		logger.info("createOrderDoc - 创建订单. shippingId={}", shippingId);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		logger.info("操作人信息. loginAuthDto={}", loginAuthDto);
 
 		OrderVo orderDoc = omcOrderService.createOrderDoc(loginAuthDto, shippingId);
-		return WrapMapper.ok(orderDoc);
+		return MvcResultBuilder.ok(orderDoc);
 	}
 
 
@@ -95,7 +95,7 @@ public class OmcOrderController extends BaseController {
 	 */
 	@PostMapping("cancelOrderDoc/{orderNo}")
 	@ApiOperation(httpMethod = "POST", value = "取消订单")
-	public Wrapper cancelOrderDoc(@PathVariable String orderNo) {
+	public MvcResult cancelOrderDoc(@PathVariable String orderNo) {
 		logger.info("cancelOrderDoc - 取消订单. orderNo={}", orderNo);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		logger.info("操作人信息. loginAuthDto={}", loginAuthDto);
@@ -113,23 +113,23 @@ public class OmcOrderController extends BaseController {
 	 */
 	@PostMapping("queryUserOrderDetailList/{orderNo}")
 	@ApiOperation(httpMethod = "POST", value = "查询订单详情")
-	public Wrapper queryUserOrderDetailList(@PathVariable String orderNo) {
+	public MvcResult queryUserOrderDetailList(@PathVariable String orderNo) {
 		logger.info("queryUserOrderDetailList - 查询用户订单明细. orderNo={}", orderNo);
 
 		Long userId = getLoginAuthDto().getUserId();
 		logger.info("操作人信息. userId={}", userId);
 
 		OrderVo orderVo = omcOrderService.getOrderDetail(userId, orderNo);
-		return WrapMapper.ok(orderVo);
+		return MvcResultBuilder.ok(orderVo);
 	}
 
 	@PostMapping("queryUserOrderDetail/{orderNo}")
 	@ApiOperation(httpMethod = "POST", value = "查询订单详情")
-	public Wrapper queryUserOrderDetail(@PathVariable String orderNo) {
+	public MvcResult queryUserOrderDetail(@PathVariable String orderNo) {
 		logger.info("queryUserOrderDetail - 查询订单明细. orderNo={}", orderNo);
 
 		OrderVo orderVo = omcOrderService.getOrderDetail(orderNo);
-		return WrapMapper.ok(orderVo);
+		return MvcResultBuilder.ok(orderVo);
 	}
 
 	/**
@@ -141,22 +141,22 @@ public class OmcOrderController extends BaseController {
 	 */
 	@PostMapping("queryUserOrderListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询用户订单列表")
-	public Wrapper queryUserOrderListWithPage(@RequestBody BaseQuery baseQuery) {
+	public MvcResult queryUserOrderListWithPage(@RequestBody BaseQuery baseQuery) {
 		logger.info("queryUserOrderListWithPage - 查询用户订单集合. baseQuery={}", baseQuery);
 
 		Long userId = getLoginAuthDto().getUserId();
 		logger.info("操作人信息. userId={}", userId);
 
 		PageInfo pageInfo = omcOrderService.queryUserOrderListWithPage(userId, baseQuery);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	@PostMapping("queryOrderListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询用户订单列表")
-	public Wrapper queryOrderListWithPage(@RequestBody OrderPageQuery orderPageQuery) {
+	public MvcResult queryOrderListWithPage(@RequestBody OrderPageQuery orderPageQuery) {
 		logger.info("queryOrderListWithPage - 查询订单集合. orderPageQuery={}", orderPageQuery);
 		PageInfo pageInfo = omcOrderService.queryOrderListWithPage(orderPageQuery);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	/**
@@ -168,10 +168,10 @@ public class OmcOrderController extends BaseController {
 	 */
 	@PostMapping("queryOrderPayStatus/{orderNo}")
 	@ApiOperation(httpMethod = "POST", value = "查询订单状态")
-	public Wrapper<Boolean> queryOrderPayStatus(@PathVariable String orderNo) {
+	public MvcResult<Boolean> queryOrderPayStatus(@PathVariable String orderNo) {
 		logger.info("queryOrderPayStatus - 查询订单状态. orderNo={}", orderNo);
 		boolean result = omcOrderService.queryOrderPayStatus(getLoginAuthDto().getUserId(), orderNo);
-		return WrapMapper.ok(result);
+		return MvcResultBuilder.ok(result);
 	}
 
 }

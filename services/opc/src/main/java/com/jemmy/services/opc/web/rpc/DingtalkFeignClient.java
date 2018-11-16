@@ -19,8 +19,8 @@ import com.jemmy.apis.opc.service.DingtalkFeignApi;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.util.ValidateUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpResponse;
@@ -46,7 +46,7 @@ public class DingtalkFeignClient extends BaseController implements DingtalkFeign
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "发送钉钉消息")
-	public Wrapper<Boolean> sendChatRobotMsg(@RequestBody ChatRobotMsgDto chatRobotMsgDto) {
+	public MvcResult<Boolean> sendChatRobotMsg(@RequestBody ChatRobotMsgDto chatRobotMsgDto) {
 		logger.info("sendChatRobotMsg - 钉钉机器人开始发送消息. chatRobotMsgDto = {}", chatRobotMsgDto);
 		boolean result;
 		try {
@@ -73,9 +73,9 @@ public class DingtalkFeignClient extends BaseController implements DingtalkFeign
 			}
 		} catch (IOException e) {
 			logger.error("发送钉钉消息,出现异常 ex={}", e.getMessage(), e);
-			return WrapMapper.error("发送钉钉消息失败");
+			return MvcResultBuilder.error("发送钉钉消息失败");
 		}
-		return WrapMapper.ok(result);
+		return MvcResultBuilder.ok(result);
 	}
 
 	/**

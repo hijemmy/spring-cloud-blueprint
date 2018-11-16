@@ -13,8 +13,8 @@ package com.jemmy.services.user.web.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.dto.log.UacLogMainDto;
 import com.jemmy.services.user.service.UacLogService;
 import io.swagger.annotations.Api;
@@ -49,9 +49,9 @@ public class UacLogMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询日志列表")
-	public Wrapper queryLogListWithPage(@ApiParam(name = "uacLogQueryDtoPage", value = "日志查询条件") @RequestBody UacLogMainDto uacLogQueryDtoPage) {
+	public MvcResult queryLogListWithPage(@ApiParam(name = "uacLogQueryDtoPage", value = "日志查询条件") @RequestBody UacLogMainDto uacLogQueryDtoPage) {
 		logger.info("查询日志处理列表 uacLogQueryDtoPage={}", uacLogQueryDtoPage);
 		PageInfo pageInfo = uacLogService.queryLogListWithPage(uacLogQueryDtoPage);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 }

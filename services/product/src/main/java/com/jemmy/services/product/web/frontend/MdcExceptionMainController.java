@@ -13,8 +13,8 @@ package com.jemmy.services.product.web.frontend;
 
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.model.dto.MdcExceptionQueryDto;
 import com.jemmy.services.product.service.MdcExceptionLogService;
 import io.swagger.annotations.Api;
@@ -49,9 +49,9 @@ public class MdcExceptionMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询日志列表")
-	public Wrapper queryLogListWithPage(@ApiParam(name = "mdcExceptionQueryDto", value = "异常查询条件") @RequestBody MdcExceptionQueryDto mdcExceptionQueryDto) {
+	public MvcResult queryLogListWithPage(@ApiParam(name = "mdcExceptionQueryDto", value = "异常查询条件") @RequestBody MdcExceptionQueryDto mdcExceptionQueryDto) {
 		logger.info("查询日志处理列表 mdcExceptionQueryDto={}", mdcExceptionQueryDto);
 		PageInfo pageInfo = mdcExceptionLogService.queryExceptionListWithPage(mdcExceptionQueryDto);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 }

@@ -13,7 +13,7 @@ package com.jemmy.apis.product.service.hystrix;
 
 import com.jemmy.apis.product.model.dto.AddressDTO;
 import com.jemmy.apis.product.service.MdcAddressQueryFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class MdcAddressQueryFeignHystrix implements MdcAddressQueryFeignApi {
 
 	@Override
-	public Wrapper<AddressDTO> getById(final Long addressId) {
+	public MvcResult<AddressDTO> getById(final Long addressId) {
 		return null;
 	}
 }

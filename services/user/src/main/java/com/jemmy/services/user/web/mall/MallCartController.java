@@ -19,7 +19,7 @@ import com.jemmy.apis.omc.service.OmcCartQueryFeignApi;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.util.PublicUtil;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.dto.omc.CartListQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,7 +54,7 @@ public class MallCartController extends BaseController {
 	 */
 	@PostMapping(value = "mergeUserCart")
 	@ApiOperation(httpMethod = "POST", value = "登录成功合并购物车")
-	public Wrapper<CartVo> mergeUserCart(@RequestBody CartListQuery cartListQuery) {
+	public MvcResult<CartVo> mergeUserCart(@RequestBody CartListQuery cartListQuery) {
 		List<CartProductVo> cartProductVoList = cartListQuery.getCartProductVoList();
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		// 1.更新购物车数据
@@ -77,7 +77,7 @@ public class MallCartController extends BaseController {
 	 */
 	@PostMapping("addProduct/{productId}/{count}")
 	@ApiOperation(httpMethod = "POST", value = "购物车添加商品")
-	public Wrapper addProduct(@PathVariable Long productId, @PathVariable Integer count) {
+	public MvcResult addProduct(@PathVariable Long productId, @PathVariable Integer count) {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.addProduct(userId, productId, count);
@@ -94,7 +94,7 @@ public class MallCartController extends BaseController {
 	 */
 	@ApiOperation(httpMethod = "POST", value = "购物车更新商品")
 	@PostMapping("updateProduct/{productId}/{count}")
-	public Wrapper updateProduct(@PathVariable Long productId, @PathVariable Integer count) {
+	public MvcResult updateProduct(@PathVariable Long productId, @PathVariable Integer count) {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.updateProduct(userId, productId, count);
@@ -109,7 +109,7 @@ public class MallCartController extends BaseController {
 	 */
 	@ApiOperation(httpMethod = "POST", value = "购物车删除商品")
 	@PostMapping("deleteProduct/{productIds}")
-	public Wrapper deleteProduct(@PathVariable String productIds) {
+	public MvcResult deleteProduct(@PathVariable String productIds) {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.deleteProduct(userId, productIds);
@@ -123,7 +123,7 @@ public class MallCartController extends BaseController {
 	 */
 	@PostMapping("selectAllProduct")
 	@ApiOperation(httpMethod = "POST", value = "购物车全选商品")
-	public Wrapper selectAll() {
+	public MvcResult selectAll() {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.selectOrUnSelect(userId, null, OmcApiConstant.Cart.CHECKED);
@@ -136,7 +136,7 @@ public class MallCartController extends BaseController {
 	 */
 	@PostMapping("unSelectAllProduct")
 	@ApiOperation(httpMethod = "POST", value = "购物车反选全部商品")
-	public Wrapper unSelectAll() {
+	public MvcResult unSelectAll() {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.selectOrUnSelect(userId, null, OmcApiConstant.Cart.UN_CHECKED);
@@ -152,7 +152,7 @@ public class MallCartController extends BaseController {
 	 */
 	@PostMapping("selectProduct/{productId}")
 	@ApiOperation(httpMethod = "POST", value = "选中商品")
-	public Wrapper select(@PathVariable Long productId) {
+	public MvcResult select(@PathVariable Long productId) {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.selectOrUnSelect(userId, productId, OmcApiConstant.Cart.CHECKED);
@@ -167,7 +167,7 @@ public class MallCartController extends BaseController {
 	 */
 	@PostMapping("unSelectProduct/{productId}")
 	@ApiOperation(httpMethod = "POST", value = "反选商品")
-	public Wrapper unSelect(@PathVariable Long productId) {
+	public MvcResult unSelect(@PathVariable Long productId) {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		Long userId = loginAuthDto.getUserId();
 		return mallCartFeignApi.selectOrUnSelect(userId, productId, OmcApiConstant.Cart.UN_CHECKED);

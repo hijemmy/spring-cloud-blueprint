@@ -20,8 +20,8 @@ import com.jemmy.apis.opc.model.dto.oss.OptUploadFileRespDto;
 import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.opc.service.OpcAttachmentService;
 import com.jemmy.services.opc.service.OpcOssService;
 import io.swagger.annotations.Api;
@@ -64,7 +64,7 @@ public class OpcFileController extends BaseController {
 	 */
 	@PostMapping(consumes = "multipart/form-data", value = "/uploadFile")
 	@ApiOperation(httpMethod = "POST", value = "上传文件")
-	public Wrapper<String> uploadFile(HttpServletRequest request, OptUploadFileReqDto optUploadFileReqDto) {
+	public MvcResult<String> uploadFile(HttpServletRequest request, OptUploadFileReqDto optUploadFileReqDto) {
 		StringBuilder temp = new StringBuilder();
 		logger.info("uploadFile - 上传文件. optUploadFileReqDto={}", optUploadFileReqDto);
 		Preconditions.checkArgument(StringUtils.isNotEmpty(optUploadFileReqDto.getFileType()), "文件类型为空");
@@ -79,7 +79,7 @@ public class OpcFileController extends BaseController {
 		if (StringUtils.isNotEmpty(attachmentIds)) {
 			attachmentIds = StringUtils.substringBeforeLast(attachmentIds, GlobalConstant.Symbol.COMMA);
 		}
-		return WrapMapper.ok(attachmentIds);
+		return MvcResultBuilder.ok(attachmentIds);
 	}
 
 	/**
@@ -123,11 +123,11 @@ public class OpcFileController extends BaseController {
 	 */
 	@PostMapping(value = "/queryAttachmentById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据ID查询附件信息")
-	public Wrapper<OptAttachmentRespDto> queryAttachment(@PathVariable Long id) {
+	public MvcResult<OptAttachmentRespDto> queryAttachment(@PathVariable Long id) {
 		logger.info("queryAttachment -根据ID查询文件信息. id={}", id);
 
 		OptAttachmentRespDto optAttachmentRespDto = optAttachmentService.queryAttachmentById(id);
-		return WrapMapper.ok(optAttachmentRespDto);
+		return MvcResultBuilder.ok(optAttachmentRespDto);
 	}
 
 	/**
@@ -139,11 +139,11 @@ public class OpcFileController extends BaseController {
 	 */
 	@PostMapping(value = "/queryAttachmentListByRefNo/{refNo}")
 	@ApiOperation(httpMethod = "POST", value = "根据关联单号查询附件信息")
-	public Wrapper<List<OptAttachmentRespDto>> queryAttachmentListByRefNo(@PathVariable String refNo) {
+	public MvcResult<List<OptAttachmentRespDto>> queryAttachmentListByRefNo(@PathVariable String refNo) {
 		logger.info("queryAttachment -查询附件信息. refNo={}", refNo);
 
 		List<OptAttachmentRespDto> optAttachmentRespDtos = optAttachmentService.queryAttachmentListByRefNo(refNo);
-		return WrapMapper.ok(optAttachmentRespDtos);
+		return MvcResultBuilder.ok(optAttachmentRespDtos);
 	}
 
 
@@ -156,17 +156,17 @@ public class OpcFileController extends BaseController {
 	 */
 	@PostMapping(value = "/deleteAttachment/{attachmentId}")
 	@ApiOperation(httpMethod = "POST", value = "删除附件信息")
-	public Wrapper deleteAttachment(@PathVariable Long attachmentId) {
+	public MvcResult deleteAttachment(@PathVariable Long attachmentId) {
 		logger.info("deleteAttachment - 删除文件. attachmentId={}", attachmentId);
 		int result;
 		try {
 			result = optAttachmentService.deleteFile(attachmentId);
 		} catch (BusinessException ex) {
 			logger.error("删除文件, 出现异常={}", ex.getMessage(), ex);
-			return WrapMapper.wrap(Wrapper.ERROR_CODE, "出现异常");
+			return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, "出现异常");
 		} catch (Exception e) {
 			logger.error("删除取文件, 出现异常={}", e.getMessage(), e);
-			return WrapMapper.error();
+			return MvcResultBuilder.error();
 		}
 		return handleResult(result);
 	}

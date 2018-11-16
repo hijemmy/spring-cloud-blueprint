@@ -14,7 +14,7 @@ package com.jemmy.apis.product.service.hystrix;
 import com.jemmy.apis.product.model.dto.ProductDto;
 import com.jemmy.apis.product.model.vo.ProductDetailVo;
 import com.jemmy.apis.product.service.MdcProductQueryFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,12 +26,12 @@ import org.springframework.stereotype.Component;
 public class MdcProductQueryFeignHystrix implements MdcProductQueryFeignApi {
 
 	@Override
-	public Wrapper<ProductDetailVo> getProductDetail(final Long productId) {
+	public MvcResult<ProductDetailVo> getProductDetail(final Long productId) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<ProductDto> selectById(final Long productId) {
+	public MvcResult<ProductDto> selectById(final Long productId) {
 		return null;
 	}
 }

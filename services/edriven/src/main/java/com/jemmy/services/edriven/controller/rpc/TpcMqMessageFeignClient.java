@@ -14,9 +14,9 @@ package com.jemmy.services.edriven.controller.rpc;
 import com.jemmy.apis.edriven.TpcMqMessageFeignApi;
 import com.jemmy.apis.edriven.model.dto.TpcMqMessageDto;
 import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.edriven.service.TpcMqMessageService;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
@@ -39,57 +39,57 @@ public class TpcMqMessageFeignClient extends BaseController implements TpcMqMess
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "预存储消息")
-	public Wrapper saveMessageWaitingConfirm(@RequestBody TpcMqMessageDto mqMessageDto) {
+	public MvcResult saveMessageWaitingConfirm(@RequestBody TpcMqMessageDto mqMessageDto) {
 		logger.info("预存储消息. mqMessageDto={}", mqMessageDto);
 		tpcMqMessageService.saveMessageWaitingConfirm(mqMessageDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "确认并发送消息")
-	public Wrapper confirmAndSendMessage(@RequestParam("messageKey") String messageKey) {
+	public MvcResult confirmAndSendMessage(@RequestParam("messageKey") String messageKey) {
 		logger.info("确认并发送消息. messageKey={}", messageKey);
 		tpcMqMessageService.confirmAndSendMessage(messageKey);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "存储并发送消息")
-	public Wrapper saveAndSendMessage(@RequestBody TpcMqMessageDto message) {
+	public MvcResult saveAndSendMessage(@RequestBody TpcMqMessageDto message) {
 		logger.info("存储并发送消息. mqMessageDto={}", message);
 		tpcMqMessageService.saveAndSendMessage(message);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "直接发送消息")
-	public Wrapper directSendMessage(@RequestBody TpcMqMessageDto messageDto) {
+	public MvcResult directSendMessage(@RequestBody TpcMqMessageDto messageDto) {
 		logger.info("直接发送消息. mqMessageDto={}", messageDto);
 		tpcMqMessageService.directSendMessage(messageDto.getMessageBody(), messageDto.getMessageTopic(), messageDto.getMessageTag(), messageDto.getMessageKey(), messageDto.getProducerGroup(), messageDto.getDelayLevel());
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据消息ID删除消息")
-	public Wrapper deleteMessageByMessageKey(@RequestParam("messageKey") String messageKey) {
+	public MvcResult deleteMessageByMessageKey(@RequestParam("messageKey") String messageKey) {
 		logger.info("根据消息ID删除消息. messageKey={}", messageKey);
 		tpcMqMessageService.deleteMessageByMessageKey(messageKey);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "确认收到消息")
-	public Wrapper confirmReceiveMessage(@RequestParam("cid") final String cid, @RequestParam("messageKey") final String messageKey) {
+	public MvcResult confirmReceiveMessage(@RequestParam("cid") final String cid, @RequestParam("messageKey") final String messageKey) {
 		logger.info("确认收到消息. cid={}, messageKey={}", cid, messageKey);
 		tpcMqMessageService.confirmReceiveMessage(cid, messageKey);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "确认消费消息")
-	public Wrapper confirmConsumedMessage(@RequestParam("cid") final String cid, @RequestParam("messageKey") final String messageKey) {
+	public MvcResult confirmConsumedMessage(@RequestParam("cid") final String cid, @RequestParam("messageKey") final String messageKey) {
 		logger.info("确认完成消费消息. cid={}, messageKey={}", cid, messageKey);
 		tpcMqMessageService.confirmConsumedMessage(cid, messageKey);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

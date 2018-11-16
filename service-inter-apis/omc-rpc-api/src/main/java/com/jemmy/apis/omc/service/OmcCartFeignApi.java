@@ -14,7 +14,7 @@ package com.jemmy.apis.omc.service;
 import com.jemmy.apis.omc.model.vo.CartProductVo;
 import com.jemmy.apis.omc.service.hystrix.OmcCartFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +39,7 @@ public interface OmcCartFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/cart/updateCartList")
-	Wrapper updateCartList(@RequestBody List<CartProductVo> cartProductVoList);
+    MvcResult updateCartList(@RequestBody List<CartProductVo> cartProductVoList);
 
 	/**
 	 * 添加购物车.
@@ -51,7 +51,7 @@ public interface OmcCartFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/cart/addProduct")
-	Wrapper addProduct(@RequestParam("userId") Long userId, @RequestParam("productId") Long productId, @RequestParam("count") Integer count);
+    MvcResult addProduct(@RequestParam("userId") Long userId, @RequestParam("productId") Long productId, @RequestParam("count") Integer count);
 
 	/**
 	 * 更新商品信息.
@@ -63,7 +63,7 @@ public interface OmcCartFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/cart/updateProduct")
-	Wrapper updateProduct(@RequestParam("userId") Long userId, @RequestParam("productId") Long productId, @RequestParam("count") Integer count);
+    MvcResult updateProduct(@RequestParam("userId") Long userId, @RequestParam("productId") Long productId, @RequestParam("count") Integer count);
 
 	/**
 	 * 删除商品信息.
@@ -74,7 +74,7 @@ public interface OmcCartFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/cart/deleteProduct")
-	Wrapper deleteProduct(@RequestParam("userId") Long userId, @RequestParam("productIds") String productIds);
+    MvcResult deleteProduct(@RequestParam("userId") Long userId, @RequestParam("productIds") String productIds);
 
 	/**
 	 * 选中和反选商品.
@@ -86,6 +86,6 @@ public interface OmcCartFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/cart/selectOrUnSelect")
-	Wrapper selectOrUnSelect(@RequestParam(name = "userId") Long userId, @RequestParam(name = "productId", required = false) Long productId, @RequestParam(name = "checked") Integer checked);
+    MvcResult selectOrUnSelect(@RequestParam(name = "userId") Long userId, @RequestParam(name = "productId", required = false) Long productId, @RequestParam(name = "checked") Integer checked);
 }
 

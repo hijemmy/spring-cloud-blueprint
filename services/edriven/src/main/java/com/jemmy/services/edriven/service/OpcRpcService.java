@@ -21,7 +21,7 @@ import com.jemmy.apis.opc.service.OpcOssFeignApi;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -51,7 +51,7 @@ public class OpcRpcService {
 	 * @return the boolean
 	 */
 	public boolean sendChatRobotMsg(ChatRobotMsgDto chatRobotMsgDto) {
-		Wrapper<Boolean> result = dingtalkFeignApi.sendChatRobotMsg(chatRobotMsgDto);
+		MvcResult<Boolean> result = dingtalkFeignApi.sendChatRobotMsg(chatRobotMsgDto);
 		return result.getResult();
 	}
 
@@ -62,12 +62,12 @@ public class OpcRpcService {
 		opcOssFeignApi.deleteExpireFile();
 	}
 
-	public Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
-		Wrapper<PageInfo<MqMessageVo>> wrapper = opcMqMessageFeignApi.queryMessageListWithPage(messageQueryDto);
-		if (wrapper == null) {
+	public MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
+		MvcResult<PageInfo<MqMessageVo>> mvcResult = opcMqMessageFeignApi.queryMessageListWithPage(messageQueryDto);
+		if (mvcResult == null) {
 			log.error("查询消息记录 失败 result is null");
 			throw new TpcBizException(ErrorCodeEnum.GL99990002);
 		}
-		return wrapper;
+		return mvcResult;
 	}
 }

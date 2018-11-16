@@ -13,8 +13,8 @@ package com.jemmy.services.product.web.frontend;
 
 
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.product.model.domain.MdcProductCategory;
 import com.jemmy.services.product.model.dto.MdcCategoryCheckNameDto;
 import com.jemmy.services.product.service.MdcProductCategoryService;
@@ -51,7 +51,7 @@ public class UacProductCategoryCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkCategoryName")
 	@ApiOperation(httpMethod = "POST", value = "检测数据分类名称是否已存在")
-	public Wrapper<Boolean> checkCategoryName(@RequestBody MdcCategoryCheckNameDto categoryCheckNameDto) {
+	public MvcResult<Boolean> checkCategoryName(@RequestBody MdcCategoryCheckNameDto categoryCheckNameDto) {
 		logger.info("检测数据分类名称是否已存在 categoryCheckNameDto={}", categoryCheckNameDto);
 
 		Long id = categoryCheckNameDto.getCategoryId();
@@ -66,6 +66,6 @@ public class UacProductCategoryCommonController extends BaseController {
 		criteria.andEqualTo("name", categoryName);
 
 		int result = mdcProductCategoryService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 }

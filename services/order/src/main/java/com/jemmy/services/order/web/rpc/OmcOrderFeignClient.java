@@ -14,7 +14,7 @@ package com.jemmy.services.order.web.rpc;
 import com.jemmy.apis.omc.model.dto.OrderDto;
 import com.jemmy.apis.omc.service.OmcOrderFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.order.model.domain.OmcOrder;
 import com.jemmy.services.order.service.OmcOrderService;
 import io.swagger.annotations.Api;
@@ -41,7 +41,7 @@ public class OmcOrderFeignClient extends BaseController implements OmcOrderFeign
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "更新订单信息")
-	public Wrapper updateOrderById(@RequestBody OrderDto orderDto) {
+	public MvcResult updateOrderById(@RequestBody OrderDto orderDto) {
 		logger.info("updateOrderById - 更新订单信息. orderDto={}", orderDto);
 		ModelMapper modelMapper = new ModelMapper();
 		OmcOrder omcOrder = modelMapper.map(orderDto, OmcOrder.class);

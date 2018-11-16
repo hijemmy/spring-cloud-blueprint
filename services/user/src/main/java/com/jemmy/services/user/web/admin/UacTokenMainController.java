@@ -13,8 +13,8 @@ package com.jemmy.services.user.web.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.dto.token.TokenMainQueryDto;
 import com.jemmy.services.user.service.UacUserTokenService;
 import io.swagger.annotations.Api;
@@ -51,9 +51,9 @@ public class UacTokenMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询在线用户列表")
-	public Wrapper queryUacActionListWithPage(@ApiParam(name = "token") @RequestBody TokenMainQueryDto token) {
+	public MvcResult queryUacActionListWithPage(@ApiParam(name = "token") @RequestBody TokenMainQueryDto token) {
 		logger.info("查询在线用户列表. token={}", token);
 		PageInfo pageInfo = uacUserTokenService.listTokenWithPage(token);
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 }

@@ -18,7 +18,7 @@ import com.jemmy.apis.user.service.UacUserTokenFeignApi;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
@@ -42,12 +42,12 @@ public class UacRpcService {
 
 	@Retryable(value = Exception.class, backoff = @Backoff(delay = 5000, multiplier = 2))
 	public void batchUpdateTokenOffLine() {
-		Wrapper<Integer> wrapper = uacUserTokenFeignApi.updateTokenOffLine();
-		if (wrapper == null) {
+		MvcResult<Integer> mvcResult = uacUserTokenFeignApi.updateTokenOffLine();
+		if (mvcResult == null) {
 			log.error("updateTokenOffLine 失败 result is null");
 			return;
 		}
-		Integer result = wrapper.getResult();
+		Integer result = mvcResult.getResult();
 		if (result == null || result == 0) {
 			log.error("updateTokenOffLine 失败");
 		} else {
@@ -56,21 +56,21 @@ public class UacRpcService {
 	}
 
 	public List<String> queryWaitingConfirmMessageKeyList(List<String> messageKeyList) {
-		Wrapper<List<String>> wrapper = uacMqMessageFeignApi.queryMessageKeyList(messageKeyList);
-		if (wrapper == null) {
+		MvcResult<List<String>> mvcResult = uacMqMessageFeignApi.queryMessageKeyList(messageKeyList);
+		if (mvcResult == null) {
 			log.error("queryWaitingConfirmMessageKeyList 失败 result is null");
 			throw new TpcBizException(ErrorCodeEnum.GL99990002);
 		}
-		return wrapper.getResult();
+		return mvcResult.getResult();
 	}
 
-	public Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(MessageQueryDto messageQueryDto) {
-		Wrapper<PageInfo<MqMessageVo>> wrapper = uacMqMessageFeignApi.queryMessageListWithPage(messageQueryDto);
-		if (wrapper == null) {
+	public MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(MessageQueryDto messageQueryDto) {
+		MvcResult<PageInfo<MqMessageVo>> mvcResult = uacMqMessageFeignApi.queryMessageListWithPage(messageQueryDto);
+		if (mvcResult == null) {
 			log.error("查询消息记录 失败 result is null");
 			throw new TpcBizException(ErrorCodeEnum.GL99990002);
 		}
-		return wrapper;
+		return mvcResult;
 	}
 
 }

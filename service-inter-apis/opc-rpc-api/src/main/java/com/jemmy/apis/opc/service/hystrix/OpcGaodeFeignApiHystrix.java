@@ -13,7 +13,7 @@ package com.jemmy.apis.opc.service.hystrix;
 
 import com.jemmy.apis.opc.model.dto.gaode.GaodeLocation;
 import com.jemmy.apis.opc.service.OpcGaodeFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class OpcGaodeFeignApiHystrix implements OpcGaodeFeignApi {
 
 	@Override
-	public Wrapper<GaodeLocation> getLocationByIpAddr(final String ipAddr) {
+	public MvcResult<GaodeLocation> getLocationByIpAddr(final String ipAddr) {
 		return null;
 	}
 }

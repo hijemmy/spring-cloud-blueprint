@@ -19,8 +19,8 @@ import com.google.common.collect.Maps;
 import com.jemmy.apis.omc.model.constant.PtcApiConstant;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.order.service.PtcAlipayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,7 +55,7 @@ public class PtcPayController extends BaseController {
 	 */
 	@PostMapping("/createQrCodeImage/{orderNo}")
 	@ApiOperation(httpMethod = "POST", value = "生成付款二维码")
-	public Wrapper createQrCodeImage(@PathVariable String orderNo) {
+	public MvcResult createQrCodeImage(@PathVariable String orderNo) {
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		return ptcAlipayService.pay(orderNo, loginAuthDto);
 	}
@@ -93,14 +93,14 @@ public class PtcPayController extends BaseController {
 			boolean alipayRSACheckedV2 = AlipaySignature.rsaCheckV2(params, Configs.getAlipayPublicKey(), "utf-8", Configs.getSignType());
 
 			if (!alipayRSACheckedV2) {
-				return WrapMapper.error("非法请求,验证不通过,再恶意请求我就报警找网警了");
+				return MvcResultBuilder.error("非法请求,验证不通过,再恶意请求我就报警找网警了");
 			}
 		} catch (AlipayApiException e) {
 			logger.error("支付宝验证回调异常", e);
 		}
 
 		//todo 验证各种数据
-		Wrapper serverResponse = ptcAlipayService.aliPayCallback(params);
+		MvcResult serverResponse = ptcAlipayService.aliPayCallback(params);
 		if (serverResponse.success()) {
 			return PtcApiConstant.AlipayCallback.RESPONSE_SUCCESS;
 		}

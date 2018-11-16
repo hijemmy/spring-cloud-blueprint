@@ -18,7 +18,7 @@ import com.jemmy.apis.opc.model.dto.oss.OptGetUrlRequest;
 import com.jemmy.apis.opc.model.dto.robot.ChatRobotMsgDto;
 import com.jemmy.apis.opc.service.DingtalkFeignApi;
 import com.jemmy.apis.opc.service.OpcOssFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -38,17 +38,17 @@ public class OpcRpcService {
 	private OpcOssFeignApi opcOssFeignApi;
 
 	public boolean sendChatRobotMsg(ChatRobotMsgDto chatRobotMsgDto) {
-		Wrapper<Boolean> result = dingtalkFeignApi.sendChatRobotMsg(chatRobotMsgDto);
+		MvcResult<Boolean> result = dingtalkFeignApi.sendChatRobotMsg(chatRobotMsgDto);
 		return result.getResult();
 	}
 
 	public List<ElementImgUrlDto> listFileUrl(OptBatchGetUrlRequest urlRequest) {
-		Wrapper<List<ElementImgUrlDto>> result = opcOssFeignApi.listFileUrl(urlRequest);
+		MvcResult<List<ElementImgUrlDto>> result = opcOssFeignApi.listFileUrl(urlRequest);
 		return result.getResult();
 	}
 
 	public String getFileUrl(final OptGetUrlRequest request) {
-		Wrapper<String> result = opcOssFeignApi.getFileUrl(request);
+		MvcResult<String> result = opcOssFeignApi.getFileUrl(request);
 		return result.getResult();
 	}
 }

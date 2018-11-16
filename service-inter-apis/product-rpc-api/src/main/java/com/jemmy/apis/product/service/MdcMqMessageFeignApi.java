@@ -18,7 +18,7 @@ import com.jemmy.apis.product.service.hystrix.MdcMqMessageApiHystrix;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +45,7 @@ public interface MdcMqMessageFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/mdc/message/queryMessageKeyList")
-	Wrapper<List<String>> queryMessageKeyList(@RequestParam("messageKeyList") List<String> messageKeyList);
+    MvcResult<List<String>> queryMessageKeyList(@RequestParam("messageKeyList") List<String> messageKeyList);
 
 	/**
 	 * Query message list with page wrapper.
@@ -55,5 +55,5 @@ public interface MdcMqMessageFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/mdc/message/queryMessageListWithPage")
-	Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(@RequestBody MessageQueryDto messageQueryDto);
+    MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(@RequestBody MessageQueryDto messageQueryDto);
 }

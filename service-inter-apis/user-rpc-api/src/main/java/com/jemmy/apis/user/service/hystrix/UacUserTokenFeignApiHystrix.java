@@ -13,7 +13,7 @@ package com.jemmy.apis.user.service.hystrix;
 
 
 import com.jemmy.apis.user.service.UacUserTokenFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class UacUserTokenFeignApiHystrix implements UacUserTokenFeignApi {
 
 	@Override
-	public Wrapper<Integer> updateTokenOffLine() {
+	public MvcResult<Integer> updateTokenOffLine() {
 		return null;
 	}
 }

@@ -13,7 +13,7 @@ package com.jemmy.apis.opc.service.hystrix;
 
 import com.jemmy.apis.opc.model.dto.oss.*;
 import com.jemmy.apis.opc.service.OpcOssFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,22 +27,22 @@ import java.util.List;
 @Component
 public class OpcOssFeignApiHystrix implements OpcOssFeignApi {
 	@Override
-	public Wrapper<OptUploadFileRespDto> uploadFile(final OptUploadFileReqDto optUploadFileReqDto) {
+	public MvcResult<OptUploadFileRespDto> uploadFile(final OptUploadFileReqDto optUploadFileReqDto) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<String> getFileUrl(final OptGetUrlRequest optGetUrlRequest) {
+	public MvcResult<String> getFileUrl(final OptGetUrlRequest optGetUrlRequest) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<List<ElementImgUrlDto>> listFileUrl(final OptBatchGetUrlRequest urlRequest) {
+	public MvcResult<List<ElementImgUrlDto>> listFileUrl(final OptBatchGetUrlRequest urlRequest) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<OptUploadFileRespDto> handleFileUpload(final MultipartFile file) {
+	public MvcResult<OptUploadFileRespDto> handleFileUpload(final MultipartFile file) {
 		return null;
 	}
 

@@ -15,8 +15,8 @@ import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.model.domain.MdcProductCategory;
 import com.jemmy.services.product.model.dto.MdcEditCategoryDto;
 import com.jemmy.services.product.model.vo.MdcCategoryVo;
@@ -51,9 +51,9 @@ public class MdcProductCategoryMainController extends BaseController {
 	 */
 	@PostMapping(value = "/getTree")
 	@ApiOperation(httpMethod = "POST", value = "获取商品分类树")
-	public Wrapper<List<MdcCategoryVo>> queryCategoryTreeList() {
+	public MvcResult<List<MdcCategoryVo>> queryCategoryTreeList() {
 		List<MdcCategoryVo> categoryVoList = mdcProductCategoryService.getCategoryTreeList();
-		return WrapMapper.ok(categoryVoList);
+		return MvcResultBuilder.ok(categoryVoList);
 	}
 
 	/**
@@ -65,10 +65,10 @@ public class MdcProductCategoryMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据ID获取商品分类信息")
-	public Wrapper<MdcCategoryVo> queryCategoryVoById(@ApiParam(name = "id", value = "商品分类id") @PathVariable Long id) {
+	public MvcResult<MdcCategoryVo> queryCategoryVoById(@ApiParam(name = "id", value = "商品分类id") @PathVariable Long id) {
 		logger.info("根据Id查询商品分类信息, categoryId={}", id);
 		MdcCategoryVo mdcCategoryVo = mdcProductCategoryService.getMdcCategoryVoById(id);
-		return WrapMapper.ok(mdcCategoryVo);
+		return MvcResultBuilder.ok(mdcCategoryVo);
 	}
 
 
@@ -80,22 +80,22 @@ public class MdcProductCategoryMainController extends BaseController {
 	@PostMapping(value = "/modifyStatus")
 	@ApiOperation(httpMethod = "POST", value = "根据id修改商品分类的禁用状态")
 	@LogAnnotation
-	public Wrapper updateMdcCategoryStatusById(@ApiParam(name = "mdcCategoryStatusDto", value = "修改商品分类状态Dto") @RequestBody UpdateStatusDto updateStatusDto) {
+	public MvcResult updateMdcCategoryStatusById(@ApiParam(name = "mdcCategoryStatusDto", value = "修改商品分类状态Dto") @RequestBody UpdateStatusDto updateStatusDto) {
 		logger.info("根据id修改商品分类的禁用状态 updateStatusDto={}", updateStatusDto);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		mdcProductCategoryService.updateMdcCategoryStatusById(updateStatusDto, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	@PostMapping(value = "/save")
 	@ApiOperation(httpMethod = "POST", value = "编辑商品分类")
 	@LogAnnotation
-	public Wrapper saveCategory(@ApiParam(name = "saveCategory", value = "编辑商品分类") @RequestBody MdcEditCategoryDto mdcCategoryAddDto) {
+	public MvcResult saveCategory(@ApiParam(name = "saveCategory", value = "编辑商品分类") @RequestBody MdcEditCategoryDto mdcCategoryAddDto) {
 		MdcProductCategory mdcCategory = new MdcProductCategory();
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		BeanUtils.copyProperties(mdcCategoryAddDto, mdcCategory);
 		mdcProductCategoryService.saveMdcCategory(mdcCategory, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -108,12 +108,12 @@ public class MdcProductCategoryMainController extends BaseController {
 	@PostMapping(value = "/deleteById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据id删除商品分类")
 	@LogAnnotation
-	public Wrapper<Integer> deleteMdcCategoryById(@ApiParam(name = "id", value = "商品分类id") @PathVariable Long id) {
+	public MvcResult<Integer> deleteMdcCategoryById(@ApiParam(name = "id", value = "商品分类id") @PathVariable Long id) {
 		logger.info(" 根据id删除商品分类 id={}", id);
 		// 判断此商品分类是否有子节点
 		boolean hasChild = mdcProductCategoryService.checkCategoryHasChildCategory(id);
 		if (hasChild) {
-			return WrapMapper.wrap(Wrapper.ERROR_CODE, "此商品分类含有子商品分类, 请先删除子商品分类");
+			return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, "此商品分类含有子商品分类, 请先删除子商品分类");
 		}
 
 		int result = mdcProductCategoryService.deleteByKey(id);

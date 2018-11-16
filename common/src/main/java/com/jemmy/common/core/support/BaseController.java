@@ -17,8 +17,8 @@ import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.util.ThreadLocalMap;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.common.zk.generator.IncrementIdGenerator;
 import com.jemmy.common.zk.generator.UniqueIdGenerator;
 import org.slf4j.Logger;
@@ -54,13 +54,13 @@ public class BaseController {
 	 *
 	 * @return the wrapper
 	 */
-	protected <T> Wrapper<T> handleResult(T result) {
+	protected <T> MvcResult<T> handleResult(T result) {
 		boolean flag = isFlag(result);
 
 		if (flag) {
-			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "操作成功", result);
+			return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, "操作成功", result);
 		} else {
-			return WrapMapper.wrap(Wrapper.ERROR_CODE, "操作失败", result);
+			return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, "操作失败", result);
 		}
 	}
 
@@ -73,13 +73,13 @@ public class BaseController {
 	 *
 	 * @return the wrapper
 	 */
-	protected <E> Wrapper<E> handleResult(E result, String errorMsg) {
+	protected <E> MvcResult<E> handleResult(E result, String errorMsg) {
 		boolean flag = isFlag(result);
 
 		if (flag) {
-			return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "操作成功", result);
+			return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, "操作成功", result);
 		} else {
-			return WrapMapper.wrap(Wrapper.ERROR_CODE, errorMsg, result);
+			return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, errorMsg, result);
 		}
 	}
 

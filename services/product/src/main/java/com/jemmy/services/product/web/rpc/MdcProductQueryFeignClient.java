@@ -16,8 +16,8 @@ import com.jemmy.apis.product.model.vo.ProductDetailVo;
 import com.jemmy.apis.product.service.MdcProductQueryFeignApi;
 import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.model.domain.MdcProduct;
 import com.jemmy.services.product.service.MdcProductService;
 import io.swagger.annotations.Api;
@@ -45,15 +45,15 @@ public class MdcProductQueryFeignClient extends BaseController implements MdcPro
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据商品ID查询商品详细信息")
-	public Wrapper<ProductDetailVo> getProductDetail(@PathVariable("productId") Long productId) {
+	public MvcResult<ProductDetailVo> getProductDetail(@PathVariable("productId") Long productId) {
 		logger.info("根据商品ID查询商品详细信息. productId={}", productId);
 		ProductDetailVo productDto = mdcProductService.getProductDetail(productId);
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, productDto);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, MvcResult.SUCCESS_MESSAGE, productDto);
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据商品ID查询商品信息")
-	public Wrapper<ProductDto> selectById(@PathVariable("productId") Long productId) {
+	public MvcResult<ProductDto> selectById(@PathVariable("productId") Long productId) {
 		logger.info("根据商品ID查询商品信息. productId={}", productId);
 		ProductDto productDto = null;
 		MdcProduct mdcProduct = mdcProductService.selectByKey(productId);
@@ -61,6 +61,6 @@ public class MdcProductQueryFeignClient extends BaseController implements MdcPro
 			productDto = new ProductDto();
 			BeanUtils.copyProperties(mdcProduct, productDto);
 		}
-		return WrapMapper.ok(productDto);
+		return MvcResultBuilder.ok(productDto);
 	}
 }

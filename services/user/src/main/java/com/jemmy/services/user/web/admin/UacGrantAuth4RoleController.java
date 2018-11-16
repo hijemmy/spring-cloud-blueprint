@@ -13,8 +13,8 @@ package com.jemmy.services.user.web.admin;
 
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.user.model.dto.role.RoleBindActionDto;
 import com.jemmy.services.user.model.dto.role.RoleBindMenuDto;
 import com.jemmy.services.user.service.UacRoleService;
@@ -53,10 +53,10 @@ public class UacGrantAuth4RoleController extends BaseController {
 	@PostMapping(value = "/bindAction")
 	@ApiOperation(httpMethod = "POST", value = "角色分配权限")
 	@LogAnnotation
-	public Wrapper bindAction(@ApiParam(name = "bindAuth", value = "权限信息") @RequestBody RoleBindActionDto roleBindActionDto) {
+	public MvcResult bindAction(@ApiParam(name = "bindAuth", value = "权限信息") @RequestBody RoleBindActionDto roleBindActionDto) {
 		logger.info("角色分配权限. roleBindActionDto= {}", roleBindActionDto);
 		uacRoleService.bindAction(roleBindActionDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -69,9 +69,9 @@ public class UacGrantAuth4RoleController extends BaseController {
 	@PostMapping(value = "/bindMenu")
 	@ApiOperation(httpMethod = "POST", value = "角色分配权限")
 	@LogAnnotation
-	public Wrapper bindMenu(@ApiParam(name = "bindAuth", value = "权限信息") @RequestBody RoleBindMenuDto roleBindMenuDto) {
+	public MvcResult bindMenu(@ApiParam(name = "bindAuth", value = "权限信息") @RequestBody RoleBindMenuDto roleBindMenuDto) {
 		logger.info("角色分配权限. roleBindMenuDto= {}", roleBindMenuDto);
 		uacRoleService.bindMenu(roleBindMenuDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

@@ -13,7 +13,7 @@ package com.jemmy.apis.omc.service.hystrix;
 
 import com.jemmy.apis.omc.model.dto.OrderDto;
 import com.jemmy.apis.omc.service.OmcOrderQueryFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,12 +26,12 @@ public class OmcOrderQueryFeignHystrix implements OmcOrderQueryFeignApi {
 
 
 	@Override
-	public Wrapper<OrderDto> queryByOrderNo(final String orderNo) {
+	public MvcResult<OrderDto> queryByOrderNo(final String orderNo) {
 		return null;
 	}
 
 	@Override
-	public Wrapper<OrderDto> queryByUserIdAndOrderNo(final Long userId, final String orderNo) {
+	public MvcResult<OrderDto> queryByUserIdAndOrderNo(final Long userId, final String orderNo) {
 		return null;
 	}
 }

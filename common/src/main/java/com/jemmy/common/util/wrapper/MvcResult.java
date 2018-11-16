@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：Wrapper.java
+ * 类名称：MvcResult.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -19,13 +19,13 @@ import java.io.Serializable;
 
 
 /**
- * The class Wrapper.
+ * The class MvcResult.
  *
  * @param <T> the type parameter @author paascloud.net@gmail.com
  */
 @Data
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class Wrapper<T> implements Serializable {
+public class MvcResult<T> implements Serializable {
 
 	/**
 	 * 序列化标识
@@ -80,7 +80,7 @@ public class Wrapper<T> implements Serializable {
 	/**
 	 * Instantiates a new wrapper. default code=200
 	 */
-	Wrapper() {
+	MvcResult() {
 		this(SUCCESS_CODE, SUCCESS_MESSAGE);
 	}
 
@@ -90,7 +90,7 @@ public class Wrapper<T> implements Serializable {
 	 * @param code    the code
 	 * @param message the message
 	 */
-	Wrapper(int code, String message) {
+	MvcResult(int code, String message) {
 		this(code, message, null);
 	}
 
@@ -101,7 +101,7 @@ public class Wrapper<T> implements Serializable {
 	 * @param message the message
 	 * @param result  the result
 	 */
-	Wrapper(int code, String message, T result) {
+	MvcResult(int code, String message, T result) {
 		super();
 		this.code(code).message(message).result(result);
 	}
@@ -113,7 +113,7 @@ public class Wrapper<T> implements Serializable {
 	 *
 	 * @return the wrapper
 	 */
-	private Wrapper<T> code(int code) {
+	private MvcResult<T> code(int code) {
 		this.setCode(code);
 		return this;
 	}
@@ -125,7 +125,7 @@ public class Wrapper<T> implements Serializable {
 	 *
 	 * @return the wrapper
 	 */
-	private Wrapper<T> message(String message) {
+	private MvcResult<T> message(String message) {
 		this.setMessage(message);
 		return this;
 	}
@@ -137,23 +137,23 @@ public class Wrapper<T> implements Serializable {
 	 *
 	 * @return the wrapper
 	 */
-	public Wrapper<T> result(T result) {
+	public MvcResult<T> result(T result) {
 		this.setResult(result);
 		return this;
 	}
 
 	/**
-	 * 判断是否成功： 依据 Wrapper.SUCCESS_CODE == this.code
+	 * 判断是否成功： 依据 MvcResult.SUCCESS_CODE == this.code
 	 *
 	 * @return code =200,true;否则 false.
 	 */
 	@JsonIgnore
 	public boolean success() {
-		return Wrapper.SUCCESS_CODE == this.code;
+		return MvcResult.SUCCESS_CODE == this.code;
 	}
 
 	/**
-	 * 判断是否成功： 依据 Wrapper.SUCCESS_CODE != this.code
+	 * 判断是否成功： 依据 MvcResult.SUCCESS_CODE != this.code
 	 *
 	 * @return code !=200,true;否则 false.
 	 */

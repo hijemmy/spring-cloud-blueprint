@@ -13,7 +13,7 @@ package com.jemmy.apis.omc.service.hystrix;
 
 import com.jemmy.apis.omc.model.dto.OrderDto;
 import com.jemmy.apis.omc.service.OmcOrderFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class OmcOrderFeignHystrix implements OmcOrderFeignApi {
 
 	@Override
-	public Wrapper updateOrderById(final OrderDto order) {
+	public MvcResult updateOrderById(final OrderDto order) {
 		return null;
 	}
 }

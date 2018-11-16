@@ -16,8 +16,8 @@ import com.github.pagehelper.PageInfo;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.common.util.PublicUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.edriven.model.vo.TpcMessageVo;
 import com.jemmy.services.edriven.service.TpcMqMessageService;
 import io.swagger.annotations.Api;
@@ -53,7 +53,7 @@ public class TpcMessageMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryRecordListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "分页查询各中心落地消息记录")
-	public Wrapper queryRecordListWithPage(@ApiParam(name = "tpcMessageQueryDto") @RequestBody MessageQueryDto messageQueryDto) {
+	public MvcResult queryRecordListWithPage(@ApiParam(name = "tpcMessageQueryDto") @RequestBody MessageQueryDto messageQueryDto) {
 		logger.info("分页查询各中心落地消息记录. messageQueryDto={}", messageQueryDto);
 		return tpcMqMessageService.queryRecordListWithPage(messageQueryDto);
 	}
@@ -67,10 +67,10 @@ public class TpcMessageMainController extends BaseController {
 	 */
 	@PostMapping(value = "/resendMessageById/{messageId}")
 	@ApiOperation(httpMethod = "POST", value = "重发消息")
-	public Wrapper resendMessageById(@PathVariable Long messageId) {
+	public MvcResult resendMessageById(@PathVariable Long messageId) {
 		logger.info("重发消息. messageId={}", messageId);
 		tpcMqMessageService.resendMessageByMessageId(messageId);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class TpcMessageMainController extends BaseController {
 	 */
 	@PostMapping(value = "/queryReliableListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "分页查询可靠消息")
-	public Wrapper queryReliableListWithPage(@ApiParam(name = "tpcMessageQueryDto") @RequestBody MessageQueryDto messageQueryDto) {
+	public MvcResult queryReliableListWithPage(@ApiParam(name = "tpcMessageQueryDto") @RequestBody MessageQueryDto messageQueryDto) {
 		logger.info("分页查询可靠消息. tpcMessageQueryDto={}", messageQueryDto);
 		PageHelper.startPage(messageQueryDto.getPageNum(), messageQueryDto.getPageSize());
 		messageQueryDto.setOrderBy("update_time desc");
@@ -103,7 +103,7 @@ public class TpcMessageMainController extends BaseController {
 			}
 			pageInfo.setList(new ArrayList<>(messageVoMap.values()));
 		}
-		return WrapMapper.ok(pageInfo);
+		return MvcResultBuilder.ok(pageInfo);
 	}
 
 	private Map<Long, TpcMessageVo> trans2Map(List<TpcMessageVo> tpcMessageVoList) {

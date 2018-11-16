@@ -18,7 +18,7 @@ import com.jemmy.apis.product.service.MdcMqMessageFeignApi;
 import com.jemmy.common.base.dto.MessageQueryDto;
 import com.jemmy.common.base.dto.MqMessageVo;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +35,12 @@ public class MdcRpcService {
 	@Resource
 	private MdcMqMessageFeignApi mdcMqMessageFeignApi;
 
-	public Wrapper<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
-		Wrapper<PageInfo<MqMessageVo>> wrapper = mdcMqMessageFeignApi.queryMessageListWithPage(messageQueryDto);
-		if (wrapper == null) {
+	public MvcResult<PageInfo<MqMessageVo>> queryMessageListWithPage(final MessageQueryDto messageQueryDto) {
+		MvcResult<PageInfo<MqMessageVo>> mvcResult = mdcMqMessageFeignApi.queryMessageListWithPage(messageQueryDto);
+		if (mvcResult == null) {
 			log.error("查询消息记录. 失败 result is null");
 			throw new TpcBizException(ErrorCodeEnum.GL99990002);
 		}
-		return wrapper;
+		return mvcResult;
 	}
 }

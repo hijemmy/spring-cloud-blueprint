@@ -33,8 +33,8 @@ import com.jemmy.apis.opc.model.dto.oss.OptUploadFileRespDto;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.util.BigDecimalUtil;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.common.zk.generator.UniqueIdGenerator;
 import com.jemmy.services.order.mapper.PtcPayInfoMapper;
 import com.jemmy.services.order.model.domain.OmcOrder;
@@ -103,7 +103,7 @@ public class PtcAlipayServiceImpl implements PtcAlipayService {
 	 * @return the wrapper
 	 */
 	@Override
-	public Wrapper pay(String orderNo, LoginAuthDto loginAuthDto) {
+	public MvcResult pay(String orderNo, LoginAuthDto loginAuthDto) {
 		Long userId = loginAuthDto.getUserId();
 		OrderDto order = omcOrderService.queryOrderDtoByUserIdAndOrderNo(userId, orderNo);
 		if (order == null) {
@@ -218,18 +218,18 @@ public class PtcAlipayServiceImpl implements PtcAlipayService {
 				} catch (Exception e) {
 					log.error("上传二维码异常", e);
 				}
-				return WrapMapper.ok(optUploadFileRespDto);
+				return MvcResultBuilder.ok(optUploadFileRespDto);
 			case FAILED:
 				log.error("支付宝预下单失败!!!");
-				return WrapMapper.error("支付宝预下单失败!!!");
+				return MvcResultBuilder.error("支付宝预下单失败!!!");
 
 			case UNKNOWN:
 				log.error("系统异常, 预下单状态未知!!!");
-				return WrapMapper.error("系统异常, 预下单状态未知!!!");
+				return MvcResultBuilder.error("系统异常, 预下单状态未知!!!");
 
 			default:
 				log.error("不支持的交易状态, 交易返回异常!!!");
-				return WrapMapper.error("不支持的交易状态, 交易返回异常!!!");
+				return MvcResultBuilder.error("不支持的交易状态, 交易返回异常!!!");
 		}
 	}
 
@@ -248,7 +248,7 @@ public class PtcAlipayServiceImpl implements PtcAlipayService {
 	}
 
 	@Override
-	public Wrapper aliPayCallback(Map<String, String> params) {
+	public MvcResult aliPayCallback(Map<String, String> params) {
 		log.info("支付宝回调. - aliPayCallback. params={}", params);
 		String orderNo = params.get("out_trade_no");
 		String tradeNo = params.get("trade_no");
@@ -284,6 +284,6 @@ public class PtcAlipayServiceImpl implements PtcAlipayService {
 
 		ptcPayInfoMapper.insertSelective(payInfo);
 
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 }

@@ -15,8 +15,8 @@ import com.jemmy.apis.product.model.dto.AddressDTO;
 import com.jemmy.apis.product.service.MdcAddressQueryFeignApi;
 import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.product.model.domain.MdcAddress;
 import com.jemmy.services.product.service.MdcAddressService;
 import io.swagger.annotations.Api;
@@ -51,7 +51,7 @@ public class MdcAddressQueryFeignClient extends BaseController implements MdcAdd
 	 */
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "根据ID获取地址信息")
-	public Wrapper<AddressDTO> getById(@PathVariable("addressId") Long addressId) {
+	public MvcResult<AddressDTO> getById(@PathVariable("addressId") Long addressId) {
 		logger.info("根据ID获取地址信息 addressId={}", addressId);
 		AddressDTO addressDTO = null;
 		MdcAddress mdcAddress = mdcAddressService.selectByKey(addressId);
@@ -59,6 +59,6 @@ public class MdcAddressQueryFeignClient extends BaseController implements MdcAdd
 			addressDTO = new AddressDTO();
 			BeanUtils.copyProperties(mdcAddress, addressDTO);
 		}
-		return WrapMapper.ok(addressDTO);
+		return MvcResultBuilder.ok(addressDTO);
 	}
 }

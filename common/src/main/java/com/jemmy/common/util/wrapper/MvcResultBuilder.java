@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018. paascloud.net All Rights Reserved.
  * 项目名称：paascloud快速搭建企业级分布式微服务平台
- * 类名称：WrapMapper.java
+ * 类名称：MvcResultBuilder.java
  * 创建人：刘兆明
  * 联系方式：paascloud.net@gmail.com
  * 开源地址: https://github.com/paascloud
@@ -18,12 +18,12 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author paascloud.net@gmail.com
  */
-public class WrapMapper {
+public class MvcResultBuilder {
 
 	/**
 	 * Instantiates a new wrap mapper.
 	 */
-	private WrapMapper() {
+	private MvcResultBuilder() {
 	}
 
 	/**
@@ -36,8 +36,8 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> wrap(int code, String message, E o) {
-		return new Wrapper<>(code, message, o);
+	public static <E> MvcResult<E> wrap(int code, String message, E o) {
+		return new MvcResult<>(code, message, o);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> wrap(int code, String message) {
+	public static <E> MvcResult<E> wrap(int code, String message) {
 		return wrap(code, message, null);
 	}
 
@@ -61,7 +61,7 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> wrap(int code) {
+	public static <E> MvcResult<E> wrap(int code) {
 		return wrap(code, null);
 	}
 
@@ -73,20 +73,20 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> wrap(Exception e) {
-		return new Wrapper<>(Wrapper.ERROR_CODE, e.getMessage());
+	public static <E> MvcResult<E> wrap(Exception e) {
+		return new MvcResult<>(MvcResult.ERROR_CODE, e.getMessage());
 	}
 
 	/**
-	 * Un wrapper.
+	 * Un mvcResult.
 	 *
 	 * @param <E>     the element type
-	 * @param wrapper the wrapper
+	 * @param mvcResult the mvcResult
 	 *
 	 * @return the e
 	 */
-	public static <E> E unWrap(Wrapper<E> wrapper) {
-		return wrapper.getResult();
+	public static <E> E unWrap(MvcResult<E> mvcResult) {
+		return mvcResult.getResult();
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> illegalArgument() {
-		return wrap(Wrapper.ILLEGAL_ARGUMENT_CODE_, Wrapper.ILLEGAL_ARGUMENT_MESSAGE);
+	public static <E> MvcResult<E> illegalArgument() {
+		return wrap(MvcResult.ILLEGAL_ARGUMENT_CODE_, MvcResult.ILLEGAL_ARGUMENT_MESSAGE);
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> error() {
-		return wrap(Wrapper.ERROR_CODE, Wrapper.ERROR_MESSAGE);
+	public static <E> MvcResult<E> error() {
+		return wrap(MvcResult.ERROR_CODE, MvcResult.ERROR_MESSAGE);
 	}
 
 
@@ -120,8 +120,8 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> error(String message) {
-		return wrap(Wrapper.ERROR_CODE, StringUtils.isBlank(message) ? Wrapper.ERROR_MESSAGE : message);
+	public static <E> MvcResult<E> error(String message) {
+		return wrap(MvcResult.ERROR_CODE, StringUtils.isBlank(message) ? MvcResult.ERROR_MESSAGE : message);
 	}
 
 	/**
@@ -131,8 +131,8 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> ok() {
-		return new Wrapper<>();
+	public static <E> MvcResult<E> ok() {
+		return new MvcResult<>();
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class WrapMapper {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> Wrapper<E> ok(E o) {
-		return new Wrapper<>(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, o);
+	public static <E> MvcResult<E> ok(E o) {
+		return new MvcResult<>(MvcResult.SUCCESS_CODE, MvcResult.SUCCESS_MESSAGE, o);
 	}
 }

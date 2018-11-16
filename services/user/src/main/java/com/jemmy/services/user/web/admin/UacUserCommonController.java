@@ -16,14 +16,14 @@ import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.user.model.domain.UacRole;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.model.dto.user.*;
 import com.jemmy.services.user.model.vo.UserVo;
 import com.jemmy.services.user.service.UacRoleService;
 import com.jemmy.services.user.service.UacUserService;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
 import com.jemmy.services.user.utils.Md5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -60,7 +60,7 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/queryUserInfo/{loginName}")
 	@ApiOperation(httpMethod = "POST", value = "根据userId查询用户详细信息")
-	public Wrapper<UserVo> queryUserInfo(@PathVariable String loginName) {
+	public MvcResult<UserVo> queryUserInfo(@PathVariable String loginName) {
 		logger.info("根据userId查询用户详细信息");
 		UserVo userVo = new UserVo();
 		UacUser uacUser = uacUserService.findByLoginName(loginName);
@@ -72,7 +72,7 @@ public class UacUserCommonController extends BaseController {
 			userVo.setRoles(new HashSet<>(roleList));
 		}
 		userVo.setAuthTree(authTree);
-		return WrapMapper.ok(userVo);
+		return MvcResultBuilder.ok(userVo);
 	}
 
 
@@ -85,7 +85,7 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkLoginName")
 	@ApiOperation(httpMethod = "POST", value = "校验登录名唯一性")
-	public Wrapper<Boolean> checkLoginName(@ApiParam(name = "loginName", value = "登录名") @RequestBody CheckLoginNameDto checkLoginNameDto) {
+	public MvcResult<Boolean> checkLoginName(@ApiParam(name = "loginName", value = "登录名") @RequestBody CheckLoginNameDto checkLoginNameDto) {
 		logger.info("校验登录名唯一性 checkLoginNameDto={}", checkLoginNameDto);
 
 		Long id = checkLoginNameDto.getUserId();
@@ -99,7 +99,7 @@ public class UacUserCommonController extends BaseController {
 		}
 
 		int result = uacUserService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkEmail")
 	@ApiOperation(httpMethod = "POST", value = "校验登录名唯一性")
-	public Wrapper<Boolean> checkEmail(@RequestBody CheckEmailDto checkEmailDto) {
+	public MvcResult<Boolean> checkEmail(@RequestBody CheckEmailDto checkEmailDto) {
 		logger.info("校验邮箱唯一性 checkEmailDto={}", checkEmailDto);
 
 		Long id = checkEmailDto.getUserId();
@@ -125,7 +125,7 @@ public class UacUserCommonController extends BaseController {
 		}
 
 		int result = uacUserService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 
@@ -138,7 +138,7 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkUserName")
 	@ApiOperation(httpMethod = "POST", value = "校验真实姓名唯一性")
-	public Wrapper<Boolean> checkUserName(@ApiParam(name = "checkUserNameDto", value = "校验真实姓名唯一性Dto") @RequestBody CheckUserNameDto checkUserNameDto) {
+	public MvcResult<Boolean> checkUserName(@ApiParam(name = "checkUserNameDto", value = "校验真实姓名唯一性Dto") @RequestBody CheckUserNameDto checkUserNameDto) {
 		logger.info(" 校验真实姓名唯一性 checkUserNameDto={}", checkUserNameDto);
 		Long id = checkUserNameDto.getUserId();
 		String name = checkUserNameDto.getUserName();
@@ -151,7 +151,7 @@ public class UacUserCommonController extends BaseController {
 		}
 
 		int result = uacUserService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 
@@ -164,7 +164,7 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkUserPhone")
 	@ApiOperation(httpMethod = "POST", value = "校验用户电话号码唯一性")
-	public Wrapper<Boolean> checkUserPhone(@ApiParam(name = "checkUserPhoneDto", value = "校验用户电话号码唯一性Dto") @RequestBody CheckUserPhoneDto checkUserPhoneDto) {
+	public MvcResult<Boolean> checkUserPhone(@ApiParam(name = "checkUserPhoneDto", value = "校验用户电话号码唯一性Dto") @RequestBody CheckUserPhoneDto checkUserPhoneDto) {
 		logger.info(" 校验用户电话号码唯一性 checkUserPhoneDto={}", checkUserPhoneDto);
 		Long id = checkUserPhoneDto.getUserId();
 		String mobileNo = checkUserPhoneDto.getMobileNo();
@@ -177,7 +177,7 @@ public class UacUserCommonController extends BaseController {
 		}
 
 		int result = uacUserService.selectCountByExample(example);
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 
@@ -190,7 +190,7 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/checkNewPassword")
 	@ApiOperation(httpMethod = "POST", value = "校验新密码是否与原始密码相同")
-	public Wrapper<Boolean> checkNewPassword(@ApiParam(name = "checkNewPasswordDto", value = "校验新密码是否与原始密码相同Dto") @RequestBody CheckNewPasswordDto checkNewPasswordDto) {
+	public MvcResult<Boolean> checkNewPassword(@ApiParam(name = "checkNewPasswordDto", value = "校验新密码是否与原始密码相同Dto") @RequestBody CheckNewPasswordDto checkNewPasswordDto) {
 		logger.info(" 校验新密码是否与原始密码相同 checkNewPasswordDto={}", checkNewPasswordDto);
 		String loginName = checkNewPasswordDto.getLoginName();
 		String newPassword = checkNewPasswordDto.getNewPassword();
@@ -204,7 +204,7 @@ public class UacUserCommonController extends BaseController {
 			uacUser.setLoginPwd(Md5Util.encrypt(newPassword));
 			result = uacUserService.selectCount(uacUser);
 		}
-		return WrapMapper.ok(result < 1);
+		return MvcResultBuilder.ok(result < 1);
 	}
 
 	/**
@@ -218,11 +218,11 @@ public class UacUserCommonController extends BaseController {
 	@LogAnnotation
 	@PostMapping(value = "/modifyUserEmail/{email}/{emailCode}")
 	@ApiOperation(httpMethod = "POST", value = "修改用户信息")
-	public Wrapper<Integer> modifyUserEmail(@PathVariable String email, @PathVariable String emailCode) {
+	public MvcResult<Integer> modifyUserEmail(@PathVariable String email, @PathVariable String emailCode) {
 		logger.info(" 修改用户信息 email={}, emailCode={}", email, emailCode);
 		LoginAuthDto loginAuthDto = getLoginAuthDto();
 		uacUserService.modifyUserEmail(email, emailCode, loginAuthDto);
-		return WrapMapper.ok();
+		return MvcResultBuilder.ok();
 	}
 
 	/**
@@ -232,8 +232,8 @@ public class UacUserCommonController extends BaseController {
 	 */
 	@PostMapping(value = "/getOwnAuthTree")
 	@ApiOperation(httpMethod = "POST", value = "获取权限树")
-	public Wrapper<List<MenuVo>> getOwnAuthTree() {
+	public MvcResult<List<MenuVo>> getOwnAuthTree() {
 		List<MenuVo> tree = uacRoleService.getOwnAuthTree(getLoginAuthDto().getUserId());
-		return WrapMapper.ok(tree);
+		return MvcResultBuilder.ok(tree);
 	}
 }

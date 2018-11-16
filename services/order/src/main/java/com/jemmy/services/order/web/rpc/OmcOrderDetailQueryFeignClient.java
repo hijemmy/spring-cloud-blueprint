@@ -15,8 +15,8 @@ import com.google.common.collect.Lists;
 import com.jemmy.apis.omc.model.dto.OrderDetailDto;
 import com.jemmy.apis.omc.service.OmcOrderDetailQueryFeignApi;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.order.model.domain.OmcOrderDetail;
 import com.jemmy.services.order.service.OmcOrderDetailService;
 import io.swagger.annotations.Api;
@@ -44,7 +44,7 @@ public class OmcOrderDetailQueryFeignClient extends BaseController implements Om
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "获取用户订单详情")
-	public Wrapper<List<OrderDetailDto>> getListByOrderNoUserId(@PathVariable("orderNo") String orderNo, @PathVariable("userId") Long userId) {
+	public MvcResult<List<OrderDetailDto>> getListByOrderNoUserId(@PathVariable("orderNo") String orderNo, @PathVariable("userId") Long userId) {
 		logger.info("getListByOrderNoUserId - 获取用户订单详情. orderNo={}, userId={}", orderNo, userId);
 		List<OmcOrderDetail> list = omcOrderDetailService.getListByOrderNoUserId(orderNo, userId);
 
@@ -57,6 +57,6 @@ public class OmcOrderDetailQueryFeignClient extends BaseController implements Om
 			orderDetailDtoList.add(orderDetailDto);
 		}
 
-		return WrapMapper.ok(orderDetailDtoList);
+		return MvcResultBuilder.ok(orderDetailDtoList);
 	}
 }

@@ -13,7 +13,7 @@ package com.jemmy.apis.omc.service.hystrix;
 
 import com.jemmy.apis.omc.model.vo.CartVo;
 import com.jemmy.apis.omc.service.OmcCartQueryFeignApi;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class OmcCartQueryFeignHystrix implements OmcCartQueryFeignApi {
 
 	@Override
-	public Wrapper<CartVo> getCartVo(final Long userId) {
+	public MvcResult<CartVo> getCartVo(final Long userId) {
 		return null;
 	}
 }

@@ -17,8 +17,8 @@ import com.jemmy.common.base.dto.LoginAuthDto;
 import com.jemmy.common.base.dto.UpdateStatusDto;
 import com.jemmy.common.core.annotation.LogAnnotation;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.edriven.model.domain.TpcMqProducer;
 import com.jemmy.services.edriven.model.vo.TpcMqProducerVo;
 import com.jemmy.services.edriven.model.vo.TpcMqPublishVo;
@@ -55,11 +55,11 @@ public class TpcMqProducerController extends BaseController {
 	 */
 	@PostMapping(value = "/queryProducerVoListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询生产者列表")
-	public Wrapper<List<TpcMqProducerVo>> queryProducerList(@ApiParam(name = "producer", value = "Mq生产者") @RequestBody TpcMqProducer tpcMqProducer) {
+	public MvcResult<List<TpcMqProducerVo>> queryProducerList(@ApiParam(name = "producer", value = "Mq生产者") @RequestBody TpcMqProducer tpcMqProducer) {
 
 		logger.info("查询生产者列表tpcMqTopicQuery={}", tpcMqProducer);
 		List<TpcMqProducerVo> list = tpcMqProducerService.listProducerVoWithPage(tpcMqProducer);
-		return WrapMapper.ok(list);
+		return MvcResultBuilder.ok(list);
 	}
 
 	/**
@@ -71,12 +71,12 @@ public class TpcMqProducerController extends BaseController {
 	 */
 	@PostMapping(value = "/queryPublishListWithPage")
 	@ApiOperation(httpMethod = "POST", value = "查询发布者列表")
-	public Wrapper<PageInfo<TpcMqPublishVo>> queryPublishListWithPage(@ApiParam(name = "producer", value = "Mq生产者") @RequestBody TpcMqProducer tpcMqProducer) {
+	public MvcResult<PageInfo<TpcMqPublishVo>> queryPublishListWithPage(@ApiParam(name = "producer", value = "Mq生产者") @RequestBody TpcMqProducer tpcMqProducer) {
 		logger.info("查询Mq发布列表tpcMqTopicQuery={}", tpcMqProducer);
 		PageHelper.startPage(tpcMqProducer.getPageNum(), tpcMqProducer.getPageSize());
 		tpcMqProducer.setOrderBy("update_time desc");
 		List<TpcMqPublishVo> list = tpcMqProducerService.listPublishVoWithPage(tpcMqProducer);
-		return WrapMapper.ok(new PageInfo<>(list));
+		return MvcResultBuilder.ok(new PageInfo<>(list));
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class TpcMqProducerController extends BaseController {
 	@PostMapping(value = "/modifyStatusById")
 	@ApiOperation(httpMethod = "POST", value = "修改生产者状态")
 	@LogAnnotation
-	public Wrapper modifyProducerStatusById(@ApiParam(value = "修改producer状态") @RequestBody UpdateStatusDto updateStatusDto) {
+	public MvcResult modifyProducerStatusById(@ApiParam(value = "修改producer状态") @RequestBody UpdateStatusDto updateStatusDto) {
 		logger.info("修改producer状态 updateStatusDto={}", updateStatusDto);
 		Long roleId = updateStatusDto.getId();
 
@@ -114,7 +114,7 @@ public class TpcMqProducerController extends BaseController {
 	@PostMapping(value = "/deleteById/{id}")
 	@ApiOperation(httpMethod = "POST", value = "根据生产者ID删除生产者")
 	@LogAnnotation
-	public Wrapper deleteProducerById(@PathVariable Long id) {
+	public MvcResult deleteProducerById(@PathVariable Long id) {
 		logger.info("删除producer id={}", id);
 		int result = tpcMqProducerService.deleteProducerById(id);
 		return super.handleResult(result);

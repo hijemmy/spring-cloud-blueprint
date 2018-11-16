@@ -14,7 +14,7 @@ package com.jemmy.apis.omc.service;
 import com.jemmy.apis.omc.model.dto.OrderDetailDto;
 import com.jemmy.apis.omc.service.hystrix.OmcOrderDetailQueryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +39,5 @@ public interface OmcOrderDetailQueryFeignApi {
 	 * @return the list by order no user id
 	 */
 	@PostMapping(value = "/api/orderDetail/getListByOrderNoUserId/{userId}/{orderNo}")
-	Wrapper<List<OrderDetailDto>> getListByOrderNoUserId(@PathVariable("orderNo") String orderNo, @PathVariable("userId") Long userId);
+    MvcResult<List<OrderDetailDto>> getListByOrderNoUserId(@PathVariable("orderNo") String orderNo, @PathVariable("userId") Long userId);
 }

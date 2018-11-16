@@ -20,8 +20,8 @@ import com.jemmy.apis.product.model.dto.ProductReqDto;
 import com.jemmy.apis.product.service.MdcProductCategoryQueryFeignApi;
 import com.jemmy.common.util.PublicUtil;
 import com.jemmy.common.core.support.BaseService;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.product.mapper.MdcProductCategoryMapper;
 import com.jemmy.services.product.model.domain.MdcProduct;
 import com.jemmy.services.product.model.domain.MdcProductCategory;
@@ -63,7 +63,7 @@ public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCa
 	 */
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "获取商品品类信息")
-	public Wrapper<List<ProductCategoryDto>> getProductCategoryData(@PathVariable("pid") Long pid) {
+	public MvcResult<List<ProductCategoryDto>> getProductCategoryData(@PathVariable("pid") Long pid) {
 		logger.info("获取商品品类信息. pid={}", pid);
 		List<ProductCategoryDto> list;
 		if (0L == pid) {
@@ -87,7 +87,7 @@ public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCa
 			list = mdcProductCategoryService.getCategoryDtoList(pid);
 		}
 
-		return WrapMapper.ok(list);
+		return MvcResultBuilder.ok(list);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCa
 	 */
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "获取商品列表信息")
-	public Wrapper<PageInfo> getProductList(@RequestBody ProductReqDto productReqDto) {
+	public MvcResult<PageInfo> getProductList(@RequestBody ProductReqDto productReqDto) {
 		logger.info("获取商品列表信息. productReqDto={}", productReqDto);
 		Long categoryId = productReqDto.getCategoryId();
 		String keyword = productReqDto.getKeyword();
@@ -107,7 +107,7 @@ public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCa
 		Integer pageSize = productReqDto.getPageSize();
 		String orderBy = productReqDto.getOrderBy();
 		if (StringUtils.isBlank(keyword) && null == categoryId) {
-			return WrapMapper.ok(new PageInfo());
+			return MvcResultBuilder.ok(new PageInfo());
 		}
 		List<Long> categoryIdList = Lists.newArrayList();
 
@@ -116,7 +116,7 @@ public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCa
 			if (category == null && StringUtils.isBlank(keyword)) {
 				// 没有该分类,并且还没有关键字,这个时候返回一个空的结果集,不报错
 				PageHelper.startPage(pageNum, pageSize);
-				return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, new PageInfo());
+				return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, MvcResult.SUCCESS_MESSAGE, new PageInfo());
 			}
 			categoryIdList = mdcProductCategoryService.selectCategoryAndChildrenById(categoryId);
 		}
@@ -134,7 +134,7 @@ public class MdcProductCategoryQueryFeignClient extends BaseService<MdcProductCa
 		}
 
 
-		return PublicUtil.isNotEmpty(productListVoList) ? WrapMapper.ok(new PageInfo<>(productListVoList)) : WrapMapper.ok();
+		return PublicUtil.isNotEmpty(productListVoList) ? MvcResultBuilder.ok(new PageInfo<>(productListVoList)) : MvcResultBuilder.ok();
 	}
 
 	private ProductDto assembleProductListVo(MdcProduct product) {

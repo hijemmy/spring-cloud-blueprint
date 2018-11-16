@@ -16,8 +16,8 @@ import com.jemmy.apis.opc.model.dto.oss.*;
 import com.jemmy.apis.opc.service.OpcOssFeignApi;
 import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.core.support.BaseController;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import com.jemmy.services.opc.model.domain.OptAttachment;
 import com.jemmy.services.opc.service.OpcAttachmentService;
 import com.jemmy.services.opc.service.OpcOssService;
@@ -49,47 +49,47 @@ public class OpcAttachmentFeignClient extends BaseController implements OpcOssFe
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "上传文件")
-	public Wrapper<OptUploadFileRespDto> uploadFile(@RequestBody OptUploadFileReqDto optUploadFileReqDto) throws OpcBizException {
+	public MvcResult<OptUploadFileRespDto> uploadFile(@RequestBody OptUploadFileReqDto optUploadFileReqDto) throws OpcBizException {
 		OptUploadFileRespDto result;
 		try {
 			logger.info("rpcUploadFile - RPC上传附件信息. optUploadFileReqDto={}", optUploadFileReqDto);
 			result = opcAttachmentService.rpcUploadFile(optUploadFileReqDto);
 		} catch (BusinessException ex) {
 			logger.error("RPC上传附件信息, 出现异常={}", ex.getMessage(), ex);
-			return WrapMapper.wrap(ex);
+			return MvcResultBuilder.wrap(ex);
 		} catch (Exception e) {
 			logger.error("RPC上传附件信息, 出现异常={}", e.getMessage(), e);
-			return WrapMapper.error();
+			return MvcResultBuilder.error();
 		}
-		return WrapMapper.wrap(Wrapper.SUCCESS_CODE, "操作成功", result);
+		return MvcResultBuilder.wrap(MvcResult.SUCCESS_CODE, "操作成功", result);
 	}
 
 	@Override
 	@ApiOperation(httpMethod = "POST", value = "获取附件完整路径")
-	public Wrapper<String> getFileUrl(@RequestBody OptGetUrlRequest optGetUrlRequest) {
+	public MvcResult<String> getFileUrl(@RequestBody OptGetUrlRequest optGetUrlRequest) {
 		String result;
 		try {
 			logger.info("getFileUrl - 获取附件完整路径. optGetUrlRequest={}", optGetUrlRequest);
 			result = opcAttachmentService.rpcGetFileUrl(optGetUrlRequest);
 		} catch (BusinessException ex) {
 			logger.error("RPC获取附件完整路径, 出现异常={}", ex.getMessage(), ex);
-			return WrapMapper.wrap(ex);
+			return MvcResultBuilder.wrap(ex);
 		} catch (Exception e) {
 			logger.error("RPC获取附件完整路径, 出现异常={}", e.getMessage(), e);
-			return WrapMapper.error();
+			return MvcResultBuilder.error();
 		}
-		return WrapMapper.ok(result);
+		return MvcResultBuilder.ok(result);
 	}
 
 	@Override
-	public Wrapper<List<ElementImgUrlDto>> listFileUrl(@RequestBody OptBatchGetUrlRequest urlRequest) {
+	public MvcResult<List<ElementImgUrlDto>> listFileUrl(@RequestBody OptBatchGetUrlRequest urlRequest) {
 		logger.info("getFileUrl - 批量获取url链接. urlRequest={}", urlRequest);
 		List<ElementImgUrlDto> result = opcAttachmentService.listFileUrl(urlRequest);
-		return WrapMapper.ok(result);
+		return MvcResultBuilder.ok(result);
 	}
 
 	@Override
-	public Wrapper<OptUploadFileRespDto> handleFileUpload(@RequestPart(value = "file") MultipartFile file) {
+	public MvcResult<OptUploadFileRespDto> handleFileUpload(@RequestPart(value = "file") MultipartFile file) {
 		return null;
 	}
 

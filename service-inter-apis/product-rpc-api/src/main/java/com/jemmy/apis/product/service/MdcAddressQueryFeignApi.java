@@ -14,7 +14,7 @@ package com.jemmy.apis.product.service;
 import com.jemmy.apis.product.model.dto.AddressDTO;
 import com.jemmy.apis.product.service.hystrix.MdcAddressQueryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +37,5 @@ public interface MdcAddressQueryFeignApi {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/api/address/getById/{addressId}")
-	Wrapper<AddressDTO> getById(@PathVariable("addressId") Long addressId);
+    MvcResult<AddressDTO> getById(@PathVariable("addressId") Long addressId);
 }

@@ -16,8 +16,8 @@ import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
 import com.jemmy.apis.product.service.MdcExceptionLogFeignApi;
 import com.jemmy.common.base.enums.ErrorCodeEnum;
 import com.jemmy.common.base.exception.BusinessException;
-import com.jemmy.common.util.wrapper.WrapMapper;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
+import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
@@ -57,9 +57,9 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public Wrapper illegalArgumentException(IllegalArgumentException e) {
+	public MvcResult illegalArgumentException(IllegalArgumentException e) {
 		log.error("参数非法异常={}", e.getMessage(), e);
-		return WrapMapper.wrap(ErrorCodeEnum.GL99990100.code(), e.getMessage());
+		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990100.code(), e.getMessage());
 	}
 
 	/**
@@ -72,9 +72,9 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(BusinessException.class)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public Wrapper businessException(BusinessException e) {
+	public MvcResult businessException(BusinessException e) {
 		log.error("业务异常={}", e.getMessage(), e);
-		return WrapMapper.wrap(e.getCode() == 0 ? Wrapper.ERROR_CODE : e.getCode(), e.getMessage());
+		return MvcResultBuilder.wrap(e.getCode() == 0 ? MvcResult.ERROR_CODE : e.getCode(), e.getMessage());
 	}
 
 
@@ -88,20 +88,20 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
-	public Wrapper exception(Exception e) {
+	public MvcResult exception(Exception e) {
 		log.info("保存全局异常信息 ex={}", e.getMessage(), e);
 		taskExecutor.execute(() -> {
 			GlobalExceptionLogDto globalExceptionLogDto = new GlobalExceptionLogDto().getGlobalExceptionLogDto(e, profile, applicationName);
 			mdcExceptionLogFeignApi.saveAndSendExceptionLog(globalExceptionLogDto);
 		});
-		return WrapMapper.error();
+		return MvcResultBuilder.error();
 	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	@ExceptionHandler(MultipartException.class)
-	public Wrapper multipartException(Throwable t) {
+	public MvcResult multipartException(Throwable t) {
 		log.error("上传文件, 出现错误={}", t.getMessage(), t);
-		return WrapMapper.wrap(Wrapper.ERROR_CODE, "文件超过限制");
+		return MvcResultBuilder.wrap(MvcResult.ERROR_CODE, "文件超过限制");
 	}
 }

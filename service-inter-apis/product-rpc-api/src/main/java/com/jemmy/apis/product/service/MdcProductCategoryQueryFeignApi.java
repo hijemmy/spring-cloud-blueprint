@@ -17,7 +17,7 @@ import com.jemmy.apis.product.model.dto.ProductReqDto;
 import com.jemmy.apis.product.service.hystrix.MdcProductCategoryQueryFeignHystrix;
 import com.jemmy.common.security.feign.OAuth2FeignAutoConfiguration;
 import com.jemmy.common.util.annotation.NoNeedAccessAuthentication;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +44,7 @@ public interface MdcProductCategoryQueryFeignApi {
 	 */
 	@PostMapping(value = "/api/productCategory/getProductCategoryDtoByPid/{pid}")
 	@NoNeedAccessAuthentication
-	Wrapper<List<ProductCategoryDto>> getProductCategoryData(@PathVariable("pid") Long pid);
+    MvcResult<List<ProductCategoryDto>> getProductCategoryData(@PathVariable("pid") Long pid);
 
 	/**
 	 * 查询商品列表.
@@ -55,6 +55,6 @@ public interface MdcProductCategoryQueryFeignApi {
 	 */
 	@PostMapping(value = "/api/product/getProductList")
 	@NoNeedAccessAuthentication
-	Wrapper<PageInfo> getProductList(@RequestBody ProductReqDto productReqDto);
+    MvcResult<PageInfo> getProductList(@RequestBody ProductReqDto productReqDto);
 
 }

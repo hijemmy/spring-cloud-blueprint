@@ -14,7 +14,7 @@ package com.jemmy.services.edriven.service;
 
 import com.jemmy.apis.edriven.model.dto.TpcMqMessageDto;
 import com.jemmy.common.base.dto.MessageQueryDto;
-import com.jemmy.common.util.wrapper.Wrapper;
+import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.services.edriven.model.domain.TpcMqMessage;
 import com.jemmy.services.edriven.model.dto.MessageTaskQueryDto;
 import com.jemmy.services.edriven.model.vo.TpcMessageVo;
@@ -189,7 +189,7 @@ public interface TpcMqMessageService {
 	 *
 	 * @return the page info
 	 */
-	Wrapper queryRecordListWithPage(MessageQueryDto tpcMessageQueryDto);
+	MvcResult queryRecordListWithPage(MessageQueryDto tpcMessageQueryDto);
 
 	/**
 	 * List reliable message vo list.
