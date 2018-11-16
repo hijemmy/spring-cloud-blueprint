@@ -9,7 +9,7 @@ export function refreshToken () {
     },
     url: REFRESH_TOKEN_URL,
     auth: {
-      username: 'client-service-uac',
+      username: 'client-cli-browser',
       password: 'oauth2ClientSecret'
     },
     params: {

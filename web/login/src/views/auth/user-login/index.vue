@@ -74,7 +74,7 @@
           },
           url: '/uac/auth/form',
           auth: {
-            username: 'client-service-uac',
+            username: 'client-cli-browser',
             password: 'oauth2ClientSecret'
           },
           params: {
