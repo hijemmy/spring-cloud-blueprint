@@ -30,7 +30,7 @@ public class MenuConstant {
 	 */
 	public static final Integer MENU_LEVEL_TWO = 2;
 	/**
-	 * 二级菜单
+	 * 三级菜单
 	 */
 	public static final Integer MENU_LEVEL_THREE = 3;
 
@@ -39,7 +39,7 @@ public class MenuConstant {
 	 */
 	public static final Integer MENU_LEAF_YES = 0;
 	/**
-	 * 菜单不叶子节点
+	 * 菜单不是叶子节点
 	 */
 	public static final Integer MENU_LEAF_NO = 1;
 }

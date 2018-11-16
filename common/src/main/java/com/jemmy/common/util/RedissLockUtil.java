@@ -1,13 +1,17 @@
 package com.jemmy.common.util;
 
 import com.jemmy.common.redisson.DistributedLocker;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.redisson.api.RLock;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * redis分布式锁帮助类
+ * @author Jemmy
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RedissLockUtil {
     private static DistributedLocker redissLock;
 

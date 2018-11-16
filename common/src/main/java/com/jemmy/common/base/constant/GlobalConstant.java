@@ -35,7 +35,7 @@ public class GlobalConstant {
 	public static final String LOCALHOST_IP_16 = "0:0:0:0:0:0:0:1";
 	public static final int MAX_IP_LENGTH = 15;
 
-	public static final String DEV_PROFILE = "dev";
+	public static final String DEV_PROFILE = "devt";
 	public static final String TEST_PROFILE = "test";
 	public static final String PRO_PROFILE = "pro";
 	public static final int TWO_INT = 2;
@@ -45,11 +45,11 @@ public class GlobalConstant {
 	public static final int EXCEPTION_CAUSE_MAX_LENGTH = 2048;
 	public static final int EXCEPTION_MESSAGE_MAX_LENGTH = 2048;
 
-	public static final String ZK_REGISTRY_SERVICE_ROOT_PATH = "/jemmycloud/registry/service";
-	public static final String ZK_REGISTRY_ID_ROOT_PATH = "/jemmycloud/registry/id";
-	public static final String ZK_REGISTRY_PRODUCER_ROOT_PATH = "/jemmycloud/registry/producer";
-	public static final String ZK_REGISTRY_CONSUMER_ROOT_PATH = "/jemmycloud/registry/consumer";
-	public static final String ZK_REGISTRY_SEQ = "/jemmycloud/seq";
+	public static final String ZK_REGISTRY_SERVICE_ROOT_PATH = Symbol.SLASH+ROOT_PREFIX+"/registry/service";
+	public static final String ZK_REGISTRY_ID_ROOT_PATH = Symbol.SLASH+ROOT_PREFIX+"/registry/id";
+	public static final String ZK_REGISTRY_PRODUCER_ROOT_PATH = Symbol.SLASH+ROOT_PREFIX+"/registry/producer";
+	public static final String ZK_REGISTRY_CONSUMER_ROOT_PATH = Symbol.SLASH+ROOT_PREFIX+"/registry/consumer";
+	public static final String ZK_REGISTRY_SEQ = Symbol.SLASH+ROOT_PREFIX+"/seq";
 
 	/**
 	 * 微服务名称

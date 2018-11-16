@@ -16,6 +16,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.jemmy.common.base.constant.GlobalConstant.ROOT_PREFIX;
+
 /**
  * The class Redis key util.
  *
@@ -27,12 +29,12 @@ public class RedisKeyUtil {
 	/**
 	 * The constant RESET_PWD_TOKEN_KEY.
 	 */
-	private static final String RESET_PWD_TOKEN_KEY = "paascloud:restPwd";
-	private static final String ACTIVE_USER = "paascloud:activeUser";
-	private static final String SEND_SMS_COUNT = "paascloud:sms:count";
-	private static final String SEND_EMAIL_CODE = "paascloud:email:code";
-	private static final String ACCESS_TOKEN = "paascloud:token:accessToken";
-	private static final String UPLOAD_FILE_SIZE = "paascloud:file:upload_file_size";
+	private static final String RESET_PWD_TOKEN_KEY = ROOT_PREFIX+":restPwd";
+	private static final String ACTIVE_USER = ROOT_PREFIX+":activeUser";
+	private static final String SEND_SMS_COUNT = ROOT_PREFIX+":sms:count";
+	private static final String SEND_EMAIL_CODE = ROOT_PREFIX+":email:code";
+	private static final String ACCESS_TOKEN = ROOT_PREFIX+":token:accessToken";
+	private static final String UPLOAD_FILE_SIZE = ROOT_PREFIX+":file:upload_file_size";
 	private static final int REF_NO_MAX_LENGTH = 100;
 
 	/**
