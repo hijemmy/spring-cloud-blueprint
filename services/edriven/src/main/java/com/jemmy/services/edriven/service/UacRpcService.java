@@ -51,7 +51,7 @@ public class UacRpcService {
 		if (result == null || result == 0) {
 			log.error("updateTokenOffLine 失败");
 		} else {
-			log.error("updateTokenOffLine 成功");
+			log.info("updateTokenOffLine 成功");
 		}
 	}
 
