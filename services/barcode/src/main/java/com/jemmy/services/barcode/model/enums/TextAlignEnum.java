@@ -1,13 +1,18 @@
 package com.jemmy.services.barcode.model.enums;
 
 public enum TextAlignEnum {
-    LEFT,
-    CENTER,
-    RIGHT,
-    JUSTIFY;
+    LEFT("left"),
+    CENTER("center"),
+    RIGHT("right"),
+    JUSTIFY("justify");
 
-    @Override
-    public String toString() {
-        return name().toLowerCase();
+    private String align;
+
+    TextAlignEnum(String align) {
+        this.align = align;
+    }
+
+    public String getAlign() {
+        return align;
     }
 }

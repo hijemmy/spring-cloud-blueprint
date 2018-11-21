@@ -19,6 +19,7 @@ import com.jemmy.services.barcode.model.enums.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
@@ -31,7 +32,7 @@ import java.awt.*;
  * @version $Id: BarcodeRequestDto.java,v 1.6 2010/10/25 09:28:47 jmaerki Exp $
  */
 @Data
-@ApiModel(value = "OptAttachmentReqDto")
+@ApiModel
 public class BarcodeRequestDto {
     /**
      * 文本
@@ -98,15 +99,18 @@ public class BarcodeRequestDto {
         /**
          * 条码类型
          */
-        private CodeTypeEnum type=CodeTypeEnum.POSTNET;
+        @NotNull
+        @ApiModelProperty(required = true,value = "条码类型")
+        private CodeTypeEnum type;
         /**
          * 条码内容
          */
-        private String code="01234567891";
-        /**
-         * 分辨率配置
-         */
+        @NotEmpty
+        @ApiModelProperty(required = true,value = "条码内容")
+        private String code;
+
         @Range(min = 10,max = 2400)
+        @ApiModelProperty(required = false,value = "分辨率",hidden = true)
         private Integer resolution=300;
 
         /***
@@ -180,7 +184,7 @@ public class BarcodeRequestDto {
         /**
          * 单位码条宽度,单位为px
          */
-        private float width=1;
+        private Float width=1f;
     }
 
 
@@ -193,11 +197,14 @@ public class BarcodeRequestDto {
          *  仅支持 none,bop,bottom
          *  文本放置位置
          */
-        private HumanReadablePlacementEnum placement=HumanReadablePlacementEnum.BOTTOM;
+        @ApiModelProperty(value = "文本放置位置")
+        private HumanReadablePlacementEnum placement;
+        @ApiModelProperty(value = "文本对齐方式")
         private TextAlignEnum align=TextAlignEnum.LEFT;
         /**
          * 字体大小
          */
+        @ApiModelProperty(value = "字体大小,单位为mm,cm,pt,mw",example ="1.3mm" )
         private String fontSize;
         /**
          * 字体颜色
@@ -206,6 +213,7 @@ public class BarcodeRequestDto {
         /**
          * 字体名称
          */
+        @ApiModelProperty(value = "字体名称")
         private String fontName;
         /**
          * 文本显示模式
@@ -214,7 +222,7 @@ public class BarcodeRequestDto {
         /**
          * 文字与条码距离
          */
-        private float offset=0.2f;
+        private Float offset=0.2f;
         private Boolean displayChecksum=false;
         private Boolean displayStartStop=false;
     }

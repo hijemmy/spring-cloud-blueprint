@@ -88,7 +88,7 @@ public class ExtCanvasLogicHandler extends DefaultCanvasLogicHandler {
         } else {
             double ty = getTextBaselinePosition();
             DrawingUtil.drawText(canvas, bcBean, formattedMsg,
-                    getStartX(), x, ty, TextAlignment.byName(textAlignEnum.toString()));
+                    getStartX(), x, ty, TextAlignment.byName(textAlignEnum.getAlign()));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.jemmy.services.barcode.controller.frontend;
 
 import com.jemmy.common.annotation.JSONRequestMapping;
+import com.jemmy.common.base.constant.GlobalConstant;
 import com.jemmy.common.core.support.BaseController;
 import com.jemmy.services.barcode.model.dto.BarcodeRequestDto;
 import com.jemmy.services.barcode.service.BarcodeService;
@@ -27,7 +28,7 @@ public class BarcodeController extends BaseController {
     @Autowired
     private BarcodeService barcodeService;
     @RequestMapping(value = "/1d", method = RequestMethod.GET)
-    @ApiOperation(httpMethod = "GET", value = "一维条形码")
+    @ApiOperation(httpMethod = "GET", value = "一维条形码",produces = MediaType.IMAGE_PNG_VALUE+GlobalConstant.Symbol.COMMA+MediaType.IMAGE_JPEG_VALUE+GlobalConstant.Symbol.COMMA)
     public void rendering(BarcodeRequestDto dto, HttpServletResponse response) throws IOException, InterruptedException {
         ByteArrayOutputStream bout=barcodeService.generateCode(dto);
         response.setContentType(dto.getTheReturn().getFormat());
