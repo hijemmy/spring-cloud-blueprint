@@ -5,7 +5,7 @@ spring:
     exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
   cloud:
     config:
-      name: opc
+      name: barcode
       profile: pro
       discovery:
         service-id: infras-config

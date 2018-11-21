@@ -22,6 +22,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
 
@@ -47,6 +48,7 @@ public class BarcodeRequestDto {
     /**
      * 条码
      */
+    @Valid
     @NotNull
     @ApiModelProperty(value = "条码")
     private BarCode barCode=new BarCode();

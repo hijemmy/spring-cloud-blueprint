@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @SpringCloudApplication
 @EnableOAuth2Client
 @EnableSwagger2
-@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.services.barcode"})
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.barcode"})
 public class BarcodeApplication {
 
     public static void main(String... args){
