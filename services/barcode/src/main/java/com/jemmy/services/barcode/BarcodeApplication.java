@@ -1,10 +1,14 @@
 package com.jemmy.services.barcode;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.sql.DataSource;
 
 /**
  * Created by pc on 2018/11/10.
@@ -19,5 +23,14 @@ public class BarcodeApplication {
         SpringApplication.run(BarcodeApplication.class, args);
     }
 
+    @Bean
+    public SpringLiquibase springLiquibase(DataSource dataSource) {
 
+        SpringLiquibase springLiquibase = new SpringLiquibase();
+
+        springLiquibase.setDataSource(dataSource);
+        springLiquibase.setChangeLog("classpath:/liquibase/index.xml");
+
+        return springLiquibase;
+    }
 }

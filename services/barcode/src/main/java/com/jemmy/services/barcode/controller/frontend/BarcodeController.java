@@ -5,6 +5,7 @@ import com.jemmy.common.core.support.BaseController;
 import com.jemmy.services.barcode.model.dto.BarcodeRequestDto;
 import com.jemmy.services.barcode.service.BarcodeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +20,14 @@ import java.io.IOException;
  * @author Jemmy
  */
 @RestController
-@JSONRequestMapping("/barcode")
+@JSONRequestMapping("/api/barcode")
 @Api(value = "条形码",produces = MediaType.IMAGE_PNG_VALUE)
 public class BarcodeController extends BaseController {
 
     @Autowired
     private BarcodeService barcodeService;
     @RequestMapping(value = "/1d", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "一维条形码")
     public void rendering(BarcodeRequestDto dto, HttpServletResponse response) throws IOException, InterruptedException {
         ByteArrayOutputStream bout=barcodeService.generateCode(dto);
         response.setContentType(dto.getTheReturn().getFormat());

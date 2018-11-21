@@ -1,6 +1,6 @@
 package com.jemmy.services.barcode.code.code128;
 
-import com.jemmy.services.barcode.ExtCanvasLogicHandler;
+import com.jemmy.services.barcode.code.ExtCanvasLogicHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.krysalis.barcode4j.ClassicBarcodeLogicHandler;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;

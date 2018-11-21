@@ -1,6 +1,6 @@
 package com.jemmy.services.barcode.code.int2of5;
 
-import com.jemmy.services.barcode.ExtCanvasLogicHandler;
+import com.jemmy.services.barcode.code.ExtCanvasLogicHandler;
 import org.krysalis.barcode4j.ClassicBarcodeLogicHandler;
 import org.krysalis.barcode4j.impl.int2of5.ITF14Bean;
 import org.krysalis.barcode4j.impl.int2of5.ITF14LogicImpl;

@@ -157,6 +157,7 @@ security:
     hsts: none
   enable-csrf: false
   sessions: never
+  ignored: /api/**
 management:
   security:
     enabled: false

@@ -94,38 +94,3 @@ jemmycloud:
         clientSecret: oauth2ClientSecret
         accessTokenValidateSeconds: 7200
         scope: "*"
-      clients[1]:
-        clientId: client-cli-browser
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
-      clients[2]:
-        clientId: client-infras-gw
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
-      clients[3]:
-        clientId: client-infras-monitor
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
-      clients[4]:
-        clientId: client-service-product
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
-      clients[5]:
-        clientId: client-service-order
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
-      clients[6]:
-        clientId: client-service-opc
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
-      clients[7]:
-        clientId: client-service-edriven
-        clientSecret: oauth2ClientSecret
-        accessTokenValidateSeconds: 7200
-        scope: "*"
