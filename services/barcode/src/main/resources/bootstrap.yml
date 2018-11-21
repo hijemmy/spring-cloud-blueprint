@@ -1,11 +1,11 @@
 spring:
   application:
-    name: service-user
+    name: service-barcode
   autoconfigure:
     exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
   cloud:
     config:
-      name: user
+      name: opc
       profile: pro
       discovery:
         service-id: infras-config
@@ -22,10 +22,6 @@ spring:
     sender:
       type: rabbit
     enabled: false
-    discovery-client-enabled: true
-    locator:
-      discovery:
-        enabled: true
   sleuth:
     sampler:
       percentage: 1
@@ -54,7 +50,7 @@ eureka:
 endpoints:
   enabled: false
 info:
-  role: '用户中心'
+  role: '条形码'
   ip: ${spring.cloud.client.ipAddress}
   port: ${server.port}
   version: ${eureka.instance.metadata-map.version}

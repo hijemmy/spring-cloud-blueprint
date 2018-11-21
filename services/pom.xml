@@ -18,6 +18,7 @@
         <module>product</module>
         <module>edriven</module>
         <module>opc</module>
+        <module>barcode</module>
     </modules>
     <dependencies>
         <dependency>

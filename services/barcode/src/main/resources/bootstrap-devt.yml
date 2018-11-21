@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+      profile: default,devt
+    service-registry:
+      auto-registration:
+        enabled: true
+    bus:
+      enabled: true
+eureka:
+  client:
+    enabled: true
+    service-url:
+      zone1: http://localhost:7002/eureka/
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    metadata-map:
+      zone: defaultZone
