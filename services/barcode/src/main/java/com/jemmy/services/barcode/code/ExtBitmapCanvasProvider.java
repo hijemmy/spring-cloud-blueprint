@@ -1,6 +1,6 @@
 package com.jemmy.services.barcode.code;
 
-import com.jemmy.services.barcode.model.dto.BarcodeRequestDto;
+import com.jemmy.services.barcode.model.dto.barcode.BarcodeRequestDto;
 import com.jemmy.services.barcode.model.enums.TextAlignEnum;
 import org.krysalis.barcode4j.BarcodeDimension;
 import org.krysalis.barcode4j.TextAlignment;

@@ -257,4 +257,12 @@ public class GlobalConstant {
 		}
 
 	}
+
+	public interface HttpMethod{
+		String GET="GET";
+		String POST="POST";
+		String DELETE="DELETE";
+		String OPTION="OPTION";
+		String PUT="PUT";
+	}
 }

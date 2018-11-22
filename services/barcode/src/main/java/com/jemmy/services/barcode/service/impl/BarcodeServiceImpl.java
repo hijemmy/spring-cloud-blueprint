@@ -2,7 +2,7 @@ package com.jemmy.services.barcode.service.impl;
 
 import com.jemmy.services.barcode.code.ExtBitmapCanvasProvider;
 import com.jemmy.services.barcode.builder.ConfigurationBuilder;
-import com.jemmy.services.barcode.model.dto.BarcodeRequestDto;
+import com.jemmy.services.barcode.model.dto.barcode.BarcodeRequestDto;
 import com.jemmy.services.barcode.service.BarcodeClassResolverService;
 import com.jemmy.services.barcode.service.BarcodeService;
 import lombok.extern.slf4j.Slf4j;

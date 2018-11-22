@@ -97,33 +97,33 @@ public class TokenInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		String uri = request.getRequestURI();
-		log.info("<== preHandle - 权限拦截器.  url={}", uri);
+		log.debug("<== preHandle - 权限拦截器.  url={}", uri);
 		if (uri.contains(AUTH_PATH1) || uri.contains(AUTH_PATH2) || uri.contains(AUTH_PATH3) || uri.contains(AUTH_PATH4)) {
-			log.info("<== preHandle - 配置URL不走认证.  url={}", uri);
+			log.debug("<== preHandle - 配置URL不走认证.  url={}", uri);
 			return true;
 		}
-		log.info("<== preHandle - 调试模式不走认证.  OPTIONS={}", request.getMethod().toUpperCase());
+		log.debug("<== preHandle - 调试模式不走认证.  OPTIONS={}", request.getMethod().toUpperCase());
 
 		if (OPTIONS.equalsIgnoreCase(request.getMethod())) {
-			log.info("<== preHandle - 调试模式不走认证.  url={}", uri);
+			log.debug("<== preHandle - 调试模式不走认证.  url={}", uri);
 			return true;
 		}
 
 		if (isHaveAccess(handler)) {
-			log.info("<== preHandle - 不需要认证注解不走认证.  token={}");
+			log.debug("<== preHandle - 不需要认证注解不走认证.  token={}");
 			return true;
 		}
 
 		String token = StringUtils.substringAfter(request.getHeader(HttpHeaders.AUTHORIZATION), "Bearer ");
-		log.info("<== preHandle - 权限拦截器.  token={}", token);
+		log.debug("<== preHandle - 权限拦截器.  token={}", token);
 		LoginAuthDto loginUser = (UserTokenDto) redisTemplate.opsForValue().get(RedisKeyUtil.getAccessTokenKey(token));
 		if (loginUser == null) {
 			log.error("获取用户信息失败, 不允许操作");
 			return false;
 		}
-		log.info("<== preHandle - 权限拦截器.  loginUser={}", loginUser);
+		log.debug("<== preHandle - 权限拦截器.  loginUser={}", loginUser);
 		ThreadLocalMap.put(GlobalConstant.Sys.TOKEN_AUTH_DTO, loginUser);
-		log.info("<== preHandle - 权限拦截器.  url={}, loginUser={}", uri, loginUser);
+		log.debug("<== preHandle - 权限拦截器.  url={}, loginUser={}", uri, loginUser);
 		return true;
 	}
 

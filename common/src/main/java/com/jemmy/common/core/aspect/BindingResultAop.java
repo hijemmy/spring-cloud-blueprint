@@ -54,6 +54,7 @@ public class BindingResultAop {
 			for (Object arg : objects) {
 				if (arg instanceof BindingResult) {
 					bindingResult = (BindingResult) arg;
+					break;
 				}
 			}
 			if (bindingResult != null && bindingResult.hasErrors()) {

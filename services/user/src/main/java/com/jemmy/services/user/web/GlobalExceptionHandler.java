@@ -22,13 +22,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.annotation.Resource;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 /**
  * 全局的的异常拦截器
@@ -62,6 +63,18 @@ public class GlobalExceptionHandler {
 		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990100.code(), e.getMessage());
 	}
 
+	@ExceptionHandler(ConstraintViolationException.class)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public MvcResult illegalArgumentException2(ConstraintViolationException e) {
+		ConstraintViolation[] violations=e.getConstraintViolations().toArray(new ConstraintViolation[]{});
+		String first=violations[0].getPropertyPath().toString();
+		String msg=first.substring(first.lastIndexOf(".")+1)+":"+ violations[0].getMessage();
+		log.error("参数非法异常={}", msg);
+
+		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990100.code(), msg);
+	}
+
 	/**
 	 * 业务异常.
 	 *
@@ -75,21 +88,6 @@ public class GlobalExceptionHandler {
 	public MvcResult businessException(BusinessException e) {
 		log.error("业务异常={}", e.getMessage(), e);
 		return MvcResultBuilder.wrap(e.getCode() == 0 ? MvcResult.ERROR_CODE : e.getCode(), e.getMessage());
-	}
-
-	/**
-	 * 无权限访问.
-	 *
-	 * @param e the e
-	 *
-	 * @return the wrapper
-	 */
-	@ExceptionHandler(AccessDeniedException.class)
-	@ResponseStatus(HttpStatus.UNAUTHORIZED)
-	@ResponseBody
-	public MvcResult unAuthorizedException(AccessDeniedException e) {
-		log.error("业务异常={}", e.getMessage(), e);
-		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990401.code(), ErrorCodeEnum.GL99990401.msg());
 	}
 
 

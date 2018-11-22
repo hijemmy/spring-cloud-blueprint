@@ -1,6 +1,6 @@
 package com.jemmy.services.barcode.service;
 
-import com.jemmy.services.barcode.model.dto.BarcodeRequestDto;
+import com.jemmy.services.barcode.model.dto.barcode.BarcodeRequestDto;
 
 import java.io.ByteArrayOutputStream;
 

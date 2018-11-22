@@ -1,6 +1,6 @@
 package com.jemmy.services.barcode.builder;
 
-import com.jemmy.services.barcode.model.dto.BarcodeRequestDto;
+import com.jemmy.services.barcode.model.dto.barcode.BarcodeRequestDto;
 import com.jemmy.services.barcode.model.enums.CodeTypeEnum;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfiguration;

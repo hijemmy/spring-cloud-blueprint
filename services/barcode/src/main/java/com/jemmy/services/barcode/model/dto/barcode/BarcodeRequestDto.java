@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jemmy.services.barcode.model.dto;
+package com.jemmy.services.barcode.model.dto.barcode;
 
 import com.jemmy.services.barcode.model.enums.*;
 import io.swagger.annotations.ApiModel;
@@ -33,7 +33,7 @@ import java.awt.*;
  * @version $Id: BarcodeRequestDto.java,v 1.6 2010/10/25 09:28:47 jmaerki Exp $
  */
 @Data
-@ApiModel
+@ApiModel(value = "请求参数")
 public class BarcodeRequestDto {
     /**
      * 文本
@@ -71,7 +71,7 @@ public class BarcodeRequestDto {
      * 返回格式
      */
     @Data
-    @ApiModel
+    @ApiModel(value = "返回格式")
     public static class Return{
         /**
          * 返回的条码格式
@@ -88,7 +88,7 @@ public class BarcodeRequestDto {
      * 条码设置
      */
     @Data
-    @ApiModel
+    @ApiModel(value = "条码")
     public static class BarCode{
 
         @ApiModelProperty(value = "旋转角度",allowableValues = "0,90,180,270")
@@ -146,6 +146,7 @@ public class BarcodeRequestDto {
      * 外框设置
      */
     @Data
+    @ApiModel(value = "外框")
     public static class BarBorder{
         /**
          * 高度
@@ -174,6 +175,7 @@ public class BarcodeRequestDto {
      * 码条配置
      */
     @Data
+    @ApiModel(value = "码条")
     public static class Bar{
         /**
          * 条码颜色
@@ -194,6 +196,7 @@ public class BarcodeRequestDto {
      * 文本配置
      */
     @Data
+    @ApiModel(value = "文本")
     public static class Text{
         /**
          *  仅支持 none,bop,bottom
