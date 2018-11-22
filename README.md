@@ -3,7 +3,6 @@
 
 本项目基于 https://github.com/paascloud/paascloud-master 学习改造,仅用于学习交流之用
 
-此分支为蓝本,基于sprind cloud改造,具备初步结构
 - infras
 基础设施层.用于提供服务治理, 指标监控,网关路由,统一配置中心等
 
