@@ -12,6 +12,8 @@
 package com.jemmy.common.util.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -25,6 +27,7 @@ import java.io.Serializable;
  */
 @Data
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@ApiModel(value = "响应结果",description = "响应结果")
 public class MvcResult<T> implements Serializable {
 
 	/**
@@ -65,16 +68,19 @@ public class MvcResult<T> implements Serializable {
 	/**
 	 * 编号.
 	 */
+	@ApiModelProperty(value = "响应码,除200外均为错误状态",required = true)
 	private int code;
 
 	/**
 	 * 信息.
 	 */
+	@ApiModelProperty(value = "错误信息提示,当code非200时有值")
 	private String message;
 
 	/**
 	 * 结果数据
 	 */
+	@ApiModelProperty(value = "数据,当code为200时有值")
 	private T result;
 
 	/**

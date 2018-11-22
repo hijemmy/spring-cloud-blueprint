@@ -15,9 +15,14 @@ import com.jemmy.common.config.properties.ApplicationProperties;
 import com.jemmy.common.config.properties.SwaggerProperties;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
+import springfox.documentation.schema.Types;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
@@ -63,10 +68,23 @@ public class SwaggerConfiguration {
 				//配置鉴权信息
 				.securitySchemes(securitySchemes())
 				.securityContexts(securityContexts())
+				//配置响应码说明
+				.useDefaultResponseMessages(false)
+				.globalResponseMessage(RequestMethod.GET,commonResponse())
+				.globalResponseMessage(RequestMethod.POST,commonResponse())
 //				.globalOperationParameters(pars)
 				.enable(true);
 	}
 
+	private List<ResponseMessage> commonResponse(){
+		List<ResponseMessage> responseMessages=new ArrayList<>();
+		responseMessages.add(new ResponseMessageBuilder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()).responseModel(new ModelRef(Types.typeNameFor(Object.class))).build());
+		responseMessages.add(new ResponseMessageBuilder().code(HttpStatus.UNAUTHORIZED.value()).message(HttpStatus.UNAUTHORIZED.getReasonPhrase()).responseModel(new ModelRef(Types.typeNameFor(Object.class))).build());
+		responseMessages.add(new ResponseMessageBuilder().code(HttpStatus.NOT_FOUND.value()).message(HttpStatus.NOT_FOUND.getReasonPhrase()).responseModel(new ModelRef(Types.typeNameFor(Object.class))).build());
+
+
+		return responseMessages;
+	}
 	private ApiInfo apiInfo() {
 		SwaggerProperties swagger = paascloudProperties.getSwagger();
 		return new ApiInfoBuilder()
