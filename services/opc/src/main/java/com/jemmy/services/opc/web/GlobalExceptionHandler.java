@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartException;
 
 import javax.annotation.Resource;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 /**
  * 全局的的异常拦截器
@@ -60,6 +62,18 @@ public class GlobalExceptionHandler {
 	public MvcResult illegalArgumentException(IllegalArgumentException e) {
 		log.error("参数非法异常={}", e.getMessage(), e);
 		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990100.code(), e.getMessage());
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public MvcResult illegalArgumentException2(ConstraintViolationException e) {
+		ConstraintViolation[] violations=e.getConstraintViolations().toArray(new ConstraintViolation[]{});
+		String first=violations[0].getPropertyPath().toString();
+		String msg=first.substring(first.lastIndexOf(".")+1)+":"+ violations[0].getMessage();
+		log.error("参数非法异常={}", msg);
+
+		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990100.code(), msg);
 	}
 
 	/**
