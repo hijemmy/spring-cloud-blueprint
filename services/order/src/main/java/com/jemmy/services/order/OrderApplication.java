@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @EnableAspectJAutoProxy(exposeProxy = true)
 @MapperScan(basePackages = {"com.jemmy.services.order.mapper","com.jemmy.apis.rmq.mapper"})
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
-@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.order"})
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.common.security.feign","com.jemmy.apis","com.jemmy.services.order"})
 public class OrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrderApplication.class, args);

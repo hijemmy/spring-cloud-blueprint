@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @EnableAspectJAutoProxy(exposeProxy = true)
 @Import({RedissonAutoConfiguration.class, RedissonSpringAutoConfiguration.class})
 @MapperScan(basePackages = {"com.jemmy.services.product.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = RootMapper.class)
-@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.product"})
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.common.security.feign","com.jemmy.apis","com.jemmy.services.product"})
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class, args);

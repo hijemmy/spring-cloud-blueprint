@@ -24,7 +24,7 @@ import java.util.Properties;
 @EnableOAuth2Client
 @EnableSwagger2
 @MapperScan(basePackages = {"com.jemmy.services.opc.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = RootMapper.class)
-@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.apis","com.jemmy.services.opc"})
+@ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.common.security.feign","com.jemmy.apis","com.jemmy.services.opc"})
 public class OpcApplication {
 
     public static void main(String... args){
