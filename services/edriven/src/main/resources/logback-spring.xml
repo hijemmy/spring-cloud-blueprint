@@ -35,6 +35,20 @@
             <charset>utf8</charset>
         </encoder>
     </appender>
+
+    <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}-error</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}-error.%d{yyyyMMdd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
     ​
     <!-- Appender to log to file in a JSON format -->
     <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -69,6 +83,7 @@
     </appender>
 
     <appender name="MyBatisStatistics" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.sql</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_FILE}.sql.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <maxHistory>10</maxHistory>
@@ -82,11 +97,22 @@
         <appender-ref ref="MyBatisStatistics" />
     </logger>
     ​
-    <root level="INFO">
-        <appender-ref ref="console"/>
-        <appender-ref ref="logstash"/>
-        <appender-ref ref="flatfile"/>
-    </root>
+    <springProfile name="pro,test">
+        <root level="INFO">
+            <appender-ref ref="console" />
+            <appender-ref ref="flatfile" />
+            <appender-ref ref="errorAppender" />
+            <appender-ref ref="logstash" />
+        </root>
+    </springProfile>
+    <springProfile name="dev,devt">
+
+        <root level="INFO">
+            <appender-ref ref="console" />
+            <appender-ref ref="flatfile" />
+        </root>
+    </springProfile>
+    <logger name="org.springframework.web" level="debug"/>
     <logger name="org.springframework.security" level="debug"/>
     <logger name="com.jemmy" level="debug"/>
 </configuration>
