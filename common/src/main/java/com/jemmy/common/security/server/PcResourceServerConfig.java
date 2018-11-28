@@ -13,8 +13,6 @@ package com.jemmy.common.security.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jemmy.common.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
-import com.jemmy.common.security.core.SelfAccessDeniedHandler;
-import com.jemmy.common.security.core.SelfAuthenticationEntryPoint;
 import com.jemmy.common.security.core.authentication.FormAuthenticationConfig;
 import com.jemmy.common.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.jemmy.common.security.core.authorize.AuthorizeConfigManager;
@@ -49,8 +47,6 @@ public class PcResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private OAuth2WebSecurityExpressionHandler pcSecurityExpressionHandler;
 
-	@Autowired
-	private AccessDeniedHandler pcAccessDeniedHandler;
 
 	@Autowired
 	protected AuthenticationSuccessHandler pcAuthenticationSuccessHandler;
@@ -114,7 +110,7 @@ public class PcResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.and()
 				.headers().frameOptions().disable()
 				.and()
-				.exceptionHandling().accessDeniedHandler(pcAccessDeniedHandler)
+				.exceptionHandling().accessDeniedHandler(new SelfAccessDeniedHandler(objectMapper))
 				.and()
 				.csrf().disable();
 

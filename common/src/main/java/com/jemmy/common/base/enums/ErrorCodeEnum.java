@@ -20,11 +20,11 @@ public enum ErrorCodeEnum {
 	/**
 	 * Gl 99990100 error code enum.
 	 */
-	GL99990100(9999100, "参数异常"),
+	GL99990100(9999400, "非法参数"),
 	/**
 	 * Gl 99990401 error code enum.
 	 */
-	GL99990401(99990401, "无访问权限"),
+	GL99990401(99990401, "未授权"),
 	/**
 	 * Gl 000500 error code enum.
 	 */
@@ -32,7 +32,7 @@ public enum ErrorCodeEnum {
 	/**
 	 * Gl 000403 error code enum.
 	 */
-	GL99990403(9999403, "无权访问"),
+	GL99990403(9999403, "权限不足"),
 	/**
 	 * Gl 000404 error code enum.
 	 */

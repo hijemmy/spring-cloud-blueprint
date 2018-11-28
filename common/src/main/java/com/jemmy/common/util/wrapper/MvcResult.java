@@ -17,6 +17,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.io.Serializable;
 
+import static com.jemmy.common.base.enums.ErrorCodeEnum.GL99990100;
+import static com.jemmy.common.base.enums.ErrorCodeEnum.GL99990500;
+
 
 /**
  * The class MvcResult.
@@ -45,22 +48,22 @@ public class MvcResult<T> implements Serializable {
 	/**
 	 * 错误码.
 	 */
-	public static final int ERROR_CODE = 500;
+	public static final int ERROR_CODE = GL99990500.code();
 
 	/**
 	 * 错误信息.
 	 */
-	public static final String ERROR_MESSAGE = "内部异常";
+	public static final String ERROR_MESSAGE = GL99990500.msg();
 
 	/**
 	 * 错误码：参数非法
 	 */
-	public static final int ILLEGAL_ARGUMENT_CODE_ = 100;
+	public static final int ILLEGAL_ARGUMENT_CODE_ = GL99990100.code();
 
 	/**
 	 * 错误信息：参数非法
 	 */
-	public static final String ILLEGAL_ARGUMENT_MESSAGE = "参数非法";
+	public static final String ILLEGAL_ARGUMENT_MESSAGE = GL99990100.msg();
 
 	/**
 	 * 编号.

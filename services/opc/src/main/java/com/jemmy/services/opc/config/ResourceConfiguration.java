@@ -1,8 +1,8 @@
 package com.jemmy.services.opc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jemmy.common.security.core.SelfAccessDeniedHandler;
-import com.jemmy.common.security.core.SelfAuthenticationEntryPoint;
+import com.jemmy.common.security.server.SelfAccessDeniedHandler;
+import com.jemmy.common.security.server.SelfAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
