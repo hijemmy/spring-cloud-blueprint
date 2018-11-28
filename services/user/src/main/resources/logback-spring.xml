@@ -93,9 +93,6 @@
         </encoder>
     </appender>
 
-    <logger name="com.paascloud.provider.mapper" level="DEBUG">
-        <appender-ref ref="MyBatisStatistics" />
-    </logger>
     ​
     <springProfile name="pro,test">
         <root level="INFO">
@@ -111,10 +108,14 @@
             <appender-ref ref="console" />
             <appender-ref ref="flatfile" />
         </root>
+        <logger name="com.jemmy" level="DEBUG"/>
+
     </springProfile>
-    <logger name="org.springframework.web" level="debug"/>
-    <logger name="org.springframework.security" level="debug"/>
     <logger name="RocketmqClient" level="warn"/>
-    <logger name="org.springframework.cloud.netflix.feign" level="DEBUG"/>
-    <logger name="com.jemmy" level="DEBUG"/>
+    <logger name="com.jemmy.services.user.mapper" level="DEBUG">
+        <appender-ref ref="MyBatisStatistics" />
+    </logger>
+    <logger name="com.jemmy.apis.rmq.mapper" level="DEBUG">
+        <appender-ref ref="MyBatisStatistics" />
+    </logger>
 </configuration>

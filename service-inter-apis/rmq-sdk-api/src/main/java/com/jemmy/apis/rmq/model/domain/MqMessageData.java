@@ -72,7 +72,7 @@ public class MqMessageData {
 	/**
 	 * 顺序类型, 0有序 1无序
 	 */
-	private int orderType;
+	private Integer orderType;
 
 	/**
 	 * 消息状态
@@ -83,7 +83,7 @@ public class MqMessageData {
 	 * 延时级别
 	 */
 	@Column(name = "delay_level")
-	private int delayLevel;
+	private Integer delayLevel;
 
 	/**
 	 * 创建人

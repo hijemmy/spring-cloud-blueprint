@@ -24,8 +24,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Component
-@Mapper
 public interface TpcMqConfirmMapper extends RootMapper<TpcMqConfirm> {
 	/**
 	 * Confirm receive message.

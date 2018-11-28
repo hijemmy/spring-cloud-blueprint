@@ -27,8 +27,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface TpcMqConsumerMapper extends RootMapper<TpcMqConsumer> {
 	/**
 	 * 查询消费者列表.

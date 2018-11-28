@@ -26,8 +26,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Component
-@Mapper
 public interface MqMessageDataMapper extends RootMapper<MqMessageData> {
 	/**
 	 * 获取7天前消息总数.

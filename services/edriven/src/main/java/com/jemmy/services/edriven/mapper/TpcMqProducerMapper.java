@@ -26,8 +26,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface TpcMqProducerMapper extends RootMapper<TpcMqProducer> {
 
 	/**

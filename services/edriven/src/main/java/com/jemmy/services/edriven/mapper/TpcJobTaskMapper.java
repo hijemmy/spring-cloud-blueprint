@@ -21,7 +21,5 @@ import org.springframework.stereotype.Component;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface TpcJobTaskMapper extends RootMapper<TpcJobTask> {
 }

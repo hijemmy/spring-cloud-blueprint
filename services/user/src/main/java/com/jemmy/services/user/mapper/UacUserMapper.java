@@ -15,9 +15,7 @@ package com.jemmy.services.user.mapper;
 import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.model.dto.user.BindRoleDto;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -27,8 +25,6 @@ import java.util.Map;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface UacUserMapper extends RootMapper<UacUser> {
 
 	/**

@@ -27,8 +27,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface OptAttachmentMapper extends RootMapper<OptAttachment> {
 	/**
 	 * Query attachment list.

@@ -17,9 +17,7 @@ import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacAction;
 import com.jemmy.services.user.model.domain.UacMenu;
 import com.jemmy.services.user.model.vo.ActionVo;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -28,8 +26,6 @@ import java.util.List;
  *
  * @author paascloud.net@gmail.com
  */
-@Mapper
-@Component
 public interface UacActionMapper extends RootMapper<UacAction> {
 	/**
 	 * Find all perms list.

@@ -13,8 +13,6 @@ package com.jemmy.services.user.mapper;
 
 import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacUserToken;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +22,6 @@ import java.util.Map;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface UacUserTokenMapper extends RootMapper<UacUserToken> {
 	/**
 	 * Select token list list.

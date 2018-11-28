@@ -24,8 +24,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface MdcExceptionLogMapper extends RootMapper<MdcExceptionLog> {
 	/**
 	 * Query exception list with page list.

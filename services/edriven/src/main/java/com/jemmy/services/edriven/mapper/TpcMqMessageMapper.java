@@ -27,8 +27,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Component
-@Mapper
 public interface TpcMqMessageMapper extends RootMapper<TpcMqMessage> {
 	/**
 	 * Gets message by message key.

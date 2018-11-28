@@ -14,9 +14,7 @@ package com.jemmy.services.user.mapper;
 import com.jemmy.apis.user.vo.MenuVo;
 import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacMenu;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
@@ -26,8 +24,6 @@ import java.util.Set;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface UacMenuMapper extends RootMapper<UacMenu> {
 
 	/**

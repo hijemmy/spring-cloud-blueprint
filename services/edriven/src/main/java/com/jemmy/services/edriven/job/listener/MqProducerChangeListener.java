@@ -85,7 +85,7 @@ public class MqProducerChangeListener implements TreeCacheListener {
 				}
 				break;
 			case NODE_UPDATED:
-				log.error("本次版本不对更新做处理, path={}, data={}", path, new String(data.getData()));
+				log.warn("本次版本不对更新做处理, path={}, data={}", path, new String(data.getData()));
 				break;
 			default:
 				break;

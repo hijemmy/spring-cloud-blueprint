@@ -14,15 +14,11 @@ package com.jemmy.services.user.mapper;
 
 import com.jemmy.common.core.mybatis.RootMapper;
 import com.jemmy.services.user.model.domain.UacUserMenu;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 /**
  * The interface Uac user menu mapper.
  *
  * @author paascloud.net@gmail.com
  */
-@Mapper
-@Component
 public interface UacUserMenuMapper extends RootMapper<UacUserMenu> {
 }

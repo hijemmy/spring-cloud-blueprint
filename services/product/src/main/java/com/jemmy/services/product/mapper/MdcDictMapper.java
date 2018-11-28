@@ -24,8 +24,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface MdcDictMapper extends RootMapper<MdcDict> {
 	/**
 	 * List dict vo list.

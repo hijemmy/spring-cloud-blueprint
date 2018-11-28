@@ -24,8 +24,6 @@ import java.util.List;
  *
  * @author paascloud.net @gmail.com
  */
-@Mapper
-@Component
 public interface TpcMqTopicMapper extends RootMapper<TpcMqTopic> {
 	/**
 	 * List tpc mq topic vo with page list.

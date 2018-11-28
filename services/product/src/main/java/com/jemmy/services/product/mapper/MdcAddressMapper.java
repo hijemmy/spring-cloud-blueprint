@@ -23,8 +23,6 @@ import java.util.List;
  *
  * @author paascloud.net@gmail.com
  */
-@Mapper
-@Component
 public interface MdcAddressMapper extends RootMapper<MdcAddress> {
 	/**
 	 * Select mdc address list.
