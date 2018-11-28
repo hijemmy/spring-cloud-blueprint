@@ -1,4 +1,4 @@
-package com.jemmy.services.product.config.security;
+package com.jemmy.services.edriven.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jemmy.common.security.core.SelfAccessDeniedHandler;
