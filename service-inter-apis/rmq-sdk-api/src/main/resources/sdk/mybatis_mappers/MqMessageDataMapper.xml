@@ -77,7 +77,7 @@
       #{item}
     </foreach>
   </select>
-  <select id="queryMessageListWithPage" resultType="com.paascloud.base.dto.MqMessageVo">
+  <select id="queryMessageListWithPage" resultType="com.jemmy.common.base.dto.MqMessageVo">
     SELECT
     <include refid="Base_Column_List">
       <property name="alias" value="message"/>

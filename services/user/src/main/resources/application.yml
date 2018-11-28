@@ -111,7 +111,7 @@ redisson:
   type: single
 mybatis:
   type-aliases-package: com.jemmy.services.user.model.domain
-  mapper-locations: mybatis_mappers/**/*.xml
+  mapper-locations: classpath:mybatis_mappers/*.xml,classpath*:sdk/mybatis_mappers/*.xml
   configuration:
     default-fetch-size: 10
     lazy-loading-enabled: true

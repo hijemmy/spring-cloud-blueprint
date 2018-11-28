@@ -19,6 +19,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 import javax.sql.DataSource;
 
+/**
+ * @author Jemmy
+ */
 @SpringCloudApplication
 @EnableFeignClients(basePackages = {"com.jemmy.apis"})
 @EnableOAuth2Client
