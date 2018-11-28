@@ -12,11 +12,11 @@
     <sql id ="Base_Set_Condition">
     </sql>
     <delete id="deleteByActionId"  parameterType="long">
-        delete from pc_uac_role_action
+        delete from uac_role_action
         where action_id = #{actionId}
     </delete>
   <delete id="deleteByRoleIdList">
-    delete from pc_uac_role_action
+    delete from uac_role_action
     where role_id in
     <foreach collection="roleIdList" item="item" index="index" open="(" separator="," close=")">
       #{item}

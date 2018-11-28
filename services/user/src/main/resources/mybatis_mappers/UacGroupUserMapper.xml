@@ -13,7 +13,7 @@
 
     <update id="updateByUserId" parameterType="uacGroupUser">
         update
-            pc_uac_group_user
+            uac_group_user
         set
             group_id=#{groupId}
         where
@@ -22,7 +22,7 @@
     <delete id="deleteExcludeSuperMng" parameterType="map">
         DELETE
         FROM
-            pc_uac_group_user
+            uac_group_user
         WHERE
             user_id IN (
                 SELECT
@@ -33,7 +33,7 @@
                             gu.user_id
                         FROM
                             `pc_uac_group_user` gu
-                            LEFT JOIN pc_uac_user u ON gu.user_id = u.id
+                            LEFT JOIN uac_user u ON gu.user_id = u.id
                         WHERE
                             gu.group_id = #{currentGroupId}
                             AND gu.user_id NOT IN (
@@ -41,7 +41,7 @@
                                     ru.user_id
                                 FROM
                                     `pc_uac_role_user` ru
-                                    LEFT JOIN pc_uac_user u ON ru.user_id = u.id
+                                    LEFT JOIN uac_user u ON ru.user_id = u.id
                                 WHERE
                                     ru.role_id = #{superManagerRoleId}
                             )
@@ -51,14 +51,14 @@
     <select id="getByUserId" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM pc_uac_group_user gu
+        FROM uac_group_user gu
         WHERE gu.user_id = #{userId, jdbcType=BIGINT}
     </select>
     <select id="selectGroupListByUserId" resultType="uacGroup">
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-            pc_uac_group g, pc_uac_user u , pc_uac_group_user gu
+            uac_group g, uac_user u , uac_group_user gu
         where
             1=1
             and g.id = gu.group_id
@@ -68,7 +68,7 @@
     <select id="listByGroupId" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM pc_uac_group_user gu
+        FROM uac_group_user gu
         WHERE gu.group_id = #{groupId, jdbcType=BIGINT}
     </select>
 </mapper>

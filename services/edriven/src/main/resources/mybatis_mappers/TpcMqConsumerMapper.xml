@@ -43,13 +43,13 @@
     ${alias}.created_time as tag_created_time, ${alias}.last_operator as tag_last_operator, ${alias}.last_operator_id as tag_last_operator_id, ${alias}.update_time as tag_update_time
   </sql>
   <delete id="deleteSubscribeTagByTagId">
-    DELETE FROM pc_tpc_mq_subscribe_tag WHERE tag_id = #{tagId}
+    DELETE FROM tpc_mq_subscribe_tag WHERE tag_id = #{tagId}
   </delete>
   <delete id="deleteSubscribeByConsumerId">
-    DELETE FROM pc_tpc_mq_subscribe WHERE consumer_id = #{consumerId}
+    DELETE FROM tpc_mq_subscribe WHERE consumer_id = #{consumerId}
   </delete>
   <delete id="deleteSubscribeTagBySubscribeIdList">
-    DELETE FROM pc_tpc_mq_subscribe_tag WHERE subscribe_id IN
+    DELETE FROM tpc_mq_subscribe_tag WHERE subscribe_id IN
     <foreach collection="subscribeIdList" item="item" index="index" open="(" separator="," close=")">
       #{item}
     </foreach>
@@ -73,9 +73,9 @@
     <include refid="Base_Topic_Column_List">
       <property name="alias" value="topic"/>
     </include>
-    from pc_tpc_mq_consumer consumer
-    LEFT JOIN pc_tpc_mq_subscribe subscribe ON consumer.id = subscribe.consumer_id
-    LEFT JOIN pc_tpc_mq_topic topic on topic.id = subscribe.topic_id
+    from tpc_mq_consumer consumer
+    LEFT JOIN tpc_mq_subscribe subscribe ON consumer.id = subscribe.consumer_id
+    LEFT JOIN tpc_mq_topic topic on topic.id = subscribe.topic_id
     WHERE 1 = 1
     <if test="consumerCode != null and consumerCode !=''">
       AND consumer.consumer_code LIKE concat(#{consumerCode}, '%')
@@ -104,9 +104,9 @@
     topic.topic_name,
     subscribe.id as subscribeId
     from
-    pc_tpc_mq_subscribe subscribe
-    LEFT JOIN pc_tpc_mq_consumer consumer ON subscribe.consumer_id = consumer.id
-    LEFT JOIN pc_tpc_mq_topic topic on topic.id = subscribe.topic_id
+    tpc_mq_subscribe subscribe
+    LEFT JOIN tpc_mq_consumer consumer ON subscribe.consumer_id = consumer.id
+    LEFT JOIN tpc_mq_topic topic on topic.id = subscribe.topic_id
     WHERE 1 = 1
     <if test="consumerCode != null and consumerCode !=''">
       AND consumer.consumer_code LIKE concat(#{consumerCode}, '%')
@@ -119,7 +119,7 @@
     </if>
   </select>
   <select id="listSubscribeIdByConsumerId" resultType="java.lang.Long">
-    select id FROM pc_tpc_mq_subscribe WHERE consumer_id = #{consumerId}
+    select id FROM tpc_mq_subscribe WHERE consumer_id = #{consumerId}
   </select>
 
   <resultMap id="TpcMqSubscribeVoResultMapN" type="com.jemmy.services.edriven.model.vo.TpcMqSubscribeVo">
@@ -140,21 +140,21 @@
     <include refid="Base_Tag_Column_List">
       <property name="alias" value="tag"/>
     </include>
-    from pc_tpc_mq_subscribe_tag st
-    LEFT JOIN pc_tpc_mq_tag tag on tag.id = st.tag_id
+    from tpc_mq_subscribe_tag st
+    LEFT JOIN tpc_mq_tag tag on tag.id = st.tag_id
     WHERE st.subscribe_id IN
     <foreach collection="subscribeIdList" item="item" index="index" open="(" separator="," close=")">
       #{item}
     </foreach>
   </select>
   <select id="listConsumerGroupByTopic" resultType="java.lang.String">
-    SELECT consumer_code from pc_tpc_mq_subscribe WHERE topic_code = #{topic}
+    SELECT consumer_code from tpc_mq_subscribe WHERE topic_code = #{topic}
   </select>
   <select id="getByCid" resultType="com.jemmy.services.edriven.model.domain.TpcMqConsumer">
     SELECT
     <include refid="Base_Column_List">
       <property name="alias" value="consumer"/>
     </include>
-    from pc_tpc_mq_consumer consumer where consumer.consumer_code = #{cid}
+    from tpc_mq_consumer consumer where consumer.consumer_code = #{cid}
   </select>
 </mapper>

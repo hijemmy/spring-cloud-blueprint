@@ -50,7 +50,7 @@
     ${alias}.update_time as topic_update_time
   </sql>
   <delete id="deletePublishByProducerId">
-    DELETE FROM pc_tpc_mq_publish WHERE producer_id = #{producerId}
+    DELETE FROM tpc_mq_publish WHERE producer_id = #{producerId}
   </delete>
 
   <resultMap id="TpcMqProducerVoResultMap" extends="BaseResultMap" type="com.jemmy.services.edriven.model.vo.TpcMqProducerVo">
@@ -72,9 +72,9 @@
     <include refid="Base_Topic_Column_List">
       <property name="alias" value="topic"/>
     </include>
-    from pc_tpc_mq_producer producer
-    LEFT JOIN pc_tpc_mq_publish publish ON producer.id = publish.producer_id
-    LEFT JOIN pc_tpc_mq_topic topic on topic.id = publish.topic_id
+    from tpc_mq_producer producer
+    LEFT JOIN tpc_mq_publish publish ON producer.id = publish.producer_id
+    LEFT JOIN tpc_mq_topic topic on topic.id = publish.topic_id
     where 1=1
     <if test="producerCode != null and producerCode !=''">
       AND producer.producer_code LIKE concat(#{producerCode}, '%')
@@ -101,9 +101,9 @@
     topic.topic_code,
     topic.topic_name
     from
-    pc_tpc_mq_publish publish
-    LEFT JOIN pc_tpc_mq_producer producer ON publish.producer_id = producer.id
-    LEFT JOIN pc_tpc_mq_topic topic on topic.id = publish.topic_id
+    tpc_mq_publish publish
+    LEFT JOIN tpc_mq_producer producer ON publish.producer_id = producer.id
+    LEFT JOIN tpc_mq_topic topic on topic.id = publish.topic_id
     WHERE 1 = 1
     <if test="producerCode != null and producerCode !=''">
       AND producer.producer_code LIKE concat(#{producerCode}, '%')
@@ -117,6 +117,6 @@
     <include refid="Base_Column_List">
       <property name="alias" value="producer"/>
     </include>
-    from pc_tpc_mq_producer producer where producer.producer_code = #{pid}
+    from tpc_mq_producer producer where producer.producer_code = #{pid}
   </select>
 </mapper>

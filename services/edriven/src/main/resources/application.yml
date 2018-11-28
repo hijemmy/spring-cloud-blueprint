@@ -107,7 +107,7 @@ spring:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
 mybatis:
   type-aliases-package: com.jemmy.services.edriven.model.domain
-  mapper-locations: classpath*:mybatis_mappers/**/*Mapper.xml
+  mapper-locations: classpath:mybatis_mappers/*.xml,classpath*:sdk/mybatis_mappers/*.xml
   configuration:
     default-fetch-size: 10
     lazy-loading-enabled: true

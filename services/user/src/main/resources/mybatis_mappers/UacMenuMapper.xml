@@ -170,7 +170,7 @@
         SELECT DISTINCT
         m.url as url
         FROM
-        pc_uac_role r,  pc_uac_role_menu rm, pc_uac_menu m, pc_uac_user u , pc_uac_role_user ur
+        uac_role r,  uac_role_menu rm, uac_menu m, uac_user u , uac_role_user ur
         WHERE
         1=1
         and	r.id = rm.role_id
@@ -189,7 +189,7 @@
         m.id as id,
         m.icon as icon
         FROM
-        pc_uac_role r,  pc_uac_role_menu rm, pc_uac_menu m, pc_uac_user u , pc_uac_role_user ur
+        uac_role r,  uac_role_menu rm, uac_menu m, uac_user u , uac_role_user ur
         WHERE
         1=1
         and	r.id = rm.role_id
@@ -204,7 +204,7 @@
         SELECT
             <include refid="Base_Column_List" />
         From
-            pc_uac_menu m
+            uac_menu m
         WHERE
             1 =1 <include refid="Base_Where_Condition" />
         <if test="orderBy != null and orderBy != ''">
@@ -212,7 +212,7 @@
         </if>
     </select>
     <update id="updateMenu" parameterType="uacMenu">
-        update pc_uac_menu
+        update uac_menu
           <include refid="Base_Set_Condition"/>
         where 1 =1
           <include refid="Base_Where_Condition"/>
@@ -221,9 +221,9 @@
         SELECT
             count(1)
         FROM
-          pc_uac_menu mp
+          uac_menu mp
         INNER JOIN
-            pc_uac_menu mc ON mp.id = mc.pid
+            uac_menu mc ON mp.id = mc.pid
         where
              mp.id=#{pid,jdbcType=BIGINT}
     </select>
@@ -231,22 +231,22 @@
         SELECT
             <include refid="Base_Column_List"/>
         FROM
-            pc_uac_menu m
+            uac_menu m
         WHERE
             m.url = #{url, jdbcType=VARCHAR}
     </select>
     <select id="listMenuListByRoleId" resultType="com.jemmy.services.user.model.domain.UacMenu">
         SELECT
           <include refid="Base_Column_List"/>
-        FROM pc_uac_menu m LEFT JOIN pc_uac_role_menu rm on m.id = rm.menu_id
-        LEFT JOIN pc_uac_role r on r.id = rm.role_id
+        FROM uac_menu m LEFT JOIN uac_role_menu rm on m.id = rm.menu_id
+        LEFT JOIN uac_role r on r.id = rm.role_id
         where r.id = #{roleId, jdbcType=BIGINT}
     </select>
   <select id="listMenu" resultType="com.jemmy.services.user.model.domain.UacMenu">
     SELECT
     <include refid="Base_Column_List" />
     From
-    pc_uac_menu m
+    uac_menu m
     WHERE m.id IN
     <foreach collection="menuIdList" item="item" index="index" open="(" close=")" separator=",">
       #{item}

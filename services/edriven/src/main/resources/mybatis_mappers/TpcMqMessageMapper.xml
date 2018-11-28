@@ -49,17 +49,17 @@
     ${alias}.message_body
   </sql>
   <update id="addTaskExeCountById">
-    UPDATE pc_tpc_mq_message
+    UPDATE tpc_mq_message
     SET resend_times = resend_times + 1, update_time = now()
     WHERE id = #{messageId}
   </update>
   <update id="updateAlreadyDeadByMessageId">
-    UPDATE pc_tpc_mq_message
+    UPDATE tpc_mq_message
     SET dead = 1, update_time = now(), task_status = 4
     WHERE id = #{messageId}
   </update>
   <update id="updateMqMessageTaskStatus">
-    UPDATE pc_tpc_mq_message
+    UPDATE tpc_mq_message
     SET task_status = #{taskStatus}, update_time = now()
     WHERE id = #{id}
     and task_status IN
@@ -69,11 +69,11 @@
   </update>
 
   <delete id="deleteMessageByMessageKey">
-    DELETE FROM pc_tpc_mq_message
+    DELETE FROM tpc_mq_message
     WHERE message_key = #{messageKey,jdbcType=VARCHAR}
   </delete>
   <delete id="batchDeleteMessage">
-    delete from pc_tpc_mq_message
+    delete from tpc_mq_message
     where message_key IN
     <foreach collection="messageKeyList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
@@ -88,13 +88,13 @@
     <include refid="Blob_Column_List">
       <property name="alias" value="message"/>
     </include>
-    FROM pc_tpc_mq_message message
+    FROM tpc_mq_message message
     WHERE message.message_key = #{messageKey,jdbcType=VARCHAR}
   </select>
   <select id="queryWaitingConfirmMessageKeyList" resultType="java.lang.String">
     SELECT message_key
     FROM
-      pc_tpc_mq_message
+      tpc_mq_message
     WHERE
       mod(id, #{shardingTotalCount}) = #{shardingItem}
       AND task_status = #{taskStatus}
@@ -115,7 +115,7 @@
       <property name="alias" value="message"/>
     </include>
     FROM
-    pc_tpc_mq_message message
+    tpc_mq_message message
     WHERE
     mod(message.id, #{shardingTotalCount}) = #{shardingItem}
     AND message.task_status = #{taskStatus}
@@ -135,7 +135,7 @@
       <property name="alias" value="message"/>
     </include>
     FROM
-    pc_tpc_mq_message message
+    tpc_mq_message message
     WHERE 1 = 1
     <if test="messageKey != null and messageKey !=''">
       AND message.message_key LIKE concat('%', #{messageKey,jdbcType=VARCHAR}, '%')
@@ -182,8 +182,8 @@
     <include refid="Blob_Column_List">
       <property name="alias" value="message"/>
     </include>
-    from pc_tpc_mq_message message
-    LEFT JOIN pc_tpc_mq_confirm confirm on message.id = confirm.message_id
+    from tpc_mq_message message
+    LEFT JOIN tpc_mq_confirm confirm on message.id = confirm.message_id
     WHERE message.id IN
     <foreach collection="messageIdList" item="item" index="index" open="(" separator="," close=")">
       #{item}

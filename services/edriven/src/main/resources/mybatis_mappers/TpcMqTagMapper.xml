@@ -38,8 +38,8 @@
     topic.topic_code,
     topic.topic_name
     from
-    pc_tpc_mq_tag tag
-    LEFT JOIN pc_tpc_mq_topic topic ON tag.topic_id = topic.id
+    tpc_mq_tag tag
+    LEFT JOIN tpc_mq_topic topic ON tag.topic_id = topic.id
     WHERE 1 = 1
     <if test="tagCode != null and tagCode !=''">
       AND tag.tag_code LIKE concat(#{tagCode}, '%')

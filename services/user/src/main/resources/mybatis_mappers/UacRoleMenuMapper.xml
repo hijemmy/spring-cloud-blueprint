@@ -12,13 +12,13 @@
     <sql id="Base_Set_Condition">
     </sql>
     <insert id="addRoleMenuList" parameterType="java.util.List" >
-        INSERT INTO pc_uac_role_menu(role_id,menu_id) VALUES
+        INSERT INTO uac_role_menu(role_id,menu_id) VALUES
         <foreach collection="list" item = "rolemenu"  separator=",">
             (#{rolemenu.roleId},#{rolemenu.menuId})
         </foreach>
     </insert>
   <delete id="deleteByRoleIdList">
-    delete from pc_uac_role_menu
+    delete from uac_role_menu
     where role_id in
     <foreach collection="roleIdList" item="item" index="index" open="(" separator="," close=")">
       #{item}
@@ -30,18 +30,18 @@
             tum.menu_name AS menuName,
             1             AS childNum
         FROM
-            pc_uac_role_menu turm
-            INNER JOIN pc_uac_menu tum ON tum.id = turm.menu_id
+            uac_role_menu turm
+            INNER JOIN uac_menu tum ON tum.id = turm.menu_id
         WHERE
             turm.role_id = #{roleId}
             AND tum.LEVEL = '1'
             AND tum.id NOT IN (
                 SELECT tum2.pid
                 FROM
-                    pc_uac_role_menu turm
-                    INNER JOIN pc_uac_menu tum ON tum.id = turm.menu_id
-                    LEFT JOIN pc_uac_menu tum2 ON tum2.pid = tum.id
-                    RIGHT JOIN pc_uac_role_menu turm2 ON turm2.menu_id = tum2.id
+                    uac_role_menu turm
+                    INNER JOIN uac_menu tum ON tum.id = turm.menu_id
+                    LEFT JOIN uac_menu tum2 ON tum2.pid = tum.id
+                    RIGHT JOIN uac_role_menu turm2 ON turm2.menu_id = tum2.id
                                                           AND turm2.role_id = #{roleId}
                 WHERE
                     1 = 1

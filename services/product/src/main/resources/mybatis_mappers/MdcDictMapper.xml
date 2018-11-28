@@ -46,6 +46,6 @@
       <property name="alias" value="dict"/>
     </include>
     from
-    pc_mdc_dict dict
+   mdc_dict dict
   </select>
 </mapper>

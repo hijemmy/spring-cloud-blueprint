@@ -12,6 +12,9 @@ logs/
 *.iml
 .idea/
 
+# config文件
+configrepository/
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

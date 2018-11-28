@@ -20,7 +20,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
   </resultMap>
   <delete id="deleteByIdList">
-    delete from pc_opt_attachment
+    delete from opt_attachment
     where id in
     <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">
       #{item}
@@ -37,7 +37,7 @@
     format,
     description
     FROM
-    pc_opt_attachment
+   opt_attachment
     <where>
       <if test=" id != null">
         id = #{id}
@@ -50,7 +50,7 @@
   <select id="queryAttachmentByRefNo" resultType="java.lang.Long">
     SELECT id
     FROM
-      pc_opt_attachment
+     opt_attachment
     WHERE
       ref_no = #{refNo}
   </select>
@@ -61,7 +61,7 @@
       path,
       name
     FROM
-      pc_opt_attachment
+     opt_attachment
     WHERE
       ref_no = ''
       AND DATE_SUB(CURDATE(), INTERVAL 1 DAY) &gt; date(created_time)

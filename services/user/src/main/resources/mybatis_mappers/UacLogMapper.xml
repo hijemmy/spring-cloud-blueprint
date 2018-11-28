@@ -237,7 +237,7 @@
         SELECT
             <include refid="Base_Column_List"/>
         FROM
-            pc_uac_log log
+            uac_log log
         WHERE
             log.creator_id = #{userId}
         ORDER BY log.created_time desc
@@ -246,10 +246,10 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-        pc_uac_log log
+        uac_log log
         WHERE 1 = 1
         <if test="menuId != null and menuId != ''">
-            AND action_id in (SELECT id from pc_uac_action action where action.menu_id = #{menuId})
+            AND action_id in (SELECT id from uac_action action where action.menu_id = #{menuId})
         </if>
         <if test="logType != null and logType != ''">
             AND log_type LIKE concat(#{logType}, '%')

@@ -13,7 +13,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
   </resultMap>
   <insert id="batchCreateMqConfirm">
-    insert into pc_tpc_mq_confirm
+    insert into tpc_mq_confirm
     (
     id,
     message_id,
@@ -30,23 +30,23 @@
     </foreach>
   </insert>
   <update id="confirmReceiveMessage">
-    UPDATE pc_tpc_mq_confirm
+    UPDATE tpc_mq_confirm
     SET status = 20, consume_count = consume_count + 1
     WHERE id = #{cid} AND status = 10
   </update>
   <update id="confirmConsumedMessage">
-    UPDATE pc_tpc_mq_confirm
+    UPDATE tpc_mq_confirm
     SET status = 30
     WHERE id = #{cid} AND status in (10, 20)
   </update>
   <select id="getIdMqConfirm" resultType="java.lang.Long">
     SELECT id
-    FROM pc_tpc_mq_confirm
+    FROM tpc_mq_confirm
     WHERE consumer_code = #{cid} AND message_key = #{messageKey}
   </select>
   <select id="selectUnConsumedCount" resultType="java.lang.Integer">
     SELECT count(1)
-    FROM pc_tpc_mq_confirm
+    FROM tpc_mq_confirm
     WHERE status in (10, 20) AND message_key = #{messageKey}
   </select>
 </mapper>

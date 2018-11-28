@@ -45,14 +45,14 @@
     <select id="selectMdcAddress" resultMap="BaseResultMap" parameterType="com.jemmy.services.product.model.domain.MdcAddress">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM pc_mdc_address
+        FROM mdc_address
         <include refid="Base_Where_Condition"/>
     </select>
     <select id="selectAddressByPid" resultType="com.jemmy.services.product.model.domain.MdcAddress">
         SELECT
           <include refid="Base_Column_List"/>
         FROM
-          pc_mdc_address
+         mdc_address
         WHERE
           parent_id = #{parentId}
     </select>

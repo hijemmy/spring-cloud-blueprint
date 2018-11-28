@@ -214,7 +214,7 @@
         </if>
     </sql>
     <update id="updateUacUser" parameterType="uacUser">
-        update pc_uac_user
+        update uac_user
         <include refid="Base_Set_Condition"/>
         where  id = #{id,jdbcType=BIGINT}
     </update>
@@ -223,7 +223,7 @@
         SELECT
           <include refid="Base_Column_List"/>
         from
-          pc_uac_user u
+          uac_user u
         WHERE
           u.login_name=#{loginName,jdbcType=VARCHAR}
     </select>
@@ -232,7 +232,7 @@
         SELECT
           <include refid="Base_Column_List"/>
         from
-          pc_uac_user u
+          uac_user u
         WHERE
           u.mobile_no=#{mobileNo,jdbcType=VARCHAR}
     </select>
@@ -241,7 +241,7 @@
         SELECT
           <include refid="Base_Column_List"/>
         FROM
-            pc_uac_user u
+            uac_user u
         WHERE
           u.login_name = #{loginName,jdbcType=VARCHAR} AND u.login_pwd = #{loginPwd,jdbcType=VARCHAR}
     </select>
@@ -249,9 +249,9 @@
         SELECT
         <include refid="Base_Column_List"/>, g.id as groupId, g.group_name as groupName
         FROM
-          pc_uac_user u
-        LEFT JOIN pc_uac_group_user gu ON gu.user_id = u.id
-        LEFT JOIN pc_uac_group g ON g.id = gu.group_id
+          uac_user u
+        LEFT JOIN uac_group_user gu ON gu.user_id = u.id
+        LEFT JOIN uac_group g ON g.id = gu.group_id
         WHERE 1 = 1
         <include refid="Base_Where_Condition">
             <property name="alias" value="u"></property>
@@ -266,9 +266,9 @@
         g.id as groupId,
         g.group_name as groupName
         FROM
-            pc_uac_user u
-            LEFT JOIN pc_uac_group_user gu on u.id = gu.user_id
-            LEFT JOIN pc_uac_group g on gu.group_id = g.id
+            uac_user u
+            LEFT JOIN uac_group_user gu on u.id = gu.user_id
+            LEFT JOIN uac_group g on gu.group_id = g.id
         WHERE u.id = #{userId}
     </select>
     <select id="selectAllNeedBindRole" parameterType="long" resultType="com.jemmy.services.user.model.dto.user.BindRoleDto">
@@ -277,7 +277,7 @@
             r.role_code as roleCode,
             r.role_name as roleName,
             (r.id = #{superManagerRoleId}) AS disabled
-        FROM pc_uac_role r
+        FROM uac_role r
     </select>
   <select id="findUserInfoByLoginName" resultType="com.jemmy.services.user.model.domain.UacUser">
     SELECT
@@ -285,9 +285,9 @@
     g.id as groupId,
     g.group_name as groupName
     FROM
-    pc_uac_user u
-    LEFT JOIN pc_uac_group_user gu on u.id = gu.user_id
-    LEFT JOIN pc_uac_group g on gu.group_id = g.id
+    uac_user u
+    LEFT JOIN uac_group_user gu on u.id = gu.user_id
+    LEFT JOIN uac_group g on gu.group_id = g.id
     WHERE u.login_name = #{loginName}
   </select>
 </mapper>

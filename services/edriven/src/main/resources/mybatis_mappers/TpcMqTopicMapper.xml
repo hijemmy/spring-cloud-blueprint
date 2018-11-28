@@ -47,9 +47,9 @@
                 <property name="alias" value="tag"></property>
             </include>
         FROM
-          pc_tpc_mq_topic topic
+          tpc_mq_topic topic
         LEFT JOIN
-          pc_tpc_mq_tag tag ON topic.id = tag.topic_id
+          tpc_mq_tag tag ON topic.id = tag.topic_id
         WHERE 1 = 1
         <if test="topicCode != null and topicCode !=''" >
             AND topic.topic_code LIKE concat(#{topicCode}, '%')

@@ -5,6 +5,7 @@ spring:
         git:
           search-paths: /config/**
           uri: https://github.com/hijemmy/spring-cloud-blueprint
+          basedir: configrepository
         bootstrap: true
       profile: dev
       enabled: false

@@ -18,7 +18,6 @@ import javax.sql.DataSource;
 @SpringCloudApplication
 @EnableFeignClients(basePackages = {"com.jemmy.apis"})
 @EnableOAuth2Client
-@MapperScan(basePackages = {"com.jemmy.services.edriven.mapper","com.jemmy.apis.rmq.mapper"},markerInterface = RootMapper.class)
 @ComponentScan({"com.jemmy.common.zk","com.jemmy.common.core","com.jemmy.common.security.feign","com.jemmy.apis","com.jemmy.services.edriven"})
 public class EDriventApplication {
     public static void main(String[] args) {
