@@ -147,8 +147,7 @@ security:
     resource:
       filter-order: 3
       id: ${spring.application.name}
-      jwt:
-        key-value: jemmycloud
+
   basic:
     enabled: true
     realm: jemmyweb
