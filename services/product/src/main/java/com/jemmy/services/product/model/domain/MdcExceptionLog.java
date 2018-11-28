@@ -26,7 +26,7 @@ import java.util.Date;
  * @author paascloud.net @gmail.com
  */
 @Alias("mdcExceptionLog")
-@Table(name = "pc_mdc_exception_log")
+@Table(name = "mdc_exception_log")
 @Data
 @NoArgsConstructor
 public class MdcExceptionLog {

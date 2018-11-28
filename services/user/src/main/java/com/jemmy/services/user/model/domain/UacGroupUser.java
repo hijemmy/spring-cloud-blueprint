@@ -24,7 +24,7 @@ import java.io.Serializable;
  * @author paascloud.net@gmail.com
  */
 @Data
-@Table(name = "pc_uac_group_user")
+@Table(name = "uac_group_user")
 @Alias(value = "uacGroupUser")
 public class UacGroupUser implements Serializable {
 	private static final long serialVersionUID = 5167709959453148144L;

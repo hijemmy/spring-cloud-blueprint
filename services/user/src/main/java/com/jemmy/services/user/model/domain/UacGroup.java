@@ -17,7 +17,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_uac_group")
+@Table(name = "uac_group")
 @Alias(value = "uacGroup")
 public class UacGroup extends BaseEntity {
 	private static final long serialVersionUID = 1752542793067966068L;

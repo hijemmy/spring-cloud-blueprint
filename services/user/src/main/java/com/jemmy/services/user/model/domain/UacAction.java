@@ -29,7 +29,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_uac_action")
+@Table(name = "uac_action")
 @Alias(value = "uacAction")
 public class UacAction extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 6943147531573339665L;

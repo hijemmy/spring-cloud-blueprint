@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_tpc_mq_topic")
+@Table(name = "tpc_mq_topic")
 @Alias(value = "tpcMqTopic")
 public class TpcMqTopic extends BaseEntity {
 	private static final long serialVersionUID = 5642946024630652202L;

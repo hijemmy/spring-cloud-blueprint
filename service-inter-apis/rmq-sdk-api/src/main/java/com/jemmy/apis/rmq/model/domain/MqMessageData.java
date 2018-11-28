@@ -23,7 +23,7 @@ import java.util.Date;
  *
  * @author paascloud.net @gmail.com
  */
-@Table(name = "pc_mq_message_data")
+@Table(name = "mq_message_data")
 @Data
 @NoArgsConstructor
 public class MqMessageData {

@@ -25,7 +25,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_opt_attachment")
+@Table(name = "opt_attachment")
 public class OptAttachment extends BaseEntity {
 
 	private static final long serialVersionUID = -2419047791219240612L;

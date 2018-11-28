@@ -27,7 +27,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_mdc_product")
+@Table(name = "mdc_product")
 @Alias(value = "mdcProduct")
 public class MdcProduct extends BaseEntity {
 

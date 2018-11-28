@@ -54,7 +54,6 @@ public class GlobalConstant {
 	/**
 	 * 微服务名称
 	 */
-	public static final String MICRO_SERVICE_NAME_ORDER="service-order";
 	public static final String MICRO_SERVICE_NAME_PRODUCT="service-product";
 	public static final String MICRO_SERVICE_NAME_OPC="service-opc";
 	public static final String MICRO_SERVICE_NAME_USER="service-user";

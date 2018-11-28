@@ -29,7 +29,7 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_uac_role")
+@Table(name = "uac_role")
 @Alias(value = "uacRole")
 public class UacRole extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = -6049575043793281879L;

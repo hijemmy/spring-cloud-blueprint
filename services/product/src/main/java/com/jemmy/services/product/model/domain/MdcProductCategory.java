@@ -27,7 +27,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_mdc_product_category")
+@Table(name = "mdc_product_category")
 @Alias(value = "mdcProductCategory")
 public class MdcProductCategory extends BaseEntity {
 

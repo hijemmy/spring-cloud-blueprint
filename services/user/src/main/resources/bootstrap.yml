@@ -10,7 +10,7 @@ spring:
       discovery:
         service-id: infras-config
         enabled: false
-      label: master
+      label: common-base
       fail-fast: true
       retry:
         max-attempts: 3

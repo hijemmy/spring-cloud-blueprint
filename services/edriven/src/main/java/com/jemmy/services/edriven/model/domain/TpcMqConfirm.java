@@ -25,7 +25,7 @@ import java.util.Date;
  */
 @Data
 @Alias("tpcMqConfirm")
-@Table(name = "pc_tpc_mq_confirm")
+@Table(name = "tpc_mq_confirm")
 @NoArgsConstructor
 public class TpcMqConfirm {
 	/**

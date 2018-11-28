@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_tpc_mq_consumer")
+@Table(name = "tpc_mq_consumer")
 @Alias(value = "tpcMqConsumer")
 public class TpcMqConsumer extends BaseEntity {
 

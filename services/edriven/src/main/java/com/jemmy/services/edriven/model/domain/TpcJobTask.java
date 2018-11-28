@@ -24,7 +24,7 @@ import java.util.Date;
  * @author paascloud.net @gmail.com
  */
 @Data
-@Table(name = "pc_tpc_job_task")
+@Table(name = "tpc_job_task")
 @Alias(value = "tpcJobTask")
 public class TpcJobTask implements Serializable {
 	private static final long serialVersionUID = -7833392442916077253L;

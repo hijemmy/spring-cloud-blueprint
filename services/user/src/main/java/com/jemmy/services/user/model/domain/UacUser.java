@@ -31,7 +31,7 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_uac_user")
+@Table(name = "uac_user")
 @Alias(value = "uacUser")
 public class UacUser extends BaseEntity {
 	private static final long serialVersionUID = 5465775492730080699L;

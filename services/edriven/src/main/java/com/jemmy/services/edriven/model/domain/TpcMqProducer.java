@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_tpc_mq_producer")
+@Table(name = "tpc_mq_producer")
 @Alias(value = "tpcMqProducer")
 public class TpcMqProducer extends BaseEntity {
 	private static final long serialVersionUID = -4064061704648362318L;

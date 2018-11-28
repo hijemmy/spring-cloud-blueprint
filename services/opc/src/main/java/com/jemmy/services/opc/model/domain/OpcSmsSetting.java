@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_opc_sms_setting")
+@Table(name = "opc_sms_setting")
 @Alias(value = "opcSmsSetting")
 public class OpcSmsSetting extends BaseEntity {
 

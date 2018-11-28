@@ -25,7 +25,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_mdc_address")
+@Table(name = "mdc_address")
 public class MdcAddress extends BaseEntity {
 	private static final long serialVersionUID = -499010884211394846L;
 

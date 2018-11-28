@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_uac_log")
+@Table(name = "uac_log")
 @ApiModel("操作日志")
 @Alias(value = "uacLog")
 public class UacLog extends BaseEntity {

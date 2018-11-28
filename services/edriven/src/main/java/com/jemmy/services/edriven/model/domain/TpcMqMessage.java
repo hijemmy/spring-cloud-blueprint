@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Data
 @Alias(value = "tpcMqMessage")
-@Table(name = "pc_tpc_mq_message")
+@Table(name = "tpc_mq_message")
 public class TpcMqMessage implements Serializable {
 	private static final long serialVersionUID = -5951754367474682967L;
 	/**

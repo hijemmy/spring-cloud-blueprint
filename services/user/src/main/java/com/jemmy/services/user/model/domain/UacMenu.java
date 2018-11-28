@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "pc_uac_menu")
+@Table(name = "uac_menu")
 @Alias(value = "uacMenu")
 public class UacMenu extends BaseEntity {
 	private static final long serialVersionUID = 454644589405700059L;
