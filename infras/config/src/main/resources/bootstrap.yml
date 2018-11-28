@@ -7,8 +7,7 @@ spring:
           uri: https://github.com/hijemmy/spring-cloud-blueprint
           basedir: configrepository
           defaultLabel: common-base
-        bootstrap: true
-      profile: dev
+      profile: git
       enabled: false
   application:
     name: infras-config
