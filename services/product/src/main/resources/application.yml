@@ -224,3 +224,5 @@ mapper:
   mappers: com.jemmy.common.core.mybatis.RootMapper
   not-empty: false
   identity: MYSQL
+liquibase:
+  change-log: classpath:/liquibase/index.xml

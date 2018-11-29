@@ -3,7 +3,6 @@ package com.jemmy.services.opc;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import com.jemmy.common.core.mybatis.RootMapper;
-import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
@@ -13,7 +12,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import tk.mybatis.spring.annotation.MapperScan;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
@@ -51,16 +49,5 @@ public class OpcApplication {
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
-    }
-
-    @Bean
-    public SpringLiquibase springLiquibase(DataSource dataSource) {
-
-        SpringLiquibase springLiquibase = new SpringLiquibase();
-
-        springLiquibase.setDataSource(dataSource);
-        springLiquibase.setChangeLog("classpath:/liquibase/index.xml");
-
-        return springLiquibase;
     }
 }

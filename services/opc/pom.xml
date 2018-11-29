@@ -9,6 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>开放平台及第三方调用</description>
+    <properties>
+        <jdbc.url>jdbc:mysql://localhost:3306/jemmycloud_opc?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</jdbc.url>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.liquibase</groupId>

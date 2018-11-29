@@ -12,6 +12,12 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>services</artifactId>
     <packaging>pom</packaging>
+    <properties>
+        <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+        <jdbc.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</jdbc.url>
+        <jdbc.username>root</jdbc.username>
+        <jdbc.password>123456</jdbc.password>
+    </properties>
     <modules>
         <module>user</module>
         <module>product</module>
@@ -245,6 +251,35 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <!--指定执行主文件 -->
+                    <changeLogFile>${basedir}/src/main/resources/liquibase/index.xml</changeLogFile>
+                    <diffChangeLogFile>${basedir}/src/main/resources/liquibase/change_log/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+                    <outputChangeLogFile>${basedir}/src/main/resources/liquibase/change_log/changelog_original.xml</outputChangeLogFile>
+                    <driver>${jdbc.driver}</driver>
+                    <url>${jdbc.url}</url>
+                    <username>${jdbc.username}</username>
+                    <password>${jdbc.password}</password>
+                    <dropFirst>false</dropFirst>
+                    <defaultSchemaName />
+                    <verbose>true</verbose>
+                    <logging>debug</logging>
+                    <!-- 是否需要弹出确认框 -->
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <!--输出文件的编码 -->
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                    <!--执行的时候是否显示详细的参数信息 -->
+                    <verbose>true</verbose>
+                    <!--是否每次都重新加载properties -->
+                    <propertyFileWillOverride>true</propertyFileWillOverride>
+                    <changeSetAuthor>Jemmy</changeSetAuthor>
+                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>

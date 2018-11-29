@@ -239,3 +239,5 @@ pagehelper:
   helper-dialect: mysql
   reasonable: false
   support-methods-arguments: false
+liquibase:
+  change-log: classpath:/liquibase/index.xml

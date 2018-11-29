@@ -8,7 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <properties>
+        <jdbc.url>jdbc:mysql://localhost:3306/jemmycloud_tpc?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</jdbc.url>
+    </properties>
     <artifactId>edriven</artifactId>
     <dependencies>
         <dependency>

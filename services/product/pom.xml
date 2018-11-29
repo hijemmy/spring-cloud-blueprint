@@ -18,6 +18,7 @@
         <mybatis.generator.overwrite>true</mybatis.generator.overwrite>
         <mybatis.generator.verbose>true</mybatis.generator.verbose>
         <mybatis.generator.includeCompileDependencies>true</mybatis.generator.includeCompileDependencies>
+        <jdbc.url>jdbc:mysql://localhost:3306/jemmycloud_mdc?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</jdbc.url>
     </properties>
     <dependencies>
         <dependency>
