@@ -111,6 +111,7 @@
         <logger name="com.jemmy" level="DEBUG"/>
 
     </springProfile>
+    <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="error"/>
     <logger name="RocketmqClient" level="warn"/>
     <logger name="com.jemmy.services.user.mapper" level="DEBUG">
         <appender-ref ref="MyBatisStatistics" />
