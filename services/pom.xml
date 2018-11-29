@@ -18,6 +18,7 @@
         <jdbc.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password>123456</jdbc.password>
+        <liquibase.version>3.6.2</liquibase.version>
     </properties>
     <modules>
         <module>user</module>
@@ -150,7 +151,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.5.3</version>
+            <version>${liquibase.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jemmyweb</groupId>
@@ -257,7 +258,7 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.5.3</version>
+                <version>${liquibase.version}</version>
                 <configuration>
                     <!--指定执行主文件 -->
                     <changeLogFile>${basedir}/src/main/resources/liquibase/index.xml</changeLogFile>
