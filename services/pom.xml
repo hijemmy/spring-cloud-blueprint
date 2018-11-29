@@ -13,6 +13,7 @@
     <artifactId>services</artifactId>
     <packaging>pom</packaging>
     <properties>
+        <maven.build.timestamp.format>yyyy-MM-dd-HHmmss</maven.build.timestamp.format>
         <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
         <jdbc.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</jdbc.url>
         <jdbc.username>root</jdbc.username>
