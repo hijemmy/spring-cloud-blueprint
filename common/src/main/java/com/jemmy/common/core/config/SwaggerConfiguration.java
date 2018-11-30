@@ -11,13 +11,22 @@
 
 package com.jemmy.common.core.config;
 
+import com.fasterxml.classmate.TypeResolver;
 import com.jemmy.common.config.properties.ApplicationProperties;
 import com.jemmy.common.config.properties.SwaggerProperties;
+import com.jemmy.common.util.wrapper.MvcResult401;
+import com.jemmy.common.util.wrapper.MvcResult500;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
@@ -38,6 +47,8 @@ import java.util.List;
 public class SwaggerConfiguration {
 	@Resource
 	private ApplicationProperties paascloudProperties;
+	@Autowired
+	private TypeResolver typeResolver;
 
 	/**
 	 * Reservation api docket.
@@ -63,6 +74,12 @@ public class SwaggerConfiguration {
 				.securitySchemes(securitySchemes())
 				.securityContexts(securityContexts())
 //				.globalOperationParameters(pars)
+				.useDefaultResponseMessages(false)
+				.globalResponseMessage(RequestMethod.GET,globalResponse())
+				.globalResponseMessage(RequestMethod.POST,globalResponse())
+				.globalResponseMessage(RequestMethod.PUT,globalResponse())
+				.globalResponseMessage(RequestMethod.DELETE,globalResponse())
+				.additionalModels(typeResolver.resolve(MvcResult401.class),typeResolver.resolve(MvcResult500.class))
 				.enable(true);
 	}
 
@@ -79,14 +96,14 @@ public class SwaggerConfiguration {
 	}
 
 	private List<ApiKey> securitySchemes() {
-		return new ArrayList(Collections.singleton(new ApiKey("Authorization", "Authorization", "header")));
+		return new ArrayList(Collections.singleton(new ApiKey(HttpHeaders.AUTHORIZATION, HttpHeaders.AUTHORIZATION, "header")));
 	}
 
 	private List<SecurityContext> securityContexts() {
 		return new ArrayList(
 				Collections.singleton(SecurityContext.builder()
 						.securityReferences(defaultAuth())
-						.forPaths(PathSelectors.regex("^(?!auth).*$"))
+						.forPaths(PathSelectors.regex("^/(?!auth|open|oauth).*$"))
 						.build())
 		);
 	}
@@ -95,7 +112,13 @@ public class SwaggerConfiguration {
 		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
 		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
 		authorizationScopes[0] = authorizationScope;
-		return new ArrayList(Collections.singleton(new SecurityReference("Authorization", authorizationScopes)));
+		return new ArrayList(Collections.singleton(new SecurityReference(HttpHeaders.AUTHORIZATION, authorizationScopes)));
 	}
 
+	private List<ResponseMessage> globalResponse(){
+		List<ResponseMessage> responseMessages=new ArrayList<>();
+		responseMessages.add(new ResponseMessageBuilder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()).responseModel(new ModelRef("MvcResult500")).build());
+		responseMessages.add(new ResponseMessageBuilder().code(HttpStatus.UNAUTHORIZED.value()).message(HttpStatus.UNAUTHORIZED.getReasonPhrase()).responseModel(new ModelRef("MvcResult401")).build());
+		return responseMessages;
+	}
 }

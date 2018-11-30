@@ -52,8 +52,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 	private static final String OPTIONS = "OPTIONS";
 	private static final String AUTH_PATH1 = "/auth";
 	private static final String AUTH_PATH2 = "/oauth";
-	private static final String AUTH_PATH3 = "/error";
-	private static final String AUTH_PATH4 = "/api";
+	private static final String OPEN_PATH3 = "/error";
+	private static final String OPEN_PATH4 = "/api";
+	private static final String OPEN_PATH5 = "/open";
 
 	/**
 	 * After completion.
@@ -98,7 +99,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		String uri = request.getRequestURI();
 		log.info("<== preHandle - 权限拦截器.  url={}", uri);
-		if (uri.contains(AUTH_PATH1) || uri.contains(AUTH_PATH2) || uri.contains(AUTH_PATH3) || uri.contains(AUTH_PATH4)) {
+		if (uri.startsWith(AUTH_PATH1) || uri.startsWith(AUTH_PATH2) || uri.startsWith(OPEN_PATH3) || uri.startsWith(OPEN_PATH4)|| uri.startsWith(OPEN_PATH5)) {
 			log.info("<== preHandle - 配置URL不走认证.  url={}", uri);
 			return true;
 		}

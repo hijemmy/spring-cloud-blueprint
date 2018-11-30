@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +49,7 @@ public class OAuthTokenPreFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         RequestContext context=RequestContext.getCurrentContext();
         HttpServletRequest request=context.getRequest();
-        String authHeader="Authorization";
+        String authHeader=HttpHeaders.AUTHORIZATION;
         String basicHeaderValue="Basic ";
         String header = request.getHeader(authHeader);
         if (header == null || !header.startsWith(basicHeaderValue)) {
