@@ -102,9 +102,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 			log.info("<== preHandle - 配置URL不走认证.  url={}", uri);
 			return true;
 		}
-		log.info("<== preHandle - 调试模式不走认证.  OPTIONS={}", request.getMethod().toUpperCase());
 
 		if (OPTIONS.equalsIgnoreCase(request.getMethod())) {
+			log.info("<== preHandle - 调试模式不走认证.  OPTIONS={}", request.getMethod().toUpperCase());
 			log.info("<== preHandle - 调试模式不走认证.  url={}", uri);
 			return true;
 		}

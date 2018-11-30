@@ -63,10 +63,10 @@ public class TpcMqMessageDto implements Serializable {
 	/**
 	 * 延时消息的延时级别
 	 */
-	private int delayLevel;
+	private Integer delayLevel;
 
 	/**
 	 * 顺序类型, 0有序 1无序
 	 */
-	private int orderType;
+	private Integer orderType;
 }
