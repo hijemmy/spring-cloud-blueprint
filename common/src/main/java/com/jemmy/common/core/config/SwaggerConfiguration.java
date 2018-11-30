@@ -19,8 +19,10 @@ import com.jemmy.common.util.wrapper.MvcResult500;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -56,7 +58,8 @@ public class SwaggerConfiguration {
 	 * @return the docket
 	 */
 	@Bean
-	public Docket createRestApi() {
+	@Order(1)
+	public Docket defaultDocket() {
 		//每次都需手动输入header信息
 /*		ParameterBuilder pb = new ParameterBuilder();
 		List<Parameter> pars = new ArrayList();
@@ -66,9 +69,10 @@ public class SwaggerConfiguration {
 		pars.add(pb.build());    //根据每个方法名也知道当前方法在设置什么参数*/
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo())
+				.groupName("前端调用接口")
 				.select()
 					.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-					.paths(PathSelectors.any())
+					.paths(PathSelectors.regex("^/(?!api).*$"))
 					.build()
 				//配置鉴权信息
 				.securitySchemes(securitySchemes())
@@ -80,6 +84,38 @@ public class SwaggerConfiguration {
 				.globalResponseMessage(RequestMethod.PUT,globalResponse())
 				.globalResponseMessage(RequestMethod.DELETE,globalResponse())
 				.additionalModels(typeResolver.resolve(MvcResult401.class),typeResolver.resolve(MvcResult500.class))
+                .produces(Collections.singleton(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.enable(true);
+	}
+
+	@Bean
+	@Order(2)
+	public Docket interApiDocket() {
+		//每次都需手动输入header信息
+/*		ParameterBuilder pb = new ParameterBuilder();
+		List<Parameter> pars = new ArrayList();
+		pb.name("Authorization").description("user access_token")
+				.modelRef(new ModelRef("string")).parameterType("header")
+				.required(true).build(); //header中的ticket参数非必填，传空也可以
+		pars.add(pb.build());    //根据每个方法名也知道当前方法在设置什么参数*/
+		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("微服务间调用接口")
+				.apiInfo(apiInfo())
+				.select()
+				.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+				.paths(PathSelectors.ant("/api/**"))
+				.build()
+				//配置鉴权信息
+				.securitySchemes(securitySchemes())
+				.securityContexts(securityContexts())
+//				.globalOperationParameters(pars)
+				.useDefaultResponseMessages(false)
+				.globalResponseMessage(RequestMethod.GET,globalResponse())
+				.globalResponseMessage(RequestMethod.POST,globalResponse())
+				.globalResponseMessage(RequestMethod.PUT,globalResponse())
+				.globalResponseMessage(RequestMethod.DELETE,globalResponse())
+				.additionalModels(typeResolver.resolve(MvcResult401.class),typeResolver.resolve(MvcResult500.class))
+				.produces(Collections.singleton(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.enable(true);
 	}
 

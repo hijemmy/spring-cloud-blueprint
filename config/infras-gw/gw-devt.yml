@@ -102,7 +102,7 @@ jemmycloud:
   enableSqlLogInterceptor: false
 # swagger butler配置
 swagger.butler:
-  api-docs-path: v2/api-docs
+  api-docs-path: v2/api-docs?group=前端调用接口
   swagger-version: 1.0
   auto-generate-from-zuul-routes: true
 # 指定要生成的范围
