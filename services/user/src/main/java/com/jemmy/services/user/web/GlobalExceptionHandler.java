@@ -14,15 +14,12 @@ package com.jemmy.services.user.web;
 
 import com.jemmy.apis.product.model.dto.GlobalExceptionLogDto;
 import com.jemmy.apis.product.service.MdcExceptionLogFeignApi;
-import com.jemmy.common.base.enums.ErrorCodeEnum;
-import com.jemmy.common.base.exception.BusinessException;
 import com.jemmy.common.util.wrapper.MvcResult;
 import com.jemmy.common.util.wrapper.MvcResultBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -46,52 +43,6 @@ public class GlobalExceptionHandler {
 	String applicationName;
 	@Resource
 	private MdcExceptionLogFeignApi mdcExceptionLogFeignApi;
-
-	/**
-	 * 参数非法异常.
-	 *
-	 * @param e the e
-	 *
-	 * @return the wrapper
-	 */
-	@ExceptionHandler(IllegalArgumentException.class)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public MvcResult illegalArgumentException(IllegalArgumentException e) {
-		log.error("参数非法异常={}", e.getMessage(), e);
-		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990100.code(), e.getMessage());
-	}
-
-	/**
-	 * 业务异常.
-	 *
-	 * @param e the e
-	 *
-	 * @return the wrapper
-	 */
-	@ExceptionHandler(BusinessException.class)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public MvcResult businessException(BusinessException e) {
-		log.error("业务异常={}", e.getMessage(), e);
-		return MvcResultBuilder.wrap(e.getCode() == 0 ? MvcResult.ERROR_CODE : e.getCode(), e.getMessage());
-	}
-
-	/**
-	 * 无权限访问.
-	 *
-	 * @param e the e
-	 *
-	 * @return the wrapper
-	 */
-	@ExceptionHandler(AccessDeniedException.class)
-	@ResponseStatus(HttpStatus.UNAUTHORIZED)
-	@ResponseBody
-	public MvcResult unAuthorizedException(AccessDeniedException e) {
-		log.error("业务异常={}", e.getMessage(), e);
-		return MvcResultBuilder.wrap(ErrorCodeEnum.GL99990401.code(), ErrorCodeEnum.GL99990401.msg());
-	}
-
 
 	/**
 	 * 全局异常.

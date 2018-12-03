@@ -37,6 +37,7 @@ public enum ErrorCodeEnum {
 	 * Gl 000404 error code enum.
 	 */
 	GL9999404(9999404, "找不到指定资源"),
+	GL99994045(9999405, "不支持的请求方法"),
 	/**
 	 * Gl 99990001 error code enum.
 	 */
