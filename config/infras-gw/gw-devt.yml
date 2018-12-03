@@ -109,3 +109,25 @@ swagger.butler:
 #  generate-routes: mdc-route,opc-route,tpc-route,uac-route
 # 忽略某些路由生成
   ignore-routes: infras-gw,infras-config,infras-center,infras-monitor,infras-zipkin
+  #swagger资源配置
+  resources:
+    uac-route:
+      name: 用户服务-前端调用接口
+    service-user:
+      name: 用户服务-服务间调用接口
+      api-docs-path: v2/api-docs?group=微服务间调用接口
+    mdc-route:
+      name: 产品服务-前端调用接口
+    service-product:
+      name: 产品服务-服务间调用接口
+      api-docs-path: v2/api-docs?group=微服务间调用接口
+    opc-route:
+          name: 开放平台-前端调用接口
+    service-opc:
+      name: 开放平台-服务间调用接口
+      api-docs-path: v2/api-docs?group=微服务间调用接口
+    tpc-route:
+      name: 可靠消息服务-前端调用接口
+    service-edriven:
+      name: 可靠消息服务-服务间调用接口
+      api-docs-path: v2/api-docs?group=微服务间调用接口
