@@ -111,6 +111,7 @@
             <appender-ref ref="console" />
             <appender-ref ref="flatfile" />
         </root>
+        <logger name="com.jemmy" level="DEBUG"/>
     </springProfile>
     <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="error"/>
 

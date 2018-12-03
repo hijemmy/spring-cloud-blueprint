@@ -90,13 +90,13 @@ public class GlobalExceptionLogDto {
 	 */
 	public GlobalExceptionLogDto getGlobalExceptionLogDto(Exception ex, String profile, String applicationName) {
 		String message = ex.getMessage();
-		if (StringUtils.isNotBlank(message) && message.length() > GlobalConstant.EXCEPTION_MESSAGE_MAX_LENGTH) {
-			this.exceptionMessage = StringUtils.substring(message, 0, GlobalConstant.EXCEPTION_MESSAGE_MAX_LENGTH) + "...";
+		if (StringUtils.isNotBlank(message) ) {
+			this.exceptionMessage = (message.length() > GlobalConstant.EXCEPTION_MESSAGE_MAX_LENGTH)?(StringUtils.substring(message, 0, GlobalConstant.EXCEPTION_MESSAGE_MAX_LENGTH) + "..."):message;
 		}
 		this.exceptionSimpleName = ex.getClass().getSimpleName();
 		String cause = ex.getCause() == null ? null : ex.getCause().toString();
-		if (StringUtils.isNotBlank(cause) && cause.length() > GlobalConstant.EXCEPTION_CAUSE_MAX_LENGTH) {
-			this.exceptionCause = StringUtils.substring(cause, 0, GlobalConstant.EXCEPTION_CAUSE_MAX_LENGTH) + "...";
+		if (StringUtils.isNotBlank(cause)) {
+			this.exceptionCause = (cause.length() > GlobalConstant.EXCEPTION_CAUSE_MAX_LENGTH)?(StringUtils.substring(cause, 0, GlobalConstant.EXCEPTION_CAUSE_MAX_LENGTH) + "..."):cause;
 		}
 		this.exceptionStack = Arrays.toString(ex.getStackTrace());
 
