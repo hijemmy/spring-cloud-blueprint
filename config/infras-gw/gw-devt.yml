@@ -52,18 +52,6 @@ zuul:
         OkToRetryOnAllOperations: false
         ConnectTimeout: 10000
         ReadTimeout: 10000
-    mall-route:
-      path: /mall/**
-      sensitiveHeaders:
-      service-id: paascloud-web-mall
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
     tpc-route:
       path: /tpc/**
       sensitiveHeaders:
