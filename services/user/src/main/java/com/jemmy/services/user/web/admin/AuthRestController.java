@@ -27,14 +27,18 @@ import com.jemmy.services.user.service.SmsService;
 import com.jemmy.services.user.service.UacLogService;
 import com.jemmy.services.user.service.UacUserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 /**
  * 不认证的URL请求.
@@ -183,8 +187,12 @@ public class AuthRestController extends BaseController {
 	 * @return the wrapper
 	 */
 	@PostMapping(value = "/register")
-	@ApiOperation(httpMethod = "POST", value = "注册用户")
-	public MvcResult registerUser(UserRegisterDto user) {
+	@ApiOperation(httpMethod = "POST", value
+			= "注册用户")
+	@ApiImplicitParams({@ApiImplicitParam(name = "deviceId",value = "设备id值. 如果无,则可使用uuid生成",required = true,paramType="header"),
+			@ApiImplicitParam(name = "imageCode",value = "图片验证码",required = true,paramType="query",dataType ="string" )
+	})
+	public MvcResult registerUser(@Valid @RequestBody UserRegisterDto user, BindingResult bindingResult) {
 		uacUserService.register(user);
 		return MvcResultBuilder.ok();
 	}

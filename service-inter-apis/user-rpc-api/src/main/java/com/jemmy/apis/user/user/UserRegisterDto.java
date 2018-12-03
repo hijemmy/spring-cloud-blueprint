@@ -30,7 +30,7 @@ public class UserRegisterDto implements Serializable {
 	/**
 	 * 用户名
 	 */
-	@ApiModelProperty(value = "登录名")
+	@ApiModelProperty(value = "登录名",required = true)
 	private String loginName;
 	/**
 	 * 手机号

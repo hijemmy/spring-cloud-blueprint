@@ -110,7 +110,7 @@ swagger.butler:
       name: 产品服务-服务间调用接口
       api-docs-path: v2/api-docs?group=微服务间调用接口
     opc-route:
-          name: 开放平台-前端调用接口
+      name: 开放平台-前端调用接口
     service-opc:
       name: 开放平台-服务间调用接口
       api-docs-path: v2/api-docs?group=微服务间调用接口

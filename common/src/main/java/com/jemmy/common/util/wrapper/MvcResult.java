@@ -12,6 +12,7 @@
 package com.jemmy.common.util.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -68,11 +69,13 @@ public class MvcResult<T> implements Serializable {
 	/**
 	 * 编号.
 	 */
+	@ApiModelProperty(example = "200")
 	private int code;
 
 	/**
 	 * 信息.
 	 */
+	@ApiModelProperty(example = SUCCESS_MESSAGE)
 	private String message;
 
 	/**
