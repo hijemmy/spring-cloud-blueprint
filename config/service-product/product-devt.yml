@@ -49,7 +49,7 @@ jemmycloud:
   enableSqlLogInterceptor: false
   dingTalk:
     webhookToken:
-      sendException: 7b0fcc73f3d2be1415c5d31e5b34100c689961454af15a61635749ba0d8*****
+      sendException: 8b72748be0e91ccb98635137ef05df384c22827e3541b35f4bba83175b4fd09c
       jobListener: 7b0fcc73f3d2be1415c5d31e5b34100c689961454af15a61635749ba0d8*****
   token:
     interceptor:
