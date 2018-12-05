@@ -89,6 +89,7 @@ jemmycloud:
         totalMaxSendCount: 3
     oauth2:
       tokenStore: jwt
+      jwtSigningKey: jemmycloud
       clients[0]:
         clientId: client-service-uac
         clientSecret: oauth2ClientSecret
