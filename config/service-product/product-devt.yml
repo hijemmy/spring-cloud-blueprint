@@ -25,7 +25,7 @@ mapper:
   mappers: com.paascloud.core.mybatis.MyMapper
   not-empty: false
   identity: MYSQL
-
+  wrapKeyword: '`{0}`'
 pagehelper:
   helperDialect: mysql
   reasonable: true

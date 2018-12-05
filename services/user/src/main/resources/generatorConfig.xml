@@ -6,7 +6,7 @@
 
 <generatorConfiguration>
    <!--数据源配置-->
-    <context id="jemmyweb" targetRuntime="MyBatis3">
+    <context id="jemmyweb" targetRuntime="MyBatis3Simple">
 
         <!--指定MBG处理Java文件时所使用的编码-->
         <property name="javaFileEncoding" value="utf-8"/>
@@ -38,7 +38,7 @@
 
         <!--对Model生成的配置-->
         <javaModelGenerator targetPackage="com.jemmy.services.user.model.domain" targetProject="src\main\java">
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
             <property name="rootClass" value="com.jemmy.common.core.mybatis.BaseEntity"/>
         </javaModelGenerator>
@@ -52,7 +52,7 @@
         <!--生成相应的Mapper类-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.jemmy.services.user.mapper" targetProject="src\main\java">
             <!--根据不同的db schema生成相应的package-->
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
             <!--在方法名中不包含Domain的名称-->
             <property name="methodNameCalculator" value="false"/>
             <!--为所有生成的Mapper指定一个父接口-->
@@ -62,13 +62,9 @@
 
         <!--配置要生成Model的Table,其为全集，在maven plugin中可以指定特定要生成的真正Table-->
         <!--普通Table配置-->
-        <table tableName="user" enableCountByExample="false"
-               escapeWildcards="true" enableDeleteByExample="false" enableSelectByExample="false" enableSelectByPrimaryKey="false"
-               enableUpdateByExample="false" enableUpdateByPrimaryKey="false" enableDeleteByPrimaryKey="false"
-        >
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-            <ignoreColumnsByRegex pattern="(?i)(create|update|delete)_time$"/>
+        <table tableName="user">
+            <property name="rootClass" value="com.jemmy.common.core.mybatis.BaseEntity"/>
+            <ignoreColumnsByRegex pattern="(?i)(created|updated|deleted)At$"/>
         </table>
     </context>
 </generatorConfiguration>

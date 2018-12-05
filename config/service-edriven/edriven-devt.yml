@@ -20,7 +20,7 @@ mapper:
   mappers: com.jemmy.common.core.mybatis.RootMapper
   not-empty: false
   identity: MYSQL
-
+  wrapKeyword: '`{0}`'
 pagehelper:
   helperDialect: mysql
   reasonable: true

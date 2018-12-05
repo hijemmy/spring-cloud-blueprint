@@ -6,7 +6,7 @@
 
 <generatorConfiguration>
    <!--数据源配置-->
-    <context id="jemmyweb" targetRuntime="MyBatis3">
+    <context id="jemmyweb" targetRuntime="MyBatis3Simple">
 
         <!--指定MBG处理Java文件时所使用的编码-->
         <property name="javaFileEncoding" value="utf-8"/>
@@ -19,8 +19,8 @@
         </plugin>
         <!--对生成的Model中的注释做配置-->
         <commentGenerator>
-            <property name="suppressAllComments" value="true"/>
-            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true"/>
             <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
         </commentGenerator>
 
@@ -46,13 +46,13 @@
         <!--对待生成mapper.xml的配置-->
         <sqlMapGenerator targetPackage="mybatis_mappers" targetProject="src\main\resources">
             <!--根据不同的db schema生成相应的package-->
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!--生成相应的Mapper类-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.jemmy.services.product.mapper" targetProject="src\main\java">
             <!--根据不同的db schema生成相应的package-->
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
             <!--在方法名中不包含Domain的名称-->
             <property name="methodNameCalculator" value="false"/>
             <property name="trimStrings" value="true"/>
@@ -61,13 +61,9 @@
 
         <!--配置要生成Model的Table,其为全集，在maven plugin中可以指定特定要生成的真正Table-->
         <!--普通Table配置-->
-        <table tableName="product" enableCountByExample="false"
-               escapeWildcards="true" enableDeleteByExample="false" enableSelectByExample="false" enableSelectByPrimaryKey="false"
-               enableUpdateByExample="false" enableUpdateByPrimaryKey="false" enableDeleteByPrimaryKey="false"
-        >
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-            <ignoreColumnsByRegex pattern="(?i)(create|update|delete)_time$"/>
+        <table tableName="product">
+            <property name="rootClass" value="com.jemmy.common.core.mybatis.BaseEntity1"/>
+            <ignoreColumnsByRegex pattern="(?i)(created|updated|deleted)At$"/>
         </table>
     </context>
 </generatorConfiguration>

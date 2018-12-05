@@ -15,7 +15,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jemmy.common.base.dto.LoginAuthDto;
 import lombok.Data;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.format.annotation.DateTimeFormat;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,6 +33,7 @@ public class BaseEntity implements Serializable {
 	private static final long serialVersionUID = 2393269568666085258L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ColumnType(jdbcType = JdbcType.BIGINT)
 	private Long id;
 
 	/**
