@@ -25,4 +25,7 @@ Web应用前端,为各web网站. 例如官网, 运营管理网站等
 
 准备工作:
 1. 针对各服务:建立数据库
-2. 针对Docker:创建app_net新网络
+2. 针对Docker:
+    创建app_net新网络
+    构建RocketMQ镜像
+
