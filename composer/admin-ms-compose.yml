@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+    monitor:
+      image: jemmyweb/infras-monitor:1.0-SNAPSHOT
+      ports:
+          - "6099:6099"
+          - "6091:6091"
+      healthcheck:
+         test: ["CMD", "curl", "-f", "http://monitor:6099/health"]
+         interval: 30s
+         timeout: 30s
+         retries: 3
+      hostname: monitor.infras.jemmyweb.com
+      external_links:
+         - center1
+         - config
+         - product
+         - opc
+         - edriven
+         - user
+         - gw
+         - "user:user.service.jemmyweb.com"
+         - 'rabbit:rabbit.mq.middle.jemmyweb.com'
+      environment:
+          TZ: Asia/Shanghai
+          JAVA_OPTS: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9930 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9930 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
+          PARAMS: '--spring.profiles.active=devt'
+      networks:
+        - app_net
+    zipkin:
+        image: jemmyweb/infras-zipkin:1.0-SNAPSHOT
+        ports:
+          - "6090:6090"
+        healthcheck:
+           test: ["CMD", "curl", "-f", "http://zipkin:6090/health"]
+           interval: 10s
+           timeout: 5s
+           retries: 3
+        hostname: zipkin.infras.jemmyweb.com
+        external_links:
+           - center1
+           - "user:user.service.jemmyweb.com"
+           - config
+           - 'redis:redis.db.middle.jemmyweb.com'
+           - 'mysql:mysql.db.middle.jemmyweb.com'
+           - 'rabbit:rabbit.mq.middle.jemmyweb.com'
+           - 'rocketmq:rocket.mq.middle.jemmyweb.com'
+           - 'zookeeper:zk.server.middle.jemmyweb.com'
+        environment:
+            TZ: Asia/Shanghai
+            JAVA_OPTS: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9950 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9950 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
+            PARAMS: '--spring.profiles.active=devt'
+        networks:
+          - app_net
+networks:
+  app_net:
+    external: true

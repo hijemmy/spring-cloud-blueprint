@@ -25,7 +25,7 @@ services:
       environment:
           TZ: Asia/Shanghai
           JAVA_OPTS: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9930 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9930 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
-          PARAMS: '--spring.profiles.active=devt --spring.rabbitmq.host=rabbit'
+          PARAMS: '--spring.profiles.active=devt'
       networks:
         - app_net
     product:
@@ -33,7 +33,7 @@ services:
         expose:
           - 6050
         healthcheck:
-           test: ["CMD", "curl", "-f", "http://product:9050/health"]
+           test: ["CMD", "curl", "-f", "http://product:6050/health"]
            interval: 10s
            timeout: 5s
            retries: 3
@@ -42,7 +42,7 @@ services:
            - edriven
         external_links:
            - center1
-           - user:user.service.jemmyweb.com"
+           - "user:user.service.jemmyweb.com"
            - config
            - 'redis:redis.db.middle.jemmyweb.com'
            - 'mysql:mysql.db.middle.jemmyweb.com'

@@ -69,4 +69,4 @@ spring:
         virtual-host: jemmyweb
 turbine:
     stream:
-        port: 9091
+        port: 6091
