@@ -61,7 +61,7 @@ jemmycloud:
       enable: false
       reliableMessageConsumer: false
       reliableMessageProducer: true
-      namesrvAddr: paascloud-mq-rocket:9876
+      namesrvAddr: rocket.mq.middle.jemmyweb.com:9876
       instanceName: service-product
       consumerGroup: CID_MDC
       producerGroup: PID_MDC
