@@ -35,3 +35,5 @@ spring:
     enabled: true
 server:
   port: 6090
+liquibase:
+  change-log: classpath:/liquibase/index.xml

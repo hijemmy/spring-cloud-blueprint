@@ -62,7 +62,7 @@ spring:
             enabled: false
         throw-exception-if-no-handler-found: true
     rabbitmq:
-        host: localhost
+        host: rabbit.mq.middle.jemmyweb.com
         password: guest
         port: 5672
         username: guest
