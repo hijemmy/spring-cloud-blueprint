@@ -13,19 +13,19 @@ services:
            interval: 10s
            timeout: 5s
            retries: 3
-        hostname: user.jemmyweb.com
+        hostname: user.service.jemmyweb.com
         external_links:
           - center1
           - config
-          - 'redis:db.redis'
-          - 'mysql:db.mysql'
-          - 'rabbit:mq.rabbit'
-          - 'rocketmq:mq.rocket'
-          - 'zookeeper:zk.server'
+          - 'redis:redis.db.middle.jemmyweb.com'
+          - 'mysql:mysql.db.middle.jemmyweb.com'
+          - 'rabbit:rabbit.mq.middle.jemmyweb.com'
+          - 'rocketmq:rocket.mq.middle.jemmyweb.com'
+          - 'zookeeper:zk.server.middle.jemmyweb.com'
         environment:
             TZ: Asia/Shanghai
             JAVA_OPTS: "-Xms256m -Xmx256m -Dcom.sun.management.jmxremote.rmi.port=9940 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9940 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
-            PARAMS: '--spring.profiles.active=devt  --spring.rabbitmq.host=rabbit'
+            PARAMS: '--spring.profiles.active=devt'
         networks:
           - custom_net
 networks:

@@ -7,7 +7,7 @@ services:
             - "5671:5671"
             - "5672:5672"
             - "15672:15672"
-        hostname: mq.rabbit
+        hostname: rabbit.mq.middle.jemmyweb.com
         environment:
             - TZ=Asia/Shanghai
             - RABBITMQ_DEFAULT_USER=guest
@@ -19,12 +19,12 @@ services:
         image: redis
         ports:
             - "6379:6379"
-        hostname: db.redis
+        hostname: redis.db.middle.jemmyweb.com
         networks:
           - custom_net
     mysql:
         image: mysql:5.7.22
-        hostname: db.mysql
+        hostname: mysql.db.middle.jemmyweb.com
         ports:
             - "3306:3306"
         environment:
@@ -34,7 +34,7 @@ services:
           - custom_net
     rocketmq:
         image: rocketmq_namesrv
-        hostname: mq.rocket
+        hostname: rocket.mq.middle.jemmyweb.com
         ports:
           - 9876:9876
         volumes:
@@ -60,7 +60,7 @@ services:
          JAVA_OPT_EXT: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9930 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9930 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
     zookeeper:
       image: zookeeper:3.4.12
-      hostname: zk.server
+      hostname: zk.server.middle.jemmyweb.com
       ports:
         - 2181:2181
       networks:

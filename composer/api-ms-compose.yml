@@ -1,20 +1,26 @@
 version: "3"
 
 services:
-    api:
-      image: jemmyweb/api:1.0-SNAPSHOT
+    gw:
+      image: jemmyweb/infras-gw:1.0-SNAPSHOT
       ports:
-          - "9030:9030"
-          - "9930:9930"
+          - "6030:6030"
+      expose:
+        - 6030
       healthcheck:
-         test: ["CMD", "curl", "-f", "http://localhost:9030/health"]
+         test: ["CMD", "curl", "-f", "http://gw:6030/health"]
          interval: 30s
          timeout: 30s
          retries: 3
-      hostname: api.jemmy.com
+      hostname: api.infras.jemmyweb.com
       external_links:
          - center1
       environment:
           TZ: Asia/Shanghai
           JAVA_OPTS: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9930 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9930 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
-          PARAMS: '--spring.application.index=0 --server.port=9030 --spring.profiles.active=devt --eureka.client.serviceUrl.defaultZone=http://center1:9001/eureka/  --eureka.client.serviceUrl.zone1=http://center1:9001/eureka/ '
+          PARAMS: '--spring.profiles.active=devt'
+      networks:
+        - app_net
+networks:
+  app_net:
+    external: true

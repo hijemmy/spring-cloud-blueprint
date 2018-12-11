@@ -57,7 +57,7 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-    <artifactId>opc</artifactId>
+    <artifactId>service-opc</artifactId>
 
 
 </project>

@@ -14,13 +14,13 @@ spring:
     proxy-target-class: true
     auto: true
   rabbitmq:
-    host: paascloud-mq-rabbit
+    host: rabbit.mq.middle.jemmyweb.com
     port: 5672
     virtual-host: jemmyweb
     username: guest
     password: guest
   redis:
-    host: paascloud-db-redis
+    host: redis.db.middle.jemmyweb.com
     port: 6379
     timeout: 0
   datasource:
@@ -120,7 +120,7 @@ jemmycloud:
       accessKeyId: 'your aliyun accessKeyId'
       accessKeySecret: 'your aliyun accessKeySecret'
     rocketMq:
-      namesrvAddr: paascloud-mq-rocket:9876
+      namesrvAddr: rocket.mq.middle.jemmyweb.com:9876
     sms:
       signName: 快乐学习网
       regionId: cn-beijing
@@ -142,4 +142,4 @@ jemmycloud:
       pcPath: /data/file/qrCode/alipay
       qiniuPath: alipay/QRCode/
   zk:
-    zkAddressList: paascloud-provider-zk:2181
+    zkAddressList: zk.server.middle.jemmyweb.com:2181

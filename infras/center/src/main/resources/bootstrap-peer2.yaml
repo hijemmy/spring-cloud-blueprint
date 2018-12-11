@@ -7,7 +7,7 @@ logging:
 eureka:
   client:
     service-url:
-      zone1: http://localhost:7001/eureka/
-      defaultZone: http://localhost:7001/eureka/
+      zone1: http://center1:6001/eureka/
+      defaultZone: http://center1:6001/eureka/
   instance:
     hostname: peer2

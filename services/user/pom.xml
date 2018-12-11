@@ -9,7 +9,7 @@
     </parent>
     <description>用户中心微服务</description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>user</artifactId>
+    <artifactId>service-user</artifactId>
     <version>${project.parent.version}</version>
     <properties>
         <!--mybatis generator配置-->

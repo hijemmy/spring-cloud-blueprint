@@ -4,8 +4,8 @@ eureka:
             ShenZhen: defaultZone,zone1
         region: ShenZhen
         service-url:
-            defaultZone: http://localhost:7001/eureka/
-            zone1: http://localhost:7002/eureka/
+            defaultZone: http://center1:6001/eureka/
+            zone1: http://center2:6002/eureka/
     instance:
         lease-expiration-duration-in-seconds: 10
         lease-renewal-interval-in-seconds: 5

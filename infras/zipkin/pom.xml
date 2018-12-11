@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>基于Zipkin的链路跟踪</description>
-    <artifactId>zipkin</artifactId>
+    <artifactId>infras-zipkin</artifactId>
 
     <dependencies>
         <dependency>

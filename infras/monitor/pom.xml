@@ -10,7 +10,7 @@
     </parent>
     <description>监控中心</description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>monitor</artifactId>
+    <artifactId>infras-monitor</artifactId>
 
     <dependencies>
         <!--<dependency>

@@ -10,7 +10,7 @@
     </parent>
     <description>配置中心</description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>config</artifactId>
+    <artifactId>infras-config</artifactId>
     <dependencies>
 
         <dependency>

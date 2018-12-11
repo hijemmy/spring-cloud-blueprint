@@ -34,4 +34,4 @@ spring:
   sleuth:
     enabled: true
 server:
-  port: 9090
+  port: 6090

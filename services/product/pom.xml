@@ -9,7 +9,7 @@
     </parent>
     <description>产品微服务</description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>product</artifactId>
+    <artifactId>service-product</artifactId>
     <properties>
         <quartz.version>2.2.3</quartz.version>
         <!--mybatis generator配置-->

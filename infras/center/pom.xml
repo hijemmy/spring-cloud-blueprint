@@ -10,7 +10,7 @@
     </parent>
     <description>注册中心</description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>center</artifactId>
+    <artifactId>infras-center</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
