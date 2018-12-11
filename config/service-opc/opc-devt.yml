@@ -44,13 +44,13 @@ security:
     client:
       clientId: client-service-opc
       clientSecret: oauth2ClientSecret
-      access-token-uri: http://paascloud-gateway:7030/uac/oauth/token
-      user-authorization-uri: http://paascloud-gateway:7030/uac/oauth/authorize
+      access-token-uri: http://api.infras.jemmyweb.com:6030/uac/oauth/token
+      user-authorization-uri: http://api.infras.jemmyweb.com:6030/uac/oauth/authorize
     resource:
-      user-info-uri: http://paascloud-gateway:7030/uac/user
+      user-info-uri: http://api.infras.jemmyweb.com:6030/uac/user
       prefer-token-info: false
       jwt:
-        key-uri: http://paascloud-provider-uac:7020/oauth/token_key
+        key-uri: http://user.service.jemmyweb.com:6020/oauth/token_key
 
 jemmycloud:
   enableSqlLogInterceptor: false

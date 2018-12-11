@@ -35,8 +35,8 @@ security:
     client:
       clientId: client-service-uac
       clientSecret: oauth2ClientSecret
-      access-token-uri: http://paascloud-gateway:7030/uac/oauth/token
-      user-authorization-uri: http://paascloud-gateway:7030/uac/oauth/authorize
+      access-token-uri: http://api.infras.jemmyweb.com:6030/uac/oauth/token
+      user-authorization-uri: http://api.infras.jemmyweb.com:6030/uac/oauth/authorize
     resource:
       id: paascloud-resource-uac
       filter-order: 3

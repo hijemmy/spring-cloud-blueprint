@@ -1,3 +1,4 @@
+ CREATE DATABASE if not exists `jemmycloud_tpc` /*!40100 DEFAULT CHARACTER SET utf8 */;
 use jemmycloud_tpc;
 
 SET FOREIGN_KEY_CHECKS=0;

@@ -1,4 +1,4 @@
-use jemmycloud_tpc;
+use jemmycloud_uac;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

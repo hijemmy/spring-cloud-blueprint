@@ -20,7 +20,7 @@ services:
       external_links:
          - center1
          - config
-         - user
+         - "user:user.service.jemmyweb.com"
          - 'rabbit:rabbit.mq.middle.jemmyweb.com'
       environment:
           TZ: Asia/Shanghai
@@ -42,7 +42,7 @@ services:
            - edriven
         external_links:
            - center1
-           - user
+           - user:user.service.jemmyweb.com"
            - config
            - 'redis:redis.db.middle.jemmyweb.com'
            - 'mysql:mysql.db.middle.jemmyweb.com'
@@ -67,7 +67,7 @@ services:
         hostname: edriven.service.jemmyweb.com
         external_links:
            - center1
-           - user
+           - "user:user.service.jemmyweb.com"
            - config
            - 'redis:redis.db.middle.jemmyweb.com'
            - 'mysql:mysql.db.middle.jemmyweb.com'
@@ -94,7 +94,7 @@ services:
            - edriven
         external_links:
            - center1
-           - user
+           - "user:user.service.jemmyweb.com"
            - config
            - 'redis:redis.db.middle.jemmyweb.com'
            - 'mysql:mysql.db.middle.jemmyweb.com'
