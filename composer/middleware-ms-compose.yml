@@ -7,22 +7,65 @@ services:
             - "5671:5671"
             - "5672:5672"
             - "15672:15672"
-        hostname: rabbit
+        hostname: mq.rabbit
         environment:
             - TZ=Asia/Shanghai
-            - RABBITMQ_DEFAULT_USER=test
-            - RABBITMQ_DEFAULT_PASS=test
-            - RABBITMQ_DEFAULT_VHOST=zj24k
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest
+            - RABBITMQ_DEFAULT_VHOST=jemmyweb
+        networks:
+          - custom_net
     redis:
         image: redis
         ports:
             - "6379:6379"
-        hostname: redis
+        hostname: db.redis
+        networks:
+          - custom_net
     mysql:
         image: mysql:5.7.22
-        hostname: mysql
+        hostname: db.mysql
         ports:
             - "3306:3306"
         environment:
             - TZ=Asia/Shanghai
             - MYSQL_ROOT_PASSWORD=123456
+        networks:
+          - custom_net
+    rocketmq:
+        image: rocketmq_namesrv
+        hostname: mq.rocket
+        ports:
+          - 9876:9876
+        volumes:
+          - ./namesrv/logs:/opt/logs
+          - ./namesrv/store:/opt/store
+        networks:
+          - custom_net
+        environment:
+           JAVA_OPT_EXT: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9930 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9930 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
+    rocketmqbroker:
+      image: rocketmq_broker
+      ports:
+        - 10909:10909
+        - 10911:10911
+      volumes:
+        - ./broker/logs:/opt/logs
+        - ./broker/store:/opt/store
+      networks:
+        - custom_net
+      depends_on:
+        - rocketmq
+      environment:
+         JAVA_OPT_EXT: "-Xms512m -Xmx512m -Dcom.sun.management.jmxremote.rmi.port=9930 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9930 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
+    zookeeper:
+      image: zookeeper:3.4.12
+      hostname: zk.server
+      ports:
+        - 2181:2181
+      networks:
+        - custom_net
+networks:
+  custom_net:
+    external:
+      name: app_net

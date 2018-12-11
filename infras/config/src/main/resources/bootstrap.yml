@@ -11,8 +11,6 @@ spring:
       enabled: false
   application:
     name: infras-config
-server:
-  port: 9010
 eureka:
   instance:
     prefer-ip-address: true

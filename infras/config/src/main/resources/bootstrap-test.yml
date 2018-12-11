@@ -3,8 +3,6 @@ spring:
     name: config
   profiles:
     include: default
-server:
-  port: 9010
 eureka:
   instance:
     prefer-ip-address: true

@@ -13,4 +13,6 @@ spring:
     add-mappings: false
   main:
     banner-mode: "OFF"
+server:
+  port: 6010
 

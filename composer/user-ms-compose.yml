@@ -2,24 +2,33 @@ version: "3"
 
 services:
     user:
-        image: jemmyweb/user:1.0-SNAPSHOT
-        ports:
-            - "9040:9040"
-            - "9940:9940"
-        deploy:
-          mode: replicated
-          replicas: 2
+        image: jemmyweb/service-user:1.0-SNAPSHOT
+        expose:
+            - "6020"
+        #deploy:
+          #mode: replicated
+          #replicas: 2
         healthcheck:
-           test: ["CMD", "curl", "-f", "http://localhost:9040/health"]
+           test: ["CMD", "curl", "-f", "http://user:6020/health"]
            interval: 10s
            timeout: 5s
            retries: 3
-        hostname: user.jemmy.com
+        hostname: user.jemmyweb.com
         external_links:
           - center1
-          - third:third.jemmy.com
-          - order:order.jemmy.com
+          - config
+          - 'redis:db.redis'
+          - 'mysql:db.mysql'
+          - 'rabbit:mq.rabbit'
+          - 'rocketmq:mq.rocket'
+          - 'zookeeper:zk.server'
         environment:
             TZ: Asia/Shanghai
             JAVA_OPTS: "-Xms256m -Xmx256m -Dcom.sun.management.jmxremote.rmi.port=9940 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9940 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Djava.rmi.server.hostname=192.168.99.100"
-            PARAMS: '--spring.application.index=0 --server.port=9040 --spring.profiles.active=devt --eureka.client.serviceUrl.defaultZone=http://center1:9001/eureka/  --eureka.client.serviceUrl.zone1=http://center1:9001/eureka/ '
+            PARAMS: '--spring.profiles.active=devt  --spring.rabbitmq.host=rabbit'
+        networks:
+          - custom_net
+networks:
+  custom_net:
+      external:
+        name: app_net

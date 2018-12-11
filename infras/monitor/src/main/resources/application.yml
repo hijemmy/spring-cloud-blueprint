@@ -42,7 +42,7 @@ security:
         name: jemmyweb
         password: 657036476
 server:
-    port: 9090
+    port: 6099
 spring:
     boot:
         admin:

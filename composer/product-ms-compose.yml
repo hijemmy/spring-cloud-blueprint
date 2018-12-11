@@ -11,7 +11,7 @@ services:
            interval: 10s
            timeout: 5s
            retries: 3
-        hostname: product.jemmy.com
+        hostname: product.jemmyweb.com
         external_links:
            - center1
           - third

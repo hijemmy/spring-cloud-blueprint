@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: devt
   datasource:
       initialize: false
       platform: mysql
@@ -33,3 +33,5 @@ spring:
     enabled: true
   sleuth:
     enabled: true
+server:
+  port: 9090
