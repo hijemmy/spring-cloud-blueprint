@@ -58,7 +58,7 @@ jemmycloud:
     interceptor:
       enable: true
   zk:
-    zkAddressList: paascloud-provider-zk:2181
+    zkAddressList: zk.server.middle.jemmyweb.com:2181
   qiniu:
     key:
       accessKey: yourQiniuAccessKey

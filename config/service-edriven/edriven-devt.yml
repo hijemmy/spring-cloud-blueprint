@@ -70,7 +70,7 @@ jemmycloud:
       clientAuthenticationScheme: header
       tokenStore: jwt
   zk:
-    zkAddressList: paascloud-provider-zk:2181
+    zkAddressList: zk.server.middle.jemmyweb.com:2181
     namespace: paascloud-elastic-job
   job:
     task:
