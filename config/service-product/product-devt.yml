@@ -74,3 +74,6 @@ jemmycloud:
       clientSecret: ${security.oauth2.client.clientSecret}
       clientAuthenticationScheme: header
       tokenStore: jwt
+tm:
+  manager:
+    url: http://api.infras.juneng.com:6030/txmanager/tx/manager/

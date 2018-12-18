@@ -143,5 +143,5 @@ jemmycloud:
       qiniuPath: alipay/QRCode/
   zk:
     zkAddressList: zk.server.middle.jemmyweb.com:2181
-  security:
-    ignored: /uac/oauth/*,/uac/auth/**,/webjars/**,/druid/**, /swagger-ui.html, /swagger-resources/**, /*/v2/api-docs, /api/applications,/pay/alipayCallback
+security:
+  ignored: /uac/oauth/*,/uac/auth/**,/txmanager/**,/webjars/**,/druid/**, /swagger-ui.html, /swagger-resources/**, /*/v2/api-docs, /api/applications,/pay/alipayCallback
