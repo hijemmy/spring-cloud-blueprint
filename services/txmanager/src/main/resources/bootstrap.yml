@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: tx-manager
+  autoconfigure:
+    exclude: org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration
+  cloud:
+    config:
+      name: txmanager
+      profile: pro
+      discovery:
+        service-id: infras-config
+        enabled: false
+      label: service-txmanager
+      fail-fast: true
+      retry:
+        max-attempts: 3
+      enabled: false
+    bus:
+      enabled: false
+  zipkin:
+    base-url: http://infras-zipin/
+    sender:
+      type: rabbit
+    enabled: false
+  sleuth:
+    sampler:
+      percentage: 1
+    enabled: false
+  jmx:
+    enabled: true
+eureka:
+  client:
+    service-url:
+      zone1: http://center2:6002/eureka/
+      defaultZone: http://center1:6001/eureka/
+    region: ShenZhen
+    availability-zones:
+      ShenZhen: defaultZone,zone1
+    enabled: false
+  instance:
+    prefer-ip-address: true
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+    metadata-map:
+      zone: defaultZone
+      cluster: juneng
+      version: 1.0
+endpoints:
+  enabled: true
+info:
+  role: '基于tx-lcn的tcc事务'
+  ip: ${spring.cloud.client.ipAddress}
+  port: ${server.port}
+  version: ${eureka.instance.metadata-map.version}
+management:
+  add-application-context-header: false
+logging:
+  path: logs

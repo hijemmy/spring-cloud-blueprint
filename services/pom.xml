@@ -25,6 +25,7 @@
         <module>product</module>
         <module>edriven</module>
         <module>opc</module>
+        <module>txmanager</module>
     </modules>
     <dependencies>
         <dependency>
