@@ -3,10 +3,10 @@ package com.jemmy.services.user.security;
 import com.jemmy.common.security.core.SecurityUser;
 import com.jemmy.services.user.model.domain.UacUser;
 import com.jemmy.services.user.service.UacUserService;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -35,7 +35,7 @@ public class UacUserDetailsServiceImpl implements UserDetailsService {
 		Collection<GrantedAuthority> grantedAuthorities;
 		UacUser user = uacUserService.findByLoginName(username);
 		if (user == null) {
-			throw new BadCredentialsException("用户名不存在或者密码错误");
+			throw new UsernameNotFoundException("用户名不存在或者密码错误");
 		}
 		user = uacUserService.findUserInfoByUserId(user.getId());
 		grantedAuthorities = uacUserService.loadUserAuthorities(user.getId());

@@ -12,7 +12,7 @@ spring:
   main:
     banner-mode: "OFF"
   messages:
-    basename: messages, org/springframework/security/messages, org/hibernate/validator/ValidationMessages
+    basename: messages, org.springframework.security.messages, org.hibernate.validator.ValidationMessages
   rabbitmq:
     host: localhost
     port: 5672
